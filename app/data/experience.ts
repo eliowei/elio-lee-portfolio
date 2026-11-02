@@ -5,6 +5,7 @@ export const intro = {
   body: '整理我的工作經驗、技術應用與開發過程中累積的工程理解。',
   pills: [
     { icon: 'domain', color: 'text-primary', label: '北極星測繪公司 前端工程師' },
+    { icon: 'school', color: 'text-primary', label: '健行科技大學 資訊管理系' },
     { icon: 'layers', color: 'text-primary', label: 'Vue 2 / Vue 3 & Vuetify 專案' },
     { icon: 'accessibility_new', color: 'text-primary', label: '無障礙改寫與 NVDA 驗證' },
     { icon: 'map', color: 'text-secondary', label: 'OpenLayers 空間圖資' },
@@ -155,7 +156,7 @@ export const principles = [
 ]
 
 export const cta = {
-  badge: '開放工作機會',
-  title: '歡迎與我聯繫。',
-  body: '我對新的前端工作機會保持開放。如果你的團隊正在找熟悉 Vue、遇到問題會追到根源的前端工程師，歡迎來信。',
+  badge: 'Contact / 聯絡',
+  title: '想進一步聊聊嗎？',
+  body: '看完經歷後，如果有想進一步了解的地方，歡迎留言給我。',
 }

@@ -78,8 +78,8 @@ export const projects: {
       ],
       stack: [
         { group: 'frontend', items: ['Vue 3', 'Vuetify', 'Pinia', 'Axios'] },
-        { group: 'backend', items: ['Node.js', 'Express', 'Socket.IO', 'JWT'] },
-        { group: 'database', items: ['MongoDB', 'Mongoose'] },
+        { group: 'backend', items: ['Node.js', 'Express', 'Socket.IO', 'JWT'], why: '即時聊天如果自己處理 WebSocket 會很麻煩，Socket.IO 已經幫忙處理好很多連線細節，所以選擇直接使用。' },
+        { group: 'database', items: ['MongoDB', 'Mongoose'], why: '職訓時學的是 MongoDB。和 SQL Server 等關聯式資料庫相比，NoSQL 的語法更接近 JavaScript，學習和開發上都比較順手。' },
         { group: 'tools', items: ['GitHub Actions', 'Render'] },
       ],
       features: [
@@ -131,7 +131,7 @@ export const projects: {
       ],
       stack: [
         { group: 'frontend', items: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Nuxt UI', 'Tailwind CSS'] },
-        { group: 'content', items: ['Notion API'] },
+        { group: 'content', items: ['Notion API'], why: '自己做後台的開發成本太高。Notion 本來就適合整理資料，也提供 API 可以讀取內容，所以直接拿來當 CMS。' },
         { group: 'ai', items: ['OpenAI', 'Gemini'] },
         { group: 'services', items: ['Google Maps', 'Vercel'] },
       ],
@@ -241,7 +241,7 @@ export const projects: {
         { group: 'frontend', items: ['Vue 3', 'PrimeVue'] },
         { group: 'backend', items: ['Node.js', 'LINE Messaging API'] },
         { group: 'database', items: ['MongoDB'] },
-        { group: 'operations', items: ['Render', 'GitHub Actions', 'Cloudflare R2', 'Discord Webhook', 'Sentry'] },
+        { group: 'operations', items: ['Render', 'GitHub Actions', 'Cloudflare R2', 'Discord Webhook', 'Sentry'], why: '比較過市面上幾個服務後選擇 Render，設定簡單，免費方案也適合小型服務。但它的 CPU 與記憶體有限，Sentry 對後端負擔較重，所以改用自己寫的日誌。' },
       ],
       features: [
         { title: '內容管理', body: '包含 FAQ、公告、價目表等基礎內容，皆可透過後台自由編輯，無需工程開發。', points: ['FAQ', '公告', '價目表'] },
