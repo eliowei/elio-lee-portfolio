@@ -1,5 +1,7 @@
 # Elio Lee Portfolio
 
+繁體中文 | [English](README.en.md)
+
 李柏偉 Elio Lee 的個人作品集網站。首頁是一座可以走進去的 3D 數位遺跡：往下捲動，鏡頭會穿過山頂的石門、走下階梯進入迴廊，每個作品都是迴廊裡的一扇門。
 
 ## 功能特色
@@ -27,6 +29,7 @@
 | 3D 與動態 | Three.js、GLSL、GSAP |
 | 樣式 | Tailwind CSS |
 | 內容與 SEO | Nuxt Content、Nuxt Image、Sitemap |
+| 聯絡表單 | EmailJS |
 
 3D 場景的鏡頭與動畫由 Three.js 自行實作；GSAP 用於一般頁面區塊的捲動淡入效果。
 
@@ -37,7 +40,7 @@ app/
 ├── components/   頁面區塊與 3D 舞台元件
 ├── data/         網站文案與作品資料
 ├── lib/          3D 場景（space-scene.ts）與遺跡結構（ruin.ts）
-├── pages/        首頁、作品、經歷、技術筆記
+├── pages/        首頁、作品、經歷、技術筆記、聯絡
 └── plugins/      GSAP 捲動淡入
 content/blog/     技術筆記 Markdown
 public/images/    作品截圖與個人照片
