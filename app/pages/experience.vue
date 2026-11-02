@@ -2,7 +2,7 @@
 import { roles, transitions } from '~/data/experience'
 
 const title = '工作經歷 | Elio Lee'
-const description = '從軍職、職訓到前端工程：Vue 2 / Vue 3 與 Vuetify 版本遷移、元件互動問題排查、OpenLayers 空間圖資互動整合。'
+const description = '從軍職、職訓到前端工程：Vue 2 / Vue 3 與 Vuetify 專案開發、元件互動問題排查、OpenLayers 空間圖資互動整合。'
 const url = `${useRuntimeConfig().public.siteUrl}/experience`
 
 useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: url })

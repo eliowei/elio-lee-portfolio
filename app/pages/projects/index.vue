@@ -3,7 +3,7 @@ import { projects } from '~/data/home'
 import { projectImages } from '~/data/project-images'
 
 const title = '專案作品 | Elio Lee'
-const description = '將想法轉化為實際作品：遊戲社群揪團平台、個人作品集、LINE OA 商家管理平台、天氣 Bike 小幫手。'
+const description = '將想法轉化為實際作品：遊戲社群揪團平台、東京自由行旅遊網站、個人品牌網站、LINE OA 商家管理平台、天氣 Bike 小幫手。'
 const url = `${useRuntimeConfig().public.siteUrl}/projects`
 
 useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: url })

@@ -2,7 +2,7 @@
 title: Nuxt Content 自訂 Markdown 語法解析器與 AST 微元件
 description: 利用 remark 外掛攔截抽象語法樹，將自訂標籤轉譯為高互動性的 Vue 元件。
 date: 2025-02-10
-category: nuxt
+category: vue
 tags: [Remark, MDC]
 readingTime: 8
 draft: true # 範例文章（非本人內容），換成正式文章後移除這行

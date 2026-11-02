@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { cta } from '~/data/experience'
-import { contactHref, site } from '~/data/site'
+import { site } from '~/data/site'
 
-const external = contactHref.startsWith('http')
 const btn = 'inline-flex items-center justify-center gap-2 rounded px-5 py-3 text-body-sm font-medium transition-colors motion-reduce:transition-none'
 </script>
 
@@ -17,9 +16,9 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded px-5 py-3 tex
           <p class="lab-muted text-body-md">{{ cta.body }}</p>
         </div>
         <div class="flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row">
-          <a :href="contactHref" :target="external ? '_blank' : undefined" :rel="external ? 'noopener noreferrer' : undefined" :class="[btn, 'bg-lab-signal text-lab-bg hover:bg-lab-signal']">
-            聯絡我 <UiIcon name="arrow_outward" class="text-[18px]" />
-          </a>
+          <NuxtLink to="/contact" :class="[btn, 'bg-lab-signal text-lab-bg hover:bg-white']">
+            聯絡我 <UiIcon name="arrow_forward" class="text-[18px]" />
+          </NuxtLink>
           <a :href="site.github" target="_blank" rel="noopener noreferrer" :class="[btn, 'border border-white/20 text-white hover:border-lab-signal hover:text-lab-signal']">GitHub</a>
         </div>
       </div>

@@ -23,7 +23,8 @@ export default defineNuxtConfig({
   tailwindcss: { cssPath: '~/assets/css/main.css' },
 
   site: { url: siteUrl, name: '李柏偉 Elio Lee' },
-  runtimeConfig: { public: { siteUrl } },
+  // EmailJS keys are public by design; filled from NUXT_PUBLIC_EMAILJS_* (see .env.example).
+  runtimeConfig: { public: { siteUrl, emailjs: { serviceId: '', templateId: '', publicKey: '' } } },
   sitemap: { sources: ['/api/__sitemap__/urls'] },
 
   // ISR: needs a host preset that supports it (vercel / netlify); a no-op on `node-server`.

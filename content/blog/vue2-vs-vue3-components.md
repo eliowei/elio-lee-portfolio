@@ -1,8 +1,8 @@
 ---
 # AI 草擬的技術說明（不含個人經歷與數據），發布前請審閱並補上自己的實務案例。
 title: Vue 2 與 Vue 3 元件生命週期與雙向綁定差異解析
-description: 從 v-model 演進、defineModel 到 reactive/ref 踩坑實錄，記錄升級專案中的元件實作關鍵要點。
-date: 2026-10-29
+description: 從 v-model 演進、defineModel 到 reactive/ref 踩坑實錄，整理元件實作的關鍵差異。
+date: 2025-07-15
 category: vue
 tags: [Vue 3, Migration, v-model]
 readingTime: 9

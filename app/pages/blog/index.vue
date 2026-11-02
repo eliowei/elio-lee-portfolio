@@ -11,6 +11,14 @@ useHead({ link: [{ rel: 'canonical', href: url }] })
 
 // Published articles only (drafts = sample posts). The list appears once there is something to list.
 const { data: posts } = await useAsyncData('blog-list', () => queryCollection('blog').where('draft', '=', false).order('date', 'DESC').all())
+
+// Category filter: plain client state, so the page stays cacheable as one document. Empty categories are not offered.
+const active = ref<keyof typeof categories | null>(null)
+const filters = computed(() => (Object.keys(categories) as (keyof typeof categories)[])
+  .map(key => ({ key, label: categories[key], count: posts.value?.filter(p => p.category === key).length ?? 0 }))
+  .filter(f => f.count))
+const shown = computed(() => posts.value?.filter(p => !active.value || p.category === active.value) ?? [])
+const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-reduce:transition-none', on ? '!border-lab-signal-ink !text-lab-signal-ink' : 'hover:!border-on-surface-variant']
 </script>
 
 <template>
@@ -25,10 +33,14 @@ const { data: posts } = await useAsyncData('blog-list', () => queryCollection('b
     <section v-if="posts?.length" class="section-x py-space-2xl" aria-labelledby="latest">
       <div class="flex items-end justify-between pb-6">
         <h2 id="latest" class="text-headline-md">最新筆記</h2>
-        <span class="hidden font-mono text-label-sm uppercase tracking-wider text-on-surface-variant sm:inline">{{ posts.length }} articles</span>
+        <span class="hidden font-mono text-label-sm uppercase tracking-wider text-on-surface-variant sm:inline">{{ shown.length }} articles</span>
+      </div>
+      <div class="flex flex-wrap gap-2 pb-6" role="group" aria-label="依分類篩選筆記">
+        <button type="button" :class="chip(!active)" :aria-pressed="!active" @click="active = null">全部 {{ posts.length }}</button>
+        <button v-for="f in filters" :key="f.key" type="button" :class="chip(active === f.key)" :aria-pressed="active === f.key" @click="active = f.key">{{ f.label }} {{ f.count }}</button>
       </div>
       <ol class="border-t border-hairline">
-        <li v-for="p in posts" :key="p.path" class="border-b border-hairline">
+        <li v-for="p in shown" :key="p.path" class="border-b border-hairline">
           <NuxtLink :to="p.path" class="group grid gap-2 py-8 md:grid-cols-12 md:gap-8">
             <div class="font-mono text-label-md text-on-surface-variant md:col-span-2">
               <time :datetime="p.date">{{ p.date.replaceAll('-', '/') }}</time>

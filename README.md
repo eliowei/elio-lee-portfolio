@@ -53,4 +53,4 @@ npm run build
 npm run preview
 ```
 
-部署時請設定環境變數 `NUXT_PUBLIC_SITE_URL` 為網站網址，canonical 連結與 Sitemap 會使用這個值。
+環境變數請參考 `.env.example`：`NUXT_PUBLIC_SITE_URL` 是網站網址，canonical 連結與 Sitemap 會使用這個值；`NUXT_PUBLIC_EMAILJS_*` 是聯絡表單使用的 EmailJS 設定。

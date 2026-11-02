@@ -85,7 +85,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
               <span class="h-2.5 w-2.5 rotate-45" :style="{ background: project.accent }" aria-hidden="true" />
               {{ project.code }} · {{ project.kind }}
             </p>
-            <h1 class="mt-5 font-heading text-display-mobile text-white [text-wrap:balance] md:text-display">{{ project.title }}</h1>
+            <h1 class="mt-5 font-heading text-display-mobile text-white [text-wrap:balance] md:text-display"><template v-for="w in project.title.split(' ')" :key="w"><span class="inline-block">{{ w }}</span>{{ ' ' }}</template></h1>
             <p v-if="detail.headline" class="mt-5 text-headline-sm font-normal text-lab-on-dark">{{ detail.headline }}</p>
           </div>
           <!-- Capped at 24rem tall (by narrowing it, keeping its ratio): a squarish cover would otherwise make the

@@ -2,7 +2,7 @@
 title: 排查幽靈響應：Pinia Store 狀態在 Getters 外部被意外修改的歷程
 description: 解構賦值失去響應追蹤後，在子元件直接突變 deep reactive 物件所引發的渲染死循環。
 date: 2025-01-29
-category: debug
+category: case
 tags: [Reactivity, Devtools]
 readingTime: 6
 draft: true # 範例文章（非本人內容），換成正式文章後移除這行

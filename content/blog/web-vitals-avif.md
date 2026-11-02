@@ -2,7 +2,7 @@
 title: 生產環境 Web Vitals 調校：Nuxt Image 搭配 AVIF 達到極速 LCP
 description: 透過 CDN Edge 動態轉碼與預載入，將產品首頁 LCP 從 2.8 秒壓縮至 0.9 秒。
 date: 2025-01-14
-category: perf
+category: quality
 tags: [LCP, IPX Edge]
 readingTime: 5
 draft: true # 範例文章（非本人內容），換成正式文章後移除這行

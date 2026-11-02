@@ -12,12 +12,12 @@ export const about = {
   eyebrow: 'About / 關於我',
   title: '從完成需求，到理解問題。',
   body: [
-    '我是 Elio，一名前端工程師，主要使用 Vue 進行網頁介面開發。剛開始工作時，我更在意如何把畫面做出來、讓功能正常運作。隨著參與 Vue 2 遷移至 Vue 3 的專案，我開始學會理解既有程式的設計原因、框架之間的差異，以及修改可能影響的範圍，再決定合適的實作方式。',
+    '我是 Elio，一名前端工程師，主要使用 Vue 進行網頁介面開發。剛開始工作時，我更在意如何把畫面做出來、讓功能正常運作。進入公司後，我同時接觸 Vue 2 與 Vue 3 的專案，開始學會理解既有程式的設計原因、框架之間的差異，以及修改可能影響的範圍，再決定合適的實作方式。',
     '工作之外，我也透過個人專案探索前端技術與互動設計。這個網站的 3D 遺跡與迴廊，便是我運用 Three.js 與 GLSL Shader 探索空間感、動態效果與網頁互動的實驗。',
   ],
   facts: [
     { label: '核心技術', text: '以 Vue 2、Vue 3 為主要開發技術，具備 Vuetify、PrimeVue 與 Nuxt UI 等 UI 元件框架的使用經驗，並運用 Nuxt、TypeScript 與 Tailwind CSS 建構網頁應用。在互動與視覺開發方面，持續探索 Three.js、GLSL Shader 與 GSAP 的應用。' },
-    { label: '實務經驗', text: '具備既有系統維護、Vue 2 至 Vue 3 框架遷移、介面調整與元件行為除錯經驗，曾處理框架差異造成的互動異常與樣式問題，並在修改過程中兼顧既有功能。' },
+    { label: '實務經驗', text: '具備既有系統維護、Vue 2 與 Vue 3 專案開發、介面調整與元件行為除錯經驗，曾處理元件互動異常與樣式問題，並在修改過程中兼顧既有功能。' },
     { label: '工程思維', text: '重視程式碼可讀性、元件結構與可維護性。面對開發問題時，先釐清原因與影響範圍，再進行修改並驗證結果，讓每次變更都有明確的目標與依據。' },
   ],
 }
@@ -93,13 +93,76 @@ export const projects: {
         { label: 'Search Experience', title: '多條件搜尋設計', problem: '玩家通常會依照遊戲類型、地區、日期等條件尋找活動。', solution: '設計多條件搜尋與排序機制，支援關鍵字、標籤、地區與日期篩選，提升活動媒合效率。', tags: ['MongoDB', 'Express'] },
         { label: 'Data Modeling', title: '資料關聯設計', problem: '活動、使用者、聊天室與留言之間存在多層資料關聯，若結構設計不佳容易造成查詢複雜度提升。', solution: '透過 Mongoose Schema 建立資料關聯結構，並依照使用情境進行資料拆分與引用設計，兼顧查詢效率與維護性。', tags: ['MongoDB', 'Mongoose'] },
       ],
+      verification: [
+        '目前以手動測試為主，走過建立揪團、參加、留言與聊天等主要流程',
+        '開發過程中逐項修正收藏顯示等畫面問題，並調整 RWD 版面',
+      ],
+      retrospective: {
+        learned: '這是第一次完整走過前後端開發。我學到資料關聯要先規劃好，查詢才不會越寫越複雜；即時連線也要考慮建立和斷開的時機，不能只想著連得上。',
+        next: '目前沒有自動化測試，修改後要靠手動回歸。下一步會先替權限驗證和揪團流程補上測試。',
+      },
     },
   },
   {
-    slug: 'personal-portfolio', code: 'PF-02', accent: '#E6E1D6', no: '02', kind: '個人網站 · 2026',
-    tags: ['Nuxt 3', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Nuxt Content'],
-    title: '個人作品集',
-    body: '使用 Nuxt 3 建立的個人品牌作品集網站，整合 SEO、頁面轉場動畫與專案案例展示，作為個人品牌與相關服務的展示平台。',
+    slug: 'tokyo-travel-site', code: 'TR-02', accent: '#7C96F2', no: '02', kind: '個人專案 · 2026',
+    tags: ['Nuxt 4', 'Notion API', 'OpenAI', 'Gemini', 'Google Maps'],
+    title: '東京自由行 旅遊網站',
+    body: '為了 9 月的東京自由行開發的旅遊行程網站，以 Notion 作為 CMS，整合 AI 助手、地圖、花費紀錄與行李清單。',
+    side: { icon: 'travel_explore', title: 'TRIP TOOLKIT', items: ['Notion API 內容管理', 'GPT 與 Gemini AI 助手', 'Google Maps 動線規劃'] },
+    detail: {
+      period: '2026/06 — 2026/09',
+      role: '獨立開發',
+      diagram: {
+        title: '以 Notion 為內容來源的資料流程',
+        caption: '依專案內容繪製的示意圖：內容在 Notion 編輯，經由伺服器路由與 transformer 轉換、快取後提供給前端。',
+        nodes: [
+          { id: 'notion', label: 'Notion', sub: '行程 / 清單 / 票券', x: 10, y: 30 },
+          { id: 'api', label: 'Nuxt 伺服器路由', sub: '快取 60 秒', x: 36, y: 30 },
+          { id: 'tf', label: 'Transformer', sub: '轉成自有型別', x: 62, y: 30 },
+          { id: 'web', label: '網站', x: 88, y: 18 },
+          { id: 'ai', label: 'GPT / Gemini', sub: 'AI 助手', x: 88, y: 46 },
+        ],
+        edges: [['notion', 'api', 'Notion API'], ['api', 'tf'], ['tf', 'web'], ['web', 'ai', '伺服器路由']],
+      },
+      headline: '為自己的東京自由行，做一個真正需要的工具。',
+      overview: [
+        '為了 9 月去日本東京自由行而開發。行程、行李和購物清單會不斷調整，所以用 Notion 當內容後台，網站負責讀取和顯示，不需要另外做一套管理介面。',
+        '除了行程內容，也整合了 AI 助手、Google Maps、花費紀錄與迪士尼樂園規劃。',
+      ],
+      stack: [
+        { group: 'frontend', items: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Nuxt UI', 'Tailwind CSS'] },
+        { group: 'content', items: ['Notion API'] },
+        { group: 'ai', items: ['OpenAI', 'Gemini'] },
+        { group: 'services', items: ['Google Maps', 'Vercel'] },
+      ],
+      features: [
+        { title: 'Notion 內容管理', body: '行程、行李清單、購物清單與票券都在 Notion 維護，透過伺服器路由讀取，金鑰不會出現在前端。', points: ['伺服器路由', 'Transformer', '60 秒快取'] },
+        { title: 'AI 旅遊助手', body: '可選擇 GPT 或 Gemini，也能上傳圖片一起詢問。Gemini 遇到請求過多時，會自動改用 OpenAI 回答。', points: ['GPT', 'Gemini', '圖片提問', '自動備援'] },
+        { title: '地圖與迪士尼規劃', body: '用 Google Maps JavaScript API 標出項目與動線，並可查看整理成繁體中文的餐廳菜單。', points: ['Marker', 'Polyline', '菜單翻譯'] },
+        { title: '花費與清單', body: '花費紀錄支援分類、付款方式與日幣換算；打勾狀態存在瀏覽器，不寫回 Notion。', points: ['圖表統計', 'localStorage', 'Zod 驗證'] },
+      ],
+      challenges: [
+        { label: 'Deployment', title: '部署後找不到資料檔', problem: 'API 用 node:fs 在執行時讀取 JSON，本機正常，部署到 Vercel 後卻找不到檔案，因為打包器無法追蹤動態路徑。', solution: '改用 Nitro 的 serverAssets 把資料內嵌進 server build，再透過 useStorage() 讀取。', tags: ['Nitro', 'Vercel'] },
+        { label: 'Data Integrity', title: 'Notion 的 slug 不保證唯一', problem: '同一間飯店住兩次時，會出現相同的 slug，行程詳情頁只用 slug 查詢會拿到錯誤的資料。', solution: '再用第幾天區分行程，並把參數一起放進快取的 key，避免不同天拿到同一份快取。', tags: ['Notion API', 'Cache'] },
+        { label: 'Reliability', title: 'AI 額度用完時的備援', problem: 'Gemini 回傳 429 時，聊天功能就無法使用。', solution: '在伺服器攔截 429，自動改由 OpenAI 回答，使用者不用自己切換。', tags: ['Gemini', 'OpenAI'] },
+      ],
+      verification: [
+        '9 月實際帶去東京自由行使用，主要功能都常用到，旅途中沒有遇到問題',
+        '在本機與 Vercel 部署環境都測試，因此發現菜單資料只有部署後才讀不到',
+        '同一間飯店住兩次時，確認不同天會顯示各自的行程',
+        '目前沒有自動化測試，以手動測試為主',
+      ],
+      retrospective: {
+        learned: '用 Notion 當 CMS 省下了做後台的時間，也讓行程能隨時調整。但它的欄位是用名稱對應，改名不會報錯，資料是否正確要靠程式自己把關。',
+        next: 'Notion 查詢尚未處理分頁，資料超過 100 筆會讀不完；行程圖片是會過期的簽名網址，快取策略還需要調整；花費和清單狀態存在瀏覽器，換裝置就看不到。',
+      },
+    },
+  },
+  {
+    slug: 'personal-portfolio', code: 'PF-03', accent: '#E6E1D6', no: '03', kind: '個人網站 · 2026',
+    tags: ['Nuxt 4', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Nuxt Content', 'GA4', 'GTM'],
+    title: '個人品牌網站',
+    body: '使用 Nuxt 建立的個人品牌網站，對外展示服務與案例，並整合 SEO、GA4 與 GTM。',
     side: { icon: 'web', title: 'SITE ARCHITECTURE', items: ['SEO 優化（Sitemap、Meta Tags、Open Graph）', 'GSAP 頁面轉場與捲動動畫', 'Nuxt Content 內容驅動架構'] },
     detail: {
       role: '獨立開發',
@@ -120,13 +183,15 @@ export const projects: {
       headline: '建立個人品牌與專業形象展示平台。',
       overview: ['展示作品、技術能力與服務內容的個人品牌網站，重視搜尋能見度、頁面轉場體驗與內容維護效率。'],
       stack: [
-        { group: 'frontend', items: ['Nuxt 3', 'Vue 3', 'TypeScript', 'Tailwind CSS'] },
+        { group: 'frontend', items: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS'] },
         { group: 'animation', items: ['GSAP', 'Vue Transition'] },
         { group: 'content', items: ['Nuxt Content', 'Markdown'] },
+        { group: 'analytics', items: ['GA4', 'GTM'] },
       ],
       features: [
         { title: 'Case Study 展示', body: '以案例研究形式展示專案內容，清楚呈現問題、解決方案與技術實作。', points: ['專案分類', '圖片展示', '技術標籤', '專案細節頁'] },
         { title: 'SEO 與內容管理', body: '透過 Nuxt Content 與 Meta 設定，提升搜尋引擎收錄效果與內容維護效率。', points: ['Sitemap', 'Meta Tags', 'Open Graph', '搜尋引擎收錄'] },
+        { title: '流量分析', body: '在網站導入 Google Tag Manager 與 Google Analytics 4，學習追蹤網站流量與使用者行為。' },
         { title: '動畫與使用體驗', body: '使用 GSAP 建立頁面轉場與互動效果，強化品牌網站的視覺體驗。', points: ['Page Transition', 'Scroll Animation', 'Responsive Layout'] },
       ],
       challenges: [
@@ -134,15 +199,25 @@ export const projects: {
         { label: 'User Experience', title: '頁面轉場體驗', problem: '頁面切換過於生硬，容易降低整體瀏覽體驗。', solution: '使用 GSAP 建立 Page Transition 與動畫效果，提升網站的互動感與品牌印象。', tags: ['GSAP', 'Vue Transition'] },
         { label: 'Content Architecture', title: '內容架構設計', problem: '隨著作品數量增加，若缺乏統一資料結構，容易造成維護成本提高與版面不一致。', solution: '使用 Nuxt Content 與 Markdown 建立內容驅動架構，將作品資料結構化管理，讓頁面能透過相同模板快速產生內容。', tags: ['Nuxt Content', 'Markdown'] },
       ],
+      verification: [
+        '以 Google Search Console 確認網站收錄與搜尋成效',
+        '上線後依實際操作修正導覽列、漢堡選單延遲等問題',
+        'GTM 改為自行載入後，上線確認自訂事件有進到 GA4',
+      ],
+      retrospective: {
+        learned: '這個網站讓我第一次實際接觸 SEO 與流量分析。功能完成不代表結束，上線後還要看數據，才知道訪客有沒有找到、有沒有用。',
+        next: '持續用 Search Console 觀察服務頁的搜尋成效，並依結果調整內容。',
+      },
     },
   },
   {
-    slug: 'line-oa-platform', code: 'OA-03', accent: '#4CC38A', no: '03', kind: '商業系統實務',
+    slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', no: '04', kind: '商業系統實務 · 2026',
     tags: ['Vue 3', 'PrimeVue', 'Node.js', 'MongoDB', 'LINE Messaging API'],
     title: 'LINE OA 商家管理平台',
     body: '提供商家自行管理 LINE 官方帳號內容的後台管理平台，讓店家不用找工程師，自己就能更新 FAQ、公告與價目表。',
     side: { icon: 'storefront', title: 'MANAGEMENT CAPABILITY', items: ['內容管理：FAQ、公告、價目表', '多店家與權限管理', '圖文選單點擊與熱門內容數據分析'] },
     detail: {
+      period: '2026',
       role: '獨立開發',
       diagram: {
         title: '後台內容同步至 LINE 官方帳號',
@@ -151,9 +226,9 @@ export const projects: {
           { id: 'admin', label: '商家後台', sub: 'Vue 3 · PrimeVue', x: 12, y: 30 },
           { id: 'api', label: 'Node.js API', sub: '多店家 / 權限', x: 40, y: 30 },
           { id: 'db', label: 'MongoDB', sub: 'FAQ · 公告 · 價目表', x: 40, y: 56 },
-          { id: 'line', label: 'LINE Messaging API', x: 68, y: 30 },
+          { id: 'line', label: 'LINE API', sub: 'Messaging API', x: 65, y: 30 },
           { id: 'oa', label: '官方帳號使用者', x: 90, y: 30 },
-          { id: 'stats', label: '數據分析', sub: '點擊與熱門內容', x: 68, y: 6 },
+          { id: 'stats', label: '數據分析', sub: '點擊與熱門內容', x: 65, y: 6 },
         ],
         edges: [['admin', 'api', '編輯內容'], ['api', 'db'], ['api', 'line', '同步'], ['line', 'oa'], ['oa', 'stats', '點擊紀錄'], ['stats', 'admin']],
       },
@@ -166,17 +241,36 @@ export const projects: {
         { group: 'frontend', items: ['Vue 3', 'PrimeVue'] },
         { group: 'backend', items: ['Node.js', 'LINE Messaging API'] },
         { group: 'database', items: ['MongoDB'] },
+        { group: 'operations', items: ['Render', 'GitHub Actions', 'Cloudflare R2', 'Discord Webhook', 'Sentry'] },
       ],
       features: [
         { title: '內容管理', body: '包含 FAQ、公告、價目表等基礎內容，皆可透過後台自由編輯，無需工程開發。', points: ['FAQ', '公告', '價目表'] },
         { title: 'LINE OA 整合', body: '將後台內容同步至 LINE 官方帳號，提供一致且即時的資訊體驗。' },
         { title: '多店家與權限管理', body: '專為連鎖品牌設計，可個別調整分店專屬的服務與資料。' },
+        { title: '部署與維運', body: '後端部署於 Render，以自行撰寫的 access log 與 audit log 追蹤線上狀況，並用 GitHub Actions 定時備份，結果透過 Discord 通知。', points: ['Render', 'GitHub Actions', 'Cloudflare R2', 'Discord 通知'] },
         { title: '數據分析', body: '追蹤商家 LINE 內容的使用情形，作為優化經營策略的依據。', points: ['圖文選單點擊紀錄', '熱門內容排行', '使用者行為分析', '點擊成效統計'] },
       ],
+      challenges: [
+        { label: 'Observability', title: '監控工具影響 LINE Bot 回應速度', problem: '後端導入 Sentry 後，LINE Bot 的回應從約 0.1～0.2 秒變成約 1 秒。服務部署在 Render 免費方案，CPU 與記憶體都很有限，判斷是監控工具增加的負擔造成影響。', solution: '先關閉 profiling，再關閉 tracing，只保留錯誤監控，逐步縮小範圍排查。最後決定移除後端的 Sentry，改用自己寫的 access log 與 audit log，輸出到 console 由 Render 收集，前端則保留少量使用。', tags: ['Sentry', 'Logging', 'Performance'] },
+        { label: 'Browser Compatibility', title: '手機 Safari 登入後 Cookie 存不下來', problem: '後台使用 HttpOnly Cookie 保存登入狀態。電腦上測試正常，用手機測試時才發現登入成功後仍是未登入狀態：前後端在不同網域，Cookie 被視為第三方 Cookie，遭到 Safari 封鎖。', solution: '調整網域，讓前後端使用同一個主網域，Cookie 不再屬於第三方，Safari 就能正常保存。', tags: ['Cookie', 'Safari'] },
+        { label: 'Authentication', title: '多支請求同時 401 造成連環登出', problem: 'Refresh Token 每次更新都會輪替。Access Token 過期時，頁面上的多支請求會同時呼叫 /refresh，後到的請求拿舊 token 被拒絕，進而觸發登出並清掉 CSRF Token。', solution: '在 axios 攔截器共用同一個 refresh Promise，同一時間只更新一次，其他請求等待結果後再重試。', tags: ['JWT', 'CSRF', 'Axios'] },
+      ],
+      verification: [
+        '部署於 Render，自行撰寫 access log 與 audit log 輸出到 console，上線後能追蹤實際的請求與關鍵操作',
+        '後端移除 Sentry 後改用自己寫的日誌，僅前端少量使用 Sentry',
+        '以 GitHub Actions 排程，每天備份 MongoDB、匯出稽核日誌到 Cloudflare R2，並用 Discord 通知成功或失敗',
+        '進行資安檢查，修補帳號管理權限、登入與 session 的問題',
+        '修正多分頁 CSRF，以及多支請求同時遇到 401 時的 token 更新流程',
+        '目前沒有自動化測試，以手動測試與日誌監控為主',
+      ],
+      retrospective: {
+        learned: '要長期運作的系統，不能只看功能是否完成。權限、CSRF、webhook 簽章、日誌和備份這些看不到的部分，才是系統能穩定運作的關鍵。',
+        next: '為登入、權限與預約審核這些關鍵流程補上自動化測試，降低修改時的風險。',
+      },
     },
   },
   {
-    slug: 'weather-bike-bot', code: 'WB-04', accent: '#5AB8F0', no: '04', kind: 'LINE Bot · 2024',
+    slug: 'weather-bike-bot', code: 'WB-05', accent: '#5AB8F0', no: '05', kind: 'LINE Bot · 2024',
     tags: ['Node.js', 'Express', 'LINE Bot', 'Flex Message', 'API Integration'],
     title: '天氣 Bike 小幫手',
     body: '透過 LINE 聊天介面整合 YouBike 與天氣查詢功能，讓使用者能快速取得即時站點資訊與天氣預報，減少在不同 App 與網站之間切換的成本。',
@@ -214,12 +308,21 @@ export const projects: {
         { label: 'User Experience', title: '聊天流程設計', problem: '使用者無法像網站一樣透過導覽列操作，若功能過多容易增加學習成本。', solution: '設計功能選單與關鍵字觸發流程，搭配 Flex Message 呈現資訊，提供更清晰的操作體驗。', tags: ['LINE Bot SDK', 'Flex Message'] },
         { label: 'Data Normalization', title: '多城市資料整合', problem: '不同城市的 YouBike API 結構與資料格式存在差異，增加資料處理與維護難度。', solution: '建立統一資料格式與轉換邏輯，將不同來源資料整理成一致結構，讓後續功能擴充更加容易。', tags: ['Node.js', 'API Integration'] },
       ],
+      verification: [
+        '撰寫小型腳本實際呼叫 YouBike 與天氣 API，確認回傳的資料格式',
+        '在 LINE 上操作關鍵字與功能選單，確認回覆內容',
+        '目前沒有自動化測試，以手動測試為主',
+      ],
+      retrospective: {
+        learned: '不同來源的資料格式都不一樣，先轉換成統一格式，後面的回覆邏輯就單純很多。',
+        next: '替資料轉換層補上測試，並處理外部 API 失敗時給使用者的提示。',
+      },
     },
   },
 ]
 
 export const contact = {
   eyebrow: 'Contact / 聯絡資訊',
-  title: '有合適的職缺或合作，歡迎聊聊。',
-  body: '我對新的前端工作機會保持開放，也接受網站開發、LINE 官方帳號與後台系統的專案合作。如果你的團隊正在找熟悉 Vue、遇到問題會追到根源的前端工程師，歡迎來信。',
+  title: '歡迎與我聯繫。',
+  body: '我對新的前端工作機會保持開放。如果你的團隊正在找熟悉 Vue、遇到問題會追到根源的前端工程師，歡迎來信。',
 }

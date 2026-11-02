@@ -5,7 +5,7 @@ export const intro = {
   body: '整理我的工作經驗、技術應用與開發過程中累積的工程理解。',
   pills: [
     { icon: 'domain', color: 'text-primary', label: '北極星測繪公司 前端工程師' },
-    { icon: 'layers', color: 'text-primary', label: 'Vue 2 / Vue 3 & Vuetify 遷移' },
+    { icon: 'layers', color: 'text-primary', label: 'Vue 2 / Vue 3 & Vuetify 專案' },
     { icon: 'accessibility_new', color: 'text-primary', label: '無障礙改寫與 NVDA 驗證' },
     { icon: 'map', color: 'text-secondary', label: 'OpenLayers 空間圖資' },
     { icon: 'code', color: 'text-tertiary-container', label: '資料流追查與下單流程擴充' },
@@ -39,7 +39,7 @@ export const roles: Role[] = [
     period: '2025/04 — 至今',
     place: '北極星測繪公司',
     title: '前端工程師 ｜ 北極星測繪公司',
-    summary: '負責公司系統的前端開發與維護，包含介面開發、框架版本遷移、既有問題追查與功能擴充。',
+    summary: '負責公司系統的前端開發與維護，包含介面開發、既有問題追查與功能擴充。',
     tagIcon: 'explore',
     tagLabel: 'GIS / Web Frontend',
     stack: [
@@ -49,7 +49,8 @@ export const roles: Role[] = [
     listTitle: '主要工作職責與開發重點',
     listIcon: 'task_alt',
     items: [
-      { title: '框架版本遷移與相容性調整', body: '公司專案同時有 Vue 2 與 Vue 3，皆以 Options API 撰寫。參與 Vue 與 Vuetify 主要版本的遷移，處理 Dialog、Menu、表單驗證等元件在新版中的行為差異與樣式問題。' },
+      { title: 'Vue 2 與 Vue 3 專案開發維護', body: '公司同時有 Vue 2 與 Vue 3 的專案，皆以 Options API 撰寫。在專案中處理 Dialog、Menu、表單驗證等元件的行為與樣式問題。' },
+      { title: '無障礙檢測修正', body: '接手網站無障礙檢測的退件修正，涵蓋標題結構、鍵盤操作、表單標籤、跳過區塊與導盲磚，協助網站通過 A 等級檢測。' },
       { title: '追查既有程式的缺陷', body: '遇到由既有程式本身缺陷造成的錯誤時，實際追蹤資料流與業務邏輯找出根源後修正，並運用 JavaScript 原型鏈調整寫法，而不是只處理表面症狀。' },
       { title: '擴充下單流程', body: '擴充整個下單流程：先從程式面理解原有功能，再從使用者角度調整操作步驟，讓流程更直覺。' },
       { title: '從使用者角度完善需求', body: '收到後台 CRUD 功能的需求時，主動補上圖片預覽與放大檢視，讓管理者不必下載就能確認內容。' },
@@ -57,8 +58,8 @@ export const roles: Role[] = [
     ].map(i => ({ ...i, icon: 'check_circle' })),
     highlight: {
       icon: 'accessibility_new',
-      title: '案例：讓日曆元件完全符合無障礙標準',
-      body: '依無障礙標準改寫 Vue 3 專案時，發現 Vuetify 內建日曆元件的無障礙支援並不完善。我重新實作了這個元件，並另外撰寫 JavaScript 補足缺少的無障礙行為，最後以 NVDA 螢幕報讀器實測，確認導讀正常。',
+      title: '案例：補足日期選擇器的無障礙操作',
+      body: '依無障礙標準改寫 Vue 3 專案時，發現 Vuetify 日期選擇器的鍵盤操作與報讀支援不完整。我撰寫共用的 mixin，補上方向鍵操作、焦點管理與日期報讀標籤，並套用到多個表單，最後以 NVDA 實測確認導讀正常。',
     },
   },
   {
@@ -131,9 +132,9 @@ export const matrix = {
   body: '整理我在公司專案與個人專案中實際用過的技術，以及用在哪些地方。',
   heads: ['技術領域', '技術與工具', '實際應用', '經驗來源'],
   rows: [
-    { icon: 'devices', domain: '前端框架與版本遷移', stack: 'Vue 2 / Vue 3, JavaScript, TypeScript', scope: '公司專案以 Options API 撰寫，並參與 Vue 2 至 Vue 3 的遷移；個人專案使用 Composition API 與 TypeScript', source: '公司＋個人專案' },
+    { icon: 'devices', domain: '前端框架', stack: 'Vue 2 / Vue 3, JavaScript, TypeScript', scope: '公司的 Vue 2 與 Vue 3 專案以 Options API 撰寫；個人專案使用 Composition API 與 TypeScript', source: '公司＋個人專案' },
     { icon: 'brush', domain: 'UI 元件庫與樣式調整', stack: 'Vuetify 2 / Vuetify 3, CSS / SASS', scope: 'Dialog、Menu 浮層定位、表單驗證、CSS 覆蓋與響應式排版修正', source: '公司專案' },
-    { icon: 'accessibility_new', domain: '無障礙', stack: 'JavaScript, NVDA', scope: '依無障礙標準改寫 Vue 3 介面，重新實作支援不足的日曆元件，並以 NVDA 實測導讀', source: '公司專案' },
+    { icon: 'accessibility_new', domain: '無障礙', stack: 'JavaScript, NVDA', scope: '依無障礙標準改寫 Vue 3 介面，以共用 mixin 補足日期選擇器的鍵盤操作、焦點管理與報讀標籤，並以 NVDA 實測導讀', source: '公司專案' },
     { icon: 'map', domain: '地理空間圖台', stack: 'OpenLayers', scope: '協助整合地圖圖層與前端介面，並依需求調整相關參數', source: '公司專案' },
     { icon: 'hub', domain: '全端延伸', stack: 'Vue 3, PrimeVue, Node.js, MongoDB, LINE Messaging API', scope: '為朋友開發 LINE 官方帳號機器人，並延伸出後台管理與資料庫，讓店家能從後台修改 LINE OA 上顯示的資料', source: '個人專案' },
     { icon: 'build', domain: '建置與版本控管', stack: 'Vite, Webpack, Git, GitLab', scope: '依 Lighthouse 檢測出 JS 檔案過大的問題，調整打包時的 chunk 切分；獨立開發，並以 Merge Request 流程審查 AI 產生的程式碼', source: '實務經驗' },
@@ -148,13 +149,13 @@ export const principlesSection = {
 }
 
 export const principles = [
-  { icon: 'compare', title: '框架差異分析', body: '理解不同版本的元件 API、預設行為與樣式差異，不把舊版寫法直接搬到新版，確保升級後元件仍照原本的設計運作。', foot: 'Framework Migration & Behavior Analysis' },
+  { icon: 'compare', title: '框架差異分析', body: '同時接觸 Vue 2 與 Vue 3 專案，理解不同版本的元件 API、預設行為與樣式差異，不把一邊的寫法直接套到另一邊。', foot: 'Framework Behavior Analysis' },
   { icon: 'troubleshoot', title: '追到問題根源', body: '從重現問題開始，追蹤資料流與業務邏輯，分辨是既有程式的缺陷、事件傳遞、生命週期順序還是 CSS 層級造成的，修正後再驗證結果。', foot: 'Root Cause Debugging' },
   { icon: 'person_search', title: '從使用者角度完善需求', body: '收到需求時，不只做到規格要求，也會思考實際使用的情境，例如在後台 CRUD 加上圖片預覽與放大，或在擴充下單流程時讓操作更直覺。', foot: 'User-Centered Development' },
 ]
 
 export const cta = {
-  badge: '開放工作機會與專案合作',
-  title: '有合適的職缺或合作，歡迎聊聊。',
-  body: '我對新的前端工作機會保持開放，也接受網站開發、LINE 官方帳號與後台系統的專案合作。如果你的團隊正在找熟悉 Vue、遇到問題會追到根源的前端工程師，歡迎來信。',
+  badge: '開放工作機會',
+  title: '歡迎與我聯繫。',
+  body: '我對新的前端工作機會保持開放。如果你的團隊正在找熟悉 Vue、遇到問題會追到根源的前端工程師，歡迎來信。',
 }

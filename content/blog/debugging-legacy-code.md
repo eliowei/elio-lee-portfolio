@@ -3,7 +3,7 @@
 title: 既有系統除錯思路：從重現問題到建立防護
 description: 面對非本人撰寫的舊程式碼時，如何透過清晰的最小重現範例、斷點排查與元件解耦逐步解決問題。
 date: 2026-10-29
-category: debug
+category: case
 tags: [Debugging, Legacy Code, DevTools]
 readingTime: 7
 ---

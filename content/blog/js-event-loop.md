@@ -2,7 +2,7 @@
 # AI 草擬的技術說明（不含個人經歷與數據），發布前請審閱並補上自己的實務案例。
 title: JavaScript 事件循環、非同步與作用域理解
 description: 梳理 Event Loop、Promise 微任務隊列與閉包機制的實務踩坑心得，建立清晰的底層執行模型。
-date: 2026-10-29
+date: 2025-03-20
 category: js
 tags: [Event Loop, Promise, Closure]
 readingTime: 8

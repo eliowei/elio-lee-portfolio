@@ -3,6 +3,63 @@
 export interface ProjectImage { src: string; w: number; h: number; caption?: string }
 
 export const projectImages: Record<string, { cover: ProjectImage; gallery: ProjectImage[] }> = {
+  "tokyo-travel-site": {
+    "cover": {
+      "src": "/images/projects/tokyo-travel-site/cover.png",
+      "w": 1437,
+      "h": 788
+    },
+    "gallery": [
+      {
+        "src": "/images/projects/tokyo-travel-site/04.png",
+        "w": 475,
+        "h": 788,
+        "caption": "首頁：封面、天氣與當日行程"
+      },
+      {
+        "src": "/images/projects/tokyo-travel-site/06.png",
+        "w": 475,
+        "h": 788,
+        "caption": "行程詳情：交通、地圖與景點資訊"
+      },
+      {
+        "src": "/images/projects/tokyo-travel-site/07.png",
+        "w": 475,
+        "h": 788,
+        "caption": "旅遊資訊：即時資訊與行前準備"
+      },
+      {
+        "src": "/images/projects/tokyo-travel-site/03.png",
+        "w": 475,
+        "h": 863,
+        "caption": "旅遊資訊：行李清單"
+      },
+      {
+        "src": "/images/projects/tokyo-travel-site/08.png",
+        "w": 475,
+        "h": 788,
+        "caption": "旅遊資訊：迪士尼樂園規劃（示意資料）"
+      },
+      {
+        "src": "/images/projects/tokyo-travel-site/09.png",
+        "w": 475,
+        "h": 788,
+        "caption": "旅遊資訊：迪士尼行程地圖（示意資料）"
+      },
+      {
+        "src": "/images/projects/tokyo-travel-site/02.png",
+        "w": 475,
+        "h": 863,
+        "caption": "AI 旅遊助手"
+      },
+      {
+        "src": "/images/projects/tokyo-travel-site/01.png",
+        "w": 475,
+        "h": 863,
+        "caption": "花費紀錄（示意資料）"
+      }
+    ]
+  },
   "game-together": {
     "cover": {
       "src": "/images/projects/game-together/cover.png",

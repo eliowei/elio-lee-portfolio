@@ -8,7 +8,7 @@ import { navLinks, site } from '~/data/site'
       <div class="flex flex-col justify-between gap-8 py-space-xl md:flex-row md:items-end">
         <div class="space-y-2">
           <div class="font-heading text-headline-sm text-white">{{ site.name }}</div>
-          <p class="lab-muted max-w-md text-body-sm">前端工程師，用 Vue 開發網頁介面，也做 LINE 官方帳號與後台系統。</p>
+          <p class="lab-muted max-w-md text-body-sm">寫前端，也喜歡做一些會動的東西。</p>
         </div>
         <nav class="flex flex-wrap items-center gap-x-6 gap-y-2" aria-label="頁尾導覽">
           <NuxtLink v-for="l in navLinks" :key="l.to" :to="l.to" class="text-body-sm text-lab-on-dark-muted transition-colors hover:text-white">{{ l.label }}</NuxtLink>
@@ -17,7 +17,6 @@ import { navLinks, site } from '~/data/site'
       </div>
       <div class="flex flex-col items-start justify-between gap-2 border-t border-white/10 py-5 font-mono text-label-sm text-lab-on-dark-muted sm:flex-row sm:items-center">
         <p>© {{ new Date().getFullYear() }} 李柏偉 (Elio Lee)</p>
-        <p>Taipei, Taiwan · Digital Space</p>
       </div>
     </div>
   </footer>
