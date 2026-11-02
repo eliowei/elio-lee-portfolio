@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens — Elio Lee / Digital Space. Mirrors tailwind.config.ts (`lab.*`) for CSS / canvas use. */
+:root {
+  --lab-bg: #0c0d0f;
+  --lab-paper: #f3f2ee;
+  --lab-signal: #ff5b1f; /* survey orange — dark grounds + non-text marks */
+  --lab-signal-ink: #b83d0e; /* same hue, text-safe on the light ground */
+  --lab-on-dark: #ecebe7;
+  --lab-on-dark-muted: #9a9da3;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  /* Focus rings: ink-orange on the light ground, bright orange on dark sections. */
+  :focus-visible { outline: 2px solid theme('colors.lab.signal-ink'); outline-offset: 2px; }
+  .lab-dark :focus-visible { outline-color: theme('colors.lab.signal'); }
+  body { @apply bg-background font-sans text-body-md text-on-surface antialiased selection:bg-lab-signal/30 selection:text-on-surface; }
+}
+
+/* Route changes use the View Transitions API (nuxt.config → experimental.viewTransition).
+   Root: a short cross-fade. Project covers carry `view-transition-name: cover-<slug>` and morph between pages. */
+::view-transition-old(root) { animation: 180ms ease-in both vt-out; }
+::view-transition-new(root) { animation: 260ms 60ms ease-out both vt-in; }
+::view-transition-group(*) { animation-duration: 420ms; animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1); }
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; } }
+
+@layer components {
+  /* ---- Building blocks ---- */
+  .lab-dark { background-color: theme('colors.lab.bg'); color: theme('colors.lab.on-dark'); }
+  .lab-dark .lab-muted { color: theme('colors.lab.on-dark-muted'); }
+  .lab-eyebrow { @apply inline-flex items-center gap-2 font-mono text-label-sm uppercase tracking-[0.18em] text-lab-signal-ink; }
+  .lab-eyebrow::before { content: ''; width: 6px; height: 6px; background: currentColor; }
+  .lab-dark .lab-eyebrow { color: theme('colors.lab.signal'); }
+  /* Faint survey contours for dark page headers. Put on an aria-hidden overlay, never on content. */
+  .lab-grid {
+    background-image: repeating-radial-gradient(ellipse 60% 48% at 78% 40%, transparent 0 46px, rgb(255 255 255 / 0.05) 46px 47px);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 78% 40%, #000 20%, transparent 75%);
+    mask-image: radial-gradient(ellipse 80% 80% at 78% 40%, #000 20%, transparent 75%);
+  }
+  /* Home title: phones 40–48px, desktop up to ~104px. Wide measure; overlaps the 3D monument on purpose. */
+  .space-title { font-family: Geist, 'Noto Sans TC', 'PingFang TC', sans-serif; font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; font-size: clamp(2.5rem, 10.5vw, 3rem); }
+  @media (min-width: 768px) { .space-title { font-size: clamp(3.5rem, 6.4vw, 6.5rem); } }
+  .lab-chip { @apply inline-flex items-center rounded border border-white/15 px-2.5 py-1 font-mono text-label-sm text-lab-on-dark; }
+  .lab-chip-light { @apply inline-flex items-center rounded border border-hairline-strong bg-white px-2.5 py-1 font-mono text-label-sm text-on-surface-variant; }
+  /* Page entrance: CSS only, so content is never hidden waiting for JS. */
+  .lab-in { animation: lab-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: var(--d, 0ms); }
+  @keyframes lab-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .lab-in { animation: none; } }
+
+  .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-size: inherit; line-height: 1; display: inline-block; user-select: none; }
+  .section-x { @apply mx-auto w-full max-w-page px-margin-mobile md:px-margin; }
+  .eyebrow { @apply mb-1.5 flex items-center gap-1.5 font-mono text-label-sm uppercase tracking-widest text-secondary; }
+
+  /* Markdown body rendered by <ContentRenderer>. Reading measure comes from the 720px column (~65-72 chars). */
+  .prose-post { @apply space-y-5 text-body-lg text-on-surface; }
+  .prose-post h2 { @apply pt-6 text-headline-md; }
+  .prose-post h3 { @apply pt-3 text-headline-sm; }
+  .prose-post :where(h2, h3) { scroll-margin-top: 6rem; font-family: Geist, 'PingFang TC', 'Noto Sans TC', sans-serif; }
+  .prose-post a { @apply text-lab-signal-ink underline decoration-lab-signal-ink/40 underline-offset-4 transition-colors hover:decoration-lab-signal-ink; }
+  .prose-post :where(h2, h3, h4) a { @apply text-inherit no-underline; } /* heading self-anchors are not links to style */
+  .prose-post ul { @apply list-disc space-y-1 pl-6; }
+  .prose-post ol { @apply list-decimal space-y-1 pl-6; }
+  .prose-post blockquote { @apply border-l-2 border-hairline-strong pl-4 text-on-surface-variant; }
+  .prose-post :not(pre) > code { @apply rounded bg-surface-container px-1.5 py-0.5 font-mono text-[13px] text-zinc-800; }
+  .prose-post pre { @apply overflow-x-auto p-4 font-mono text-code-block text-slate-200; }
+  .prose-post pre code { @apply bg-transparent p-0 text-inherit; }
+  .prose-post table { @apply block w-full overflow-x-auto rounded-lg bg-surface-container-lowest text-left text-body-sm shadow-sm; }
+  .prose-post th { @apply min-w-[7rem] bg-surface-container-low px-4 py-3 font-mono text-label-md text-on-surface; }
+  .prose-post td { @apply min-w-[7rem] border-t border-hairline px-4 py-3; }
+  .prose-post img { @apply rounded-lg; }
+}
