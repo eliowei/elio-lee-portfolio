@@ -2,7 +2,7 @@
 # AI 草擬的技術說明（不含個人經歷與數據），發布前請審閱並補上自己的實務案例。
 title: 前端工程化與品質：測試策略、無障礙與 Web Vitals
 description: 測試、自動化驗證、無障礙設計、效能優化與大型專案的維護思維。
-date: 2026-10-29
+date: 2026-06-18
 category: quality
 tags: [Testing, Accessibility, Web Vitals]
 readingTime: 8

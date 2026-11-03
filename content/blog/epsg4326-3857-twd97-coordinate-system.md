@@ -1,7 +1,7 @@
 ---
 title: EPSG:4326、EPSG:3857 與 TWD97：理解 GIS 座標系統與 OpenLayers 座標轉換
 description: 從經緯度、Web Mercator 到台灣常見的 TWD97 二度分帶座標，理解不同座標系統的差異，以及如何透過 OpenLayers 進行座標轉換。
-date: 2025-06-05
+date: 2025-06-14
 category: gis
 tags:
   - GIS

@@ -17,7 +17,13 @@ const active = ref<keyof typeof categories | null>(null)
 const filters = computed(() => (Object.keys(categories) as (keyof typeof categories)[])
   .map(key => ({ key, label: categories[key], count: posts.value?.filter(p => p.category === key).length ?? 0 }))
   .filter(f => f.count))
-const shown = computed(() => posts.value?.filter(p => !active.value || p.category === active.value) ?? [])
+// Search matches the title, description and tags, on top of the category filter.
+const query = ref('')
+const shown = computed(() => {
+  const q = query.value.trim().toLowerCase()
+  return posts.value?.filter(p => (!active.value || p.category === active.value)
+    && (!q || [p.title, p.description, ...(p.tags ?? [])].join(' ').toLowerCase().includes(q))) ?? []
+})
 const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-reduce:transition-none', on ? '!border-lab-signal-ink !text-lab-signal-ink' : 'hover:!border-on-surface-variant']
 </script>
 
@@ -35,11 +41,25 @@ const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-
         <h2 id="latest" class="text-headline-md">最新筆記</h2>
         <span class="hidden font-mono text-label-sm uppercase tracking-wider text-on-surface-variant sm:inline">{{ shown.length }} articles</span>
       </div>
+      <div class="relative mb-4 max-w-md">
+        <label for="note-search" class="sr-only">搜尋筆記</label>
+        <UiIcon name="search" class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[20px] text-on-surface-variant" />
+        <input
+          id="note-search"
+          v-model="query"
+          type="search"
+          placeholder="搜尋標題、內容摘要或標籤"
+          class="w-full rounded-sm border border-hairline-strong bg-white py-2.5 pl-10 pr-3 text-body-md text-on-surface transition-colors hover:border-on-surface-variant motion-reduce:transition-none"
+        >
+      </div>
       <div class="flex flex-wrap gap-2 pb-6" role="group" aria-label="依分類篩選筆記">
         <button type="button" :class="chip(!active)" :aria-pressed="!active" @click="active = null">全部 {{ posts.length }}</button>
         <button v-for="f in filters" :key="f.key" type="button" :class="chip(active === f.key)" :aria-pressed="active === f.key" @click="active = f.key">{{ f.label }} {{ f.count }}</button>
       </div>
-      <ol class="border-t border-hairline">
+      <p v-if="!shown.length" class="border-t border-hairline py-12 text-center text-body-md text-on-surface-variant" role="status">
+        找不到符合的筆記，換個關鍵字或分類試試。
+      </p>
+      <ol v-else class="border-t border-hairline">
         <li v-for="p in shown" :key="p.path" class="border-b border-hairline">
           <NuxtLink :to="p.path" class="group grid gap-2 py-8 md:grid-cols-12 md:gap-8">
             <div class="font-mono text-label-md text-on-surface-variant md:col-span-2">

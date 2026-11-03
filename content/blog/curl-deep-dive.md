@@ -1,7 +1,7 @@
 ---
 title: 從 Postman 到 cURL：當你開始真正理解 HTTP 請求
 description: 從使用 Postman 測 API，到理解後端提供 curl 指令背後的 HTTP 原理，這篇筆記整理我一路學到的 cURL 實務觀念。
-date: 2026-11-03
+date: 2025-05-08
 category: js
 tags: [HTTP, cURL, API, Debugging, Postman]
 readingTime: 8

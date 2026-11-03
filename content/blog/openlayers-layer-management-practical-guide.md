@@ -1,7 +1,7 @@
 ---
 title: OpenLayers 圖層管理實作：新增、移除、切換與狀態同步
 description: 從前端開發角度出發，透過 OpenLayers 實作圖層註冊、動態新增、移除、切換與 Vue 狀態同步，並整理圖層重複加入、zIndex 與資源清理等常見問題。
-date: 2025-06-05
+date: 2025-06-26
 category: gis
 tags:
   - GIS

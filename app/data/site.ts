@@ -17,6 +17,7 @@ export const navLinks = [
 export const categories = {
   js: 'JavaScript',
   vue: 'Vue / Nuxt',
+  gis: 'GIS 地圖',
   case: '實戰紀錄',
   quality: '工程品質與資安',
 } as const

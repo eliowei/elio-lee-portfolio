@@ -1,8 +1,8 @@
 ---
 title: "從 Vue 專案結構到前端架構設計：一個專案究竟可以拆分到多細？"
 description: "從學習階段接觸的 Vue 專案結構，到實際專案中的架構觀察，探討前端專案如何依照功能、元件與責任進行拆分，以及如何在可維護性與複雜度之間取得平衡。"
-date: 2026-11-03
-category: frontend
+date: 2025-09-10
+category: vue
 tags:
 
 - Vue

@@ -1,7 +1,7 @@
 ---
 title: 從 HTTP 請求到 TCP 連線：一次 API 呼叫究竟發生了什麼？
 description: 從 cURL 到 DNS、TCP、TLS，我們一起把一次 API 呼叫拆解成一整段網路協定流程，理解 HTTP 背後其實不是單純的請求，而是整套連線與安全機制共同完成的。
-date: 2026-11-03
+date: 2025-05-22
 category: js
 tags: [HTTP, TCP, API, DNS, HTTPS, Networking]
 readingTime: 7
