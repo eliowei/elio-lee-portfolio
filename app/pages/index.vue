@@ -5,6 +5,7 @@ import { site } from '~/data/site'
 const title = '李柏偉 Elio Lee | 前端工程師'
 const description = hero.intro
 const url = useRuntimeConfig().public.siteUrl
+const HomeSpace = defineAsyncComponent(() => import('~/components/home/Space.vue'))
 
 useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: url, twitterCard: 'summary' })
 useHead({

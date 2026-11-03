@@ -122,8 +122,14 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
                 <NuxtImg
                   v-if="cover(current.slug)"
                   :key="current.slug"
-                  :src="cover(current.slug)!.src" :width="160" :height="Math.round(160 * cover(current.slug)!.h / cover(current.slug)!.w)"
-                  format="webp" alt="" class="h-auto w-40 shrink-0 self-start rounded-sm border border-white/10"
+                  :src="cover(current.slug)!.src" 
+                  :width="160" 
+                  :height="Math.round(160 * cover(current.slug)!.h / cover(current.slug)!.w)"
+                  sizes="(max-width: 768px) 100vw, 160px"
+                  format="webp" 
+                  loading="lazy"
+                  alt="" 
+                  class="h-auto w-40 shrink-0 self-start rounded-sm border border-white/10"
                   :style="{ viewTransitionName: `cover-${current.slug}` }"
                 />
                 <div class="min-w-0">
@@ -145,8 +151,15 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
                 <NuxtLink :to="`/projects/${p.slug}`" class="group block rounded-sm border border-white/10 bg-lab-bg-soft" :class="i === 0 ? 'p-3' : 'flex items-center gap-4 p-3'">
                   <NuxtImg
                     v-if="cover(p.slug)"
-                    :src="cover(p.slug)!.src" :width="i === 0 ? 720 : 240" format="webp" loading="lazy" alt=""
-                    :class="i === 0 ? 'aspect-[16/10] w-full' : 'aspect-square w-20 shrink-0'" class="rounded-sm object-cover object-top"
+                    :src="cover(p.slug)!.src" 
+                    :width="i === 0 ? 720 : 240" 
+                    :height="i === 0 ? 450 : 240"
+                    sizes="(max-width: 768px) 100vw, 240px"
+                    format="webp" 
+                    loading="lazy" 
+                    alt=""
+                    :class="i === 0 ? 'aspect-[16/10] w-full' : 'aspect-square w-20 shrink-0'" 
+                    class="rounded-sm object-cover object-top"
                     :style="{ viewTransitionName: `cover-${p.slug}` }"
                   />
                   <div :class="i === 0 ? 'mt-4 px-1 pb-1' : 'min-w-0'">

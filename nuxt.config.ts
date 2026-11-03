@@ -1,4 +1,4 @@
-const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || 'https://alexchen.dev'
+const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || 'https://portfolio.elioflowra.com/'
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',

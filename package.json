@@ -21,6 +21,7 @@
     "vue-router": "^5.4.0"
   },
   "devDependencies": {
+    "@types/node": "^26.6.6",
     "@types/three": "^0.186.0"
   }
 }
