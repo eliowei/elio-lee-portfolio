@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { projects } from '~/data/home'
-import { projectImages } from '~/data/project-images'
-
+const { t } = useI18n()
+const localePath = useLocalePath()
+const { projects, projectImages } = useData()
 const route = useRoute()
 const idx = projects.findIndex(p => p.slug === route.params.slug)
-if (idx < 0) throw createError({ statusCode: 404, statusMessage: '找不到這個專案', fatal: true })
+if (idx < 0) throw createError({ statusCode: 404, statusMessage: t('projects.notFound'), fatal: true })
 
 const project = projects[idx]!
 const detail = project.detail ?? {}
@@ -16,7 +16,7 @@ const images = projectImages[project.slug]
 const cover = images?.cover
 const gallery = images?.gallery ?? []
 const coverAt = cover ? gallery.findIndex(i => i.w === cover.w && i.h === cover.h) : -1
-const slides = cover && coverAt < 0 ? [{ ...cover, caption: '專案封面' }, ...gallery] : gallery
+const slides = cover && coverAt < 0 ? [{ ...cover, caption: t('projects.coverCaption') }, ...gallery] : gallery
 const coverSlide = cover ? Math.max(coverAt, 0) : -1
 const thumbs = slides.map((s, i) => ({ ...s, i })).filter(t => t.i !== coverSlide)
 const lightbox = ref<number | null>(null)
@@ -33,7 +33,6 @@ const has = {
   reflection: !!detail.retrospective,
 }
 const labels = { context: 'Context', challenge: 'Challenge', decision: 'Decision', implementation: 'Implementation', validation: 'Validation', reflection: 'Reflection' }
-const titles = { context: '背景與需求', challenge: '需要解決的問題', decision: '技術方案與取捨', implementation: '實作過程', validation: '測試與驗證', reflection: '限制與後續' }
 type Chapter = keyof typeof has
 const chapters = (Object.keys(has) as Chapter[]).filter(k => has[k] || (dev && (k === 'validation' || k === 'reflection')))
 const no = (k: Chapter) => String(chapters.indexOf(k) + 1).padStart(2, '0')
@@ -53,18 +52,17 @@ onMounted(() => {
 })
 
 const title = `${project.title} | Elio Lee`
-const url = `${useRuntimeConfig().public.siteUrl}/projects/${project.slug}`
+const url = usePageUrl()
 const ogImage = cover ? `${useRuntimeConfig().public.siteUrl}${cover.src}` : undefined
 useSeoMeta({ title, description: project.body, ogTitle: title, ogDescription: project.body, ogType: 'article', ogUrl: url, ogImage, twitterCard: ogImage ? 'summary_large_image' : 'summary', twitterImage: ogImage })
 useHead({
-  link: [{ rel: 'canonical', href: url }],
   script: [{
     type: 'application/ld+json',
     innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'CreativeWork', name: project.title, description: project.body, keywords: project.tags.join(', '), author: { '@type': 'Person', name: '李柏偉', alternateName: 'Elio Lee' }, url }),
   }],
 })
 
-const back = `/?project=${project.slug}#works`
+const back = `${localePath('/')}?project=${project.slug}#works`
 const eyebrow = 'font-mono text-label-sm uppercase tracking-[0.18em] text-lab-signal-ink'
 const h2 = 'mt-3 text-headline-lg-mobile md:text-headline-lg'
 const chapter = 'scroll-mt-24 border-t border-hairline-strong pb-space-2xl pt-space-lg'
@@ -77,7 +75,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
     <header class="lab-dark relative isolate overflow-hidden">
       <div class="section-x pb-space-xl pt-24 md:pt-28">
         <NuxtLink :to="back" class="inline-flex items-center gap-1.5 font-mono text-label-md text-lab-on-dark-muted transition-colors hover:text-white">
-          <UiIcon name="arrow_back" class="text-[15px]" /> 返回作品空間
+          <UiIcon name="arrow_back" class="text-[15px]" /> {{ $t('projects.back') }}
         </NuxtLink>
         <div class="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">
           <div class="lg:col-span-5">
@@ -94,11 +92,11 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
             <button
               type="button" class="ml-auto block w-full cursor-zoom-in"
               :style="{ viewTransitionName: `cover-${project.slug}`, maxWidth: `min(${cover.w}px, ${(24 * cover.w / cover.h).toFixed(2)}rem)` }"
-              :aria-label="`放大檢視：${project.title} 封面畫面`" @click="lightbox = coverSlide"
+              :aria-label="$t('projects.zoom', { caption: $t('projects.coverAlt', { title: project.title }) })" @click="lightbox = coverSlide"
             >
               <NuxtPicture
                 :src="cover.src" :width="cover.w" :height="cover.h" sizes="xs:100vw sm:100vw md:100vw lg:680px"
-                :alt="`${project.title} 封面畫面`" loading="eager" :preload="{ fetchPriority: 'high' }"
+                :alt="$t('projects.coverAlt', { title: project.title })" loading="eager" :preload="{ fetchPriority: 'high' }"
                 :img-attrs="{ class: 'h-auto w-full rounded-sm border border-white/10', fetchpriority: 'high', decoding: 'async' }"
                 class="block"
               />
@@ -115,22 +113,22 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
         <div class="space-y-8 lg:sticky lg:top-24">
           <dl class="space-y-4 text-body-sm">
             <div v-if="detail.period">
-              <dt :class="eyebrow">年份</dt>
+              <dt :class="eyebrow">{{ $t('projects.year') }}</dt>
               <dd class="mt-1 font-medium">{{ detail.period }}</dd>
             </div>
             <div v-if="detail.role">
-              <dt :class="eyebrow">角色</dt>
+              <dt :class="eyebrow">{{ $t('projects.role') }}</dt>
               <dd class="mt-1 font-medium">{{ detail.role }}</dd>
             </div>
             <div>
-              <dt :class="eyebrow">技術</dt>
+              <dt :class="eyebrow">{{ $t('projects.tech') }}</dt>
               <dd class="mt-2 flex flex-wrap gap-1.5"><span v-for="t in project.tags" :key="t" class="lab-chip-light">{{ t }}</span></dd>
             </div>
             <div v-if="detail.demo || detail.github">
-              <dt :class="eyebrow">連結</dt>
+              <dt :class="eyebrow">{{ $t('projects.links') }}</dt>
               <dd class="mt-1 flex flex-wrap gap-x-4 gap-y-1">
                 <a v-if="detail.demo" :href="detail.demo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-medium text-lab-signal-ink underline decoration-lab-signal-ink/40 underline-offset-4 hover:decoration-lab-signal-ink">
-                  線上展示 <UiIcon name="arrow_outward" class="text-[14px]" />
+                  {{ $t('projects.demo') }} <UiIcon name="arrow_outward" class="text-[14px]" />
                 </a>
                 <a v-if="detail.github" :href="detail.github" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-medium text-on-surface underline decoration-hairline-strong underline-offset-4 hover:decoration-on-surface">
                   GitHub <UiIcon name="arrow_outward" class="text-[14px]" />
@@ -139,7 +137,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
             </div>
           </dl>
 
-          <nav class="hidden lg:block" aria-label="案例段落">
+          <nav class="hidden lg:block" :aria-label="$t('projects.chapters')">
             <ol class="border-l border-hairline-strong">
               <li v-for="k in chapters" :key="k">
                 <a
@@ -157,7 +155,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
       </aside>
 
       <!-- Phones / tablets: chapter index as a scrollable row -->
-      <nav class="-mx-margin-mobile mb-space-lg overflow-x-auto px-margin-mobile lg:hidden" aria-label="案例段落（行動版）">
+      <nav class="-mx-margin-mobile mb-space-lg overflow-x-auto px-margin-mobile lg:hidden" :aria-label="$t('projects.chaptersMobile')">
         <ol class="flex gap-2 whitespace-nowrap">
           <li v-for="k in chapters" :key="k"><a :href="`#${k}`" class="lab-chip-light">{{ no(k) }} {{ labels[k] }}</a></li>
         </ol>
@@ -167,7 +165,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
       <div class="min-w-0 max-w-[46rem]">
         <section id="context" :class="chapter" aria-labelledby="context-h">
           <p :class="eyebrow">{{ no('context') }} / Context</p>
-          <h2 id="context-h" :class="h2">{{ titles.context }}</h2>
+          <h2 id="context-h" :class="h2">{{ $t('projects.chapterTitles.context') }}</h2>
           <div class="mt-6 space-y-4 text-body-lg text-on-surface-variant">
             <p v-for="p in detail.overview?.length ? detail.overview : [project.body]" :key="p">{{ p }}</p>
           </div>
@@ -175,7 +173,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
 
         <section v-if="has.challenge" id="challenge" :class="chapter" aria-labelledby="challenge-h">
           <p :class="eyebrow">{{ no('challenge') }} / Challenge</p>
-          <h2 id="challenge-h" :class="h2">{{ titles.challenge }}</h2>
+          <h2 id="challenge-h" :class="h2">{{ $t('projects.chapterTitles.challenge') }}</h2>
           <ol class="mt-6 divide-y divide-hairline border-y border-hairline">
             <li v-for="(c, i) in challenges" :key="c.title" class="grid gap-2 py-5 sm:grid-cols-[3.5rem_1fr]">
               <span class="font-mono text-label-md text-on-surface-variant">C{{ i + 1 }}</span>
@@ -189,7 +187,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
 
         <section v-if="has.decision" id="decision" :class="chapter" aria-labelledby="decision-h">
           <p :class="eyebrow">{{ no('decision') }} / Decision</p>
-          <h2 id="decision-h" :class="h2">{{ titles.decision }}</h2>
+          <h2 id="decision-h" :class="h2">{{ $t('projects.chapterTitles.decision') }}</h2>
           <ol v-if="challenges.length" class="mt-6 space-y-4">
             <li v-for="(c, i) in challenges" :key="c.title" class="rounded-sm bg-surface-container-lowest p-5 shadow-sm">
               <p class="font-mono text-label-sm text-on-surface-variant">C{{ i + 1 }} → {{ c.label }}</p>
@@ -198,7 +196,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
             </li>
           </ol>
           <template v-if="detail.stack?.length">
-            <h3 class="mt-10 text-headline-sm">技術組成</h3>
+            <h3 class="mt-10 text-headline-sm">{{ $t('projects.stack') }}</h3>
             <dl class="mt-4 divide-y divide-hairline border-y border-hairline">
               <div v-for="g in detail.stack" :key="g.group" class="grid gap-2 py-3 sm:grid-cols-[8rem_1fr]">
                 <dt class="font-mono text-label-md uppercase tracking-wider text-on-surface-variant">{{ g.group }}</dt>
@@ -213,7 +211,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
 
         <section id="implementation" :class="chapter" aria-labelledby="implementation-h">
           <p :class="eyebrow">{{ no('implementation') }} / Implementation</p>
-          <h2 id="implementation-h" :class="h2">{{ titles.implementation }}</h2>
+          <h2 id="implementation-h" :class="h2">{{ $t('projects.chapterTitles.implementation') }}</h2>
 
           <ProjectCaseDiagram v-if="detail.diagram" class="mt-6" :diagram="detail.diagram" :accent="project.accent" />
 
@@ -232,15 +230,15 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
           </ul>
 
           <template v-if="thumbs.length">
-            <h3 class="mt-12 text-headline-sm">實際畫面</h3>
-            <p class="mt-1 text-body-sm text-on-surface-variant">點擊放大檢視，可用左右鍵或滑動切換。</p>
+            <h3 class="mt-12 text-headline-sm">{{ $t('projects.screens') }}</h3>
+            <p class="mt-1 text-body-sm text-on-surface-variant">{{ $t('projects.screensHint') }}</p>
             <ul class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
               <li v-for="t in thumbs" :key="t.src">
                 <figure class="space-y-1.5">
                   <button
                     type="button"
                     class="group relative block aspect-[4/3] w-full cursor-zoom-in overflow-hidden rounded-sm bg-surface-container-lowest p-1.5 shadow-sm transition-shadow hover:shadow-md"
-                    :aria-label="`放大檢視：${t.caption}`"
+                    :aria-label="$t('projects.zoom', { caption: t.caption })"
                     @click="lightbox = t.i"
                   >
                     <NuxtPicture
@@ -259,7 +257,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
 
         <section v-if="chapters.includes('validation')" id="validation" :class="chapter" aria-labelledby="validation-h">
           <p :class="eyebrow">{{ no('validation') }} / Validation</p>
-          <h2 id="validation-h" :class="h2">{{ titles.validation }}</h2>
+          <h2 id="validation-h" :class="h2">{{ $t('projects.chapterTitles.validation') }}</h2>
           <template v-if="has.validation">
             <ul v-if="detail.verification?.length" class="mt-6 divide-y divide-hairline border-y border-hairline">
               <li v-for="v in detail.verification" :key="v" class="py-3 text-body-md">{{ v }}</li>
@@ -277,14 +275,14 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
 
         <section v-if="chapters.includes('reflection')" id="reflection" :class="chapter" aria-labelledby="reflection-h">
           <p :class="eyebrow">{{ no('reflection') }} / Reflection</p>
-          <h2 id="reflection-h" :class="h2">{{ titles.reflection }}</h2>
+          <h2 id="reflection-h" :class="h2">{{ $t('projects.chapterTitles.reflection') }}</h2>
           <div v-if="has.reflection" class="mt-6 grid gap-8 sm:grid-cols-2">
             <div v-if="detail.retrospective?.learned">
-              <h3 class="text-headline-sm">學到的事</h3>
+              <h3 class="text-headline-sm">{{ $t('projects.learned') }}</h3>
               <p class="mt-1.5 text-body-md text-on-surface-variant">{{ detail.retrospective.learned }}</p>
             </div>
             <div v-if="detail.retrospective?.next">
-              <h3 class="text-headline-sm">下一步</h3>
+              <h3 class="text-headline-sm">{{ $t('projects.next') }}</h3>
               <p class="mt-1.5 text-body-md text-on-surface-variant">{{ detail.retrospective.next }}</p>
             </div>
           </div>
@@ -293,12 +291,12 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
       </div>
     </div>
 
-    <nav class="lab-dark" aria-label="作品導覽">
+    <nav class="lab-dark" :aria-label="$t('projects.projectNav')">
       <div class="section-x flex flex-col gap-6 py-space-xl sm:flex-row sm:items-center sm:justify-between">
         <NuxtLink :to="back" class="inline-flex items-center gap-2 font-mono text-label-md text-lab-on-dark-muted transition-colors hover:text-white">
-          <UiIcon name="arrow_back" class="text-[16px]" /> 返回作品空間
+          <UiIcon name="arrow_back" class="text-[16px]" /> {{ $t('projects.back') }}
         </NuxtLink>
-        <NuxtLink :to="`/projects/${next.slug}`" class="group sm:text-right">
+        <NuxtLink :to="localePath(`/projects/${next.slug}`)" class="group sm:text-right">
           <span class="block font-mono text-label-sm uppercase tracking-[0.18em] text-lab-on-dark-muted">Next · {{ next.code }}</span>
           <span class="mt-1 inline-flex items-center gap-2 font-heading text-headline-md text-white">
             {{ next.title }} <UiIcon name="arrow_forward" class="text-[22px] text-lab-signal transition-transform group-hover:translate-x-1 motion-reduce:transition-none" />

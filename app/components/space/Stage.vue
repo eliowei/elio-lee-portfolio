@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { FrameInfo, SpaceScene } from '~/lib/space-scene'
-import { projects } from '~/data/home'
-import { projectImages } from '~/data/project-images'
+
+const { projects, projectImages } = useData()
 
 // Sticky full-viewport 3D stage behind the home hero + project space. Three.js is loaded lazily, only on
 // screens >= 768px with enough memory/cores and no Save-Data. Otherwise (and on WebGL failure) the static

@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { method, page } from '~/data/notes'
 import { categories } from '~/data/site'
 
-const title = '技術筆記 | Elio Lee'
+const { t } = useI18n()
+const { method, page } = useData()
+const title = t('blog.title')
 const description = page.lead
-const url = `${useRuntimeConfig().public.siteUrl}/blog`
 
-useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: url })
-useHead({ link: [{ rel: 'canonical', href: url }] })
+useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: usePageUrl() })
 
 // Published articles only (drafts = sample posts). The list appears once there is something to list.
-const { data: posts } = await useAsyncData('blog-list', () => queryCollection('blog').where('draft', '=', false).order('date', 'DESC').all())
+const collection = useBlogCollection()
+const { data: posts } = await useAsyncData(`blog-list-${collection}`, () => queryCollection(collection).where('draft', '=', false).order('date', 'DESC').all())
 
 // Category filter: plain client state, so the page stays cacheable as one document. Empty categories are not offered.
-const active = ref<keyof typeof categories | null>(null)
-const filters = computed(() => (Object.keys(categories) as (keyof typeof categories)[])
-  .map(key => ({ key, label: categories[key], count: posts.value?.filter(p => p.category === key).length ?? 0 }))
+const active = ref<(typeof categories)[number] | null>(null)
+const filters = computed(() => categories
+  .map(key => ({ key, label: t(`categories.${key}`), count: posts.value?.filter(p => p.category === key).length ?? 0 }))
   .filter(f => f.count))
 // Search matches the title, description and tags, on top of the category filter.
 const query = ref('')
@@ -30,7 +30,7 @@ const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-
 <template>
   <div>
     <LabPageHeader :eyebrow="page.eyebrow" :title="page.title" :lead="page.lead">
-      <ul class="flex flex-wrap gap-2" aria-label="筆記特色">
+      <ul class="flex flex-wrap gap-2" :aria-label="$t('blog.facts')">
         <li v-for="f in page.facts" :key="f" class="lab-chip">{{ f }}</li>
       </ul>
     </LabPageHeader>
@@ -38,26 +38,26 @@ const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-
     <!-- Editorial index of real articles -->
     <section v-if="posts?.length" class="section-x py-space-2xl" aria-labelledby="latest">
       <div class="flex items-end justify-between pb-6">
-        <h2 id="latest" class="text-headline-md">最新筆記</h2>
+        <h2 id="latest" class="text-headline-md">{{ $t('blog.latest') }}</h2>
         <span class="hidden font-mono text-label-sm uppercase tracking-wider text-on-surface-variant sm:inline">{{ shown.length }} articles</span>
       </div>
       <div class="relative mb-4 max-w-md">
-        <label for="note-search" class="sr-only">搜尋筆記</label>
+        <label for="note-search" class="sr-only">{{ $t('blog.search') }}</label>
         <UiIcon name="search" class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[20px] text-on-surface-variant" />
         <input
           id="note-search"
           v-model="query"
           type="search"
-          placeholder="搜尋標題、內容摘要或標籤"
+          :placeholder="$t('blog.searchPlaceholder')"
           class="w-full rounded-sm border border-hairline-strong bg-white py-2.5 pl-10 pr-3 text-body-md text-on-surface transition-colors hover:border-on-surface-variant motion-reduce:transition-none"
         >
       </div>
-      <div class="flex flex-wrap gap-2 pb-6" role="group" aria-label="依分類篩選筆記">
-        <button type="button" :class="chip(!active)" :aria-pressed="!active" @click="active = null">全部 {{ posts.length }}</button>
+      <div class="flex flex-wrap gap-2 pb-6" role="group" :aria-label="$t('blog.filter')">
+        <button type="button" :class="chip(!active)" :aria-pressed="!active" @click="active = null">{{ $t('blog.all') }} {{ posts.length }}</button>
         <button v-for="f in filters" :key="f.key" type="button" :class="chip(active === f.key)" :aria-pressed="active === f.key" @click="active = f.key">{{ f.label }} {{ f.count }}</button>
       </div>
       <p v-if="!shown.length" class="border-t border-hairline py-12 text-center text-body-md text-on-surface-variant" role="status">
-        找不到符合的筆記，換個關鍵字或分類試試。
+        {{ $t('blog.empty') }}
       </p>
       <ol v-else class="border-t border-hairline">
         <li v-for="p in shown" :key="p.path" class="border-b border-hairline">
@@ -67,7 +67,7 @@ const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-
               <p class="mt-1 text-label-sm uppercase tracking-wider text-lab-signal-ink">{{ p.readingTime }} min read</p>
             </div>
             <div class="md:col-span-8">
-              <p class="font-mono text-label-sm uppercase tracking-wider text-lab-signal-ink">{{ categories[p.category] }}</p>
+              <p class="font-mono text-label-sm uppercase tracking-wider text-lab-signal-ink">{{ $t(`categories.${p.category}`) }}</p>
               <h3 class="mt-1 text-headline-sm transition-colors group-hover:text-lab-signal-ink md:text-headline-md">{{ p.title }}</h3>
               <p class="mt-2 text-body-md text-on-surface-variant">{{ p.description }}</p>
             </div>

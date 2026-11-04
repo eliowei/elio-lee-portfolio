@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { matrix } from '~/data/experience'
+const { matrix } = useData()
 </script>
 
 <template>

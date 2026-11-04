@@ -1,0 +1,184 @@
+{
+  "skip": "メインコンテンツへスキップ",
+  "nav": {
+    "projects": "制作実績",
+    "experience": "経歴",
+    "blog": "ノート",
+    "contact": "お問い合わせ",
+    "main": "メインナビゲーション",
+    "mainMobile": "メインナビゲーション（モバイル）",
+    "footer": "フッターナビゲーション",
+    "home": "Elio Lee — ホーム",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる",
+    "language": "言語を切り替える"
+  },
+  "footer": {
+    "tagline": "フロントエンドを書きつつ、動くものを作るのが好きです。",
+    "explore": "サイト案内",
+    "legal": "法的情報と信頼性"
+  },
+  "backToTop": "ページの先頭へ",
+  "categories": {
+    "js": "JavaScript",
+    "vue": "Vue / Nuxt",
+    "gis": "GIS・地図",
+    "case": "実践記録",
+    "quality": "品質とセキュリティ"
+  },
+  "common": {
+    "contactMe": "お問い合わせ",
+    "techUsed": "使用技術",
+    "close": "閉じる"
+  },
+  "code": {
+    "copy": "コードをコピー",
+    "copied": "コピーしました"
+  },
+  "toc": "目次",
+  "home": {
+    "title": "Elio Lee（李柏偉）| フロントエンドエンジニア",
+    "jobTitle": "フロントエンドエンジニア",
+    "photoAlt": "Elio Lee（李柏偉）のプロフィール写真",
+    "aboutLink": "軍務からフロントエンドエンジニアへ：経歴を見る",
+    "explore": "制作実績を見る",
+    "aboutMe": "自己紹介",
+    "scrollHint": "スクロールして作品空間へ",
+    "worksEyebrow": "Project Space / 作品空間",
+    "worksTitle": "アイデアを実際のプロダクトに",
+    "worksHint": "カーソルを合わせるか ↑ ↓ キーでプレビュー、クリックか Enter でケーススタディを開きます（タッチ操作：1 回タップでプレビュー、もう 1 回で開く）。",
+    "worksList": "作品一覧",
+    "enterCase": "ケーススタディを見る：{title}",
+    "allWorks": "すべての作品を見る / All Works",
+    "notesEyebrow": "Technical Notes / 技術ノート",
+    "notesTitle": "問題を記録し、自分の理解を整理する。",
+    "notesBody": "実際に直面した問題を出発点に、デバッグの過程、フレームワークのバージョン間の違い、個人プロジェクトでの技術的な探求を記録しています。",
+    "notesLink": "技術ノートを読む"
+  },
+  "experience": {
+    "title": "経歴 | Elio Lee",
+    "description": "軍務、職業訓練を経てフロントエンドエンジニアへ。Vue 2 / Vue 3 と Vuetify のプロジェクト開発、コンポーネントの不具合調査、OpenLayers による地図連携。",
+    "highlights": "経歴のポイント"
+  },
+  "projects": {
+    "title": "制作実績 | Elio Lee",
+    "description": "アイデアを形にした作品：ゲーム仲間募集プラットフォーム、東京旅行サイト、個人ブランドサイト、LINE 公式アカウント管理プラットフォーム、天気と YouBike の LINE Bot。",
+    "eyebrow": "Project Index / 作品一覧",
+    "heading": "制作実績",
+    "lead": "個人で開発した 5 つの作品です。各ケーススタディでは背景、課題、技術的な判断、実装の流れを順に説明しています。",
+    "list": "プロジェクト一覧",
+    "screenshotAlt": "{title} のスクリーンショット",
+    "readCase": "ケーススタディを読む",
+    "notFound": "プロジェクトが見つかりません",
+    "coverCaption": "プロジェクトのカバー",
+    "coverAlt": "{title} のカバー画像",
+    "zoom": "拡大表示：{caption}",
+    "back": "作品空間に戻る",
+    "year": "年",
+    "role": "役割",
+    "tech": "技術",
+    "links": "リンク",
+    "demo": "デモを見る",
+    "chapters": "ケーススタディの構成",
+    "chaptersMobile": "ケーススタディの構成（モバイル）",
+    "chapterTitles": {
+      "context": "背景と要件",
+      "challenge": "解決すべき課題",
+      "decision": "技術的な判断とトレードオフ",
+      "implementation": "実装",
+      "validation": "テストと検証",
+      "reflection": "制約と今後"
+    },
+    "stack": "技術構成",
+    "screens": "スクリーンショット",
+    "screensHint": "クリックで拡大表示。左右キーまたはスワイプで切り替えられます。",
+    "learned": "学んだこと",
+    "next": "次のステップ",
+    "projectNav": "作品ナビゲーション",
+    "diagramTag": "概念図",
+    "diagramEdges": "接続：",
+    "viewer": "プロジェクトの画面",
+    "prev": "前の画像",
+    "nextSlide": "次の画像"
+  },
+  "blog": {
+    "title": "技術ノート | Elio Lee",
+    "facts": "ノートの特徴",
+    "latest": "最新のノート",
+    "search": "ノートを検索",
+    "searchPlaceholder": "タイトル・概要・タグで検索",
+    "filter": "カテゴリーで絞り込む",
+    "all": "すべて",
+    "empty": "該当するノートが見つかりません。別のキーワードやカテゴリーをお試しください。",
+    "notFound": "記事が見つかりません",
+    "back": "技術ノートに戻る",
+    "breadcrumb": "技術ノート",
+    "draft": "下書き · サンプル記事。開発環境でのみ表示されます（本番環境では 404）",
+    "readingTime": "{n} 分で読めます",
+    "tags": "タグ"
+  },
+  "contact": {
+    "title": "お問い合わせ | Elio Lee",
+    "form": "お問い合わせフォーム",
+    "heading": "メッセージを送る",
+    "lead": "お仕事のご相談でも技術的な話題でも、お気軽にメッセージをお送りください。メールでご返信します。",
+    "name": "お名前",
+    "topic": "お問い合わせの種類",
+    "message": "メッセージ",
+    "topics": [
+      "お仕事のご相談",
+      "技術交流",
+      "内容の訂正",
+      "その他"
+    ],
+    "errName": "お名前を入力してください",
+    "errEmail": "メールアドレスを入力してください",
+    "errEmailFormat": "メールアドレスの形式が正しくありません",
+    "errMessage": "メッセージを入力してください",
+    "errMessageShort": "メッセージは 10 文字以上で入力してください",
+    "sending": "送信中…",
+    "submit": "送信する",
+    "okTitle": "送信しました",
+    "okBody": "できるだけ早くご連絡いたします",
+    "failTitle": "送信できませんでした",
+    "failBody": "入力内容は残っています。しばらくしてからもう一度お試しください",
+    "closeToast": "通知を閉じる",
+    "infoTitle": "ご連絡の前に",
+    "info": [
+      {
+        "icon": "schedule",
+        "title": "返信までの時間",
+        "body": "メッセージを受け取ってから 24〜48 時間以内に、私自身がご返信します。"
+      },
+      {
+        "icon": "location_on",
+        "title": "所在地とタイムゾーン",
+        "body": "台湾（UTC+8、台北時間）。"
+      },
+      {
+        "icon": "translate",
+        "title": "対応言語",
+        "body": "中国語または英語でご連絡ください。"
+      },
+      {
+        "icon": "shield",
+        "title": "ご連絡先の取り扱い",
+        "body": "いただいた情報は今回のご連絡への返信にのみ使い、共有・販売・営業目的での利用は一切しません。"
+      }
+    ],
+    "privacyLink": "プライバシーポリシーを読む",
+    "methods": "連絡方法",
+    "emailTag": "メインの窓口",
+    "emailBody": "クリックするとお問い合わせフォームが開き、メッセージは私のメールボックスに直接届きます。",
+    "githubBody": "コードと作品のソースを見る",
+    "closeForm": "お問い合わせフォームを閉じる"
+  },
+  "legal": {
+    "privacy": "プライバシーポリシー",
+    "terms": "利用規約",
+    "disclaimer": "免責事項",
+    "corrections": "訂正と編集方針",
+    "updated": "最終更新",
+    "notFound": "ページが見つかりません"
+  }
+}

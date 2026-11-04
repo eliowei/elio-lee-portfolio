@@ -1,0 +1,184 @@
+{
+  "skip": "Skip to main content",
+  "nav": {
+    "projects": "Work",
+    "experience": "Experience",
+    "blog": "Notes",
+    "contact": "Contact me",
+    "main": "Main navigation",
+    "mainMobile": "Main navigation (mobile)",
+    "footer": "Footer navigation",
+    "home": "Elio Lee — Home",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Change language"
+  },
+  "footer": {
+    "tagline": "I write frontend code, and I like making things that move.",
+    "explore": "Explore",
+    "legal": "Trust & Legal"
+  },
+  "backToTop": "Back to top",
+  "categories": {
+    "js": "JavaScript",
+    "vue": "Vue / Nuxt",
+    "gis": "GIS & Maps",
+    "case": "Field Notes",
+    "quality": "Quality & Security"
+  },
+  "common": {
+    "contactMe": "Contact me",
+    "techUsed": "Technologies used",
+    "close": "Close"
+  },
+  "code": {
+    "copy": "Copy code",
+    "copied": "Copied"
+  },
+  "toc": "Table of contents",
+  "home": {
+    "title": "Elio Lee | Frontend Engineer",
+    "jobTitle": "Frontend Engineer",
+    "photoAlt": "Portrait of Elio Lee",
+    "aboutLink": "From the army to frontend engineering: full experience",
+    "explore": "Explore work",
+    "aboutMe": "About me",
+    "scrollHint": "Scroll into the project space",
+    "worksEyebrow": "Project Space",
+    "worksTitle": "Turning ideas into real products",
+    "worksHint": "Hover or use ↑ ↓ to preview a project; click or press Enter to open the case study (touch: tap once to preview, again to open).",
+    "worksList": "Project list",
+    "enterCase": "Open case study: {title}",
+    "allWorks": "View all work",
+    "notesEyebrow": "Technical Notes",
+    "notesTitle": "Writing down problems, and what I learned from them.",
+    "notesBody": "Notes that start from real problems: debugging stories, differences between framework versions, and technical exploration from personal projects.",
+    "notesLink": "Read the technical notes"
+  },
+  "experience": {
+    "title": "Experience | Elio Lee",
+    "description": "From the army and vocational training to frontend engineering: Vue 2 / Vue 3 and Vuetify projects, debugging component interactions, and OpenLayers map integration.",
+    "highlights": "Experience highlights"
+  },
+  "projects": {
+    "title": "Projects | Elio Lee",
+    "description": "Ideas turned into real products: a gaming meetup platform, a Tokyo trip planner, a personal brand site, a LINE OA management platform and a weather & YouBike LINE bot.",
+    "eyebrow": "Project Index",
+    "heading": "Projects",
+    "lead": "Five projects I built on my own. Each case study walks through the context, the problems, the technical decisions and the implementation.",
+    "list": "Project list",
+    "screenshotAlt": "Screenshot of {title}",
+    "readCase": "Read the case study",
+    "notFound": "Project not found",
+    "coverCaption": "Project cover",
+    "coverAlt": "Cover screenshot of {title}",
+    "zoom": "Enlarge: {caption}",
+    "back": "Back to the project space",
+    "year": "Year",
+    "role": "Role",
+    "tech": "Stack",
+    "links": "Links",
+    "demo": "Live demo",
+    "chapters": "Case study sections",
+    "chaptersMobile": "Case study sections (mobile)",
+    "chapterTitles": {
+      "context": "Context and goals",
+      "challenge": "Problems to solve",
+      "decision": "Technical decisions and trade-offs",
+      "implementation": "Implementation",
+      "validation": "Testing and validation",
+      "reflection": "Limitations and next steps"
+    },
+    "stack": "Tech stack",
+    "screens": "Screenshots",
+    "screensHint": "Click to enlarge; use the arrow keys or swipe to move between images.",
+    "learned": "What I learned",
+    "next": "Next steps",
+    "projectNav": "Project navigation",
+    "diagramTag": "Diagram",
+    "diagramEdges": "Connections: ",
+    "viewer": "Project screenshot",
+    "prev": "Previous image",
+    "nextSlide": "Next image"
+  },
+  "blog": {
+    "title": "Technical Notes | Elio Lee",
+    "facts": "About these notes",
+    "latest": "Latest notes",
+    "search": "Search notes",
+    "searchPlaceholder": "Search titles, summaries or tags",
+    "filter": "Filter notes by category",
+    "all": "All",
+    "empty": "No matching notes. Try another keyword or category.",
+    "notFound": "Article not found",
+    "back": "Back to technical notes",
+    "breadcrumb": "Technical Notes",
+    "draft": "Draft · sample article, visible in development only (404 in production)",
+    "readingTime": "{n} min read",
+    "tags": "Tags"
+  },
+  "contact": {
+    "title": "Contact me | Elio Lee",
+    "form": "Contact form",
+    "heading": "Send a message",
+    "lead": "Whether it is about a job opportunity or a technical discussion, leave a message and I will reply by email.",
+    "name": "Name",
+    "topic": "Topic",
+    "message": "Message",
+    "topics": [
+      "Job opportunity",
+      "Technical discussion",
+      "Content correction",
+      "Other"
+    ],
+    "errName": "Please enter your name",
+    "errEmail": "Please enter your email",
+    "errEmailFormat": "Please enter a valid email address",
+    "errMessage": "Please enter a message",
+    "errMessageShort": "The message needs at least 10 characters",
+    "sending": "Sending…",
+    "submit": "Send message",
+    "okTitle": "Message sent",
+    "okBody": "I will get back to you soon",
+    "failTitle": "Could not send",
+    "failBody": "Your message is still here. Please try again later",
+    "closeToast": "Close notification",
+    "infoTitle": "Good to know",
+    "info": [
+      {
+        "icon": "schedule",
+        "title": "Response time",
+        "body": "I reply personally within 24–48 hours of receiving your message."
+      },
+      {
+        "icon": "location_on",
+        "title": "Location and time zone",
+        "body": "Taiwan (UTC+8, Taipei time)."
+      },
+      {
+        "icon": "translate",
+        "title": "Languages",
+        "body": "Chinese or English, whichever you prefer."
+      },
+      {
+        "icon": "shield",
+        "title": "How your details are used",
+        "body": "Your details are only used to reply to this message. They are never shared, sold or used for marketing."
+      }
+    ],
+    "privacyLink": "Read the privacy policy",
+    "methods": "Ways to reach me",
+    "emailTag": "Main channel",
+    "emailBody": "Opens the contact form; your message goes straight to my inbox.",
+    "githubBody": "Browse my code and project source",
+    "closeForm": "Close the contact form"
+  },
+  "legal": {
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "disclaimer": "Disclaimer",
+    "corrections": "Corrections & Editorial Standards",
+    "updated": "Last updated",
+    "notFound": "Page not found"
+  }
+}

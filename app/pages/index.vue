@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { hero } from '~/data/home'
 import { site } from '~/data/site'
 
-const title = '李柏偉 Elio Lee | 前端工程師'
+const { t } = useI18n()
+const { hero } = useData()
+const title = t('home.title')
 const description = hero.intro
-const url = useRuntimeConfig().public.siteUrl
+const url = usePageUrl()
 const HomeSpace = defineAsyncComponent(() => import('~/components/home/Space.vue'))
 
 useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: url, twitterCard: 'summary' })
 useHead({
-  link: [{ rel: 'canonical', href: url }],
   script: [{
     type: 'application/ld+json',
     innerHTML: JSON.stringify({
@@ -17,7 +17,7 @@ useHead({
       '@type': 'Person',
       name: '李柏偉',
       alternateName: 'Elio Lee',
-      jobTitle: '前端工程師',
+      jobTitle: t('home.jobTitle'),
       ...(site.email && { email: site.email }),
       url,
       sameAs: [site.github, site.linkedin].filter(Boolean),

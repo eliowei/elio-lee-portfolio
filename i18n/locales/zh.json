@@ -1,0 +1,184 @@
+{
+  "skip": "跳到主要內容",
+  "nav": {
+    "projects": "作品",
+    "experience": "經歷",
+    "blog": "筆記",
+    "contact": "聯絡我",
+    "main": "主要導覽",
+    "mainMobile": "主要導覽（手機）",
+    "footer": "頁尾導覽",
+    "home": "李柏偉 Elio Lee — 首頁",
+    "openMenu": "開啟選單",
+    "closeMenu": "關閉選單",
+    "language": "切換語言"
+  },
+  "footer": {
+    "tagline": "寫前端，也喜歡做一些會動的東西。",
+    "explore": "網站導覽",
+    "legal": "法律與信任"
+  },
+  "backToTop": "回到最上面",
+  "categories": {
+    "js": "JavaScript",
+    "vue": "Vue / Nuxt",
+    "gis": "GIS 地圖",
+    "case": "實戰紀錄",
+    "quality": "工程品質與資安"
+  },
+  "common": {
+    "contactMe": "聯絡我",
+    "techUsed": "使用技術",
+    "close": "關閉"
+  },
+  "code": {
+    "copy": "複製程式碼",
+    "copied": "已複製"
+  },
+  "toc": "文章大綱",
+  "home": {
+    "title": "李柏偉 Elio Lee | 前端工程師",
+    "jobTitle": "前端工程師",
+    "photoAlt": "李柏偉 Elio Lee 的個人照片",
+    "aboutLink": "從軍職到前端工程：完整經歷",
+    "explore": "探索作品",
+    "aboutMe": "認識我",
+    "scrollHint": "捲動進入作品空間",
+    "worksEyebrow": "Project Space / 作品探索",
+    "worksTitle": "將想法轉化為實際作品",
+    "worksHint": "移動游標或用 ↑ ↓ 預覽作品，點擊或按 Enter 進入案例（觸控：點一下預覽，再點一下進入）。",
+    "worksList": "作品列表",
+    "enterCase": "進入案例：{title}",
+    "allWorks": "查看全部作品 / All Works",
+    "notesEyebrow": "Technical Notes / 技術筆記",
+    "notesTitle": "記錄問題，也整理自己的理解。",
+    "notesBody": "從實際遇到的問題出發，記錄除錯過程、框架版本的差異，以及個人專案中的技術探索。",
+    "notesLink": "閱讀技術筆記"
+  },
+  "experience": {
+    "title": "工作經歷 | Elio Lee",
+    "description": "從軍職、職訓到前端工程：Vue 2 / Vue 3 與 Vuetify 專案開發、元件互動問題排查、OpenLayers 空間圖資互動整合。",
+    "highlights": "經歷重點"
+  },
+  "projects": {
+    "title": "專案作品 | Elio Lee",
+    "description": "將想法轉化為實際作品：遊戲社群揪團平台、東京自由行旅遊網站、個人品牌網站、LINE OA 商家管理平台、天氣 Bike 小幫手。",
+    "eyebrow": "Project Index / 作品列表",
+    "heading": "專案作品",
+    "lead": "五個獨立開發的作品。每個案例依序說明背景、問題、技術決策與實作過程。",
+    "list": "專案列表",
+    "screenshotAlt": "{title} 實際畫面",
+    "readCase": "閱讀案例",
+    "notFound": "找不到這個專案",
+    "coverCaption": "專案封面",
+    "coverAlt": "{title} 封面畫面",
+    "zoom": "放大檢視：{caption}",
+    "back": "返回作品空間",
+    "year": "年份",
+    "role": "角色",
+    "tech": "技術",
+    "links": "連結",
+    "demo": "線上展示",
+    "chapters": "案例段落",
+    "chaptersMobile": "案例段落（行動版）",
+    "chapterTitles": {
+      "context": "背景與需求",
+      "challenge": "需要解決的問題",
+      "decision": "技術方案與取捨",
+      "implementation": "實作過程",
+      "validation": "測試與驗證",
+      "reflection": "限制與後續"
+    },
+    "stack": "技術組成",
+    "screens": "實際畫面",
+    "screensHint": "點擊放大檢視，可用左右鍵或滑動切換。",
+    "learned": "學到的事",
+    "next": "下一步",
+    "projectNav": "作品導覽",
+    "diagramTag": "示意",
+    "diagramEdges": "連線：",
+    "viewer": "專案畫面",
+    "prev": "上一張",
+    "nextSlide": "下一張"
+  },
+  "blog": {
+    "title": "技術筆記 | Elio Lee",
+    "facts": "筆記特色",
+    "latest": "最新筆記",
+    "search": "搜尋筆記",
+    "searchPlaceholder": "搜尋標題、內容摘要或標籤",
+    "filter": "依分類篩選筆記",
+    "all": "全部",
+    "empty": "找不到符合的筆記，換個關鍵字或分類試試。",
+    "notFound": "找不到這篇文章",
+    "back": "返回技術筆記",
+    "breadcrumb": "技術筆記",
+    "draft": "草稿 · 範例文章，僅開發環境可見（正式環境為 404）",
+    "readingTime": "{n} 分鐘閱讀",
+    "tags": "標籤"
+  },
+  "contact": {
+    "title": "聯絡我 | Elio Lee",
+    "form": "聯絡表單",
+    "heading": "留下訊息",
+    "lead": "無論是工作機會或技術交流，都歡迎留下訊息，我會透過 Email 與你聯繫。",
+    "name": "姓名",
+    "topic": "聯絡類型",
+    "message": "訊息內容",
+    "topics": [
+      "工作機會",
+      "技術交流",
+      "內容勘誤",
+      "其他"
+    ],
+    "errName": "請輸入姓名",
+    "errEmail": "請輸入 Email",
+    "errEmailFormat": "Email 格式不正確",
+    "errMessage": "請輸入訊息內容",
+    "errMessageShort": "訊息內容至少需要 10 個字",
+    "sending": "傳送中…",
+    "submit": "送出訊息",
+    "okTitle": "送出成功",
+    "okBody": "我會盡快與您聯繫",
+    "failTitle": "送出失敗",
+    "failBody": "訊息內容還保留著，請稍後再試一次",
+    "closeToast": "關閉通知",
+    "infoTitle": "聯絡須知",
+    "info": [
+      {
+        "icon": "schedule",
+        "title": "回覆時間",
+        "body": "收到訊息後，我會在 24–48 小時內親自回覆。"
+      },
+      {
+        "icon": "location_on",
+        "title": "所在地與時區",
+        "body": "台灣（UTC+8，台北時間）。"
+      },
+      {
+        "icon": "translate",
+        "title": "溝通語言",
+        "body": "中文或英文皆可。"
+      },
+      {
+        "icon": "shield",
+        "title": "聯絡資料的使用",
+        "body": "你留下的資料只用來回覆這次聯絡，不會分享、出售，也不會用於行銷。"
+      }
+    ],
+    "privacyLink": "閱讀隱私權政策",
+    "methods": "聯絡方式",
+    "emailTag": "主要管道",
+    "emailBody": "點擊開啟聯絡表單，訊息會直接寄到我的信箱。",
+    "githubBody": "查看程式碼與作品原始碼",
+    "closeForm": "關閉聯絡表單"
+  },
+  "legal": {
+    "privacy": "隱私權政策",
+    "terms": "使用條款",
+    "disclaimer": "免責聲明",
+    "corrections": "勘誤與內容原則",
+    "updated": "最後更新",
+    "notFound": "找不到這個頁面"
+  }
+}

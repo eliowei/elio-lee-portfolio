@@ -7,17 +7,15 @@ export const site = {
   linkedin: '',
 }
 
+// 標籤文字在 i18n/locales/*.json 的 nav.<key>；分類名稱在 categories.<key>。
 export const navLinks = [
-  { label: '作品', to: '/projects' },
-  { label: '經歷', to: '/experience' },
-  { label: '筆記', to: '/blog' },
-  { label: '聯絡', to: '/contact' },
+  { key: 'projects', to: '/projects' },
+  { key: 'experience', to: '/experience' },
+  { key: 'blog', to: '/blog' },
+  { key: 'contact', to: '/contact' },
 ]
 
-export const categories = {
-  js: 'JavaScript',
-  vue: 'Vue / Nuxt',
-  gis: 'GIS 地圖',
-  case: '實戰紀錄',
-  quality: '工程品質與資安',
-} as const
+// 頁尾「法律與信任」。標籤在 legal.<key>；內容在 content/{,en/,ja/}legal/<key>.md。
+export const legalLinks = ['privacy', 'terms', 'disclaimer', 'corrections'] as const
+
+export const categories = ['js', 'vue', 'gis', 'case', 'quality'] as const

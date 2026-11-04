@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { hero, projects } from '~/data/home'
-import { projectImages } from '~/data/project-images'
+const { hero, projects, projectImages } = useData()
+const localePath = useLocalePath()
 
 // Hero + project space share one sticky 3D stage (desktop). Scrolling carries the camera from the ruin through
 // its summit door, down into the corridor. There:
@@ -39,7 +39,7 @@ async function open(e: MouseEvent, slug: string) {
   if (pointerType === 'touch' && e.detail > 0 && preview.value !== slug) return show(slug)
   show(slug)
   await stage.value?.enter(slug)
-  await navigateTo(`/projects/${slug}`)
+  await navigateTo(localePath(`/projects/${slug}`))
 }
 
 function onKey(e: KeyboardEvent, i: number) {
@@ -53,7 +53,7 @@ function onKey(e: KeyboardEvent, i: number) {
 async function onStage(slug: string) {
   if (slug !== preview.value) return show(slug)
   await stage.value?.enter(slug)
-  await navigateTo(`/projects/${slug}`)
+  await navigateTo(localePath(`/projects/${slug}`))
 }
 
 const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 text-body-md font-medium transition-colors motion-reduce:transition-none'
@@ -76,15 +76,15 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
           <p class="lab-in lab-muted mt-8 max-w-[36rem] text-body-lg" style="--d: 160ms">{{ hero.intro }}</p>
           <div class="lab-in mt-10 flex flex-wrap items-center gap-3" style="--d: 240ms">
             <a href="#works" :class="[btn, 'bg-lab-signal text-lab-bg hover:bg-white']">
-              探索作品 <span class="font-mono text-label-sm opacity-70">Explore Works</span>
+              {{ $t('home.explore') }} <span v-if="$i18n.locale !== 'en'" class="font-mono text-label-sm opacity-70">Explore Works</span>
             </a>
             <a href="#about" :class="[btn, 'border border-white/25 text-white hover:border-white']">
-              認識我 <span class="font-mono text-label-sm opacity-70">About Elio</span>
+              {{ $t('home.aboutMe') }} <span v-if="$i18n.locale !== 'en'" class="font-mono text-label-sm opacity-70">About Elio</span>
             </a>
           </div>
         </div>
         <p class="absolute bottom-6 left-1/2 hidden -translate-x-1/2 items-center gap-2 font-mono text-label-sm tracking-wider text-lab-on-dark-muted md:flex" aria-hidden="true">
-          捲動進入作品空間 <UiIcon name="south" class="text-[14px]" />
+          {{ $t('home.scrollHint') }} <UiIcon name="south" class="text-[14px]" />
         </p>
       </section>
 
@@ -92,16 +92,16 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
       <section id="works" class="pointer-events-none relative scroll-mt-0 py-24 md:flex md:min-h-[100svh] md:items-center" aria-labelledby="works-title">
         <div class="section-x pointer-events-auto">
           <div ref="column" class="md:max-w-[26rem]" @mouseleave="preview = null" @focusout="onFocusOut" @pointerdown="pointerType = $event.pointerType">
-            <p class="lab-eyebrow">Project Space / 作品探索</p>
-            <h2 id="works-title" class="mt-4 font-heading text-headline-lg-mobile text-white md:text-headline-lg">將想法轉化為實際作品</h2>
-            <p class="lab-muted mt-3 hidden text-body-sm md:block">移動游標或用 ↑ ↓ 預覽作品，點擊或按 Enter 進入案例（觸控：點一下預覽，再點一下進入）。</p>
+            <p class="lab-eyebrow">{{ $t('home.worksEyebrow') }}</p>
+            <h2 id="works-title" class="mt-4 font-heading text-headline-lg-mobile text-white md:text-headline-lg">{{ $t('home.worksTitle') }}</h2>
+            <p class="lab-muted mt-3 hidden text-body-sm md:block">{{ $t('home.worksHint') }}</p>
 
             <!-- Desktop: the list drives the 3D focus. Each item is a real link. -->
-            <ol class="mt-8 hidden border-t border-white/10 md:block" aria-label="作品列表">
+            <ol class="mt-8 hidden border-t border-white/10 md:block" :aria-label="$t('home.worksList')">
               <li v-for="(p, i) in projects" :key="p.slug" class="border-b border-white/10" @click.capture="open($event, p.slug)">
                 <NuxtLink
                   :ref="el => (items[i] = (el as { $el: HTMLElement } | null)?.$el as HTMLElement)"
-                  :to="`/projects/${p.slug}`"
+                  :to="localePath(`/projects/${p.slug}`)"
                   class="group flex items-baseline gap-4 py-3.5 transition-colors"
                   :class="p.slug === selected ? 'text-white' : 'text-lab-on-dark-muted hover:text-white'"
                   :aria-current="p.slug === selected ? 'true' : undefined"
@@ -137,18 +137,18 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
                   <p class="mt-1 line-clamp-3 text-body-sm text-lab-on-dark">{{ current.body }}</p>
                 </div>
               </div>
-              <ul class="mt-4 flex flex-wrap gap-1.5" aria-label="使用技術">
+              <ul class="mt-4 flex flex-wrap gap-1.5" :aria-label="$t('common.techUsed')">
                 <li v-for="t in current.tags" :key="t" class="lab-chip">{{ t }}</li>
               </ul>
-              <NuxtLink :to="`/projects/${current.slug}`" class="mt-6 inline-flex items-center gap-2 font-medium text-lab-signal underline-offset-4 hover:underline">
-                進入案例：{{ current.title }} <UiIcon name="arrow_forward" class="text-[18px]" />
+              <NuxtLink :to="localePath(`/projects/${current.slug}`)" class="mt-6 inline-flex items-center gap-2 font-medium text-lab-signal underline-offset-4 hover:underline">
+                {{ $t('home.enterCase', { title: current.title }) }} <UiIcon name="arrow_forward" class="text-[18px]" />
               </NuxtLink>
             </div>
 
             <!-- Phones: no 3D. Lead project as a large card, the rest as smaller rows. -->
-            <ol class="mt-8 space-y-4 md:hidden" aria-label="作品列表">
+            <ol class="mt-8 space-y-4 md:hidden" :aria-label="$t('home.worksList')">
               <li v-for="(p, i) in projects" :key="p.slug">
-                <NuxtLink :to="`/projects/${p.slug}`" class="group block rounded-sm border border-white/10 bg-lab-bg-soft" :class="i === 0 ? 'p-3' : 'flex items-center gap-4 p-3'">
+                <NuxtLink :to="localePath(`/projects/${p.slug}`)" class="group block rounded-sm border border-white/10 bg-lab-bg-soft" :class="i === 0 ? 'p-3' : 'flex items-center gap-4 p-3'">
                   <NuxtImg
                     v-if="cover(p.slug)"
                     :src="cover(p.slug)!.src" 
@@ -174,8 +174,8 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
             </ol>
 
             <!-- Skip the 3D: the plain project index. -->
-            <NuxtLink to="/projects" class="mt-8 inline-flex items-center gap-2 font-mono text-label-sm text-lab-on-dark-muted underline-offset-4 hover:text-white hover:underline">
-              查看全部作品 / All Works <UiIcon name="arrow_forward" class="text-[16px]" />
+            <NuxtLink :to="localePath('/projects')" class="mt-8 inline-flex items-center gap-2 font-mono text-label-sm text-lab-on-dark-muted underline-offset-4 hover:text-white hover:underline">
+              {{ $t('home.allWorks') }} <UiIcon name="arrow_forward" class="text-[16px]" />
             </NuxtLink>
           </div>
         </div>

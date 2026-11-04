@@ -3,7 +3,20 @@ const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || 'https://portfolio.elioflowr
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/content', '@nuxtjs/tailwindcss', '@nuxtjs/sitemap', '@nuxt/image'],
+  modules: ['@nuxtjs/i18n', '@nuxt/content', '@nuxtjs/tailwindcss', '@nuxtjs/sitemap', '@nuxt/image'],
+  // 中文維持原網址，英文 /en/...、日文 /ja/...。不做瀏覽器語言自動轉址：首頁有 ISR 快取，轉址會讓快取錯亂。
+  // 文案：介面字串在 i18n/locales/*.json；頁面資料在 app/data/{,en/,ja/}；筆記在 content/{,en/,ja/}blog。
+  i18n: {
+    baseUrl: siteUrl.replace(/\/$/, ''),
+    defaultLocale: 'zh',
+    strategy: 'prefix_except_default',
+    detectBrowserLanguage: false,
+    locales: [
+      { code: 'zh', language: 'zh-Hant', name: '中文', file: 'zh.json' },
+      { code: 'en', language: 'en', name: 'English', file: 'en.json' },
+      { code: 'ja', language: 'ja', name: '日本語', file: 'ja.json' },
+    ],
+  },
   image: {
     // <NuxtPicture> emits AVIF first, then WebP, then the original format as the fallback.
     format: ['avif', 'webp'],
@@ -32,12 +45,17 @@ export default defineNuxtConfig({
     '/': { isr: 3600 },
     '/blog': { isr: 3600 },
     '/blog/**': { isr: 3600 },
+    ...Object.fromEntries(['en', 'ja'].flatMap(l => [`/${l}`, `/${l}/blog`, `/${l}/blog/**`].map(r => [r, { isr: 3600 }]))),
   },
 
   app: {
     head: {
-      htmlAttrs: { lang: 'zh-Hant' },
       link: [
+        // Files in public/: SVG for modern browsers, PNG / ICO as fallbacks, apple-touch-icon for iOS home screens.
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon-96x96.png' },
+        { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         {

@@ -18,7 +18,7 @@ const toTop = () => window.scrollTo({ top: 0, behavior: matchMedia('(prefers-red
       @click="toTop"
     >
       <UiIcon name="arrow_upward" class="text-[18px]" />
-      回到最上面
+      {{ $t('backToTop') }}
       <span class="font-mono text-label-sm text-lab-signal">{{ progress }}%</span>
     </button>
   </Transition>

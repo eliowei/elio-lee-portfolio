@@ -85,21 +85,21 @@ const circle = 'absolute flex h-10 w-10 items-center justify-center rounded-full
       ref="dialog"
       role="dialog"
       aria-modal="true"
-      aria-label="專案畫面"
+      :aria-label="$t('projects.viewer')"
       class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90"
       @click.self="close"
       @touchstart.passive="touchX = $event.touches[0]!.clientX"
       @touchend.passive="onTouchEnd"
     >
-      <button ref="closeBtn" type="button" aria-label="關閉" :class="[circle, 'right-3 top-3 sm:right-5 sm:top-5']" @click="close">
+      <button ref="closeBtn" type="button" :aria-label="$t('common.close')" :class="[circle, 'right-3 top-3 sm:right-5 sm:top-5']" @click="close">
         <UiIcon name="close" class="text-[22px]" />
       </button>
 
       <template v-if="slides.length > 1">
-        <button type="button" aria-label="上一張" :class="[circle, 'left-2 top-1/2 -translate-y-1/2 sm:left-6']" @click="go(-1)">
+        <button type="button" :aria-label="$t('projects.prev')" :class="[circle, 'left-2 top-1/2 -translate-y-1/2 sm:left-6']" @click="go(-1)">
           <UiIcon name="chevron_left" class="text-[26px]" />
         </button>
-        <button type="button" aria-label="下一張" :class="[circle, 'right-2 top-1/2 -translate-y-1/2 sm:right-6']" @click="go(1)">
+        <button type="button" :aria-label="$t('projects.nextSlide')" :class="[circle, 'right-2 top-1/2 -translate-y-1/2 sm:right-6']" @click="go(1)">
           <UiIcon name="chevron_right" class="text-[26px]" />
         </button>
       </template>
@@ -110,7 +110,7 @@ const circle = 'absolute flex h-10 w-10 items-center justify-center rounded-full
         :width="current.w"
         :height="current.h"
         :sizes="VIEWER_SIZES"
-        :alt="current.caption ?? '專案畫面'"
+        :alt="current.caption ?? $t('projects.viewer')"
         :img-attrs="{ class: 'h-auto max-h-[78vh] w-auto max-w-[calc(100vw-6rem)] rounded object-contain sm:max-w-[calc(100vw-10rem)]' }"
         class="contents"
       />

@@ -31,7 +31,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <nav class="sticky top-28" aria-label="文章大綱">
+  <nav class="sticky top-28" :aria-label="$t('toc')">
     <div class="mb-3 font-mono text-label-sm uppercase tracking-wider text-secondary">On this page</div>
     <ul class="border-l border-hairline">
       <li v-for="l in links" :key="l.id">

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { about } from '~/data/home'
+const { about } = useData()
+const localePath = useLocalePath()
 
 const isDev = import.meta.dev
 </script>
@@ -11,7 +12,7 @@ const isDev = import.meta.dev
         <p v-reveal="{ x: -32 }" class="lab-eyebrow">{{ about.eyebrow }}</p>
         <h2 id="about-title" v-reveal="{ x: -32 }" class="mt-4 text-headline-lg-mobile md:text-headline-lg">{{ about.title }}</h2>
         <figure v-if="about.photo" v-reveal="{ x: -32, delay: 0.15 }" class="mt-8 max-w-xs overflow-hidden rounded-lg shadow-sm">
-          <NuxtPicture :src="about.photo" alt="李柏偉 Elio Lee 的個人照片" width="800" height="1000" sizes="320px" class="block" :img-attrs="{ class: 'aspect-[4/5] w-full object-cover', loading: 'lazy' }" />
+          <NuxtPicture :src="about.photo" :alt="$t('home.photoAlt')" width="800" height="1000" sizes="320px" class="block" :img-attrs="{ class: 'aspect-[4/5] w-full object-cover', loading: 'lazy' }" />
         </figure>
         <p v-else-if="isDev" class="mt-8 max-w-xs rounded border border-dashed border-hairline-strong px-4 py-10 text-center font-mono text-label-sm text-secondary">
           TODO 個人照片：放入 public/images/ 後填入 data/home.ts 的 about.photo
@@ -28,8 +29,8 @@ const isDev = import.meta.dev
             <dd class="text-body-md">{{ f.text }}</dd>
           </div>
         </dl>
-        <NuxtLink v-reveal to="/experience" class="mt-8 inline-flex items-center gap-2 font-medium text-lab-signal-ink underline-offset-4 hover:underline">
-          從軍職到前端工程：完整經歷 <UiIcon name="arrow_forward" class="text-[18px]" />
+        <NuxtLink v-reveal :to="localePath('/experience')" class="mt-8 inline-flex items-center gap-2 font-medium text-lab-signal-ink underline-offset-4 hover:underline">
+          {{ $t('home.aboutLink') }} <UiIcon name="arrow_forward" class="text-[18px]" />
         </NuxtLink>
       </div>
     </div>

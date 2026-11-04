@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { principles, principlesSection as s } from '~/data/experience'
+const { principles, principlesSection: s } = useData()
 </script>
 
 <template>

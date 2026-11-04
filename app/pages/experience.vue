@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { roles, transitions } from '~/data/experience'
+const { t } = useI18n()
+const { roles, transitions } = useData()
+const title = t('experience.title')
+const description = t('experience.description')
 
-const title = '工作經歷 | Elio Lee'
-const description = '從軍職、職訓到前端工程：Vue 2 / Vue 3 與 Vuetify 專案開發、元件互動問題排查、OpenLayers 空間圖資互動整合。'
-const url = `${useRuntimeConfig().public.siteUrl}/experience`
-
-useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: url })
-useHead({ link: [{ rel: 'canonical', href: url }] })
+useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: usePageUrl() })
 
 // Told in time order (roles are stored newest-first): each chapter is a light reading section; the
 // transitions between them — in Elio's own words — are dark full-width bands.

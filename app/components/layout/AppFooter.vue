@@ -1,19 +1,33 @@
 <script setup lang="ts">
-import { navLinks, site } from '~/data/site'
+import { legalLinks, navLinks, site } from '~/data/site'
+
+const localePath = useLocalePath()
+const heading = 'mb-3 font-mono text-label-sm uppercase tracking-[0.18em] text-lab-on-dark-muted'
+const link = 'text-body-sm text-lab-on-dark-muted transition-colors hover:text-white'
 </script>
 
 <template>
   <footer class="lab-dark w-full border-t border-white/10">
     <div class="section-x">
-      <div class="flex flex-col justify-between gap-8 py-space-xl md:flex-row md:items-end">
+      <div class="flex flex-col justify-between gap-10 py-space-xl md:flex-row">
         <div class="space-y-2">
           <div class="font-heading text-headline-sm text-white">{{ site.name }}</div>
-          <p class="lab-muted max-w-md text-body-sm">寫前端，也喜歡做一些會動的東西。</p>
+          <p class="lab-muted max-w-md text-body-sm">{{ $t('footer.tagline') }}</p>
         </div>
-        <nav class="flex flex-wrap items-center gap-x-6 gap-y-2" aria-label="頁尾導覽">
-          <NuxtLink v-for="l in navLinks" :key="l.to" :to="l.to" class="text-body-sm text-lab-on-dark-muted transition-colors hover:text-white">{{ l.label }}</NuxtLink>
-          <a :href="site.github" target="_blank" rel="noopener noreferrer" class="text-body-sm text-lab-on-dark-muted transition-colors hover:text-white">GitHub</a>
-        </nav>
+        <div class="flex flex-wrap gap-x-16 gap-y-8">
+          <nav :aria-label="$t('nav.footer')">
+            <h2 :class="heading">{{ $t('footer.explore') }}</h2>
+            <ul class="space-y-2">
+              <li v-for="l in navLinks" :key="l.to"><NuxtLink :to="localePath(l.to)" :class="link">{{ $t(`nav.${l.key}`) }}</NuxtLink></li>
+            </ul>
+          </nav>
+          <nav :aria-label="$t('footer.legal')">
+            <h2 :class="heading">{{ $t('footer.legal') }}</h2>
+            <ul class="space-y-2">
+              <li v-for="k in legalLinks" :key="k"><NuxtLink :to="localePath(`/legal/${k}`)" :class="link">{{ $t(`legal.${k}`) }}</NuxtLink></li>
+            </ul>
+          </nav>
+        </div>
       </div>
       <div class="flex flex-col items-start justify-between gap-2 border-t border-white/10 py-5 font-mono text-label-sm text-lab-on-dark-muted sm:flex-row sm:items-center">
         <p>© {{ new Date().getFullYear() }} 李柏偉 (Elio Lee)</p>

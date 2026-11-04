@@ -19,7 +19,7 @@ defineProps<{ role: Role }>()
         </span>
       </div>
 
-      <ul v-if="role.stack" class="mb-4 flex flex-wrap gap-2" aria-label="使用技術">
+      <ul v-if="role.stack" class="mb-4 flex flex-wrap gap-2" :aria-label="$t('common.techUsed')">
         <li v-for="t in role.stack" :key="t.label" class="rounded-full bg-surface-container-low px-2.5 py-1 font-mono text-label-sm font-medium" :class="t.primary ? 'text-primary' : 'text-secondary'">{{ t.label }}</li>
       </ul>
 
