@@ -3,6 +3,7 @@ import { legalLinks, navLinks, site } from '~/data/site'
 
 const localePath = useLocalePath()
 const { reopen } = useConsent()
+const { track } = useAnalytics()
 const heading = 'mb-3 font-mono text-label-sm uppercase tracking-[0.18em] text-lab-on-dark-muted'
 const link = 'text-body-sm text-lab-on-dark-muted transition-colors hover:text-white'
 </script>
@@ -19,7 +20,7 @@ const link = 'text-body-sm text-lab-on-dark-muted transition-colors hover:text-w
           <nav :aria-label="$t('nav.footer')">
             <h2 :class="heading">{{ $t('footer.explore') }}</h2>
             <ul class="space-y-2">
-              <li v-for="l in navLinks" :key="l.to"><NuxtLink :to="localePath(l.to)" :class="link">{{ $t(`nav.${l.key}`) }}</NuxtLink></li>
+              <li v-for="l in navLinks" :key="l.to"><NuxtLink :to="localePath(l.to)" :class="link" @click="l.key === 'contact' && track('contact_click', { source: 'footer' })">{{ $t(`nav.${l.key}`) }}</NuxtLink></li>
             </ul>
           </nav>
           <nav :aria-label="$t('footer.legal')">

@@ -1,12 +1,11 @@
-// GA4 custom events, sent with gtag. Nothing is sent unless the visitor agreed to analytics (see useConsent).
-// Never put personal data in params: no name, email or message text.
+// Custom events, pushed to the GTM dataLayer as `{ event, ...params }` so the "Custom Event" trigger in GTM matches
+// them by name (a `gtag('event')` call would NOT match it). Nothing is sent unless the visitor agreed to analytics
+// (see useConsent). Never put personal data in params: no name, email or message text.
 export type AnalyticsEvent
   = | 'project_view' | 'project_demo_click' | 'project_github_click'
     | 'note_click' | 'note_read' | 'note_search'
     | 'contact_click' | 'contact_form_open' | 'contact_submit' | 'contact_submit_error'
     | 'social_click' | 'language_change'
-
-type Gtag = (...args: unknown[]) => void
 
 export function useAnalytics() {
   const { locale } = useI18n()
@@ -18,7 +17,8 @@ export function useAnalytics() {
     try { granted = localStorage.getItem(CONSENT_KEY) === 'granted' }
     catch { /* storage blocked: no consent, no events */ }
     if (!granted) return
-    ;(window as unknown as { gtag?: Gtag }).gtag?.('event', event, { locale: locale.value, ...params })
+    const w = window as unknown as { dataLayer?: unknown[] }
+    ;(w.dataLayer ||= []).push({ event, locale: locale.value, ...params })
   }
 
   /** `/en/blog/js-event-loop` → `js-event-loop` */
