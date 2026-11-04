@@ -15,6 +15,6 @@ export default defineSitemapEventHandler(async (event) => {
       ...legalLinks.map(p => ({ loc: `${l}/legal/${p}` })),
       ...projects.map(p => ({ loc: `${l}/projects/${p.slug}` })),
     ]),
-    ...posts.map(p => ({ loc: p.path, lastmod: p.date })),
+    ...posts.map(p => ({ loc: p.path, lastmod: p.updated ?? p.date })),
   ]
 })

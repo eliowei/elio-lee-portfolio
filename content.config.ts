@@ -2,6 +2,8 @@ import { defineCollection, defineContentConfig, z } from '@nuxt/content'
 
 const schema = z.object({
   date: z.string(),
+  // 最後一次實質修改（改錯字不算）。會輸出成 JSON-LD 的 dateModified 與 sitemap 的 lastmod；沒填就用 date。
+  updated: z.string().optional(),
   category: z.enum(['js', 'vue', 'gis', 'case', 'quality']),
   tags: z.array(z.string()),
   readingTime: z.number(),

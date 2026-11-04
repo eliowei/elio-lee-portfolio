@@ -26,6 +26,8 @@ onMounted(() => {
 
 const url = usePageUrl()
 const title = `${post.value.title} | Elio Lee`
+// Same default share image the layout sets (per language).
+const ogImage = computed(() => `${String(useRuntimeConfig().public.siteUrl).replace(/\/$/, '')}/og-image-${useNuxtApp().$i18n.locale.value}.jpg`)
 
 useSeoMeta({
   title,
@@ -35,7 +37,6 @@ useSeoMeta({
   ogType: 'article',
   ogUrl: url,
   articlePublishedTime: post.value.date,
-  twitterCard: 'summary',
   robots: post.value.draft ? 'noindex, nofollow' : undefined,
 })
 useHead({
@@ -47,6 +48,8 @@ useHead({
       headline: post.value.title,
       description: post.value.description,
       datePublished: post.value.date,
+      dateModified: post.value.updated ?? post.value.date,
+      image: ogImage.value,
       keywords: post.value.tags.join(', '),
       inLanguage: useNuxtApp().$i18n.localeProperties.value.language,
       author: { '@type': 'Person', name: '李柏偉', alternateName: 'Elio Lee' },

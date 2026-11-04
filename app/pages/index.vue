@@ -9,7 +9,7 @@ const description = hero.intro
 const url = usePageUrl()
 const HomeSpace = defineAsyncComponent(() => import('~/components/home/Space.vue'))
 
-useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: url, twitterCard: 'summary' })
+useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: url })
 useHead({
   script: [{
     type: 'application/ld+json',

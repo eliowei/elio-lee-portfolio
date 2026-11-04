@@ -55,8 +55,8 @@ onMounted(() => {
 
 const title = `${project.title} | Elio Lee`
 const url = usePageUrl()
-const ogImage = cover ? `${useRuntimeConfig().public.siteUrl}${cover.src}` : undefined
-useSeoMeta({ title, description: project.body, ogTitle: title, ogDescription: project.body, ogType: 'article', ogUrl: url, ogImage, twitterCard: ogImage ? 'summary_large_image' : 'summary', twitterImage: ogImage })
+const ogImage = cover ? `${String(useRuntimeConfig().public.siteUrl).replace(/\/$/, '')}${cover.src}` : undefined
+useSeoMeta({ title, description: project.body, ogTitle: title, ogDescription: project.body, ogType: 'article', ogUrl: url, ogImage, ogImageAlt: ogImage ? title : undefined, twitterImage: ogImage })
 useHead({
   script: [{
     type: 'application/ld+json',

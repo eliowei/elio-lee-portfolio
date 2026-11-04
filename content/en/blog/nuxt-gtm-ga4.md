@@ -1,7 +1,8 @@
 ---
 title: 'Adding GTM and GA4 to a Nuxt Site: From Loading the Script to Custom Events'
-description: How I added Google Tag Manager and GA4 to my personal brand site, including deferred loading, cookie consent, and tracking project and contact interactions with the dataLayer.
+description: How I added Google Tag Manager and GA4 to my personal brand site, including loading only after cookie consent, avoiding double-counted GA4 hits, and tracking project and contact interactions with the dataLayer.
 date: 2026-07-30
+updated: 2026-11-04
 category: case
 tags: [GTM, GA4, Nuxt]
 readingTime: 6
@@ -20,9 +21,9 @@ Put simply, GA4 is where you read reports and GTM is where the code lives. Once 
 
 The site and GTM communicate through the `dataLayer`: the site pushes events into it, and GTM sends them to GA4 according to its configuration.
 
-## Trying the Nuxt module first, then loading it myself
+## Loading through a Nuxt module, but deciding the timing myself
 
-I first found that Nuxt has an official module, `@nuxt/scripts`, for managing third-party scripts, so I used it to connect GA4:
+Nuxt has an official module, `@nuxt/scripts`, for managing third-party scripts, so I first used it to connect GA4 directly:
 
 ```ts
 // plugins/analytics.client.ts
@@ -31,94 +32,66 @@ export default defineNuxtPlugin(() => {
 })
 ```
 
-Later, to manage tracking with GTM, I switched to `useScriptGoogleTagManager`, moved the settings to `nuxt.config.ts`, and pushed events through the module's `proxy.dataLayer`:
+Later, to manage tracking with GTM, I switched to `useScriptGoogleTagManager` and pushed events through the module's `proxy.dataLayer`.
+
+But after launch, no data came through. The custom events couldn't wait, so I dropped the module, created the `dataLayer` myself and inserted GTM's script dynamically, and the data started coming in.
+
+Reading the docs afterwards, I found the module wasn't the problem: `@nuxt/scripts` v1 changed its behaviour so that, without a `trigger`, the script isn't inserted automatically, and I hadn't set one.
+
+Once I knew that, I switched back to the module and set `trigger: 'manual'` explicitly, so I decide when it loads:
 
 ```ts
-const { proxy } = useScriptGoogleTagManager()
-proxy.dataLayer?.push({ event, ...params })
-```
-
-But after launch, no data came through. The custom events couldn't wait, so I removed the module configuration and loaded GTM's JS directly instead, pushing events straight into `window.dataLayer`, and the data started coming in.
-
-Reading the docs afterwards, I found that `@nuxt/scripts` v1 changed its behaviour: if a registry entry has no `trigger` configured, the script isn't inserted automatically, and my configuration at the time had none.
-
-The upside of this approach is that the whole flow is visible, and controlling when it loads is easier later; the cost is having to handle duplicate loading and server-side rendering myself.
-
-## Loading GTM without slowing the first paint
-
-The GTM script doesn't affect the site's functionality, so I load it only when the browser is idle:
-
-```ts
-onMounted(() => {
-  const run = () => initializeAnalytics()
-
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(run, { timeout: 3000 })
-  } else {
-    setTimeout(run, 1000)
-  }
+const gtm = useScriptGoogleTagManager({
+  id: gtmId,
+  scriptOptions: { trigger: 'manual' },
 })
+
+// call this only after the visitor agrees
+gtm.load()
 ```
 
-`requestIdleCallback` waits until the main thread is free, and `timeout` makes sure it doesn't wait forever. Browsers that don't support it wait one second instead.
+`manual` means nothing is requested until I call `load()`. That fits the next section exactly, and I don't have to handle duplicate loading and server-side rendering myself.
 
-The actual loading creates the `dataLayer` and inserts the script dynamically. Nuxt renders on the server, and `window` and `document` only exist in the browser, so check the environment first:
+## Let GTM load GA4, not the site too
+
+The GTM container already holds the Google tag for GA4. If the site also loaded gtag.js itself, every visit would be counted twice. So I removed GA4 loading from the code: the site only loads GTM, and GA4 is managed entirely in the GTM dashboard.
+
+This was the easiest thing to overlook in the whole process: both sides can load GA4, but only one of them should.
+
+## Cookie consent: no consent, no loading, no events
+
+You may need consent before tracking visitor behaviour, so I built a cookie banner and a `useConsent` composable that stores the choice in `localStorage`:
 
 ```ts
-const loadGTM = () => {
-  if (!import.meta.client || document.getElementById('gtm-script')) return
-
-  const { public: { gtmId } } = useRuntimeConfig()
-
-  window.dataLayer = window.dataLayer || []
-  window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' })
-
-  const script = document.createElement('script')
-  script.id = 'gtm-script'
-  script.async = true
-  script.src = `https://www.googletagmanager.com/gtm.js?id=${gtmId}`
-  document.head.appendChild(script)
+const decide = (next: 'granted' | 'denied') => {
+  localStorage.setItem('cookie-consent', next)
+  if (next === 'granted') nuxtApp.$analytics.load()
+  else nuxtApp.$analytics.stop()
 }
 ```
 
-Checking for a fixed `id` prevents loading it twice.
-
-## Cookie consent: remember the choice
-
-You may need consent before tracking visitor behaviour, so I built a cookie banner and a `useConsent` composable that stores the visitor's choice in `localStorage` and only loads GTM after they agree:
-
-```ts
-const accept = () => {
-  localStorage.setItem('cookie-consent', JSON.stringify({ analytics: true }))
-  loadGTM()
-}
-
-const reject = () => {
-  localStorage.setItem('cookie-consent', JSON.stringify({ analytics: false }))
-}
-```
-
-I also added a switch for whether to enable the banner at all, so it can be changed later without touching the flow.
+- If the visitor agrees, `load()` loads GTM. On later visits the saved choice is read on page load, and `granted` loads it automatically.
+- If the visitor declines or withdraws, `stop()` sets GA's official opt-out switch, `ga-disable-<GA4 ID>`, and clears the `_ga` cookies already written.
+- If they change their mind, a "Cookie settings" link in the footer reopens the banner at any time.
 
 ## Custom events: keep tracking in one place
 
 Page views can't answer "what are visitors interested in", so I defined custom events and kept the push logic in one place, `useAnalytics`:
 
 ```ts
-export const useAnalytics = () => {
-  const push = (event: string, params: Record<string, unknown> = {}) => {
-    if (!import.meta.client) return
-    window.dataLayer?.push({ event, ...params })
-  }
-
-  const trackProjectView = (project: { id: string; title: string }) =>
-    push('project_view', { project_id: project.id, project_name: project.title })
-
-  return { trackProjectView }
+function track(event: AnalyticsEvent, params: Record<string, string | number> = {}) {
+  if (!import.meta.client) return
+  // no consent, no events
+  if (localStorage.getItem(CONSENT_KEY) !== 'granted') return
+  window.dataLayer ||= []
+  window.dataLayer.push({ event, locale: locale.value, ...params })
 }
 ```
 
-Components just call `trackProjectView(project)` without knowing the `dataLayer` format. Event names live in one place too, so the same thing never ends up with two names.
+Components just call `track('project_view', { project_slug })` without knowing the `dataLayer` format. Two details:
+
+- `AnalyticsEvent` is a type listing every valid event name, so a typo is flagged by the editor and the same thing never ends up with two names.
+- Every event automatically carries the current `locale`, so GA4 can be broken down by language later. Event parameters never include names, emails or message text.
 
 The main events I track:
 
@@ -126,15 +99,24 @@ The main events I track:
 |---|---|
 | `project_view` | Which project the visitor looked at |
 | `project_demo_click` | Who clicked the live demo |
-| `project_github_click` | Who clicked GitHub |
+| `project_github_click` | Who clicked a project's GitHub link |
+| `note_click` | Which note was clicked from the home page or the list |
+| `note_read` | Which note was read to 75% (only a real scroll counts) |
+| `note_search` | What visitors searched for |
 | `contact_click` | Where they clicked contact from, such as the nav bar or footer |
-| `contact_submit` | Who submitted the contact form |
+| `contact_form_open` | Someone opened the contact form |
+| `contact_submit` / `contact_submit_error` | The form was submitted successfully or failed |
 | `social_click` | Which social link was clicked |
+| `language_change` | Which language they switched from and to |
 
-After an event is pushed into the `dataLayer`, you still have to create matching triggers and GA4 event tags in the GTM dashboard before the data reaches GA4. Writing the frontend alone isn't enough.
+After an event is pushed into the `dataLayer`, you still have to create a matching "Custom Event" trigger and GA4 event tag in the GTM dashboard before the data reaches GA4. Writing the frontend alone isn't enough.
+
+Note that GTM's "Custom Event" trigger matches on the `event` name in the `dataLayer`, so events must be sent with `dataLayer.push`; a `gtag('event', ...)` call would not match it.
 
 ## What I learned
 
 - First decide which questions you want answered, then decide what to track; more events isn't better.
-- Third-party scripts are part of performance too; defer them when you can.
+- When data doesn't arrive, check the tool's version changes first. I briefly thought the module was unusable, but I was only missing one setting.
+- Only one side should load GA4; if both GTM and the site do, hits are counted twice.
+- Consent has to govern two things: loading the script and sending events. Withdrawing should also clear the cookies already written.
 - Wrapping tracking logic in a composable keeps components much cleaner, and renaming or adjusting later only touches one place.

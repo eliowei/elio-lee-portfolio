@@ -3,6 +3,13 @@ useScrollTracker()
 // <html lang>, hreflang alternates, canonical and og:locale for every page.
 const head = useLocaleHead({ seo: true })
 useHead(() => ({ htmlAttrs: head.value.htmlAttrs, link: head.value.link, meta: head.value.meta }))
+
+// Default share image, one per language (public/og-image-{zh,en,ja}.jpg). A page's own useSeoMeta (e.g. a project
+// cover) overrides it.
+const { locale } = useI18n()
+const siteUrl = String(useRuntimeConfig().public.siteUrl).replace(/\/$/, '')
+const ogImage = computed(() => `${siteUrl}/og-image-${locale.value}.jpg`)
+useSeoMeta({ ogImage, ogImageAlt: 'Elio Lee | Frontend Engineer · Creative Development', twitterCard: 'summary_large_image', twitterImage: ogImage })
 </script>
 
 <template>
