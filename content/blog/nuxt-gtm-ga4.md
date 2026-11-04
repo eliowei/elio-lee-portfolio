@@ -5,7 +5,7 @@ date: 2026-07-30
 updated: 2026-11-04
 category: case
 tags: [GTM, GA4, Nuxt]
-readingTime: 6
+readingTime: 8
 ---
 
 做個人品牌網站時，我想知道訪客看了哪些作品、有沒有點聯絡，所以導入了 Google Tag Manager（GTM）和 Google Analytics 4（GA4）。一開始我分不清這兩個工具的差別，實際做過才比較清楚。
@@ -109,14 +109,45 @@ function track(event: AnalyticsEvent, params: Record<string, string | number> = 
 | `social_click` | 點了哪個社群連結 |
 | `language_change` | 從哪個語言切換到哪個語言 |
 
-事件推進 `dataLayer` 之後，還要在 GTM 後台建立對應的「自訂事件」觸發條件和 GA4 事件代碼，資料才會進到 GA4。只寫前端是不夠的。
+## 在 GTM 與 GA4 後台設定
 
-要注意，GTM 的「自訂事件」觸發條件比對的是 `dataLayer` 裡的 `event` 名稱，所以必須用 `dataLayer.push` 推送，改用 `gtag('event', ...)` 是比對不到的。
+前端只負責把事件推進 `dataLayer`，資料要進到 GA4，後台還要設定。我用「一個觸發條件加一個事件代碼」處理所有事件，之後新增事件，不必再建新的代碼。
+
+**1. 建立資料層變數**
+
+在 GTM 新增「資料層變數」，名稱要跟程式送出的參數名一字不差，例如 `project_slug`、`note_slug`、`source`、`locale`。事件沒有送某個參數時，變數是空的，GA4 會直接略過，不會出錯。
+
+**2. 建立一個觸發條件**
+
+類型選「自訂事件」，事件名稱用規則運算式一次比對所有事件，並勾選「使用規則運算式比對」：
+
+```
+^(project_view|project_demo_click|project_github_click|note_click|note_read|note_search|contact_click|contact_form_open|contact_submit|contact_submit_error|social_click|language_change)$
+```
+
+GTM 的「自訂事件」比對的是 `dataLayer` 裡的 `event` 名稱，所以事件必須用 `dataLayer.push` 推送，改用 `gtag('event', ...)` 是比對不到的。
+
+**3. 建立一個 GA4 事件代碼**
+
+事件名稱填內建變數 `{{Event}}`，它會自動帶入 `dataLayer` 的事件名稱（要先在變數設定裡勾選 Event）。再把第一步的變數加進事件參數，觸發條件選上一步建立的。新增事件時，只要把名稱加進規則運算式就好。
+
+GA4 本身由 GTM 裡的 Google 代碼載入，網站不再自己載一份，原因前面提過。
+
+**4. 在 GA4 註冊自訂維度**
+
+GA4 不會自動把自訂參數放進報表。到「管理 → 自訂定義」建立範圍為「事件」的自訂維度，例如 `project_slug`、`note_slug`、`source`，沒有註冊的話，資料雖然收到了，報表裡卻看不到「哪個專案」、「哪篇筆記」。另外把 `contact_submit` 標成關鍵事件，這是我最想知道的行為。
+
+**5. 預覽測試，再發布**
+
+用 GTM 的預覽模式開網站，並搭配 GA4 的 DebugView 確認。因為網站要同意才會載入 GTM，測試時要先按同意 Cookie，不然看不到任何事件。確認參數都有帶進去，再提交發布，沒發布的話正式站不會生效。
+
+常見的問題：事件有觸發但參數是空的，多半是資料層變數名稱拼錯或大小寫不一致；完全沒有事件，先確認有同意 Cookie，以及容器有發布。
 
 ## 這次學到的事
 
 - 先想清楚要回答什麼問題，再決定追蹤什麼，不是事件越多越好。
 - 資料進不來時，先查工具的版本變更說明，我一度以為模組不能用，其實只是少了一個設定。
 - GA4 只能由一邊載入，GTM 和網站同時載會重複計算。
+- 資料要進到 GA4，三段都要通：程式推進 `dataLayer`、GTM 的觸發與代碼、GA4 的自訂維度。只有前端是不夠的。
 - 同意機制要同時管兩件事：載入腳本、送出事件。撤回時也要把已經寫入的 Cookie 清掉。
 - 把追蹤邏輯包成 composable，元件會乾淨很多，之後改名或調整也只要改一個地方。

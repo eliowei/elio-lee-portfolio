@@ -5,7 +5,7 @@ date: 2026-07-30
 updated: 2026-11-04
 category: case
 tags: [GTM, GA4, Nuxt]
-readingTime: 6
+readingTime: 8
 ---
 
 While building my personal brand site, I wanted to know which projects visitors looked at and whether they clicked to get in touch, so I added Google Tag Manager (GTM) and Google Analytics 4 (GA4). At first I couldn't tell the two tools apart; only after doing it did it become clear.
@@ -109,14 +109,45 @@ The main events I track:
 | `social_click` | Which social link was clicked |
 | `language_change` | Which language they switched from and to |
 
-After an event is pushed into the `dataLayer`, you still have to create a matching "Custom Event" trigger and GA4 event tag in the GTM dashboard before the data reaches GA4. Writing the frontend alone isn't enough.
+## Setting up GTM and GA4
 
-Note that GTM's "Custom Event" trigger matches on the `event` name in the `dataLayer`, so events must be sent with `dataLayer.push`; a `gtag('event', ...)` call would not match it.
+The frontend only pushes events into the `dataLayer`; the dashboards still need setting up before the data reaches GA4. I handle every event with one trigger and one event tag, so adding an event later doesn't need a new tag.
+
+**1. Create Data Layer Variables**
+
+In GTM, add "Data Layer Variable" entries whose names match the parameter names the code sends exactly, such as `project_slug`, `note_slug`, `source` and `locale`. When an event doesn't send a parameter, the variable is empty and GA4 simply skips it, with no error.
+
+**2. Create one trigger**
+
+Choose the "Custom Event" type, match all the events at once with a regular expression, and tick "Use regex matching":
+
+```
+^(project_view|project_demo_click|project_github_click|note_click|note_read|note_search|contact_click|contact_form_open|contact_submit|contact_submit_error|social_click|language_change)$
+```
+
+GTM's "Custom Event" matches on the `event` name in the `dataLayer`, so events must be sent with `dataLayer.push`; a `gtag('event', ...)` call would not match it.
+
+**3. Create one GA4 event tag**
+
+Set the event name to the built-in `{{Event}}` variable, which brings in the `dataLayer` event name (enable the Event built-in variable first). Then add the variables from step 1 as event parameters and pick the trigger from step 2. To add an event later, just add its name to the regex.
+
+GA4 itself is loaded by the Google tag inside GTM; the site no longer loads its own copy, for the reason given earlier.
+
+**4. Register custom dimensions in GA4**
+
+GA4 doesn't put custom parameters into reports automatically. Under "Admin → Custom definitions", create event-scoped custom dimensions such as `project_slug`, `note_slug` and `source`. Without them the data arrives, but reports can't show which project or which note. I also marked `contact_submit` as a key event, since it's the behaviour I most want to know about.
+
+**5. Preview, then publish**
+
+Open the site in GTM's preview mode and confirm in GA4's DebugView. The site only loads GTM after consent, so accept the cookie banner first when testing, or no events will appear. Once the parameters come through correctly, submit and publish; until you publish, the live site is unaffected.
+
+Common problems: an event fires but its parameters are empty, usually a misspelt or wrongly capitalised variable name; no events at all, so check that you accepted cookies and that the container is published.
 
 ## What I learned
 
 - First decide which questions you want answered, then decide what to track; more events isn't better.
 - When data doesn't arrive, check the tool's version changes first. I briefly thought the module was unusable, but I was only missing one setting.
 - Only one side should load GA4; if both GTM and the site do, hits are counted twice.
+- For data to reach GA4, all three stages must work: the code pushing to the `dataLayer`, GTM's trigger and tag, and GA4's custom dimensions. The frontend alone isn't enough.
 - Consent has to govern two things: loading the script and sending events. Withdrawing should also clear the cookies already written.
 - Wrapping tracking logic in a composable keeps components much cleaner, and renaming or adjusting later only touches one place.
