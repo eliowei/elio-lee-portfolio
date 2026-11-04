@@ -3,7 +3,8 @@ import { site } from '~/data/site'
 
 const { t } = useI18n()
 const { hero } = useData()
-const title = t('home.title')
+// `|` can't live in an i18n message (vue-i18n reads it as a plural separator), so titles are joined here.
+const title = `${t('home.title')} | ${t('home.titleTagline')}`
 const description = hero.intro
 const url = usePageUrl()
 const HomeSpace = defineAsyncComponent(() => import('~/components/home/Space.vue'))

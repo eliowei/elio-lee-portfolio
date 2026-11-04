@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { t } = useI18n()
 const { roles, transitions } = useData()
-const title = t('experience.title')
+const title = `${t('experience.title')} | Elio Lee`
 const description = t('experience.description')
 
 useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: usePageUrl() })

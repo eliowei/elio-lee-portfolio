@@ -2,6 +2,7 @@
 import { legalLinks, navLinks, site } from '~/data/site'
 
 const localePath = useLocalePath()
+const { reopen } = useConsent()
 const heading = 'mb-3 font-mono text-label-sm uppercase tracking-[0.18em] text-lab-on-dark-muted'
 const link = 'text-body-sm text-lab-on-dark-muted transition-colors hover:text-white'
 </script>
@@ -25,6 +26,7 @@ const link = 'text-body-sm text-lab-on-dark-muted transition-colors hover:text-w
             <h2 :class="heading">{{ $t('footer.legal') }}</h2>
             <ul class="space-y-2">
               <li v-for="k in legalLinks" :key="k"><NuxtLink :to="localePath(`/legal/${k}`)" :class="link">{{ $t(`legal.${k}`) }}</NuxtLink></li>
+              <li><button type="button" :class="link" @click="reopen">{{ $t('footer.cookieSettings') }}</button></li>
             </ul>
           </nav>
         </div>

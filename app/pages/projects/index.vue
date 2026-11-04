@@ -2,7 +2,7 @@
 const { t } = useI18n()
 const localePath = useLocalePath()
 const { projects, projectImages } = useData()
-const title = t('projects.title')
+const title = `${t('projects.title')} | Elio Lee`
 const description = t('projects.description')
 
 useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: usePageUrl() })

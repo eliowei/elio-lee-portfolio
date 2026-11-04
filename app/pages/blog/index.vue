@@ -3,7 +3,7 @@ import { categories } from '~/data/site'
 
 const { t } = useI18n()
 const { method, page } = useData()
-const title = t('blog.title')
+const title = `${t('blog.title')} | Elio Lee`
 const description = page.lead
 
 useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: usePageUrl() })

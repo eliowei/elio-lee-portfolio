@@ -16,7 +16,8 @@
   "footer": {
     "tagline": "フロントエンドを書きつつ、動くものを作るのが好きです。",
     "explore": "サイト案内",
-    "legal": "法的情報と信頼性"
+    "legal": "法的情報と信頼性",
+    "cookieSettings": "Cookie の設定"
   },
   "backToTop": "ページの先頭へ",
   "categories": {
@@ -37,7 +38,7 @@
   },
   "toc": "目次",
   "home": {
-    "title": "Elio Lee（李柏偉）| フロントエンドエンジニア",
+    "title": "Elio Lee（李柏偉）",
     "jobTitle": "フロントエンドエンジニア",
     "photoAlt": "Elio Lee（李柏偉）のプロフィール写真",
     "aboutLink": "軍務からフロントエンドエンジニアへ：経歴を見る",
@@ -53,15 +54,16 @@
     "notesEyebrow": "Technical Notes / 技術ノート",
     "notesTitle": "問題を記録し、自分の理解を整理する。",
     "notesBody": "実際に直面した問題を出発点に、デバッグの過程、フレームワークのバージョン間の違い、個人プロジェクトでの技術的な探求を記録しています。",
-    "notesLink": "技術ノートを読む"
+    "notesLink": "技術ノートを読む",
+    "titleTagline": "ポートフォリオと技術ノート"
   },
   "experience": {
-    "title": "経歴 | Elio Lee",
+    "title": "経歴",
     "description": "軍務、職業訓練を経てフロントエンドエンジニアへ。Vue 2 / Vue 3 と Vuetify のプロジェクト開発、コンポーネントの不具合調査、OpenLayers による地図連携。",
     "highlights": "経歴のポイント"
   },
   "projects": {
-    "title": "制作実績 | Elio Lee",
+    "title": "制作実績",
     "description": "アイデアを形にした作品：ゲーム仲間募集プラットフォーム、東京旅行サイト、個人ブランドサイト、LINE 公式アカウント管理プラットフォーム、天気と YouBike の LINE Bot。",
     "eyebrow": "Project Index / 作品一覧",
     "heading": "制作実績",
@@ -102,7 +104,7 @@
     "nextSlide": "次の画像"
   },
   "blog": {
-    "title": "技術ノート | Elio Lee",
+    "title": "技術ノート",
     "facts": "ノートの特徴",
     "latest": "最新のノート",
     "search": "ノートを検索",
@@ -118,7 +120,7 @@
     "tags": "タグ"
   },
   "contact": {
-    "title": "お問い合わせ | Elio Lee",
+    "title": "お問い合わせ",
     "form": "お問い合わせフォーム",
     "heading": "メッセージを送る",
     "lead": "お仕事のご相談でも技術的な話題でも、お気軽にメッセージをお送りください。メールでご返信します。",
@@ -180,5 +182,13 @@
     "corrections": "訂正と編集方針",
     "updated": "最終更新",
     "notFound": "ページが見つかりません"
+  },
+  "consent": {
+    "label": "Cookie の同意設定",
+    "title": "Cookie とアクセス解析",
+    "body": "どの作品やノートが読まれているかを知るために Google Analytics を使います。同意いただいた場合のみ読み込まれ、データが広告に使われることはありません。",
+    "accept": "同意する",
+    "reject": "拒否する",
+    "policy": "プライバシーポリシー"
   }
 }

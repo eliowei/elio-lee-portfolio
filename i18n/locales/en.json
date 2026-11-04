@@ -16,7 +16,8 @@
   "footer": {
     "tagline": "I write frontend code, and I like making things that move.",
     "explore": "Explore",
-    "legal": "Trust & Legal"
+    "legal": "Trust & Legal",
+    "cookieSettings": "Cookie settings"
   },
   "backToTop": "Back to top",
   "categories": {
@@ -37,7 +38,7 @@
   },
   "toc": "Table of contents",
   "home": {
-    "title": "Elio Lee | Frontend Engineer",
+    "title": "Elio Lee",
     "jobTitle": "Frontend Engineer",
     "photoAlt": "Portrait of Elio Lee",
     "aboutLink": "From the army to frontend engineering: full experience",
@@ -53,15 +54,16 @@
     "notesEyebrow": "Technical Notes",
     "notesTitle": "Writing down problems, and what I learned from them.",
     "notesBody": "Notes that start from real problems: debugging stories, differences between framework versions, and technical exploration from personal projects.",
-    "notesLink": "Read the technical notes"
+    "notesLink": "Read the technical notes",
+    "titleTagline": "Portfolio & Technical Notes"
   },
   "experience": {
-    "title": "Experience | Elio Lee",
+    "title": "Experience",
     "description": "From the army and vocational training to frontend engineering: Vue 2 / Vue 3 and Vuetify projects, debugging component interactions, and OpenLayers map integration.",
     "highlights": "Experience highlights"
   },
   "projects": {
-    "title": "Projects | Elio Lee",
+    "title": "Projects",
     "description": "Ideas turned into real products: a gaming meetup platform, a Tokyo trip planner, a personal brand site, a LINE OA management platform and a weather & YouBike LINE bot.",
     "eyebrow": "Project Index",
     "heading": "Projects",
@@ -102,7 +104,7 @@
     "nextSlide": "Next image"
   },
   "blog": {
-    "title": "Technical Notes | Elio Lee",
+    "title": "Technical Notes",
     "facts": "About these notes",
     "latest": "Latest notes",
     "search": "Search notes",
@@ -118,7 +120,7 @@
     "tags": "Tags"
   },
   "contact": {
-    "title": "Contact me | Elio Lee",
+    "title": "Contact me",
     "form": "Contact form",
     "heading": "Send a message",
     "lead": "Whether it is about a job opportunity or a technical discussion, leave a message and I will reply by email.",
@@ -180,5 +182,13 @@
     "corrections": "Corrections & Editorial Standards",
     "updated": "Last updated",
     "notFound": "Page not found"
+  },
+  "consent": {
+    "label": "Cookie consent",
+    "title": "Cookies and analytics",
+    "body": "I use Google Analytics to see which projects and notes get read. It only loads if you agree, and the data is never used for advertising.",
+    "accept": "Accept",
+    "reject": "Decline",
+    "policy": "Privacy policy"
   }
 }

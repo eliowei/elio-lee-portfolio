@@ -16,7 +16,8 @@
   "footer": {
     "tagline": "寫前端，也喜歡做一些會動的東西。",
     "explore": "網站導覽",
-    "legal": "法律與信任"
+    "legal": "法律與信任",
+    "cookieSettings": "Cookie 設定"
   },
   "backToTop": "回到最上面",
   "categories": {
@@ -37,7 +38,7 @@
   },
   "toc": "文章大綱",
   "home": {
-    "title": "李柏偉 Elio Lee | 前端工程師",
+    "title": "李柏偉 Elio Lee",
     "jobTitle": "前端工程師",
     "photoAlt": "李柏偉 Elio Lee 的個人照片",
     "aboutLink": "從軍職到前端工程：完整經歷",
@@ -53,15 +54,16 @@
     "notesEyebrow": "Technical Notes / 技術筆記",
     "notesTitle": "記錄問題，也整理自己的理解。",
     "notesBody": "從實際遇到的問題出發，記錄除錯過程、框架版本的差異，以及個人專案中的技術探索。",
-    "notesLink": "閱讀技術筆記"
+    "notesLink": "閱讀技術筆記",
+    "titleTagline": "作品集與技術筆記"
   },
   "experience": {
-    "title": "工作經歷 | Elio Lee",
+    "title": "工作經歷",
     "description": "從軍職、職訓到前端工程：Vue 2 / Vue 3 與 Vuetify 專案開發、元件互動問題排查、OpenLayers 空間圖資互動整合。",
     "highlights": "經歷重點"
   },
   "projects": {
-    "title": "專案作品 | Elio Lee",
+    "title": "專案作品",
     "description": "將想法轉化為實際作品：遊戲社群揪團平台、東京自由行旅遊網站、個人品牌網站、LINE OA 商家管理平台、天氣 Bike 小幫手。",
     "eyebrow": "Project Index / 作品列表",
     "heading": "專案作品",
@@ -102,7 +104,7 @@
     "nextSlide": "下一張"
   },
   "blog": {
-    "title": "技術筆記 | Elio Lee",
+    "title": "技術筆記",
     "facts": "筆記特色",
     "latest": "最新筆記",
     "search": "搜尋筆記",
@@ -118,7 +120,7 @@
     "tags": "標籤"
   },
   "contact": {
-    "title": "聯絡我 | Elio Lee",
+    "title": "聯絡我",
     "form": "聯絡表單",
     "heading": "留下訊息",
     "lead": "無論是工作機會或技術交流，都歡迎留下訊息，我會透過 Email 與你聯繫。",
@@ -180,5 +182,13 @@
     "corrections": "勘誤與內容原則",
     "updated": "最後更新",
     "notFound": "找不到這個頁面"
+  },
+  "consent": {
+    "label": "Cookie 同意設定",
+    "title": "Cookie 與流量分析",
+    "body": "我想用 Google Analytics 了解哪些作品與筆記被閱讀。只有在你同意後才會載入，資料不會用於廣告。",
+    "accept": "同意",
+    "reject": "拒絕",
+    "policy": "隱私權政策"
   }
 }

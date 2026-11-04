@@ -15,5 +15,6 @@ useHead(() => ({ htmlAttrs: head.value.htmlAttrs, link: head.value.link, meta: h
     </main>
     <LayoutAppFooter />
     <LayoutBackToTop />
+    <LayoutConsentBanner />
   </div>
 </template>

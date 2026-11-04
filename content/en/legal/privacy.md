@@ -8,9 +8,19 @@ This is the personal portfolio and technical notes site of Elio Lee (李柏偉).
 
 ## What this site does not do
 
-- It doesn't use analytics tools such as Google Analytics.
-- It doesn't set tracking cookies or store your personal data in your browser.
-- It doesn't show ads, and never sells or shares any visitor data.
+- It doesn't show ads, and the data is never used for advertising.
+- It never sells or shares any visitor data.
+- It doesn't load any analytics or tracking tool before you agree.
+
+## Analytics and cookies
+
+To see which projects and notes get read, the site uses Google Tag Manager and Google Analytics 4. These services **only load after you press "Accept" on the banner**. If you decline, or don't respond, they aren't loaded and no related cookies are set.
+
+Once you agree, Google Analytics sets cookies starting with `_ga` and records anonymous browsing information, such as the pages viewed, time on page, device and browser type, and your approximate region. Google processes this data; the site never receives your name or email address.
+
+Your choice is stored in your browser's localStorage (under the name `cookie-consent`), so the site knows not to ask again.
+
+You can change your mind at any time: use "Cookie settings" in the footer to choose again. After you decline, the site stops sending data and clears the `_ga` cookies already set.
 
 ## The contact form
 
@@ -30,6 +40,7 @@ The site relies on the following services, which may process your browsing infor
 | Service | Purpose |
 | --- | --- |
 | Vercel | Hosts the site. Keeps access logs for operations and security. |
+| Google Tag Manager, Google Analytics 4 | Analytics. Only loaded after you agree. |
 | Google Fonts | Loads the site's fonts and icons. Your browser requests the font files from Google's servers. |
 | EmailJS | Sends the contents of the contact form. |
 
@@ -37,7 +48,7 @@ The site also links to external sites such as GitHub and project demos. Once you
 
 ## Your rights
 
-You can ask at any time to see, correct or delete the data you provided through the contact form. Please write to me through the [Contact me](/en/contact) page and say what you need.
+You can withdraw your consent to analytics at any time (see "Analytics and cookies" above), and you can ask to see, correct or delete the data you provided through the contact form. Please write to me through the [Contact me](/en/contact) page and say what you need.
 
 ## Changes to this policy
 

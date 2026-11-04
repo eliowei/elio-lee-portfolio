@@ -3,7 +3,7 @@ const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || 'https://portfolio.elioflowr
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/i18n', '@nuxt/content', '@nuxtjs/tailwindcss', '@nuxtjs/sitemap', '@nuxt/image'],
+  modules: ['@nuxtjs/i18n', '@nuxt/scripts', '@nuxt/content', '@nuxtjs/tailwindcss', '@nuxtjs/sitemap', '@nuxt/image'],
   // 中文維持原網址，英文 /en/...、日文 /ja/...。不做瀏覽器語言自動轉址：首頁有 ISR 快取，轉址會讓快取錯亂。
   // 文案：介面字串在 i18n/locales/*.json；頁面資料在 app/data/{,en/,ja/}；筆記在 content/{,en/,ja/}blog。
   i18n: {
@@ -37,7 +37,9 @@ export default defineNuxtConfig({
 
   site: { url: siteUrl, name: '李柏偉 Elio Lee' },
   // EmailJS keys are public by design; filled from NUXT_PUBLIC_EMAILJS_* (see .env.example).
-  runtimeConfig: { public: { siteUrl, emailjs: { serviceId: '', templateId: '', publicKey: '' } } },
+  // gtmId / ga4Id are public by design and can be overridden with NUXT_PUBLIC_GTM_ID / NUXT_PUBLIC_GA4_ID. Never leave them
+  // empty: @nuxt/scripts skips a script with invalid options (dev: only an info log), which looks like "not loading".
+  runtimeConfig: { public: { siteUrl, gtmId: 'GTM-KT7VR4Q3', ga4Id: 'G-6P4Z8FF93C', emailjs: { serviceId: '', templateId: '', publicKey: '' } } },
   sitemap: { sources: ['/api/__sitemap__/urls'] },
 
   // ISR: needs a host preset that supports it (vercel / netlify); a no-op on `node-server`.

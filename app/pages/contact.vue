@@ -3,7 +3,7 @@ import { site } from '~/data/site'
 
 const { t, tm, rt } = useI18n()
 const { contact } = useData()
-const title = t('contact.title')
+const title = `${t('contact.title')} | Elio Lee`
 const description = contact.body
 const config = useRuntimeConfig().public
 
