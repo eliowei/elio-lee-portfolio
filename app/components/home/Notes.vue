@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const localePath = useLocalePath()
 const collection = useBlogCollection()
+const { track, slugOf } = useAnalytics()
 
 // Only published articles; drafts never appear. The section hides itself if there are none.
 const { data: posts } = await useAsyncData(`home-notes-${collection}`, () =>
@@ -22,7 +23,7 @@ const { data: posts } = await useAsyncData(`home-notes-${collection}`, () =>
 
       <ol class="border-t border-hairline lg:col-span-8">
         <li v-for="(p, i) in posts" :key="p.path" v-reveal="i * 0.1" class="border-b border-hairline">
-          <NuxtLink :to="p.path" class="group grid gap-1 py-6 sm:grid-cols-[7.5rem_1fr] sm:gap-6">
+          <NuxtLink :to="p.path" class="group grid gap-1 py-6 sm:grid-cols-[7.5rem_1fr] sm:gap-6" @click="track('note_click', { note_slug: slugOf(p.path), source: 'home' })">
             <div class="font-mono text-label-md text-on-surface-variant">
               <time :datetime="p.date">{{ p.date.replaceAll('-', '/') }}</time>
               <p class="mt-1 text-label-sm uppercase tracking-wider text-lab-signal-ink">{{ p.readingTime }} min</p>

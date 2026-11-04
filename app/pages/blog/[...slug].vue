@@ -8,6 +8,22 @@ const { data: post } = await useAsyncData(`post-${route.path}`, () => queryColle
 // Drafts (sample articles) are previewable in dev only.
 if (!post.value || (post.value.draft && !import.meta.dev)) throw createError({ statusCode: 404, statusMessage: t('blog.notFound'), fatal: true })
 
+const { track, slugOf } = useAnalytics()
+const article = ref<HTMLElement>()
+
+// note_read: once per visit, when the reader has scrolled 75% of the way through the article. Only a real scroll
+// counts, so a short article that already fits on screen doesn't report as "read" on load.
+onMounted(() => {
+  const onScroll = () => {
+    const rect = article.value?.getBoundingClientRect()
+    if (!rect || innerHeight - rect.top < rect.height * 0.75) return
+    removeEventListener('scroll', onScroll)
+    track('note_read', { note_slug: slugOf(route.path), note_category: post.value?.category ?? '' })
+  }
+  addEventListener('scroll', onScroll, { passive: true })
+  onBeforeUnmount(() => removeEventListener('scroll', onScroll))
+})
+
 const url = usePageUrl()
 const title = `${post.value.title} | Elio Lee`
 
@@ -67,7 +83,7 @@ useHead({
           <p class="text-body-lg text-on-surface-variant">{{ post.description }}</p>
         </header>
 
-        <article class="border-t border-hairline pt-space-lg">
+        <article ref="article" class="border-t border-hairline pt-space-lg">
           <ContentRenderer :value="post" class="prose-post" />
         </article>
 

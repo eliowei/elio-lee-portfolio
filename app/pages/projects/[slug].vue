@@ -7,6 +7,7 @@ const idx = projects.findIndex(p => p.slug === route.params.slug)
 if (idx < 0) throw createError({ statusCode: 404, statusMessage: t('projects.notFound'), fatal: true })
 
 const project = projects[idx]!
+const { track } = useAnalytics()
 const detail = project.detail ?? {}
 const next = projects[(idx + 1) % projects.length]!
 const dev = import.meta.dev
@@ -41,6 +42,7 @@ const todo = (field: string) => `TODO（僅開發環境顯示）：在 data/home
 // Scroll spy for the chapter index.
 const active = ref<Chapter>(chapters[0]!)
 onMounted(() => {
+  track('project_view', { project_slug: project.slug })
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) if (e.isIntersecting) active.value = e.target.id as Chapter
   }, { rootMargin: '-35% 0px -60% 0px' })
@@ -127,10 +129,10 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
             <div v-if="detail.demo || detail.github">
               <dt :class="eyebrow">{{ $t('projects.links') }}</dt>
               <dd class="mt-1 flex flex-wrap gap-x-4 gap-y-1">
-                <a v-if="detail.demo" :href="detail.demo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-medium text-lab-signal-ink underline decoration-lab-signal-ink/40 underline-offset-4 hover:decoration-lab-signal-ink">
+                <a v-if="detail.demo" :href="detail.demo" target="_blank" rel="noopener noreferrer" @click="track('project_demo_click', { project_slug: project.slug })" class="inline-flex items-center gap-1 font-medium text-lab-signal-ink underline decoration-lab-signal-ink/40 underline-offset-4 hover:decoration-lab-signal-ink">
                   {{ $t('projects.demo') }} <UiIcon name="arrow_outward" class="text-[14px]" />
                 </a>
-                <a v-if="detail.github" :href="detail.github" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-medium text-on-surface underline decoration-hairline-strong underline-offset-4 hover:decoration-on-surface">
+                <a v-if="detail.github" :href="detail.github" target="_blank" rel="noopener noreferrer" @click="track('project_github_click', { project_slug: project.slug })" class="inline-flex items-center gap-1 font-medium text-on-surface underline decoration-hairline-strong underline-offset-4 hover:decoration-on-surface">
                   GitHub <UiIcon name="arrow_outward" class="text-[14px]" />
                 </a>
               </dd>

@@ -10,14 +10,20 @@ const config = useRuntimeConfig().public
 useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: usePageUrl() })
 
 const topics = (tm('contact.topics') as string[]).map(m => rt(m))
+// Stable, language-independent topic keys for analytics (the labels themselves are translated).
+const topicKey = (label: string) => ['job', 'tech', 'correction', 'other'][topics.indexOf(label)] ?? 'other'
 const info = (tm('contact.info') as Record<'icon' | 'title' | 'body', string>[]).map(i => ({ icon: rt(i.icon), title: rt(i.title), body: rt(i.body) }))
 const localePath = useLocalePath()
+const { track } = useAnalytics()
 const githubHandle = `@${site.github.split('/').pop()}`
 
 // The form lives in a native <dialog>: focus trap, Esc and focus return come from the browser. No address is
 // printed on the page; messages go through EmailJS.
 const dialog = ref<HTMLDialogElement>()
-const openForm = () => dialog.value?.showModal()
+const openForm = () => {
+  track('contact_form_open')
+  dialog.value?.showModal()
+}
 const closeForm = () => dialog.value?.close()
 const onCancel = (e: Event) => { if (sending.value) e.preventDefault() } // Esc must not interrupt a send
 const onBackdrop = (e: MouseEvent) => { if (e.target === dialog.value && !sending.value) closeForm() }
@@ -74,11 +80,13 @@ async function send() {
       new Promise(r => setTimeout(r, 1600)), // long enough for one full flight of the loading plane
     ])
     if (!res.ok) throw new Error(`EmailJS ${res.status}: ${await res.text()}`)
+    track('contact_submit', { topic: topicKey(form.topic) })
     Object.assign(form, blank())
     closeForm()
     showToast(success)
   } catch (e) {
     console.error(e)
+    track('contact_submit_error')
     closeForm()
     showToast({ ok: false, title: t('contact.failTitle'), body: t('contact.failBody') })
   } finally {
@@ -113,7 +121,7 @@ const cardArrow = 'mt-1 text-[20px] text-on-surface-variant transition-transform
           </span>
           <UiIcon name="arrow_forward" :class="cardArrow" />
         </button>
-        <a :href="site.github" target="_blank" rel="noopener noreferrer" :class="card">
+        <a :href="site.github" target="_blank" rel="noopener noreferrer" :class="card" @click="track('social_click', { platform: 'github', source: 'contact_page' })">
           <UiIcon name="code" :class="cardIcon" />
           <span class="min-w-0 flex-1">
             <span class="flex flex-wrap items-center gap-2">

@@ -3,6 +3,7 @@ import { site } from '~/data/site'
 
 const { contact } = useData()
 const localePath = useLocalePath()
+const { track } = useAnalytics()
 
 const btn = 'inline-flex items-center justify-center gap-2 rounded px-6 py-3 text-body-md font-medium transition-colors motion-reduce:transition-none'
 </script>
@@ -17,8 +18,8 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded px-6 py-3 tex
         <p v-reveal="{ x: -32, delay: 0.1 }" class="lab-muted mt-5 max-w-xl text-body-lg">{{ contact.body }}</p>
       </div>
       <div v-reveal="0.2" class="flex flex-wrap gap-3 lg:col-span-4 lg:justify-end">
-        <NuxtLink :to="localePath('/contact')" :class="[btn, 'bg-lab-signal text-lab-bg hover:bg-white']">{{ $t('common.contactMe') }} <UiIcon name="arrow_forward" class="text-[18px]" /></NuxtLink>
-        <a :href="site.github" target="_blank" rel="noopener noreferrer" :class="[btn, 'border border-white/20 text-white hover:border-lab-signal hover:text-lab-signal']">GitHub</a>
+        <NuxtLink :to="localePath('/contact')" :class="[btn, 'bg-lab-signal text-lab-bg hover:bg-white']" @click="track('contact_click', { source: 'home' })">{{ $t('common.contactMe') }} <UiIcon name="arrow_forward" class="text-[18px]" /></NuxtLink>
+        <a :href="site.github" target="_blank" rel="noopener noreferrer" :class="[btn, 'border border-white/20 text-white hover:border-lab-signal hover:text-lab-signal']" @click="track('social_click', { platform: 'github', source: 'home' })">GitHub</a>
       </div>
     </div>
   </section>

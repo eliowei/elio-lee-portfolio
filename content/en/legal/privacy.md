@@ -16,7 +16,7 @@ This is the personal portfolio and technical notes site of Elio Lee (李柏偉).
 
 To see which projects and notes get read, the site uses Google Tag Manager and Google Analytics 4. These services **only load after you press "Accept" on the banner**. If you decline, or don't respond, they aren't loaded and no related cookies are set.
 
-Once you agree, Google Analytics sets cookies starting with `_ga` and records anonymous browsing information, such as the pages viewed, time on page, device and browser type, and your approximate region. Google processes this data; the site never receives your name or email address.
+Once you agree, Google Analytics sets cookies starting with `_ga` and records anonymous browsing information, such as the pages viewed, time on page, device and browser type, and your approximate region. The site also records your interactions, such as which project you opened, which note you read, the language you use, the keywords you type into the notes search box, and whether you sent the contact form (only the topic you chose, never your name, email or message). Google processes this data; the site never receives your name or email address.
 
 Your choice is stored in your browser's localStorage (under the name `cookie-consent`), so the site knows not to ask again.
 

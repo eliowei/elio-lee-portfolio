@@ -3,6 +3,7 @@ import { categories } from '~/data/site'
 
 const { t } = useI18n()
 const { method, page } = useData()
+const { track, slugOf } = useAnalytics()
 const title = `${t('blog.title')} | Elio Lee`
 const description = page.lead
 
@@ -24,6 +25,15 @@ const shown = computed(() => {
   return posts.value?.filter(p => (!active.value || p.category === active.value)
     && (!q || [p.title, p.description, ...(p.tags ?? [])].join(' ').toLowerCase().includes(q))) ?? []
 })
+// note_search: sent once the reader pauses typing for a second; the term is cut to 50 characters.
+let searchTimer: ReturnType<typeof setTimeout> | undefined
+watch(query, (value) => {
+  clearTimeout(searchTimer)
+  const term = value.trim()
+  if (term.length < 2) return
+  searchTimer = setTimeout(() => track('note_search', { search_term: term.slice(0, 50), results: shown.value.length }), 1000)
+})
+onBeforeUnmount(() => clearTimeout(searchTimer))
 const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-reduce:transition-none', on ? '!border-lab-signal-ink !text-lab-signal-ink' : 'hover:!border-on-surface-variant']
 </script>
 
@@ -61,7 +71,7 @@ const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-
       </p>
       <ol v-else class="border-t border-hairline">
         <li v-for="p in shown" :key="p.path" class="border-b border-hairline">
-          <NuxtLink :to="p.path" class="group grid gap-2 py-8 md:grid-cols-12 md:gap-8">
+          <NuxtLink :to="p.path" class="group grid gap-2 py-8 md:grid-cols-12 md:gap-8" @click="track('note_click', { note_slug: slugOf(p.path), source: 'list' })">
             <div class="font-mono text-label-md text-on-surface-variant md:col-span-2">
               <time :datetime="p.date">{{ p.date.replaceAll('-', '/') }}</time>
               <p class="mt-1 text-label-sm uppercase tracking-wider text-lab-signal-ink">{{ p.readingTime }} min read</p>

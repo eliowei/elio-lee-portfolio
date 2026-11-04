@@ -5,6 +5,7 @@ const route = useRoute()
 const localePath = useLocalePath()
 const switchLocalePath = useSwitchLocalePath()
 const { locale, locales } = useI18n()
+const { track } = useAnalytics()
 const short: Record<string, string> = { zh: '中', en: 'EN', ja: 'JP' }
 const langOpen = ref(false)
 const langButton = ref<HTMLButtonElement>()
@@ -89,6 +90,7 @@ onMounted(() => {
           class="relative py-1 text-body-sm transition-opacity after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:transition-transform after:duration-300 motion-reduce:after:transition-none"
           :class="[isActive(l.to) ? 'after:scale-x-100' : 'opacity-70 after:scale-x-0 hover:opacity-100 hover:after:scale-x-100', scrolled ? 'after:bg-lab-signal' : 'after:bg-current']"
           :aria-current="isActive(l.to) ? 'page' : undefined"
+          @click="l.key === 'contact' && track('contact_click', { source: 'navbar' })"
         >{{ $t(`nav.${l.key}`) }}</NuxtLink>
       </nav>
 
@@ -115,6 +117,7 @@ onMounted(() => {
                 class="flex items-center justify-between gap-4 px-4 py-2.5 text-body-sm transition-colors hover:bg-white/5"
                 :class="l.code === locale ? 'text-white' : 'text-lab-on-dark-muted hover:text-white'"
                 :aria-current="l.code === locale ? 'true' : undefined"
+                @click="track('language_change', { language_from: locale, language_to: l.code })"
               >
                 {{ l.name }}
                 <span v-if="l.code === locale" class="h-1.5 w-1.5 rotate-45 bg-lab-signal" aria-hidden="true" />
@@ -148,6 +151,7 @@ onMounted(() => {
             class="flex items-center justify-between py-3.5 text-body-lg"
             :class="isActive(l.to) ? 'font-medium text-white' : 'text-lab-on-dark-muted'"
             :aria-current="isActive(l.to) ? 'page' : undefined"
+            @click="l.key === 'contact' && track('contact_click', { source: 'navbar' })"
           >
             {{ $t(`nav.${l.key}`) }}
             <span v-if="isActive(l.to)" class="h-1.5 w-1.5 rotate-45 bg-lab-signal" aria-hidden="true" />

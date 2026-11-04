@@ -1,6 +1,6 @@
 export type ConsentChoice = 'granted' | 'denied'
 
-const KEY = 'cookie-consent'
+export const CONSENT_KEY = 'cookie-consent'
 
 /**
  * Cookie / analytics consent. The choice lives in localStorage (per browser). `choice === null` means "not asked yet",
@@ -15,7 +15,7 @@ export function useConsent() {
   /** Called once by the analytics plugin after mount. */
   function restore() {
     let saved: string | null = null
-    try { saved = localStorage.getItem(KEY) }
+    try { saved = localStorage.getItem(CONSENT_KEY) }
     catch { /* storage blocked: treat as not asked yet, and ask every visit */ }
     choice.value = saved === 'granted' || saved === 'denied' ? saved : null
     ready.value = true
@@ -23,7 +23,7 @@ export function useConsent() {
   }
 
   function decide(next: ConsentChoice) {
-    try { localStorage.setItem(KEY, next) }
+    try { localStorage.setItem(CONSENT_KEY, next) }
     catch { /* the choice still applies for this visit */ }
     choice.value = next
     asking.value = false
