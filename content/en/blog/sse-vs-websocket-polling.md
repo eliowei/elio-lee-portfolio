@@ -30,6 +30,10 @@ It is the simplest and works anywhere. The downside is that most requests are wa
 
 The frontend sends a request and the server **does not answer yet**. It waits until there is new data, and the frontend sends the next request as soon as it gets a response. It is more real-time than Short Polling, but every notification costs a fresh request, the server has to hold many waiting connections, and timeouts and reconnects are yours to handle.
 
+**The difference is who decides when the answer comes.** With Short Polling, the frontend asks at a fixed rhythm and the server replies straight away, whether or not there is new data. With Long Polling, the server holds the request until there is data (or a timeout). So Long Polling is not free of polling: "how often to ask" is simply replaced by the server's events or timeouts.
+
+![Request flow of Short Polling versus Long Polling: in Short Polling the client sends requests at a fixed interval and the server replies immediately, mostly with empty responses; in Long Polling the server holds each request until there is new data or a timeout, and the client sends the next request right after it gets a response.](/images/blog/short-vs-long-polling.svg)
+
 ### SSE (Server-Sent Events): a one-way long connection
 
 The browser sends an ordinary HTTP request, and the server **never finishes the response**. It writes messages into it piece by piece. Browsers have a built-in `EventSource` that receives them.
@@ -62,12 +66,12 @@ For chat, multiplayer games and collaborative editing, where both sides send dat
 | | Short Polling | Long Polling | SSE | WebSocket |
 |---|---|---|---|---|
 | Direction | Frontend asks | Frontend asks, server delays the reply | Server → frontend | Two-way |
-| Protocol | HTTP | HTTP | HTTP | WebSocket after upgrade |
+| Protocol | HTTP | HTTP | HTTP | HTTP handshake, then upgrade to WebSocket |
 | Real-time | Depends on interval | High | High | High |
 | Reconnect | Not needed | Write it yourself | Automatic in the browser | Write it yourself |
-| Data format | Any | Any | Text only | Text or binary |
+| Data format | Any | Any | UTF-8 text (JSON strings are fine) | Text or binary |
 | Custom headers | Yes | Yes | Not with `EventSource` | Not with the browser API |
-| Server cost | Many requests | Many connections | Many connections | Many connections, plus state to manage |
+| Server cost | Lots of requests to handle | Lots of waiting requests | Long-lived connections and pushing data | Long-lived connections, plus connection state and messages to manage |
 | Good for | Low frequency, simple | When nothing else is possible | Notifications, progress, live boards | Chat, games, collaboration |
 
 Web Push often comes up in this comparison too. It is a browser or OS-level push that arrives even when the page is closed, but it needs permission and subscription handling, and it solves a different problem from live updates while a page is open. I did not use it here.
@@ -79,7 +83,7 @@ Before choosing, I asked myself: does data need to travel both ways?
 Admin notifications only go from the server to the frontend. Marking one as read is an ordinary `PATCH` request, so there is no reason to keep a two-way channel open. So:
 
 - **I would not use WebSocket's two-way ability**, but I would have to handle heartbeats, reconnects and authentication myself.
-- **SSE is just HTTP**, so the HttpOnly cookie used for login is sent along, and I do not need a separate authentication scheme for WebSocket.
+- **SSE is an ordinary HTTP request**, so the HttpOnly login cookie is sent along and the existing authentication middleware works as it is. A WebSocket handshake also carries cookies, but I would still have to check the origin and handle authentication during the upgrade, which is extra work.
 - **`EventSource` reconnects automatically** after a drop.
 - **Polling is wasteful**: notifications are infrequent, so most requests would come back empty, and on Render's free plan I did not want to add requests for nothing.
 
@@ -141,7 +145,7 @@ eventSource.addEventListener('notification', (event) => {
 
 **Missed notifications are not backfilled after a reconnect.** `EventSource` reconnects by itself, but notifications missed during the drop are only recovered when the page is refreshed or the shop is switched and the list is fetched again. A fuller approach is to call the list API again after a reconnect, or to use the SSE `id` field with `Last-Event-ID` so the server can resend what was missed. I have not done this yet.
 
-Also, over HTTP/1.1 browsers limit connections per domain (usually 6), and one SSE connection takes one of them, so many tabs on the same site compete for slots. HTTP/2 does not have this problem.
+Also, over HTTP/1.1 browsers limit connections per domain (usually 6), and one SSE connection takes one of them, so many tabs on the same site compete for slots. HTTP/2 multiplexes streams over one connection with a much higher limit, so the problem mostly goes away.
 
 ## How to choose
 
