@@ -12,7 +12,7 @@ export const about = {
   eyebrow: 'About / 關於我',
   title: '從完成需求，到理解問題。',
   body: [
-    '我是 Elio，一名前端工程師，主要使用 Vue 進行網頁介面開發。剛開始工作時，我更在意如何把畫面做出來、讓功能正常運作。進入公司後，我同時接觸 Vue 2 與 Vue 3 的專案，開始學會理解既有程式的設計原因、框架之間的差異，以及修改可能影響的範圍，再決定合適的實作方式。',
+    '我是李柏偉（Elio），一名前端工程師，主要使用 Vue 進行網頁介面開發。剛開始工作時，我更在意如何把畫面做出來、讓功能正常運作。進入公司後，我同時接觸 Vue 2 與 Vue 3 的專案，開始學會理解既有程式的設計原因、框架之間的差異，以及修改可能影響的範圍，再決定合適的實作方式。',
     '工作之外，我也透過個人專案探索前端技術與互動設計。這個網站的 3D 遺跡與迴廊，便是我運用 Three.js 與 GLSL Shader 探索空間感、動態效果與網頁互動的實驗。',
   ],
   facts: [
@@ -212,7 +212,7 @@ export const projects: {
   },
   {
     slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', no: '04', kind: '商業系統實務 · 2026',
-    tags: ['Vue 3', 'PrimeVue', 'Node.js', 'MongoDB', 'LINE Messaging API'],
+    tags: ['Vue 3', 'PrimeVue', 'Node.js', 'MongoDB', 'LINE Messaging API', 'SSE'],
     title: 'LINE OA 商家管理平台',
     body: '提供商家自行管理 LINE 官方帳號內容的後台管理平台，讓店家不用找工程師，自己就能更新 FAQ、公告與價目表。',
     side: { icon: 'storefront', title: 'MANAGEMENT CAPABILITY', items: ['內容管理：FAQ、公告、價目表', '多店家與權限管理', '圖文選單點擊與熱門內容數據分析'] },
@@ -239,7 +239,7 @@ export const projects: {
       ],
       stack: [
         { group: 'frontend', items: ['Vue 3', 'PrimeVue'] },
-        { group: 'backend', items: ['Node.js', 'LINE Messaging API'] },
+        { group: 'backend', items: ['Node.js', 'LINE Messaging API', 'SSE'] },
         { group: 'database', items: ['MongoDB'] },
         { group: 'operations', items: ['Render', 'GitHub Actions', 'Cloudflare R2', 'Discord Webhook', 'Sentry'], why: '比較過市面上幾個服務後選擇 Render，設定簡單，免費方案也適合小型服務。但它的 CPU 與記憶體有限，Sentry 對後端負擔較重，所以改用自己寫的日誌。' },
       ],
@@ -247,6 +247,7 @@ export const projects: {
         { title: '內容管理', body: '包含 FAQ、公告、價目表等基礎內容，皆可透過後台自由編輯，無需工程開發。', points: ['FAQ', '公告', '價目表'] },
         { title: 'LINE OA 整合', body: '將後台內容同步至 LINE 官方帳號，提供一致且即時的資訊體驗。' },
         { title: '多店家與權限管理', body: '專為連鎖品牌設計，可個別調整分店專屬的服務與資料。' },
+        { title: '即時通知', body: '資料異動、預約審核與新追蹤者等事件會寫入通知紀錄，並透過 SSE 即時推送到後台，商家不用重新整理頁面就能看到；切換店家時會重新建立連線，只接收該店的通知。', points: ['SSE 即時推送', '未讀 / 已讀管理', '依店家隔離'] },
         { title: '部署與維運', body: '後端部署於 Render，以自行撰寫的 access log 與 audit log 追蹤線上狀況，並用 GitHub Actions 定時備份，結果透過 Discord 通知。', points: ['Render', 'GitHub Actions', 'Cloudflare R2', 'Discord 通知'] },
         { title: '數據分析', body: '追蹤商家 LINE 內容的使用情形，作為優化經營策略的依據。', points: ['圖文選單點擊紀錄', '熱門內容排行', '使用者行為分析', '點擊成效統計'] },
       ],

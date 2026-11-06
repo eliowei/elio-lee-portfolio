@@ -13,7 +13,7 @@ export const about: typeof zh.about = {
   eyebrow: 'About',
   title: 'From finishing tasks to understanding problems.',
   body: [
-    'I’m Elio, a frontend engineer who mainly builds web interfaces with Vue. When I started out, I cared most about getting screens built and features working. At my company I work on both Vue 2 and Vue 3 projects, and I have learned to understand why existing code was designed the way it was, how the frameworks differ, and what a change might affect, before deciding how to implement it.',
+    'I’m Elio Lee (李柏偉), a frontend engineer who mainly builds web interfaces with Vue. When I started out, I cared most about getting screens built and features working. At my company I work on both Vue 2 and Vue 3 projects, and I have learned to understand why existing code was designed the way it was, how the frameworks differ, and what a change might affect, before deciding how to implement it.',
     'Outside of work, I explore frontend technology and interaction design through personal projects. The 3D ruin and corridor on this site are my experiments with Three.js and GLSL shaders, exploring space, motion and web interaction.',
   ],
   facts: [
@@ -189,7 +189,7 @@ export const projects: typeof zh.projects = [
   },
   {
     slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', no: '04', kind: 'Business system · 2026',
-    tags: ['Vue 3', 'PrimeVue', 'Node.js', 'MongoDB', 'LINE Messaging API'],
+    tags: ['Vue 3', 'PrimeVue', 'Node.js', 'MongoDB', 'LINE Messaging API', 'SSE'],
     title: 'LINE OA Management Platform',
     body: 'An admin platform that lets businesses manage their own LINE Official Account content, so shops can update FAQs, announcements and price lists themselves without hiring an engineer.',
     side: { icon: 'storefront', title: 'MANAGEMENT CAPABILITY', items: ['Content management: FAQs, announcements, price lists', 'Multiple shops and permissions', 'Analytics for rich menu clicks and popular content'] },
@@ -216,7 +216,7 @@ export const projects: typeof zh.projects = [
       ],
       stack: [
         { group: 'frontend', items: ['Vue 3', 'PrimeVue'] },
-        { group: 'backend', items: ['Node.js', 'LINE Messaging API'] },
+        { group: 'backend', items: ['Node.js', 'LINE Messaging API', 'SSE'] },
         { group: 'database', items: ['MongoDB'] },
         { group: 'operations', items: ['Render', 'GitHub Actions', 'Cloudflare R2', 'Discord Webhook', 'Sentry'], why: 'I chose Render after comparing several services: it is simple to set up and the free plan suits a small service. But its CPU and memory are limited, and Sentry was too heavy for the backend, so I switched to logs I wrote myself.' },
       ],
@@ -224,6 +224,7 @@ export const projects: typeof zh.projects = [
         { title: 'Content management', body: 'Basic content such as FAQs, announcements and price lists can all be edited freely in the admin, with no engineering work needed.', points: ['FAQ', 'Announcements', 'Price lists'] },
         { title: 'LINE OA integration', body: 'Admin content is synced to the LINE Official Account, giving users consistent, up-to-date information.' },
         { title: 'Multiple shops and permissions', body: 'Designed for chains, so each branch can have its own services and data.' },
+        { title: 'Real-time notifications', body: 'Data changes, reservation reviews and new followers are saved as notifications and pushed to the admin over SSE, so shops see them without refreshing. Switching shops reopens the connection, so only that shop’s notifications arrive.', points: ['SSE push', 'Read / unread tracking', 'Isolated per shop'] },
         { title: 'Deployment and operations', body: 'The backend runs on Render, with self-written access and audit logs to track production, and scheduled GitHub Actions backups whose results are posted to Discord.', points: ['Render', 'GitHub Actions', 'Cloudflare R2', 'Discord alerts'] },
         { title: 'Analytics', body: 'Tracks how the shop’s LINE content is used, as a basis for improving how the business is run.', points: ['Rich menu click log', 'Top content ranking', 'User behaviour analysis', 'Click statistics'] },
       ],

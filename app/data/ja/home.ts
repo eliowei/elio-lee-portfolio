@@ -13,7 +13,7 @@ export const about: typeof zh.about = {
   eyebrow: 'About / 自己紹介',
   title: '要件をこなすことから、問題を理解することへ。',
   body: [
-    'Elio です。主に Vue でウェブのインターフェースを開発しているフロントエンドエンジニアです。働き始めた頃は、画面を作って機能を動かすことを何より気にしていました。入社後は Vue 2 と Vue 3 のプロジェクトに同時に関わるようになり、既存コードの設計意図、フレームワーク間の違い、変更が及ぼす影響範囲を理解したうえで、適切な実装方法を決めるようになりました。',
+    'Elio（李柏偉）です。主に Vue でウェブのインターフェースを開発しているフロントエンドエンジニアです。働き始めた頃は、画面を作って機能を動かすことを何より気にしていました。入社後は Vue 2 と Vue 3 のプロジェクトに同時に関わるようになり、既存コードの設計意図、フレームワーク間の違い、変更が及ぼす影響範囲を理解したうえで、適切な実装方法を決めるようになりました。',
     '仕事以外でも、個人プロジェクトを通じてフロントエンド技術とインタラクションデザインを探求しています。このサイトの 3D の遺跡と回廊は、Three.js と GLSL シェーダーを使って空間表現、モーション、ウェブのインタラクションを探った実験です。',
   ],
   facts: [
@@ -189,7 +189,7 @@ export const projects: typeof zh.projects = [
   },
   {
     slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', no: '04', kind: '業務システム · 2026',
-    tags: ['Vue 3', 'PrimeVue', 'Node.js', 'MongoDB', 'LINE Messaging API'],
+    tags: ['Vue 3', 'PrimeVue', 'Node.js', 'MongoDB', 'LINE Messaging API', 'SSE'],
     title: 'LINE 公式アカウント管理プラットフォーム',
     body: '店舗が LINE 公式アカウントの内容を自分で管理できる管理プラットフォームです。エンジニアに頼まなくても、FAQ、お知らせ、料金表を店舗自身で更新できます。',
     side: { icon: 'storefront', title: 'MANAGEMENT CAPABILITY', items: ['コンテンツ管理：FAQ、お知らせ、料金表', '複数店舗と権限の管理', 'リッチメニューのクリックと人気コンテンツの分析'] },
@@ -216,7 +216,7 @@ export const projects: typeof zh.projects = [
       ],
       stack: [
         { group: 'frontend', items: ['Vue 3', 'PrimeVue'] },
-        { group: 'backend', items: ['Node.js', 'LINE Messaging API'] },
+        { group: 'backend', items: ['Node.js', 'LINE Messaging API', 'SSE'] },
         { group: 'database', items: ['MongoDB'] },
         { group: 'operations', items: ['Render', 'GitHub Actions', 'Cloudflare R2', 'Discord Webhook', 'Sentry'], why: 'いくつかのサービスを比較して Render を選びました。設定が簡単で、無料プランも小規模なサービスに合っています。ただし CPU とメモリが限られており、Sentry はバックエンドへの負荷が大きかったため、自作のログに切り替えました。' },
       ],
@@ -224,6 +224,7 @@ export const projects: typeof zh.projects = [
         { title: 'コンテンツ管理', body: 'FAQ、お知らせ、料金表などの基本的なコンテンツは、すべて管理画面から自由に編集でき、開発作業は不要です。', points: ['FAQ', 'お知らせ', '料金表'] },
         { title: 'LINE 公式アカウントとの連携', body: '管理画面の内容を LINE 公式アカウントに同期し、一貫した最新の情報を届けます。' },
         { title: '複数店舗と権限の管理', body: 'チェーン店向けに設計されており、店舗ごとにサービスやデータを個別に設定できます。', },
+        { title: 'リアルタイム通知', body: 'データの変更、予約の審査、新しいフォロワーなどのイベントを通知として保存し、SSE で管理画面にリアルタイムに届けます。ページを更新しなくても確認できます。店舗を切り替えると接続を張り直し、その店舗の通知だけを受け取ります。', points: ['SSE によるプッシュ', '既読 / 未読の管理', '店舗ごとに分離'] },
         { title: 'デプロイと運用', body: 'バックエンドは Render にデプロイし、自作の access log と audit log で本番の状況を追跡しています。GitHub Actions で定期的にバックアップし、結果は Discord に通知します。', points: ['Render', 'GitHub Actions', 'Cloudflare R2', 'Discord 通知'] },
         { title: 'データ分析', body: '店舗の LINE コンテンツの利用状況を追跡し、運営方針を改善するための根拠にします。', points: ['リッチメニューのクリック記録', '人気コンテンツのランキング', 'ユーザー行動の分析', 'クリック効果の集計'] },
       ],
