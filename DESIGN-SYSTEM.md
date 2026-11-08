@@ -22,6 +22,7 @@
 | 字型產生腳本 | `scripts/fetch-fonts.py`、`scripts/subset-font.py` |
 | 主題狀態與切換 | `app/composables/useTheme.ts`、`app/plugins/theme.client.ts`、`app/components/layout/ThemeToggle.vue` |
 | 防閃爍的主題初始化腳本 | `nuxt.config.ts` 的 `app.head.script` |
+| 錯誤頁（404 / 500） | `app/error.vue`；文案在三份 i18n 的 `error` 區塊。深色舞台、等高線背景、鏤空的大狀態碼；`noindex`，伺服器仍回傳真實狀態碼 |
 | 換頁轉場（掃描線） | `app/plugins/page-transition.client.ts`、`main.css` 的 `.page-scan` 與 `::view-transition-*` 規則 |
 | 共用元件 | `app/components/ui/`（`Chip`、`Icon`）、`app/components/lab/PageHeader.vue` |
 

@@ -191,5 +191,14 @@
     "accept": "Accept",
     "reject": "Decline",
     "policy": "Privacy policy"
+  },
+  "error": {
+    "eyebrow": "ERROR",
+    "title404": "Nothing at these coordinates",
+    "lead404": "The page you're looking for doesn't exist. It may have moved, or the URL may be mistyped. Pick a place below to keep exploring.",
+    "titleGeneric": "Something went wrong",
+    "leadGeneric": "The server couldn't complete this request. Try again in a moment, or head back home.",
+    "home": "Back to home",
+    "readout": "SIGNAL LOST"
   }
 }
