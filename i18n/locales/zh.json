@@ -52,7 +52,7 @@
     "enterCase": "進入案例：{title}",
     "allWorks": "查看全部作品 / All Works",
     "notesEyebrow": "Technical Notes / 技術筆記",
-    "notesTitle": "記錄問題，也整理自己的理解。",
+    "notesTitle": "記錄問題，也整理自己的理解",
     "notesBody": "從實際遇到的問題出發，記錄除錯過程、框架版本的差異，以及個人專案中的技術探索。",
     "notesLink": "閱讀技術筆記",
     "titleTagline": "作品集與技術筆記"
