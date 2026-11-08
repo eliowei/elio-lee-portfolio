@@ -35,11 +35,10 @@ onBeforeUnmount(() => clearTimeout(timer))
         <button
           type="button"
           class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 transition-colors hover:bg-white/10 hover:text-white"
-          :aria-label="copied ? $t('code.copied') : $t('code.copy')"
           @click="copy"
         >
           <UiIcon :name="copied ? 'check' : 'content_copy'" class="text-[14px]" />
-          <span aria-live="polite">{{ copied ? 'Copied' : 'Copy' }}</span>
+          <span aria-live="polite">{{ copied ? $t('code.copied') : $t('code.copy') }}</span>
         </button>
       </span>
     </div>

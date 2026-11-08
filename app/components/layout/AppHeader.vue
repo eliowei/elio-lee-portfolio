@@ -133,7 +133,6 @@ onMounted(() => {
         class="inline-flex h-10 items-center gap-2 text-body-sm md:hidden"
         :aria-expanded="menuOpen"
         aria-controls="mobile-nav"
-        :aria-label="menuOpen ? $t('nav.closeMenu') : $t('nav.openMenu')"
         @click="toggleMenu"
       >
         {{ menuOpen ? 'Close' : 'Menu' }}

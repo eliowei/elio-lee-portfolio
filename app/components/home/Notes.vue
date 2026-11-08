@@ -5,7 +5,7 @@ const { track, slugOf } = useAnalytics()
 
 // Only published articles; drafts never appear. The section hides itself if there are none.
 const { data: posts } = await useAsyncData(`home-notes-${collection}`, () =>
-  queryCollection(collection).where('draft', '=', false).order('date', 'DESC').limit(4).all(),
+  queryCollection(collection).select('path', 'title', 'description', 'date', 'category', 'tags', 'readingTime').where('draft', '=', false).order('date', 'DESC').limit(4).all(),
 )
 </script>
 

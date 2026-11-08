@@ -32,7 +32,8 @@ export default defineNuxtConfig({
   // Route changes run inside document.startViewTransition (skipped for reduced motion / unsupported browsers).
   // Project covers morph between home, /projects and the case study via `view-transition-name`.
   experimental: { viewTransition: true },
-  css: ['~/assets/css/main.css'],
+  // All fonts are self-hosted from public/fonts (no external font CSS): scripts/fetch-fonts.py (Latin + icons), scripts/subset-font.py (Noto Sans TC).
+  css: ['~/assets/css/latin-fonts.generated.css', '~/assets/css/noto-sans-tc.generated.css', '~/assets/css/main.css'],
   tailwindcss: { cssPath: '~/assets/css/main.css' },
 
   site: { url: siteUrl, name: '李柏偉 Elio Lee' },
@@ -50,6 +51,19 @@ export default defineNuxtConfig({
     ...Object.fromEntries(['en', 'ja'].flatMap(l => [`/${l}`, `/${l}/blog`, `/${l}/blog/**`].map(r => [r, { isr: 3600 }]))),
   },
 
+  // Precompress /_nuxt assets (gzip + brotli) so `node-server` previews match what a CDN would serve.
+  nitro: { compressPublicAssets: true },
+
+  hooks: {
+    // The three.js scene only runs on wide, capable screens; stop Nuxt from prefetching its ~570 KB chunk on every visit
+    // (phones never use it and it competes with the page for bandwidth). It is still fetched on demand.
+    'build:manifest': (manifest) => {
+      for (const [key, entry] of Object.entries(manifest)) {
+        if (/space-scene|node_modules\/three\//.test(key)) entry.prefetch = entry.preload = false
+      }
+    },
+  },
+
   app: {
     head: {
       link: [
@@ -58,16 +72,6 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon-96x96.png' },
         { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap',
-        },
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..500,0,0&display=swap',
-        },
       ],
     },
   },

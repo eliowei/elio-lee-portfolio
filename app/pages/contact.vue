@@ -135,15 +135,15 @@ const cardArrow = 'mt-1 text-[20px] text-on-surface-variant transition-transform
       </div>
 
       <h2 class="mt-space-xl text-headline-md">{{ $t('contact.infoTitle') }}</h2>
-      <dl class="mt-6 grid gap-4 sm:grid-cols-2">
-        <div v-for="i in info" :key="i.title" class="flex gap-3 rounded-sm bg-surface-container-lowest p-5 shadow-sm">
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+        <li v-for="i in info" :key="i.title" class="flex gap-3 rounded-sm bg-surface-container-lowest p-5 shadow-sm">
           <UiIcon :name="i.icon" class="mt-0.5 text-[20px] text-lab-signal-ink" />
-          <div>
+          <dl>
             <dt class="text-body-md font-medium text-on-surface">{{ i.title }}</dt>
             <dd class="mt-0.5 text-body-sm text-on-surface-variant">{{ i.body }}</dd>
-          </div>
-        </div>
-      </dl>
+          </dl>
+        </li>
+      </ul>
       <NuxtLink :to="localePath('/legal/privacy')" class="mt-4 inline-flex items-center gap-1 text-body-sm font-medium text-lab-signal-ink underline-offset-4 hover:underline">
         {{ $t('contact.privacyLink') }} <UiIcon name="arrow_forward" class="text-[16px]" />
       </NuxtLink>

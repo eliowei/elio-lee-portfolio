@@ -26,12 +26,29 @@
 | 類別 | 使用技術 |
 |---|---|
 | 框架 | Nuxt 4、Vue 3、TypeScript |
-| 3D 與動態 | Three.js、GLSL、GSAP |
+| 3D 與動態 | Three.js、GLSL |
 | 樣式 | Tailwind CSS |
 | 內容與 SEO | Nuxt Content、Nuxt Image、Sitemap |
 | 聯絡表單 | EmailJS |
 
-3D 場景的鏡頭與動畫由 Three.js 自行實作；GSAP 用於一般頁面區塊的捲動淡入效果。
+3D 場景的鏡頭與動畫由 Three.js 自行實作；一般頁面區塊的捲動淡入效果以 IntersectionObserver 與 Web Animations API 實作。
+
+## 效能與字型
+
+Lighthouse（手機、預設節流）實測：筆記、聯絡、文章頁約 96–97；首頁、專案、經歷約 60–80；桌機首頁 96。無障礙、最佳做法、SEO 皆為 100（文章頁無障礙 96：導覽列使用 `mix-blend-difference`，對比檢查為誤報）。
+
+- Lighthouse 的 LCP 是模擬慢速 4G 推算的數字，實測 LCP 約 0.5–1 秒；首頁 TBT 每次量測落差大（約 300–1,100 ms），分數會上下跳動。
+- **字型全部自架**（`public/fonts/`），頁面不載入外部字型 CSS。
+  - `scripts/fetch-fonts.py`：下載 Inter、Geist、Geist Mono（僅 Latin）與 Material Symbols 圖示子集，並產生 `app/assets/css/latin-fonts.generated.css`。**新增圖示名稱時，要加進該腳本的 `ICONS` 清單後重跑**，否則圖示會顯示成文字。
+  - `scripts/subset-font.py`：把 Noto Sans TC 裁成網站實際用到的字，分成 `en`／`ui`／`article`／`ja` 四組（`unicode-range` 互不重疊），頁面只下載用得到的組別。新增大量文章後請重跑；缺字會退回系統字型，不會壞版。兩支腳本需要 `pip install fonttools brotli`，字型來源網址寫在腳本開頭。
+  - 不要用 `media="print"` + `onload` 這種「非阻塞載入 Google Fonts」的寫法：在這個專案裡 `onload` 不會生效，樣式表永遠停在 `print`，字型與圖示不會載入。
+- `/blog` 與首頁筆記區的查詢用 `.select()` 只取列表需要的欄位，避免整篇文章內容進入 payload。
+- 捲動淡入（`v-reveal`）改用 IntersectionObserver + Web Animations API（`app/plugins/reveal.ts`），不再打包動畫函式庫。
+- three.js 的 chunk 不預取（`nuxt.config.ts` 的 `build:manifest` hook）；手機不會用到，桌機仍按需載入。
+- 圖示固定為 1em 方框，字型載入前不會造成版面位移。
+- `nitro.compressPublicAssets` 只是讓本機 `node-server` 預覽的壓縮接近 CDN，量測才準；部署在 Vercel 時不影響。
+
+已知取捨：選單按鈕不再設 `aria-label`（改以可見文字 `Menu`／`Close` 作為名稱，以通過「可見文字需包含在名稱內」檢查），中日文使用者的螢幕閱讀器會念英文；複製程式碼按鈕改顯示在地化文字。
 
 ## 專案結構
 
@@ -41,9 +58,11 @@ app/
 ├── data/         網站文案與作品資料
 ├── lib/          3D 場景（space-scene.ts）與遺跡結構（ruin.ts）
 ├── pages/        首頁、作品、經歷、技術筆記、聯絡
-└── plugins/      GSAP 捲動淡入
+└── plugins/      捲動淡入（v-reveal）
 content/blog/     技術筆記 Markdown
 public/images/    作品截圖與個人照片
+public/fonts/     自架字型（由 scripts/ 產生）
+scripts/          字型下載與裁切腳本
 ```
 
 ## 本機開發

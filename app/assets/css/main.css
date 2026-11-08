@@ -43,7 +43,7 @@
     mask-image: radial-gradient(ellipse 80% 80% at 78% 40%, #000 20%, transparent 75%);
   }
   /* Home title: phones 40–48px, desktop up to ~104px. Wide measure; overlaps the 3D monument on purpose. */
-  .space-title { font-family: Geist, 'Noto Sans TC', 'PingFang TC', sans-serif; font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; font-size: clamp(2.5rem, 10.5vw, 3rem); }
+  .space-title { font-family: Geist, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif; font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; font-size: clamp(2.5rem, 10.5vw, 3rem); }
   @media (min-width: 768px) { .space-title { font-size: clamp(3.5rem, 6.4vw, 6.5rem); } }
   .lab-chip { @apply inline-flex items-center rounded border border-white/15 px-2.5 py-1 font-mono text-label-sm text-lab-on-dark; }
   .lab-chip-light { @apply inline-flex items-center rounded border border-hairline-strong bg-white px-2.5 py-1 font-mono text-label-sm text-on-surface-variant; }
@@ -52,7 +52,7 @@
   @keyframes lab-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) { .lab-in { animation: none; } }
 
-  .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-size: inherit; line-height: 1; display: inline-block; user-select: none; }
+  .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; letter-spacing: normal; text-transform: none; font-feature-settings: 'liga'; font-size: inherit; line-height: 1; display: inline-block; width: 1em; height: 1em; overflow: hidden; white-space: nowrap; user-select: none; } /* fixed box: the ligature name (e.g. "arrow_outward") shows as text until the icon font loads and must not shift the layout */
   .section-x { @apply mx-auto w-full max-w-page px-margin-mobile md:px-margin; }
   .eyebrow { @apply mb-1.5 flex items-center gap-1.5 font-mono text-label-sm uppercase tracking-widest text-secondary; }
 
@@ -60,7 +60,7 @@
   .prose-post { @apply space-y-5 text-body-lg text-on-surface; }
   .prose-post h2 { @apply pt-6 text-headline-md; }
   .prose-post h3 { @apply pt-3 text-headline-sm; }
-  .prose-post :where(h2, h3) { scroll-margin-top: 6rem; font-family: Geist, 'PingFang TC', 'Noto Sans TC', sans-serif; }
+  .prose-post :where(h2, h3) { scroll-margin-top: 6rem; font-family: Geist, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif; }
   .prose-post a { @apply text-lab-signal-ink underline decoration-lab-signal-ink/40 underline-offset-4 transition-colors hover:decoration-lab-signal-ink; }
   .prose-post :where(h2, h3, h4) a { @apply text-inherit no-underline; } /* heading self-anchors are not links to style */
   .prose-post ul { @apply list-disc space-y-1 pl-6; }

@@ -11,7 +11,7 @@ const type = (size: string, lh: string, ls: string, weight: string): [string, Re
   { lineHeight: lh, letterSpacing: ls, fontWeight: weight },
 ]
 
-const HEADING_FONT = "Geist, 'Noto Sans TC', 'PingFang TC', sans-serif"
+const HEADING_FONT = "Geist, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif"
 const headingSizes = ['display', 'display-mobile', 'headline-lg', 'headline-lg-mobile', 'headline-md', 'headline-sm']
 
 export default <Partial<Config>>{
@@ -68,7 +68,7 @@ export default <Partial<Config>>{
         'space-2xl': '5rem', 'space-3xl': '7rem', // section rhythm
       },
       fontFamily: {
-        sans: ['Inter', "'Noto Sans TC'", "'PingFang TC'", 'sans-serif'],
+        sans: ['Inter', "'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif"],
         mono: ["'Geist Mono'", 'ui-monospace', 'monospace'],
       },
       // Body 16–18px at ~1.7; the home title is sized in main.css (`.space-title`).

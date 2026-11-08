@@ -76,10 +76,10 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
           <p class="lab-in lab-muted mt-8 max-w-[36rem] text-body-lg" style="--d: 160ms">{{ hero.intro }}</p>
           <div class="lab-in mt-10 flex flex-wrap items-center gap-3" style="--d: 240ms">
             <a href="#works" :class="[btn, 'bg-lab-signal text-lab-bg hover:bg-white']">
-              {{ $t('home.explore') }} <span v-if="$i18n.locale !== 'en'" class="font-mono text-label-sm opacity-70">Explore Works</span>
+              {{ $t('home.explore') }} <span v-if="$i18n.locale !== 'en'" class="font-mono text-label-sm opacity-80">Explore Works</span>
             </a>
             <a href="#about" :class="[btn, 'border border-white/25 text-white hover:border-white']">
-              {{ $t('home.aboutMe') }} <span v-if="$i18n.locale !== 'en'" class="font-mono text-label-sm opacity-70">About Elio</span>
+              {{ $t('home.aboutMe') }} <span v-if="$i18n.locale !== 'en'" class="font-mono text-label-sm opacity-80">About Elio</span>
             </a>
           </div>
         </div>
@@ -152,9 +152,9 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
                   <NuxtImg
                     v-if="cover(p.slug)"
                     :src="cover(p.slug)!.src" 
-                    :width="i === 0 ? 720 : 240" 
-                    :height="i === 0 ? 450 : 240"
-                    sizes="(max-width: 768px) 100vw, 240px"
+                    :width="i === 0 ? 720 : 160" 
+                    :height="i === 0 ? 450 : 160"
+                    :sizes="i === 0 ? '100vw' : '80px'"
                     format="webp" 
                     loading="lazy" 
                     alt=""

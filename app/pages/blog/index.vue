@@ -11,7 +11,7 @@ useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogT
 
 // Published articles only (drafts = sample posts). The list appears once there is something to list.
 const collection = useBlogCollection()
-const { data: posts } = await useAsyncData(`blog-list-${collection}`, () => queryCollection(collection).where('draft', '=', false).order('date', 'DESC').all())
+const { data: posts } = await useAsyncData(`blog-list-${collection}`, () => queryCollection(collection).select('path', 'title', 'description', 'date', 'category', 'tags', 'readingTime').where('draft', '=', false).order('date', 'DESC').all())
 
 // Category filter: plain client state, so the page stays cacheable as one document. Empty categories are not offered.
 const active = ref<(typeof categories)[number] | null>(null)
