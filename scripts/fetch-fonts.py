@@ -12,7 +12,7 @@ root = pathlib.Path(__file__).resolve().parent.parent
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
 ICONS = ('accessibility_new api arrow_back arrow_forward arrow_outward arrow_upward assignment_turned_in auto_stories brush build check '
          'check_circle chevron_left chevron_right close code compare content_copy devices domain email error expand_more explore fact_check '
-         'format_quote group_work groups hub language layers mail map markunread_mailbox menu message pedal_bike person_search school search '
+         'dark_mode format_quote group_work groups hub language layers light_mode mail map markunread_mailbox menu message pedal_bike person_search school search '
          'send shield south sports_esports storefront task_alt topic travel_explore troubleshoot web').split()
 URLS = [
     'https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400;500&family=Inter:wght@400..600&display=swap',

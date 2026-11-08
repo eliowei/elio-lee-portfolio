@@ -1,0 +1,112 @@
+/* Colour tokens for the content ground (light paper / dark). Single source of truth: tailwind.config.ts reads these as
+   `rgb(var(--c-<name>) / <alpha-value>)`, so utilities like `bg-surface`, `text-on-surface/70` follow the theme.
+   Values are space-separated RGB channels (needed for Tailwind's opacity modifier); the hex is in the comment.
+   The theme is chosen by `data-theme` on <html>: set before first paint by the inline script in nuxt.config.ts, toggled by
+   <LayoutThemeToggle>. Fixed dark stage colours (`lab.bg`, `lab.on-dark`…) are NOT here: dark sections stay dark in both themes. */
+:root {
+  color-scheme: light;
+  --c-primary: 184 61 14; /* #b83d0e */
+  --c-on-primary: 255 255 255; /* #ffffff */
+  --c-primary-container: 255 91 31; /* #ff5b1f */
+  --c-on-primary-container: 12 13 15; /* #0c0d0f */
+  --c-primary-fixed: 255 228 216; /* #ffe4d8 */
+  --c-primary-fixed-dim: 255 194 168; /* #ffc2a8 */
+  --c-on-primary-fixed: 74 23 3; /* #4a1703 */
+  --c-on-primary-fixed-variant: 143 47 10; /* #8f2f0a */
+  --c-inverse-primary: 255 154 114; /* #ff9a72 */
+  --c-secondary: 85 87 92; /* #55575c */
+  --c-on-secondary: 255 255 255; /* #ffffff */
+  --c-secondary-container: 230 228 223; /* #e6e4df */
+  --c-on-secondary-container: 58 60 64; /* #3a3c40 */
+  --c-secondary-fixed: 230 228 223; /* #e6e4df */
+  --c-secondary-fixed-dim: 207 204 197; /* #cfccc5 */
+  --c-on-secondary-fixed: 12 13 15; /* #0c0d0f */
+  --c-on-secondary-fixed-variant: 58 60 64; /* #3a3c40 */
+  --c-tertiary: 184 61 14; /* #b83d0e */
+  --c-on-tertiary: 255 255 255; /* #ffffff */
+  --c-tertiary-container: 255 91 31; /* #ff5b1f */
+  --c-on-tertiary-container: 12 13 15; /* #0c0d0f */
+  --c-tertiary-fixed: 255 228 216; /* #ffe4d8 */
+  --c-tertiary-fixed-dim: 255 194 168; /* #ffc2a8 */
+  --c-on-tertiary-fixed: 74 23 3; /* #4a1703 */
+  --c-on-tertiary-fixed-variant: 143 47 10; /* #8f2f0a */
+  --c-error: 186 26 26; /* #ba1a1a */
+  --c-on-error: 255 255 255; /* #ffffff */
+  --c-error-container: 255 218 214; /* #ffdad6 */
+  --c-on-error-container: 147 0 10; /* #93000a */
+  --c-background: 243 242 238; /* #f3f2ee */
+  --c-on-background: 12 13 15; /* #0c0d0f */
+  --c-surface: 243 242 238; /* #f3f2ee */
+  --c-surface-bright: 255 255 255; /* #ffffff */
+  --c-surface-dim: 220 218 212; /* #dcdad4 */
+  --c-surface-tint: 184 61 14; /* #b83d0e */
+  --c-surface-variant: 232 230 225; /* #e8e6e1 */
+  --c-surface-container-lowest: 255 255 255; /* #ffffff */
+  --c-surface-container-low: 236 235 230; /* #ecebe6 */
+  --c-surface-container: 230 228 223; /* #e6e4df */
+  --c-surface-container-high: 223 221 215; /* #dfddd7 */
+  --c-surface-container-highest: 214 212 206; /* #d6d4ce */
+  --c-on-surface: 12 13 15; /* #0c0d0f */
+  --c-on-surface-variant: 85 87 92; /* #55575c */
+  --c-inverse-surface: 12 13 15; /* #0c0d0f */
+  --c-inverse-on-surface: 236 235 231; /* #ecebe7 */
+  --c-outline: 107 110 116; /* #6b6e74 */
+  --c-outline-variant: 207 204 197; /* #cfccc5 */
+  --c-hairline: 222 220 214; /* #dedcd6 */
+  --c-hairline-strong: 207 204 197; /* #cfccc5 */
+  --c-signal-ink: 184 61 14; /* #b83d0e */
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --c-primary: 255 122 71; /* #ff7a47 */
+  --c-on-primary: 12 13 15; /* #0c0d0f */
+  --c-primary-container: 255 91 31; /* #ff5b1f */
+  --c-on-primary-container: 12 13 15; /* #0c0d0f */
+  --c-primary-fixed: 58 26 14; /* #3a1a0e */
+  --c-primary-fixed-dim: 90 36 16; /* #5a2410 */
+  --c-on-primary-fixed: 255 228 216; /* #ffe4d8 */
+  --c-on-primary-fixed-variant: 255 194 168; /* #ffc2a8 */
+  --c-inverse-primary: 184 61 14; /* #b83d0e */
+  --c-secondary: 168 171 177; /* #a8abb1 */
+  --c-on-secondary: 12 13 15; /* #0c0d0f */
+  --c-secondary-container: 42 45 50; /* #2a2d32 */
+  --c-on-secondary-container: 220 218 212; /* #dcdad4 */
+  --c-secondary-fixed: 42 45 50; /* #2a2d32 */
+  --c-secondary-fixed-dim: 58 61 67; /* #3a3d43 */
+  --c-on-secondary-fixed: 236 235 231; /* #ecebe7 */
+  --c-on-secondary-fixed-variant: 220 218 212; /* #dcdad4 */
+  --c-tertiary: 255 122 71; /* #ff7a47 */
+  --c-on-tertiary: 12 13 15; /* #0c0d0f */
+  --c-tertiary-container: 255 91 31; /* #ff5b1f */
+  --c-on-tertiary-container: 12 13 15; /* #0c0d0f */
+  --c-tertiary-fixed: 58 26 14; /* #3a1a0e */
+  --c-tertiary-fixed-dim: 90 36 16; /* #5a2410 */
+  --c-on-tertiary-fixed: 255 228 216; /* #ffe4d8 */
+  --c-on-tertiary-fixed-variant: 255 194 168; /* #ffc2a8 */
+  --c-error: 255 180 171; /* #ffb4ab */
+  --c-on-error: 105 0 5; /* #690005 */
+  --c-error-container: 147 0 10; /* #93000a */
+  --c-on-error-container: 255 218 214; /* #ffdad6 */
+  --c-background: 17 19 22; /* #111316 */
+  --c-on-background: 236 235 231; /* #ecebe7 */
+  --c-surface: 17 19 22; /* #111316 */
+  --c-surface-bright: 42 45 50; /* #2a2d32 */
+  --c-surface-dim: 12 13 15; /* #0c0d0f */
+  --c-surface-tint: 255 122 71; /* #ff7a47 */
+  --c-surface-variant: 31 34 38; /* #1f2226 */
+  --c-surface-container-lowest: 24 26 30; /* #181a1e */
+  --c-surface-container-low: 21 23 26; /* #15171a */
+  --c-surface-container: 27 29 33; /* #1b1d21 */
+  --c-surface-container-high: 33 36 41; /* #212429 */
+  --c-surface-container-highest: 40 43 48; /* #282b30 */
+  --c-on-surface: 236 235 231; /* #ecebe7 */
+  --c-on-surface-variant: 168 171 177; /* #a8abb1 */
+  --c-inverse-surface: 236 235 231; /* #ecebe7 */
+  --c-inverse-on-surface: 12 13 15; /* #0c0d0f */
+  --c-outline: 138 141 148; /* #8a8d94 */
+  --c-outline-variant: 58 61 67; /* #3a3d43 */
+  --c-hairline: 38 41 46; /* #26292e */
+  --c-hairline-strong: 55 58 64; /* #373a40 */
+  --c-signal-ink: 255 122 71; /* #ff7a47 */
+}

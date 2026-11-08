@@ -39,21 +39,21 @@ const fit = (text: string, size: number, max = NW - 24) => {
         <desc :id="`${uid}-d`">{{ diagram.caption }} {{ $t('projects.diagramEdges') }}{{ edges.map(e => e.text).join(', ') }}</desc>
         <defs>
           <marker :id="`${uid}-arrow`" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="9" markerHeight="9" orient="auto">
-            <path d="M1 1 L9 5 L1 9 z" fill="#6B6E74" />
+            <path d="M1 1 L9 5 L1 9 z" style="fill: rgb(var(--c-outline))" />
           </marker>
         </defs>
-        <g fill="none" stroke="#9A9DA3" stroke-width="1.5">
+        <g fill="none" style="stroke: rgb(var(--c-outline))" stroke-width="1.5">
           <polyline v-for="e in edges" :key="e.key" :points="e.points" :marker-mid="`url(#${uid}-arrow)`" />
         </g>
         <g v-for="n in diagram.nodes" :key="n.id" :transform="`translate(${n.x * 10 - NW / 2} ${n.y * 10 + 10 - NH / 2})`">
-          <rect :width="NW" :height="NH" rx="3" fill="#ffffff" stroke="#CFCCC5" stroke-width="1.5" />
+          <rect :width="NW" :height="NH" rx="3" style="fill: rgb(var(--c-surface-container-lowest)); stroke: rgb(var(--c-hairline-strong))" stroke-width="1.5" />
           <rect width="5" :height="NH" :fill="accent" />
-          <text :x="NW / 2 + 2" :y="n.sub ? 29 : 40" text-anchor="middle" :font-size="fit(n.label, 21)" font-weight="600" fill="#0C0D0F">{{ n.label }}</text>
-          <text v-if="n.sub" :x="NW / 2 + 2" y="52" text-anchor="middle" :font-size="fit(n.sub, 15)" fill="#55575C" font-family="'Geist Mono', monospace">{{ n.sub }}</text>
+          <text :x="NW / 2 + 2" :y="n.sub ? 29 : 40" text-anchor="middle" :font-size="fit(n.label, 21)" font-weight="600" style="fill: rgb(var(--c-on-surface))">{{ n.label }}</text>
+          <text v-if="n.sub" :x="NW / 2 + 2" y="52" text-anchor="middle" :font-size="fit(n.sub, 15)" style="fill: rgb(var(--c-on-surface-variant))" font-family="'Geist Mono', monospace">{{ n.sub }}</text>
         </g>
-        <g font-family="'Geist Mono', monospace" font-size="18" fill="#55575C">
+        <g font-family="'Geist Mono', monospace" font-size="18" style="fill: rgb(var(--c-on-surface-variant))">
           <template v-for="e in edges" :key="e.key">
-            <text v-if="e.label" :x="e.at.x" :y="e.at.y" :text-anchor="e.at.anchor" paint-order="stroke" stroke="#ffffff" stroke-width="6">{{ e.label }}</text>
+            <text v-if="e.label" :x="e.at.x" :y="e.at.y" :text-anchor="e.at.anchor" paint-order="stroke" style="stroke: rgb(var(--c-surface-container-lowest))" stroke-width="6">{{ e.label }}</text>
           </template>
         </g>
       </svg>

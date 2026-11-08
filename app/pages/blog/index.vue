@@ -59,7 +59,7 @@ const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-
           v-model="query"
           type="search"
           :placeholder="$t('blog.searchPlaceholder')"
-          class="w-full rounded-sm border border-hairline-strong bg-white py-2.5 pl-10 pr-3 text-body-md text-on-surface transition-colors hover:border-on-surface-variant motion-reduce:transition-none"
+          class="w-full rounded-sm border border-hairline-strong bg-surface-container-lowest py-2.5 pl-10 pr-3 text-body-md text-on-surface transition-colors hover:border-on-surface-variant motion-reduce:transition-none"
         >
       </div>
       <div class="flex flex-wrap gap-2 pb-6" role="group" :aria-label="$t('blog.filter')">
@@ -89,7 +89,7 @@ const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-
       </ol>
     </section>
 
-    <section class="border-t border-hairline bg-white" aria-labelledby="method">
+    <section class="border-t border-hairline bg-surface-container-lowest" aria-labelledby="method">
       <div class="section-x py-space-2xl">
         <p class="lab-eyebrow">{{ method.eyebrow }}</p>
         <h2 id="method" class="mt-4 max-w-2xl text-headline-lg-mobile md:text-headline-lg">{{ method.title }}</h2>

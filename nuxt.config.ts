@@ -26,14 +26,14 @@ export default defineNuxtConfig({
   },
   content: {
     experimental: { nativeSqlite: true }, // node:sqlite (Node >= 22.5); avoids native better-sqlite3
-    // Code blocks sit on a dark (#09090B) container, so use the dark theme only (light-theme tokens are unreadable there).
-    build: { markdown: { highlight: { theme: 'github-dark' } } },
+    // Code blocks sit on a dark (#09090B) container in both themes, so use a dark theme only. github-dark-default (not github-dark): its comment colour passes 4.5:1 on that container.
+    build: { markdown: { highlight: { theme: 'github-dark-default' } } },
   },
   // Route changes run inside document.startViewTransition (skipped for reduced motion / unsupported browsers).
   // Project covers morph between home, /projects and the case study via `view-transition-name`.
   experimental: { viewTransition: true },
   // All fonts are self-hosted from public/fonts (no external font CSS): scripts/fetch-fonts.py (Latin + icons), scripts/subset-font.py (Noto Sans TC).
-  css: ['~/assets/css/latin-fonts.generated.css', '~/assets/css/noto-sans-tc.generated.css', '~/assets/css/main.css'],
+  css: ['~/assets/css/theme.css', '~/assets/css/latin-fonts.generated.css', '~/assets/css/noto-sans-tc.generated.css', '~/assets/css/main.css'],
   tailwindcss: { cssPath: '~/assets/css/main.css' },
 
   site: { url: siteUrl, name: '李柏偉 Elio Lee' },
@@ -66,6 +66,11 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      // Theme before first paint (no flash of the wrong theme): saved choice, else the OS preference. Keep in sync with useTheme.ts.
+      script: [{
+        innerHTML: "(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t})()",
+        tagPosition: 'head',
+      }],
       link: [
         // Files in public/: SVG for modern browsers, PNG / ICO as fallbacks, apple-touch-icon for iOS home screens.
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },

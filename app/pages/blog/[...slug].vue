@@ -80,7 +80,7 @@ useHead({
           <div class="flex flex-wrap items-center gap-3 font-mono text-label-md text-secondary">
             <UiChip tone="secondary">{{ $t(`categories.${post.category}`) }}</UiChip>
             <time :datetime="post.date">{{ post.date.replaceAll('-', '/') }}</time>
-            <span class="rounded bg-slate-100 px-2 py-0.5 text-label-sm text-slate-700">{{ $t('blog.readingTime', { n: post.readingTime }) }}</span>
+            <span class="rounded bg-surface-container px-2 py-0.5 text-label-sm text-on-surface-variant">{{ $t('blog.readingTime', { n: post.readingTime }) }}</span>
           </div>
           <h1 class="text-headline-lg-mobile md:text-headline-lg">{{ post.title }}</h1>
           <p class="text-body-lg text-on-surface-variant">{{ post.description }}</p>
@@ -92,7 +92,7 @@ useHead({
 
         <footer class="mt-space-xl flex flex-col gap-4 border-t border-hairline pt-space-md sm:flex-row sm:items-center sm:justify-between">
           <ul class="flex flex-wrap gap-1.5 font-mono text-label-sm" :aria-label="$t('blog.tags')">
-            <li v-for="t in post.tags" :key="t" class="rounded bg-slate-100 px-2 py-0.5 text-slate-700">{{ t }}</li>
+            <li v-for="t in post.tags" :key="t" class="rounded bg-surface-container px-2 py-0.5 text-on-surface-variant">{{ t }}</li>
           </ul>
           <NuxtLink :to="localePath('/blog')" class="inline-flex items-center justify-center gap-2 rounded border border-hairline px-4 py-2 text-body-sm font-medium transition-colors hover:border-hairline-strong hover:bg-surface-container-low">
             <UiIcon name="arrow_back" class="text-sm" /> {{ $t('blog.back') }}

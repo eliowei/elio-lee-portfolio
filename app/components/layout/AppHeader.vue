@@ -94,8 +94,10 @@ onMounted(() => {
         >{{ $t(`nav.${l.key}`) }}</NuxtLink>
       </nav>
 
+      <LayoutThemeToggle class="ml-auto md:ml-0" />
+
       <!-- Language switch: a disclosure button over plain links to the same page in each language. -->
-      <div ref="langBox" class="relative ml-auto md:ml-0">
+      <div ref="langBox" class="relative">
         <button
           ref="langButton"
           type="button"

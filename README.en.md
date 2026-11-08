@@ -50,6 +50,10 @@ Lighthouse (mobile, default throttling): notes list, contact and article pages s
 
 Known trade-off: the menu button no longer sets `aria-label` (its visible text `Menu` / `Close` is the name, to satisfy the "visible text must be in the name" check), so screen readers read English for Chinese and Japanese users. The copy-code button now shows localized text.
 
+## Design System and Dark Mode
+
+The site supports light and dark themes (follows the OS by default; the header button toggles it and remembers the choice). Colours, type, spacing, components and the theming mechanism are documented in [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md) (written in Chinese). Theme colour values live in `app/assets/css/theme.css`; the Tailwind setup is in `tailwind.config.ts`.
+
 ## Project Structure
 
 ```text

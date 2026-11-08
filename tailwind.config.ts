@@ -2,13 +2,25 @@ import type { Config } from 'tailwindcss'
 import plugin from 'tailwindcss/plugin'
 
 // Design system "Elio Lee / Digital Space".
-//   Dark stage #0C0D0F (immersion: hero, project space, case covers) · light paper #F3F2EE (reading) ·
+//   Dark stage #0C0D0F (immersion: hero, project space, case covers) · light paper #F3F2EE (reading; dark theme: #111316) ·
 //   survey orange #FF5B1F as the single identity colour.
 // #FF5B1F is for dark grounds and non-text marks. Text/links on the light ground use `signal-ink` (5.05:1 on paper).
 // The semantic token names (surface-*, on-surface, primary…) are kept and remapped, so content components re-skin.
 const type = (size: string, lh: string, ls: string, weight: string): [string, Record<string, string>] => [
   size,
   { lineHeight: lh, letterSpacing: ls, fontWeight: weight },
+]
+
+// Colours that change with the theme are CSS variables (channels, so `/<alpha>` still works); see app/assets/css/theme.css.
+const token = (name: string) => `rgb(var(--c-${name}) / <alpha-value>)`
+const SEMANTIC = [
+  'primary', 'on-primary', 'primary-container', 'on-primary-container', 'primary-fixed', 'primary-fixed-dim', 'on-primary-fixed', 'on-primary-fixed-variant', 'inverse-primary',
+  'secondary', 'on-secondary', 'secondary-container', 'on-secondary-container', 'secondary-fixed', 'secondary-fixed-dim', 'on-secondary-fixed', 'on-secondary-fixed-variant',
+  'tertiary', 'on-tertiary', 'tertiary-container', 'on-tertiary-container', 'tertiary-fixed', 'tertiary-fixed-dim', 'on-tertiary-fixed', 'on-tertiary-fixed-variant',
+  'error', 'on-error', 'error-container', 'on-error-container',
+  'background', 'on-background', 'surface', 'surface-bright', 'surface-dim', 'surface-tint', 'surface-variant',
+  'surface-container-lowest', 'surface-container-low', 'surface-container', 'surface-container-high', 'surface-container-highest',
+  'on-surface', 'on-surface-variant', 'inverse-surface', 'inverse-on-surface', 'outline', 'outline-variant',
 ]
 
 const HEADING_FONT = "Geist, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif"
@@ -19,47 +31,24 @@ export default <Partial<Config>>{
   theme: {
     extend: {
       colors: {
-        // --- Space palette (also exposed as CSS variables in main.css)
+        // --- Space palette: the dark stage is fixed (dark sections stay dark in both themes)...
         lab: {
           bg: '#0C0D0F', 'bg-soft': '#15171A', 'bg-raise': '#1F2125',
-          paper: '#F3F2EE',
-          signal: '#FF5B1F', 'signal-ink': '#B83D0E',
+          paper: token('background'), // ...except the reading ground, which follows the theme
+          signal: '#FF5B1F', 'signal-ink': token('signal-ink'),
           'on-dark': '#ECEBE7', 'on-dark-muted': '#9A9DA3',
         },
-        // --- Semantic tokens (light content ground)
-        primary: '#B83D0E', 'on-primary': '#ffffff',
-        'primary-container': '#FF5B1F', 'on-primary-container': '#0C0D0F',
-        'primary-fixed': '#ffe4d8', 'primary-fixed-dim': '#ffc2a8',
-        'on-primary-fixed': '#4a1703', 'on-primary-fixed-variant': '#8f2f0a',
-        'inverse-primary': '#ff9a72',
-        secondary: '#55575C', 'on-secondary': '#ffffff',
-        'secondary-container': '#e6e4df', 'on-secondary-container': '#3a3c40',
-        'secondary-fixed': '#e6e4df', 'secondary-fixed-dim': '#cfccc5',
-        'on-secondary-fixed': '#0c0d0f', 'on-secondary-fixed-variant': '#3a3c40',
-        tertiary: '#B83D0E', 'on-tertiary': '#ffffff',
-        'tertiary-container': '#FF5B1F', 'on-tertiary-container': '#0c0d0f',
-        'tertiary-fixed': '#ffe4d8', 'tertiary-fixed-dim': '#ffc2a8',
-        'on-tertiary-fixed': '#4a1703', 'on-tertiary-fixed-variant': '#8f2f0a',
-        error: '#ba1a1a', 'on-error': '#ffffff',
-        'error-container': '#ffdad6', 'on-error-container': '#93000a',
-        background: '#f3f2ee', 'on-background': '#0c0d0f',
-        surface: '#f3f2ee', 'surface-bright': '#ffffff', 'surface-dim': '#dcdad4',
-        'surface-tint': '#b83d0e', 'surface-variant': '#e8e6e1',
-        'surface-container-lowest': '#ffffff', 'surface-container-low': '#ecebe6',
-        'surface-container': '#e6e4df', 'surface-container-high': '#dfddd7',
-        'surface-container-highest': '#d6d4ce',
-        'on-surface': '#0c0d0f', 'on-surface-variant': '#55575c',
-        'inverse-surface': '#0c0d0f', 'inverse-on-surface': '#ecebe7',
-        outline: '#6b6e74', 'outline-variant': '#cfccc5',
-        hairline: { DEFAULT: '#dedcd6', strong: '#cfccc5' },
+        // --- Semantic tokens (content ground). Light + dark values live in app/assets/css/theme.css.
+        ...Object.fromEntries(SEMANTIC.map(n => [n, token(n)])),
+        hairline: { DEFAULT: token('hairline'), strong: token('hairline-strong') },
       },
       borderRadius: { sm: '0.125rem', DEFAULT: '0.25rem', md: '0.375rem', lg: '0.5rem', xl: '0.75rem', full: '9999px' },
       // Light ground: cards are a 1px stroke (shadow-sm); hover darkens the stroke + a barely-there micro shadow (shadow-md).
       boxShadow: {
-        DEFAULT: '0 0 0 1px #dedcd6',
-        sm: '0 0 0 1px #dedcd6',
-        md: '0 0 0 1px #cfccc5, 0 1px 3px rgba(12, 13, 15, 0.06)',
-        lg: '0 0 0 1px #cfccc5, 0 1px 3px rgba(12, 13, 15, 0.06)',
+        DEFAULT: '0 0 0 1px rgb(var(--c-hairline))',
+        sm: '0 0 0 1px rgb(var(--c-hairline))',
+        md: '0 0 0 1px rgb(var(--c-hairline-strong)), 0 1px 3px rgba(0, 0, 0, 0.08)',
+        lg: '0 0 0 1px rgb(var(--c-hairline-strong)), 0 1px 3px rgba(0, 0, 0, 0.08)',
       },
       spacing: {
         gutter: '1.5rem', 'gutter-mobile': '1rem',

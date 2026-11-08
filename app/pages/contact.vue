@@ -95,7 +95,7 @@ async function send() {
 }
 
 const label = 'mb-2 block font-mono text-label-md text-on-surface'
-const field = 'w-full rounded-sm border bg-white px-4 py-3 text-body-md text-on-surface transition-colors motion-reduce:transition-none'
+const field = 'w-full rounded-sm border bg-surface-container-lowest px-4 py-3 text-body-md text-on-surface transition-colors motion-reduce:transition-none'
 const fieldState = (k: Field) => (errors[k] ? 'border-error' : 'border-hairline-strong hover:border-on-surface-variant')
 const hint = 'mt-2 text-body-sm text-error'
 const card = 'group flex w-full items-start gap-4 rounded-sm bg-surface-container-lowest p-5 text-left shadow-sm transition-shadow hover:shadow-md'

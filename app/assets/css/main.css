@@ -22,10 +22,40 @@
 }
 
 /* Route changes use the View Transitions API (nuxt.config → experimental.viewTransition).
-   Root: a short cross-fade. Project covers carry `view-transition-name: cover-<slug>` and morph between pages. */
-::view-transition-old(root) { animation: 180ms ease-in both vt-out; }
-::view-transition-new(root) { animation: 260ms 60ms ease-out both vt-in; }
-::view-transition-group(*) { animation-duration: 420ms; animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1); }
+   Root: no default cross-fade; JS drives it (app/plugins/page-transition.client.ts for pages, useTheme.ts for the theme switch).
+   Pages: a survey-orange scan line sweeps across the screen and reveals the new page behind it (`.page-scan`).
+   Project covers carry `view-transition-name: cover-<slug>` and morph between pages. */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) { z-index: 2; }
+/* Cover morphs run as long as the sweep. Covers that exist on only one side have no partner to morph with: the arriving ones
+   wait until the sweep has uncovered the page, the leaving ones fade out at once (otherwise they float over the wrong page). */
+::view-transition-group(*) { animation-duration: 700ms; animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1); }
+::view-transition-new(*):only-child { animation: vt-in 320ms 480ms both ease-out; }
+::view-transition-old(*):only-child { animation: vt-out 160ms both ease-in; }
+/* The scan line is a real element (so it gets its own transition group, above the page snapshots). It is invisible except
+   while a page transition runs (`html.vt-scan`), and its group stays hidden until the plugin starts its animation. */
+.page-scan {
+  position: fixed; left: 0; right: 0; top: 0; height: 2px; z-index: 60; pointer-events: none; opacity: 0;
+  view-transition-name: page-scan;
+  background: #ff5b1f;
+  box-shadow: 0 0 18px 3px rgb(255 91 31 / 0.55), 0 -90px 110px 10px rgb(255 91 31 / 0.10);
+}
+:root.vt-scan .page-scan { opacity: 1; }
+::view-transition-group(page-scan) { opacity: 0; }
+::view-transition-old(page-scan), ::view-transition-new(page-scan) { animation: none; }
+/* Theme switch (see useTheme.ts): no cross-fade; the new theme is revealed by a circle growing from the toggle, driven from JS.
+   A survey-orange ring rides the circle's edge with a faint wake behind it (`.theme-ring`, part of the new page snapshot). */
+@property --theme-r { syntax: '<length>'; inherits: false; initial-value: 0px; }
+.theme-ring {
+  position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
+  background: radial-gradient(circle at var(--theme-x) var(--theme-y),
+    transparent calc(var(--theme-r) - 160px),
+    rgb(255 91 31 / 0.10) calc(var(--theme-r) - 8px),
+    rgb(255 91 31 / 0.85) calc(var(--theme-r) - 2px),
+    #ff5b1f calc(var(--theme-r) - 1px),
+    transparent calc(var(--theme-r) + 0.5px));
+}
 @keyframes vt-out { to { opacity: 0; } }
 @keyframes vt-in { from { opacity: 0; } }
 
@@ -46,12 +76,18 @@
   .space-title { font-family: Geist, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif; font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; font-size: clamp(2.5rem, 10.5vw, 3rem); }
   @media (min-width: 768px) { .space-title { font-size: clamp(3.5rem, 6.4vw, 6.5rem); } }
   .lab-chip { @apply inline-flex items-center rounded border border-white/15 px-2.5 py-1 font-mono text-label-sm text-lab-on-dark; }
-  .lab-chip-light { @apply inline-flex items-center rounded border border-hairline-strong bg-white px-2.5 py-1 font-mono text-label-sm text-on-surface-variant; }
+  .lab-chip-light { @apply inline-flex items-center rounded border border-hairline-strong bg-surface-container-lowest px-2.5 py-1 font-mono text-label-sm text-on-surface-variant; }
   /* Page entrance: CSS only, so content is never hidden waiting for JS. */
   .lab-in { animation: lab-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: var(--d, 0ms); }
   @keyframes lab-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) { .lab-in { animation: none; } }
 
+  /* Theme toggle icons: moon and sun are stacked and swap with a turn + scale; which one is "in" follows <html data-theme>. */
+  .theme-toggle-icons { position: relative; display: inline-block; width: 18px; height: 18px; }
+  .theme-icon-moon, .theme-icon-sun { position: absolute; inset: 0; transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.45s ease; }
+  :root[data-theme='dark'] .theme-icon-moon { opacity: 0; transform: rotate(120deg) scale(0.3); }
+  :root:not([data-theme='dark']) .theme-icon-sun { opacity: 0; transform: rotate(-120deg) scale(0.3); }
+  @media (prefers-reduced-motion: reduce) { .theme-icon-moon, .theme-icon-sun { transition: none; } }
   .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; letter-spacing: normal; text-transform: none; font-feature-settings: 'liga'; font-size: inherit; line-height: 1; display: inline-block; width: 1em; height: 1em; overflow: hidden; white-space: nowrap; user-select: none; } /* fixed box: the ligature name (e.g. "arrow_outward") shows as text until the icon font loads and must not shift the layout */
   .section-x { @apply mx-auto w-full max-w-page px-margin-mobile md:px-margin; }
   .eyebrow { @apply mb-1.5 flex items-center gap-1.5 font-mono text-label-sm uppercase tracking-widest text-secondary; }
@@ -66,7 +102,7 @@
   .prose-post ul { @apply list-disc space-y-1 pl-6; }
   .prose-post ol { @apply list-decimal space-y-1 pl-6; }
   .prose-post blockquote { @apply border-l-2 border-hairline-strong pl-4 text-on-surface-variant; }
-  .prose-post :not(pre) > code { @apply rounded bg-surface-container px-1.5 py-0.5 font-mono text-[13px] text-zinc-800; }
+  .prose-post :not(pre) > code { @apply rounded bg-surface-container px-1.5 py-0.5 font-mono text-[13px] text-on-surface; }
   .prose-post pre { @apply overflow-x-auto p-4 font-mono text-code-block text-slate-200; }
   .prose-post pre code { @apply bg-transparent p-0 text-inherit; }
   .prose-post .table-wrap { @apply overflow-x-auto rounded-lg bg-surface-container-lowest shadow-sm; }

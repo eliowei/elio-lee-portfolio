@@ -50,6 +50,10 @@ Lighthouse（手機、預設節流）實測：筆記、聯絡、文章頁約 96�
 
 已知取捨：選單按鈕不再設 `aria-label`（改以可見文字 `Menu`／`Close` 作為名稱，以通過「可見文字需包含在名稱內」檢查），中日文使用者的螢幕閱讀器會念英文；複製程式碼按鈕改顯示在地化文字。
 
+## 設計系統與暗色模式
+
+網站支援亮色／暗色主題（預設跟隨系統，導覽列可手動切換並記住選擇）。顏色、字體、間距、元件與主題機制的完整說明見 [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md)。主題色值在 `app/assets/css/theme.css`，Tailwind 設定在 `tailwind.config.ts`。
+
 ## 專案結構
 
 ```text
@@ -62,6 +66,7 @@ app/
 content/blog/     技術筆記 Markdown
 public/images/    作品截圖與個人照片
 public/fonts/     自架字型（由 scripts/ 產生）
+DESIGN-SYSTEM.md  設計系統說明
 scripts/          字型下載與裁切腳本
 ```
 

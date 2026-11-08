@@ -24,6 +24,7 @@ useSeoMeta({ ogImage, ogImageAlt: 'Elio Lee | Frontend Engineer · Creative Deve
 <template>
   <div>
     <a href="#main" class="sr-only z-[70] rounded bg-lab-signal px-4 py-2 font-medium text-lab-bg focus:not-sr-only focus:fixed focus:left-4 focus:top-4">{{ $t('skip') }}</a>
+    <div class="page-scan" aria-hidden="true" />
     <LayoutAppHeader />
     <!-- No top padding: the first block of every page (hero / page header / breadcrumb) clears the fixed header itself. -->
     <main id="main" class="min-h-screen w-full bg-background">
