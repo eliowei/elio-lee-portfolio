@@ -17,7 +17,8 @@ onMounted(() => (mounted.value = true))
 <template>
   <button
     type="button"
-    class="inline-flex h-10 w-10 items-center justify-center rounded-sm opacity-80 transition-opacity hover:opacity-100"
+    data-cursor-label=""
+    class="inline-flex h-10 w-10 items-center justify-center opacity-80 transition-opacity hover:opacity-100"
     :aria-pressed="mounted && theme === 'dark'"
     :aria-label="$t('nav.darkMode')"
     @click="onClick"

@@ -33,5 +33,6 @@ useSeoMeta({ ogImage, ogImageAlt: 'Elio Lee | Frontend Engineer · Creative Deve
     <LayoutAppFooter />
     <LayoutBackToTop />
     <LayoutConsentBanner />
+    <LayoutAppCursor />
   </div>
 </template>

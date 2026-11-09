@@ -17,7 +17,7 @@ export const about: typeof zh.about = {
     'Outside of work, I explore frontend technology and interaction design through personal projects. The 3D ruin and corridor on this site are my experiments with Three.js and GLSL shaders, exploring space, motion and web interaction.',
   ],
   facts: [
-    { label: 'Core stack', text: 'I mainly develop with Vue 2 and Vue 3, have experience with UI frameworks such as Vuetify, PrimeVue and Nuxt UI, and build web applications with Nuxt, TypeScript and Tailwind CSS. For interaction and visuals, I keep exploring Three.js, GLSL shaders and GSAP.' },
+    { label: 'Core stack', text: 'I mainly work with Vue 2 and Vue 3, and have used UI frameworks such as Vuetify, PrimeVue and Nuxt UI. My personal projects use Nuxt, TypeScript and Tailwind CSS to build web applications. For interaction and visuals, I experiment with implementing 3D effects and motion with Three.js, GLSL shaders and GSAP.' },
     { label: 'Experience', text: 'I have maintained existing systems, developed Vue 2 and Vue 3 projects, adjusted interfaces and debugged component behaviour, including broken component interactions and styling issues, while keeping existing features intact.' },
     { label: 'Mindset', text: 'I care about readable code, component structure and maintainability. When a problem comes up, I first work out its cause and scope, then make the change and verify the result, so every change has a clear goal and reason.' },
   ],

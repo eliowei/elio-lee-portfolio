@@ -11,6 +11,7 @@ const btn = 'inline-flex items-center justify-center rounded-sm px-4 py-2 text-b
   <Transition name="consent">
     <section
       v-if="visible"
+      data-cursor-label=""
       class="lab-dark fixed inset-x-4 bottom-4 z-[65] max-w-xl rounded-sm border border-white/15 p-5 shadow-[0_8px_30px_rgb(0_0_0/0.35)] md:left-8"
       :aria-label="$t('consent.label')"
     >

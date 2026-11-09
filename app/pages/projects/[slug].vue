@@ -76,7 +76,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
     <!-- Cover: dark, the landing point of the cover morph from the project space. -->
     <header class="lab-dark relative isolate overflow-hidden">
       <div class="section-x pb-space-xl pt-24 md:pt-28">
-        <NuxtLink :to="back" class="inline-flex items-center gap-1.5 font-mono text-label-md text-lab-on-dark-muted transition-colors hover:text-white">
+        <NuxtLink :to="back" data-cursor-label="" class="inline-flex items-center gap-1.5 font-mono text-label-md text-lab-on-dark-muted transition-colors hover:text-white">
           <UiIcon name="arrow_back" class="text-[15px]" /> {{ $t('projects.back') }}
         </NuxtLink>
         <div class="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">
@@ -129,17 +129,17 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
             <div v-if="detail.demo || detail.github">
               <dt :class="eyebrow">{{ $t('projects.links') }}</dt>
               <dd class="mt-1 flex flex-wrap gap-x-4 gap-y-1">
-                <a v-if="detail.demo" :href="detail.demo" target="_blank" rel="noopener noreferrer" @click="track('project_demo_click', { project_slug: project.slug })" class="inline-flex items-center gap-1 font-medium text-lab-signal-ink underline decoration-lab-signal-ink/40 underline-offset-4 hover:decoration-lab-signal-ink">
+                <a v-if="detail.demo" :href="detail.demo" data-cursor-label="DEMO" target="_blank" rel="noopener noreferrer" @click="track('project_demo_click', { project_slug: project.slug })" class="inline-flex items-center gap-1 font-medium text-lab-signal-ink underline decoration-lab-signal-ink/40 underline-offset-4 hover:decoration-lab-signal-ink">
                   {{ $t('projects.demo') }} <UiIcon name="arrow_outward" class="text-[14px]" />
                 </a>
-                <a v-if="detail.github" :href="detail.github" target="_blank" rel="noopener noreferrer" @click="track('project_github_click', { project_slug: project.slug })" class="inline-flex items-center gap-1 font-medium text-on-surface underline decoration-hairline-strong underline-offset-4 hover:decoration-on-surface">
+                <a v-if="detail.github" :href="detail.github" data-cursor-label="CODE" target="_blank" rel="noopener noreferrer" @click="track('project_github_click', { project_slug: project.slug })" class="inline-flex items-center gap-1 font-medium text-on-surface underline decoration-hairline-strong underline-offset-4 hover:decoration-on-surface">
                   GitHub <UiIcon name="arrow_outward" class="text-[14px]" />
                 </a>
               </dd>
             </div>
           </dl>
 
-          <nav class="hidden lg:block" :aria-label="$t('projects.chapters')">
+          <nav class="hidden lg:block" data-cursor-label="" :aria-label="$t('projects.chapters')">
             <ol class="border-l border-hairline-strong">
               <li v-for="k in chapters" :key="k">
                 <a
@@ -157,7 +157,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
       </aside>
 
       <!-- Phones / tablets: chapter index as a scrollable row -->
-      <nav class="-mx-margin-mobile mb-space-lg overflow-x-auto px-margin-mobile lg:hidden" :aria-label="$t('projects.chaptersMobile')">
+      <nav class="-mx-margin-mobile mb-space-lg overflow-x-auto px-margin-mobile lg:hidden" data-cursor-label="" :aria-label="$t('projects.chaptersMobile')">
         <ol class="flex gap-2 whitespace-nowrap">
           <li v-for="k in chapters" :key="k"><a :href="`#${k}`" class="lab-chip-light">{{ no(k) }} {{ labels[k] }}</a></li>
         </ol>
@@ -295,7 +295,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
 
     <nav class="lab-dark" :aria-label="$t('projects.projectNav')">
       <div class="section-x flex flex-col gap-6 py-space-xl sm:flex-row sm:items-center sm:justify-between">
-        <NuxtLink :to="back" class="inline-flex items-center gap-2 font-mono text-label-md text-lab-on-dark-muted transition-colors hover:text-white">
+        <NuxtLink :to="back" data-cursor-label="" class="inline-flex items-center gap-2 font-mono text-label-md text-lab-on-dark-muted transition-colors hover:text-white">
           <UiIcon name="arrow_back" class="text-[16px]" /> {{ $t('projects.back') }}
         </NuxtLink>
         <NuxtLink :to="localePath(`/projects/${next.slug}`)" class="group sm:text-right">

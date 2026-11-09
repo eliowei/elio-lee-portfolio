@@ -16,7 +16,7 @@ export const about = {
     '工作之外，我也透過個人專案探索前端技術與互動設計。這個網站的 3D 遺跡與迴廊，便是我運用 Three.js 與 GLSL Shader 探索空間感、動態效果與網頁互動的實驗。',
   ],
   facts: [
-    { label: '核心技術', text: '以 Vue 2、Vue 3 為主要開發技術，具備 Vuetify、PrimeVue 與 Nuxt UI 等 UI 元件框架的使用經驗，並運用 Nuxt、TypeScript 與 Tailwind CSS 建構網頁應用。在互動與視覺開發方面，持續探索 Three.js、GLSL Shader 與 GSAP 的應用。' },
+    { label: '核心技術', text: '主要使用 Vue 2 與 Vue 3 進行開發，使用過 Vuetify、PrimeVue 與 Nuxt UI 等 UI 框架。個人專案則使用 Nuxt、TypeScript 與 Tailwind CSS 建構網頁應用。互動與視覺方面，透過 Three.js、GLSL Shader 與 GSAP 嘗試實作 3D 效果與動態互動。' },
     { label: '實務經驗', text: '具備既有系統維護、Vue 2 與 Vue 3 專案開發、介面調整與元件行為除錯經驗，曾處理元件互動異常與樣式問題，並在修改過程中兼顧既有功能。' },
     { label: '工程思維', text: '重視程式碼可讀性、元件結構與可維護性。面對開發問題時，先釐清原因與影響範圍，再進行修改並驗證結果，讓每次變更都有明確的目標與依據。' },
   ],

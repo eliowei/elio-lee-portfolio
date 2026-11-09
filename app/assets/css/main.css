@@ -17,7 +17,7 @@
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   /* Focus rings: ink-orange on the light ground, bright orange on dark sections. */
   :focus-visible { outline: 2px solid theme('colors.lab.signal-ink'); outline-offset: 2px; }
-  .lab-dark :focus-visible { outline-color: theme('colors.lab.signal'); }
+  .lab-dark :focus-visible, .nav-bar :focus-visible { outline-color: theme('colors.lab.signal'); }
   body { @apply bg-background font-sans text-body-md text-on-surface antialiased selection:bg-lab-signal/30 selection:text-on-surface; }
 }
 

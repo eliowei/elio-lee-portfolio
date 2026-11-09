@@ -34,6 +34,7 @@ onBeforeUnmount(() => clearTimeout(timer))
         <span v-if="filename && language" class="rounded bg-white/10 px-1.5 py-0.5">{{ language }}</span>
         <button
           type="button"
+          data-cursor-label=""
           class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 transition-colors hover:bg-white/10 hover:text-white"
           @click="copy"
         >

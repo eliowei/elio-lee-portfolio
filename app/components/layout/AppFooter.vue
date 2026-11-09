@@ -9,7 +9,7 @@ const link = 'text-body-sm text-lab-on-dark-muted transition-colors hover:text-w
 </script>
 
 <template>
-  <footer class="lab-dark w-full border-t border-white/10">
+  <footer class="app-footer lab-dark w-full border-t border-white/10">
     <div class="section-x">
       <div class="flex flex-col justify-between gap-10 py-space-xl md:flex-row">
         <div class="space-y-2">

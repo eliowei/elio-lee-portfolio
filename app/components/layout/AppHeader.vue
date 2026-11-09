@@ -70,7 +70,7 @@ onMounted(() => {
        Past the top: a floating glass bar. Its negative margin keeps the logo and links aligned with the page content.
        Open mobile menu: the whole header turns the menu's solid colour, so the two read as one panel. -->
   <header
-    class="fixed inset-x-0 top-0 z-50 text-white transition-[transform,background-color] duration-300 motion-reduce:transition-none"
+    class="nav-bar fixed inset-x-0 top-0 z-50 text-white transition-[transform,background-color] duration-300 motion-reduce:transition-none"
     :class="[shown ? 'translate-y-0' : '-translate-y-full', solid ? 'bg-lab-bg' : { 'mix-blend-difference': !scrolled }]"
   >
     <div class="mx-auto max-w-page px-margin-mobile md:px-margin">
@@ -97,11 +97,11 @@ onMounted(() => {
       <LayoutThemeToggle class="ml-auto md:ml-0" />
 
       <!-- Language switch: a disclosure button over plain links to the same page in each language. -->
-      <div ref="langBox" class="relative">
+      <div ref="langBox" class="relative" data-cursor-label="">
         <button
           ref="langButton"
           type="button"
-          class="inline-flex h-10 items-center gap-1 rounded-sm px-1.5 font-mono text-label-sm opacity-80 transition-opacity hover:opacity-100"
+          class="inline-flex h-10 items-center gap-1 px-1.5 font-mono text-label-sm opacity-80 transition-opacity hover:opacity-100"
           :aria-expanded="langOpen"
           aria-controls="lang-menu"
           @click="toggleLang"

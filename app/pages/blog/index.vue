@@ -62,7 +62,7 @@ const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-
           class="w-full rounded-sm border border-hairline-strong bg-surface-container-lowest py-2.5 pl-10 pr-3 text-body-md text-on-surface transition-colors hover:border-on-surface-variant motion-reduce:transition-none"
         >
       </div>
-      <div class="flex flex-wrap gap-2 pb-6" role="group" :aria-label="$t('blog.filter')">
+      <div class="flex flex-wrap gap-2 pb-6" data-cursor-label="" role="group" :aria-label="$t('blog.filter')">
         <button type="button" :class="chip(!active)" :aria-pressed="!active" @click="active = null">{{ $t('blog.all') }} {{ posts.length }}</button>
         <button v-for="f in filters" :key="f.key" type="button" :class="chip(active === f.key)" :aria-pressed="active === f.key" @click="active = f.key">{{ f.label }} {{ f.count }}</button>
       </div>
