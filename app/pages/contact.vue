@@ -15,7 +15,16 @@ const topicKey = (label: string) => ['job', 'tech', 'correction', 'other'][topic
 const info = (tm('contact.info') as Record<'icon' | 'title' | 'body', string>[]).map(i => ({ icon: rt(i.icon), title: rt(i.title), body: rt(i.body) }))
 const localePath = useLocalePath()
 const { track } = useAnalytics()
-const githubHandle = `@${site.github.split('/').pop()}`
+// Social cards after Email and GitHub; one with no URL in data/site.ts is simply not shown.
+const socials = ([
+  { key: 'instagram', name: 'Instagram', href: site.instagram },
+  { key: 'threads', name: 'Threads', href: site.threads },
+] as const).filter(s => s.href)
+const channels = [
+  { key: 'email', name: 'Email', icon: 'mail', body: t('contact.emailBody'), tag: t('contact.emailTag') },
+  { key: 'github', name: 'GitHub', icon: 'code', href: site.github, body: t('contact.githubBody') },
+  ...socials.map(c => ({ ...c, icon: '', body: t(`contact.${c.key}Body`) })),
+]
 
 // The form lives in a native <dialog>: focus trap, Esc and focus return come from the browser. No address is
 // printed on the page; messages go through EmailJS.
@@ -98,9 +107,8 @@ const label = 'mb-2 block font-mono text-label-md text-on-surface'
 const field = 'w-full rounded-sm border bg-surface-container-lowest px-4 py-3 text-body-md text-on-surface transition-colors motion-reduce:transition-none'
 const fieldState = (k: Field) => (errors[k] ? 'border-error' : 'border-hairline-strong hover:border-on-surface-variant')
 const hint = 'mt-2 text-body-sm text-error'
-const card = 'group flex w-full items-start gap-4 rounded-sm bg-surface-container-lowest p-5 text-left shadow-sm transition-shadow hover:shadow-md'
-const cardIcon = 'mt-0.5 text-[24px] text-lab-signal-ink'
-const cardArrow = 'mt-1 text-[20px] text-on-surface-variant transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none'
+const card = 'group flex h-full min-h-[13rem] w-full flex-col rounded-sm bg-surface-container-lowest p-4 text-left shadow-sm transition-[box-shadow,transform] hover:-translate-y-0.5 hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:p-5'
+const cardArrow = 'text-[20px] text-on-surface-variant transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transition-none'
 </script>
 
 <template>
@@ -109,29 +117,29 @@ const cardArrow = 'mt-1 text-[20px] text-on-surface-variant transition-transform
 
     <section class="section-x py-space-2xl md:py-space-3xl" aria-labelledby="contact-methods">
       <h2 id="contact-methods" class="text-headline-md">{{ $t('contact.methods') }}</h2>
-      <div class="mt-6 grid gap-4 sm:grid-cols-2">
-        <button type="button" :class="card" aria-haspopup="dialog" @click="openForm">
-          <UiIcon name="mail" :class="cardIcon" />
-          <span class="min-w-0 flex-1">
-            <span class="flex flex-wrap items-center gap-2">
-              <span class="text-headline-sm">Email</span>
-              <span class="rounded-sm bg-lab-signal/10 px-1.5 py-0.5 font-mono text-label-sm text-lab-signal-ink">{{ $t('contact.emailTag') }}</span>
-            </span>
-            <span class="mt-1 block text-body-sm text-on-surface-variant">{{ $t('contact.emailBody') }}</span>
+      <div class="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <component
+          :is="c.href ? 'a' : 'button'"
+          v-for="(c, i) in channels"
+          :key="c.key"
+          v-bind="c.href ? { href: c.href, target: '_blank', rel: 'noopener noreferrer' } : { type: 'button', 'aria-haspopup': 'dialog' }"
+          :class="[card, !c.href && 'ring-1 ring-primary/70']"
+          @click="c.href ? track('social_click', { platform: c.key, source: 'contact_page' }) : openForm()"
+        >
+          <span class="flex w-full items-start justify-between">
+            <span class="font-mono text-label-sm tracking-wider text-on-surface-variant">{{ String(i + 1).padStart(2, '0') }}</span>
+            <UiIcon :name="c.href ? 'arrow_outward' : 'arrow_forward'" :class="cardArrow" />
           </span>
-          <UiIcon name="arrow_forward" :class="cardArrow" />
-        </button>
-        <a :href="site.github" target="_blank" rel="noopener noreferrer" :class="card" @click="track('social_click', { platform: 'github', source: 'contact_page' })">
-          <UiIcon name="code" :class="cardIcon" />
-          <span class="min-w-0 flex-1">
-            <span class="flex flex-wrap items-center gap-2">
-              <span class="text-headline-sm">GitHub</span>
-              <span class="font-mono text-label-sm text-on-surface-variant">{{ githubHandle }}</span>
+          <UiSocialIcon v-if="!c.icon" :name="c.key as 'instagram' | 'threads'" class="mt-8 h-8 w-8 text-lab-signal-ink" />
+          <UiIcon v-else :name="c.icon" class="mt-8 text-[32px] text-lab-signal-ink" />
+          <span class="mt-auto block pt-6">
+            <span class="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <span class="text-headline-sm">{{ c.name }}</span>
+              <span v-if="c.tag" class="rounded-sm bg-lab-signal/10 px-1.5 py-0.5 font-mono text-label-sm text-lab-signal-ink">{{ c.tag }}</span>
             </span>
-            <span class="mt-1 block text-body-sm text-on-surface-variant">{{ $t('contact.githubBody') }}</span>
+            <span class="mt-1 block text-body-sm text-on-surface-variant">{{ c.body }}</span>
           </span>
-          <UiIcon name="arrow_outward" :class="cardArrow" />
-        </a>
+        </component>
       </div>
 
       <h2 class="mt-space-xl text-headline-md">{{ $t('contact.infoTitle') }}</h2>

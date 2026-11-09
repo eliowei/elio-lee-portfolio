@@ -18,6 +18,7 @@
     "tagline": "I write frontend code, and I like making things that move.",
     "explore": "Explore",
     "legal": "Trust & Legal",
+    "social": "Social links",
     "cookieSettings": "Cookie settings"
   },
   "backToTop": "Back to top",
@@ -174,6 +175,8 @@
     "emailTag": "Main channel",
     "emailBody": "Opens the contact form; your message goes straight to my inbox.",
     "githubBody": "Browse my code and project source",
+    "instagramBody": "Find me on Instagram",
+    "threadsBody": "Find me on Threads",
     "closeForm": "Close the contact form"
   },
   "legal": {

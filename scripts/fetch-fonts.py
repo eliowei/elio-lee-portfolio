@@ -13,7 +13,7 @@ UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like 
 ICONS = ('accessibility_new api arrow_back arrow_forward arrow_outward arrow_upward assignment_turned_in auto_stories brush build check '
          'check_circle chevron_left chevron_right close code compare content_copy devices domain email error expand_more explore fact_check '
          'dark_mode format_quote group_work groups hub language layers light_mode mail map markunread_mailbox menu message pedal_bike person_search school search '
-         'send shield south sports_esports storefront task_alt topic travel_explore troubleshoot web').split()
+         'location_on schedule send shield south sports_esports storefront task_alt topic translate travel_explore troubleshoot web').split()
 URLS = [
     'https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400;500&family=Inter:wght@400..600&display=swap',
     'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..500,0,0&icon_names=' + ','.join(sorted(ICONS)) + '&display=swap',

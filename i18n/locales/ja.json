@@ -18,6 +18,7 @@
     "tagline": "フロントエンドを書きつつ、動くものを作るのが好きです。",
     "explore": "サイト案内",
     "legal": "法的情報と信頼性",
+    "social": "SNS リンク",
     "cookieSettings": "Cookie の設定"
   },
   "backToTop": "ページの先頭へ",
@@ -174,6 +175,8 @@
     "emailTag": "メインの窓口",
     "emailBody": "クリックするとお問い合わせフォームが開き、メッセージは私のメールボックスに直接届きます。",
     "githubBody": "コードと作品のソースを見る",
+    "instagramBody": "Instagram で私を見つける",
+    "threadsBody": "Threads で私を見つける",
     "closeForm": "お問い合わせフォームを閉じる"
   },
   "legal": {

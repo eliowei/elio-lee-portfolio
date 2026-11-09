@@ -5,6 +5,8 @@ export const site = {
   email: '',
   github: 'https://github.com/eliowei', // 取自 elioflowra.com 專案頁連結的 repo 擁有者
   linkedin: '',
+  instagram: 'https://www.instagram.com/z220168722/',
+  threads: 'https://www.threads.com/@z220168722', // 已去掉分享連結的追蹤參數（?xmt=...）
 }
 
 // 標籤文字在 i18n/locales/*.json 的 nav.<key>；分類名稱在 categories.<key>。

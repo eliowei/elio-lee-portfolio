@@ -18,6 +18,7 @@
     "tagline": "寫前端，也喜歡做一些會動的東西。",
     "explore": "網站導覽",
     "legal": "法律與信任",
+    "social": "社群連結",
     "cookieSettings": "Cookie 設定"
   },
   "backToTop": "回到最上面",
@@ -174,6 +175,8 @@
     "emailTag": "主要管道",
     "emailBody": "點擊開啟聯絡表單，訊息會直接寄到我的信箱。",
     "githubBody": "查看程式碼與作品原始碼",
+    "instagramBody": "在 Instagram 上找到我",
+    "threadsBody": "在 Threads 上找到我",
     "closeForm": "關閉聯絡表單"
   },
   "legal": {

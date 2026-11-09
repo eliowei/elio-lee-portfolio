@@ -6,6 +6,7 @@ const { reopen } = useConsent()
 const { track } = useAnalytics()
 const heading = 'mb-3 font-mono text-label-sm uppercase tracking-[0.18em] text-lab-on-dark-muted'
 const link = 'text-body-sm text-lab-on-dark-muted transition-colors hover:text-white'
+const icon = 'inline-flex h-10 w-10 items-center justify-center text-lab-on-dark-muted transition-colors hover:text-white motion-reduce:transition-none'
 </script>
 
 <template>
@@ -15,6 +16,18 @@ const link = 'text-body-sm text-lab-on-dark-muted transition-colors hover:text-w
         <div class="space-y-2">
           <div class="font-heading text-headline-sm text-white">{{ site.name }}</div>
           <p class="lab-muted max-w-md text-body-sm">{{ $t('footer.tagline') }}</p>
+          <ul class="-ml-2 flex items-center gap-1 pt-2" :aria-label="$t('footer.social')">
+            <li v-if="site.instagram">
+              <a :href="site.instagram" :class="icon" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <UiSocialIcon name="instagram" class="h-5 w-5" />
+              </a>
+            </li>
+            <li v-if="site.threads">
+              <a :href="site.threads" :class="icon" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+                <UiSocialIcon name="threads" class="h-5 w-5" />
+              </a>
+            </li>
+          </ul>
         </div>
         <div class="flex flex-wrap gap-x-16 gap-y-8">
           <nav :aria-label="$t('nav.footer')">
