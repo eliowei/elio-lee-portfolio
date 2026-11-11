@@ -62,7 +62,9 @@
   "experience": {
     "title": "Experience",
     "description": "From the army and vocational training to frontend engineering: Vue 2 / Vue 3 and Vuetify projects, debugging component interactions, and OpenLayers map integration.",
-    "highlights": "Experience highlights"
+    "highlights": "Experience highlights",
+    "chapter": "Chapter {n}",
+    "transition": "Transition"
   },
   "projects": {
     "title": "Projects",
@@ -119,6 +121,8 @@
     "breadcrumb": "Technical Notes",
     "draft": "Draft sample article, visible in development only (404 in production)",
     "readingTime": "{n} min read",
+    "articles": "{n} articles",
+    "step": "Step {n}",
     "tags": "Tags"
   },
   "contact": {

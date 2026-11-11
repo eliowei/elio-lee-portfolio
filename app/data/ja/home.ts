@@ -2,7 +2,7 @@
 import type * as zh from '../home'
 
 export const hero: typeof zh.hero = {
-  eyebrow: 'Frontend Engineer, Creative Development',
+  eyebrow: 'インタラクションに強いフロントエンドエンジニア',
   title: ['コードでアイデアを形にし、', 'インタラクションでもっと'],
   intro: 'フロントエンド開発とインタラクションの実装に取り組み、モダンなフロントエンド技術でパフォーマンス・使いやすさ・ビジュアル表現を兼ね備えたウェブサイトを作っています。',
 }

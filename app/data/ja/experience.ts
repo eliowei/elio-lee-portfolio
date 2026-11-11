@@ -110,7 +110,7 @@ export const transitions: typeof zh.transitions = [
 ]
 
 export const matrix: typeof zh.matrix = {
-  eyebrow: 'Tech Stack & Practice',
+  eyebrow: '技術と実践',
   title: '技術と実際の活用',
   body: '会社のプロジェクトと個人プロジェクトで実際に使った技術と、その使いどころをまとめました。',
   heads: ['技術領域', '技術とツール', '実際の活用', '経験の場'],
@@ -126,7 +126,7 @@ export const matrix: typeof zh.matrix = {
 }
 
 export const principlesSection: typeof zh.principlesSection = {
-  eyebrow: 'Engineering Insights',
+  eyebrow: 'エンジニアリングの学び',
   title: '仕事の中で積み重ねた技術',
   body: 'プロジェクトの開発と保守の中で、少しずつ身についた 3 つの働き方です。',
 }

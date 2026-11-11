@@ -32,7 +32,7 @@ onBeforeUnmount(() => {
 
 <template>
   <nav class="sticky top-28" data-cursor-label="" :aria-label="$t('toc')">
-    <div class="mb-3 font-mono text-label-sm uppercase tracking-wider text-secondary">On this page</div>
+    <div class="mb-3 font-mono text-label-sm uppercase tracking-wider text-secondary">{{ $t('toc') }}</div>
     <ul class="border-l border-hairline">
       <li v-for="l in links" :key="l.id">
         <a

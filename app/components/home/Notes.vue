@@ -26,7 +26,7 @@ const { data: posts } = await useAsyncData(`home-notes-${collection}`, () =>
           <NuxtLink :to="p.path" class="group grid gap-1 py-6 sm:grid-cols-[7.5rem_1fr] sm:gap-6" @click="track('note_click', { note_slug: slugOf(p.path), source: 'home' })">
             <div class="font-mono text-label-md text-on-surface-variant">
               <time :datetime="p.date">{{ p.date.replaceAll('-', '/') }}</time>
-              <p class="mt-1 text-label-sm uppercase tracking-wider text-lab-signal-ink">{{ p.readingTime }} min</p>
+              <p class="mt-1 text-label-sm uppercase tracking-wider text-lab-signal-ink">{{ $t('blog.readingTime', { n: p.readingTime }) }}</p>
             </div>
             <div>
               <p class="font-mono text-label-sm uppercase tracking-wider text-lab-signal-ink">{{ $t(`categories.${p.category}`) }}</p>

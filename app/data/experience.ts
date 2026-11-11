@@ -128,7 +128,7 @@ export const transitions = [
 ]
 
 export const matrix = {
-  eyebrow: 'Tech Stack & Practice',
+  eyebrow: '技術與實踐',
   title: '技術與實際應用',
   body: '整理我在公司專案與個人專案中實際用過的技術，以及用在哪些地方。',
   heads: ['技術領域', '技術與工具', '實際應用', '經驗來源'],
@@ -144,7 +144,7 @@ export const matrix = {
 }
 
 export const principlesSection = {
-  eyebrow: 'Engineering Insights',
+  eyebrow: '工程心得',
   title: '工作中的技術累積',
   body: '在專案開發與維護的過程中，逐步養成的三個工作習慣。',
 }

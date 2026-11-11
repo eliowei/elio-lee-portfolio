@@ -62,7 +62,9 @@
   "experience": {
     "title": "経歴",
     "description": "軍務、職業訓練を経てフロントエンドエンジニアへ。Vue 2 / Vue 3 と Vuetify のプロジェクト開発、コンポーネントの不具合調査、OpenLayers による地図連携。",
-    "highlights": "経歴のポイント"
+    "highlights": "経歴のポイント",
+    "chapter": "第{n}章",
+    "transition": "転機"
   },
   "projects": {
     "title": "制作実績",
@@ -119,6 +121,8 @@
     "breadcrumb": "技術ノート",
     "draft": "下書き サンプル記事。開発環境でのみ表示されます（本番環境では 404）",
     "readingTime": "{n} 分で読めます",
+    "articles": "{n} 件の記事",
+    "step": "ステップ {n}",
     "tags": "タグ"
   },
   "contact": {
@@ -196,7 +200,7 @@
     "policy": "プライバシーポリシー"
   },
   "error": {
-    "eyebrow": "ERROR",
+    "eyebrow": "エラー",
     "title404": "この座標には何もありません",
     "lead404": "お探しのページは見つかりませんでした。移動したか、URLが間違っている可能性があります。下のリンクから続きをご覧ください。",
     "titleGeneric": "問題が発生しました",

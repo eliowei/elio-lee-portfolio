@@ -62,7 +62,9 @@
   "experience": {
     "title": "工作經歷",
     "description": "從軍職、職訓到前端工程：Vue 2 / Vue 3 與 Vuetify 專案開發、元件互動問題排查、OpenLayers 空間圖資互動整合。",
-    "highlights": "經歷重點"
+    "highlights": "經歷重點",
+    "chapter": "歷程 {n}",
+    "transition": "轉折"
   },
   "projects": {
     "title": "專案作品",
@@ -119,6 +121,8 @@
     "breadcrumb": "技術筆記",
     "draft": "草稿 範例文章，僅開發環境可見（正式環境為 404）",
     "readingTime": "{n} 分鐘閱讀",
+    "articles": "{n} 篇文章",
+    "step": "步驟 {n}",
     "tags": "標籤"
   },
   "contact": {
@@ -196,7 +200,7 @@
     "policy": "隱私權政策"
   },
   "error": {
-    "eyebrow": "ERROR",
+    "eyebrow": "錯誤",
     "title404": "這個座標上什麼都沒有",
     "lead404": "你要找的頁面不存在，可能已經搬家，或是網址打錯了。從下面挑一個地方繼續逛吧。",
     "titleGeneric": "發生了一點問題",

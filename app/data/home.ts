@@ -1,6 +1,6 @@
 // 首頁文案與專案資料。專案詳情頁（/projects/[slug]）也讀這份 `projects`。
 export const hero = {
-  eyebrow: 'Frontend Engineer, Creative Development',
+  eyebrow: '專注互動的前端工程師',
   title: ['以程式實現想法', '讓互動創造更多'],
   intro: '專注於前端開發與互動實作，運用現代前端技術，打造兼具效能、可用性與視覺表現的網站。',
 }
