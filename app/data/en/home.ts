@@ -2,9 +2,8 @@
 import type * as zh from '../home'
 
 export const hero: typeof zh.hero = {
-  eyebrow: 'Frontend Engineer · Creative Development',
+  eyebrow: 'Frontend Engineer, Creative Development',
   title: ['Building ideas in code,', 'letting interaction do more'],
-  titleAccent: 'more', // must be the ending of title[1]
   intro: 'I focus on frontend development and interaction, using modern frontend technology to build websites that balance performance, usability and visual expression.',
 }
 
@@ -25,7 +24,7 @@ export const about: typeof zh.about = {
 
 export const projects: typeof zh.projects = [
   {
-    slug: 'game-together', code: 'GT-01', accent: '#A79BFF', no: '01', kind: 'Full-stack project · 2025',
+    slug: 'game-together', code: 'GT-01', accent: '#A79BFF', no: '01', kind: 'Full-stack project, 2025',
     tags: ['Vue 3', 'Vuetify', 'Node.js', 'MongoDB', 'WebSocket'],
     title: 'Gaming Meetup Platform',
     body: 'A real-time community platform for gamers that combines search and filtering, event management and live chat rooms, helping players quickly find teammates and build long-term gaming communities.',
@@ -81,7 +80,7 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'tokyo-travel-site', code: 'TR-02', accent: '#7C96F2', no: '02', kind: 'Personal project · 2026',
+    slug: 'tokyo-travel-site', code: 'TR-02', accent: '#7C96F2', no: '02', kind: 'Personal project, 2026',
     tags: ['Nuxt 4', 'Notion API', 'OpenAI', 'Gemini', 'Google Maps'],
     title: 'Tokyo Trip Planner',
     body: 'A travel itinerary site built for my September trip to Tokyo. It uses Notion as the CMS and brings together an AI assistant, maps, expense tracking and a packing list.',
@@ -93,7 +92,7 @@ export const projects: typeof zh.projects = [
         title: 'Data flow with Notion as the content source',
         caption: 'Diagram drawn from the project description: content is edited in Notion, converted and cached by server routes and transformers, then served to the frontend.',
         nodes: [
-          { id: 'notion', label: 'Notion', sub: 'Trips · lists', x: 10, y: 30 },
+          { id: 'notion', label: 'Notion', sub: 'Trips, lists', x: 10, y: 30 },
           { id: 'api', label: 'Nuxt server', sub: '60 s cache', x: 36, y: 30 },
           { id: 'tf', label: 'Transformer', sub: 'to own types', x: 62, y: 30 },
           { id: 'web', label: 'Website', x: 88, y: 18 },
@@ -136,7 +135,7 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'personal-portfolio', code: 'PF-03', accent: '#E6E1D6', no: '03', kind: 'Personal website · 2026',
+    slug: 'personal-portfolio', code: 'PF-03', accent: '#E6E1D6', no: '03', kind: 'Personal website, 2026',
     tags: ['Nuxt 4', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Nuxt Content', 'GA4', 'GTM'],
     title: 'Personal Brand Website',
     body: 'A personal brand website built with Nuxt that presents services and case studies, with SEO, GA4 and GTM integrated.',
@@ -188,7 +187,7 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', no: '04', kind: 'Business system · 2026',
+    slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', no: '04', kind: 'Business system, 2026',
     tags: ['Vue 3', 'PrimeVue', 'Node.js', 'MongoDB', 'LINE Messaging API', 'SSE'],
     title: 'LINE OA Management Platform',
     body: 'An admin platform that lets businesses manage their own LINE Official Account content, so shops can update FAQs, announcements and price lists themselves without hiring an engineer.',
@@ -200,12 +199,12 @@ export const projects: typeof zh.projects = [
         title: 'Syncing admin content to the LINE Official Account',
         caption: 'Diagram drawn from the project description: shops edit content in the admin, which is synced to the LINE Official Account; user clicks flow back to the admin for analytics.',
         nodes: [
-          { id: 'admin', label: 'Shop admin', sub: 'Vue 3 · PrimeVue', x: 12, y: 30 },
+          { id: 'admin', label: 'Shop admin', sub: 'Vue 3, PrimeVue', x: 12, y: 30 },
           { id: 'api', label: 'Node.js API', sub: 'Shops / permissions', x: 40, y: 30 },
-          { id: 'db', label: 'MongoDB', sub: 'FAQ · news · prices', x: 40, y: 56 },
+          { id: 'db', label: 'MongoDB', sub: 'FAQ, news, prices', x: 40, y: 56 },
           { id: 'line', label: 'LINE API', sub: 'Messaging API', x: 65, y: 30 },
           { id: 'oa', label: 'OA users', x: 90, y: 30 },
-          { id: 'stats', label: 'Analytics', sub: 'Clicks · top items', x: 65, y: 6 },
+          { id: 'stats', label: 'Analytics', sub: 'Clicks, top items', x: 65, y: 6 },
         ],
         edges: [['admin', 'api', 'edit content'], ['api', 'db'], ['api', 'line', 'sync'], ['line', 'oa'], ['oa', 'stats', 'click log'], ['stats', 'admin']],
       },
@@ -248,7 +247,7 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'weather-bike-bot', code: 'WB-05', accent: '#5AB8F0', no: '05', kind: 'LINE Bot · 2024',
+    slug: 'weather-bike-bot', code: 'WB-05', accent: '#5AB8F0', no: '05', kind: 'LINE Bot, 2024',
     tags: ['Node.js', 'Express', 'LINE Bot', 'Flex Message', 'API Integration'],
     title: 'Weather & Bike Helper',
     body: 'A LINE chat bot that combines YouBike and weather lookups, so users can get live station information and forecasts quickly without switching between apps and websites.',
@@ -261,7 +260,7 @@ export const projects: typeof zh.projects = [
         nodes: [
           { id: 'user', label: 'LINE user', sub: 'Keywords / menu', x: 10, y: 30 },
           { id: 'bot', label: 'Express Webhook', sub: 'LINE Bot SDK', x: 34, y: 30 },
-          { id: 'norm', label: 'Normaliser', sub: 'One format · errors', x: 60, y: 30 },
+          { id: 'norm', label: 'Normaliser', sub: 'One format, errors', x: 60, y: 30 },
           { id: 'bike', label: 'YouBike API', sub: 'Multiple cities', x: 88, y: 12 },
           { id: 'cwa', label: 'CWA weather API', x: 88, y: 48 },
           { id: 'flex', label: 'Flex Message', x: 34, y: 56 },

@@ -1,14 +1,14 @@
 // 技術筆記頁文案。文章本身在 content/blog/*.md；沒有已發布文章時，列表區塊不顯示。
 export const page = {
-  eyebrow: 'Technical Notes / 01',
+  eyebrow: '技術筆記',
   title: '技術筆記',
   lead: '從實際問題出發，建立更完整的技術理解。這裡記錄前端開發、問題排查與個人專案中的技術探索，將零散的經驗整理成可以理解、驗證與重複應用的知識。',
   facts: ['問題重現 → 歸因 → 驗證', '可執行的程式碼範例', '持續整理中'],
 }
 
 export const method = {
-  eyebrow: 'Methodology / 整理方式',
-  title: '我如何梳理與沉澱技術問題。',
+  eyebrow: '整理方式',
+  title: '我如何梳理與沉澱​技術問題',
   body: '在真實專案中，技術坑往往來自對邊界條件或底層機制假設不足。筆記不堆砌零碎片段，而是遵循四步流程，讓解法具備可遷移性。',
   steps: [
     { title: '問題重現', body: '排除環境雜訊，提煉最小可運行範例（Minimal Reproduction）。' },

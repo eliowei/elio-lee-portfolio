@@ -23,7 +23,7 @@ const SEMANTIC = [
   'on-surface', 'on-surface-variant', 'inverse-surface', 'inverse-on-surface', 'outline', 'outline-variant',
 ]
 
-const HEADING_FONT = "Geist, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif"
+const HEADING_FONT = "Barlow, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif"
 const headingSizes = ['display', 'display-mobile', 'headline-lg', 'headline-lg-mobile', 'headline-md', 'headline-sm']
 
 export default <Partial<Config>>{
@@ -58,7 +58,7 @@ export default <Partial<Config>>{
       },
       fontFamily: {
         sans: ['Inter', "'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif"],
-        mono: ["'Geist Mono'", 'ui-monospace', 'monospace'],
+        mono: ["'IBM Plex Mono'", 'ui-monospace', 'monospace'],
       },
       // Body 16–18px at ~1.7; the home title is sized in main.css (`.space-title`).
       fontSize: {
@@ -79,7 +79,7 @@ export default <Partial<Config>>{
     },
   },
   plugins: [
-    // Headlines use Geist, body Inter: tailwind's fontSize can't carry a family, so add it per size class.
+    // Headlines use Barlow, body Inter: tailwind's fontSize can't carry a family, so add it per size class.
     plugin(({ addUtilities }) => {
       // :not(icon) — icons reuse these size classes (e.g. text-headline-sm) and must keep the icon font.
       addUtilities(Object.fromEntries(headingSizes.map(n => [`.text-${n}:not(.material-symbols-outlined)`, { fontFamily: HEADING_FONT }])))

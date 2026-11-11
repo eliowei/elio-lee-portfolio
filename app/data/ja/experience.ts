@@ -2,7 +2,7 @@
 import type * as zh from '../experience'
 
 export const intro: typeof zh.intro = {
-  eyebrow: 'EXPERIENCE / 01 経歴',
+  eyebrow: '経歴',
   title: 'UI の実装からエンジニアリング品質まで、積み重ねてきたこと。',
   body: 'これまでの職務経験、活用してきた技術、開発の中で身につけたエンジニアリングへの理解をまとめています。',
   pills: [
@@ -49,7 +49,7 @@ export const roles: typeof zh.roles = [
   {
     no: '02',
     dot: 'secondary',
-    badge: '職業訓練 · ソフトウェア開発',
+    badge: '職業訓練 ソフトウェア開発',
     period: '2024/09 — 2025/03',
     place: '泰山職業訓練センター',
     title: 'フロントエンド Web 開発研修 ｜ 泰山職業訓練センター',
@@ -75,7 +75,7 @@ export const roles: typeof zh.roles = [
   {
     no: '03',
     dot: 'outline',
-    badge: '軍務 · 常勤',
+    badge: '軍務 常勤',
     period: '2017/12 — 2023/12',
     place: '陸軍第 21 砲兵指揮部',
     title: '志願兵 ｜ 陸軍第六軍団第二一砲兵指揮部',
@@ -138,7 +138,7 @@ export const principles: typeof zh.principles = [
 ]
 
 export const cta: typeof zh.cta = {
-  badge: 'Contact / お問い合わせ',
+  badge: 'お問い合わせ',
   title: 'もう少し話してみませんか？',
   body: '経歴をご覧になって、さらに知りたいことがあれば、お気軽にメッセージをお送りください。',
 }

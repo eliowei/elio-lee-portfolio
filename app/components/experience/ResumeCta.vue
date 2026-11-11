@@ -10,7 +10,7 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded px-5 py-3 tex
 
 <template>
   <section class="mb-space-xl py-space-md">
-    <div v-reveal class="lab-dark relative isolate overflow-hidden rounded-lg p-space-lg md:p-space-xl">
+    <div class="lab-dark relative isolate overflow-hidden rounded-lg p-space-lg md:p-space-xl">
       <div class="lab-grid pointer-events-none absolute inset-0 -z-10 opacity-60" aria-hidden="true" />
       <div class="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
         <div class="max-w-2xl space-y-3">

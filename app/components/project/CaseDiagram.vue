@@ -49,9 +49,9 @@ const fit = (text: string, size: number, max = NW - 24) => {
           <rect :width="NW" :height="NH" rx="3" style="fill: rgb(var(--c-surface-container-lowest)); stroke: rgb(var(--c-hairline-strong))" stroke-width="1.5" />
           <rect width="5" :height="NH" :fill="accent" />
           <text :x="NW / 2 + 2" :y="n.sub ? 29 : 40" text-anchor="middle" :font-size="fit(n.label, 21)" font-weight="600" style="fill: rgb(var(--c-on-surface))">{{ n.label }}</text>
-          <text v-if="n.sub" :x="NW / 2 + 2" y="52" text-anchor="middle" :font-size="fit(n.sub, 15)" style="fill: rgb(var(--c-on-surface-variant))" font-family="'Geist Mono', monospace">{{ n.sub }}</text>
+          <text v-if="n.sub" :x="NW / 2 + 2" y="52" text-anchor="middle" :font-size="fit(n.sub, 15)" style="fill: rgb(var(--c-on-surface-variant))" font-family="'IBM Plex Mono', monospace">{{ n.sub }}</text>
         </g>
-        <g font-family="'Geist Mono', monospace" font-size="18" style="fill: rgb(var(--c-on-surface-variant))">
+        <g font-family="'IBM Plex Mono', monospace" font-size="18" style="fill: rgb(var(--c-on-surface-variant))">
           <template v-for="e in edges" :key="e.key">
             <text v-if="e.label" :x="e.at.x" :y="e.at.y" :text-anchor="e.at.anchor" paint-order="stroke" style="stroke: rgb(var(--c-surface-container-lowest))" stroke-width="6">{{ e.label }}</text>
           </template>

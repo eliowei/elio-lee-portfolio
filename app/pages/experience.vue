@@ -33,7 +33,7 @@ const chapters = [...roles].reverse().map((role, i) => ({ role, n: String(i + 1)
         <div class="section-x grid gap-8 py-space-2xl lg:grid-cols-[14rem_1fr] lg:gap-12">
           <p class="font-mono text-label-sm uppercase tracking-[0.18em] text-lab-on-dark-muted">Transition</p>
           <div class="max-w-3xl border-l-2 border-lab-signal pl-6 md:pl-8">
-            <h2 class="font-heading text-headline-lg-mobile text-white md:text-headline-lg">{{ c.turn.title }}</h2>
+            <h2 class="font-heading text-headline-lg-mobile text-white [word-break:keep-all] [overflow-wrap:break-word] md:text-headline-lg">{{ c.turn.title }}</h2>
             <p v-for="p in c.turn.body" :key="p" class="lab-muted mt-5 text-body-lg">{{ p }}</p>
           </div>
         </div>

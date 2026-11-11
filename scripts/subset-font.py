@@ -6,7 +6,7 @@ Run after adding a lot of new text (articles, copy):
     python scripts/subset-font.py <path to NotoSansTC[wght].ttf>
 Source font (OFL): https://github.com/google/fonts/raw/main/ofl/notosanstc/NotoSansTC%5Bwght%5D.ttf
 Characters missing from the subsets fall back to the system CJK font in the font stacks, so nothing breaks.
-Latin is served by Inter / Geist, so only characters above U+007F are included.
+Latin is served by Inter / Barlow, so only characters above U+007F are included.
 Requires: pip install fonttools brotli
 """
 import pathlib, sys

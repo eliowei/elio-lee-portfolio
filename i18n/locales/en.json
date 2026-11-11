@@ -117,7 +117,7 @@
     "notFound": "Article not found",
     "back": "Back to technical notes",
     "breadcrumb": "Technical Notes",
-    "draft": "Draft · sample article, visible in development only (404 in production)",
+    "draft": "Draft sample article, visible in development only (404 in production)",
     "readingTime": "{n} min read",
     "tags": "Tags"
   },

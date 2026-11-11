@@ -191,8 +191,8 @@
 | 角色 | 字型 | 備援 |
 |---|---|---|
 | 內文 `font-sans` | Inter | Noto Sans TC → PingFang TC → 微軟正黑體 → Hiragino Sans → Yu Gothic → Meiryo → sans-serif |
-| 標題（`display`、`headline-*`） | Geist | 同上 |
-| 程式碼、標籤、代號 `font-mono` | Geist Mono | `ui-monospace` → monospace |
+| 標題（`display`、`headline-*`） | Barlow | 同上 |
+| 程式碼、標籤、代號 `font-mono` | IBM Plex Mono | `ui-monospace` → monospace |
 | 圖示 | Material Symbols Outlined（子集） | — |
 
 - 標題字型用一個 Tailwind 外掛為每個標題字級類別補上 `font-family`（`fontSize` 本身不能帶字型）。圖示用 `:not(.material-symbols-outlined)` 排除，避免圖示被套上標題字型。
@@ -274,7 +274,7 @@
 ### 8.3 文章內文 `.prose-post`
 
 - 字級 `text-body-lg`，段落間距 `space-y-5`。
-- 標題：`h2` 為 `text-headline-md`、`h3` 為 `text-headline-sm`，使用 Geist；`scroll-margin-top: 6rem` 避開固定導覽列。
+- 標題：`h2` 為 `text-headline-md`、`h3` 為 `text-headline-sm`，使用 Barlow；`scroll-margin-top: 6rem` 避開固定導覽列。
 - 連結：`primary` 色加底線，底線為 40% 透明度，hover 時變實色。
 - 行內程式碼：`surface-container` 底、`on-surface` 字、mono 13px。
 - 程式碼區塊：`ProsePre` 元件，固定深色底，標題列含檔名／語言與複製按鈕。

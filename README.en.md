@@ -18,7 +18,7 @@ The personal website of Elio Lee (李柏偉). The home page is a 3D digital ruin
 The concept is a "digital ruin": grey stone with a single orange signal color. Every energy element in the 3D scene is orange, while project accent colors stay in the HTML and screenshots to keep the scene focused.
 
 - Dark sections carry the story and the 3D scene, and light sections are for reading.
-- Type is set in Geist and Noto Sans TC, with monospace for labels and numbering.
+- Type is set in Barlow and Noto Sans TC, with monospace for labels and numbering.
 - Animations respect the system's reduced motion setting.
 
 ## Tech Stack
@@ -39,7 +39,7 @@ Lighthouse (mobile, default throttling): notes list, contact and article pages s
 
 - Lighthouse's LCP is simulated on slow 4G; measured LCP is about 0.5–1 s. Home-page TBT varies a lot between runs (roughly 300–1,100 ms), so its score jumps around.
 - **All fonts are self-hosted** (`public/fonts/`); pages load no external font CSS.
-  - `scripts/fetch-fonts.py` downloads Inter, Geist, Geist Mono (Latin only) and a Material Symbols icon subset, and generates `app/assets/css/latin-fonts.generated.css`. **When you add an icon name, add it to the script's `ICONS` list and re-run it**, or the icon renders as plain text.
+  - `scripts/fetch-fonts.py` downloads Inter, Barlow, IBM Plex Mono (Latin only) and a Material Symbols icon subset, and generates `app/assets/css/latin-fonts.generated.css`. **When you add an icon name, add it to the script's `ICONS` list and re-run it**, or the icon renders as plain text.
   - `scripts/subset-font.py` cuts Noto Sans TC down to the characters the site actually uses, in four groups (`en` / `ui` / `article` / `ja`, with disjoint `unicode-range`), so a page downloads only the groups it needs. Re-run it after adding a lot of text; missing characters fall back to the system font. Both scripts need `pip install fonttools brotli`; the font source URL is in the script header.
   - Do not use the `media="print"` + `onload` trick to load Google Fonts without blocking: in this project `onload` never fires, the stylesheet stays on `print`, and neither fonts nor icons load.
 - The `/blog` and home notes queries use `.select()` to fetch only the fields the list needs, so article bodies stay out of the payload.

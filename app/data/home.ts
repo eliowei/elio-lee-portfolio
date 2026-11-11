@@ -1,16 +1,15 @@
 // 首頁文案與專案資料。專案詳情頁（/projects/[slug]）也讀這份 `projects`。
 export const hero = {
-  eyebrow: 'Frontend Engineer · Creative Development',
+  eyebrow: 'Frontend Engineer, Creative Development',
   title: ['以程式實現想法', '讓互動創造更多'],
-  titleAccent: '更多', // the part of the second line set in signal orange (its ending)
   intro: '專注於前端開發與互動實作，運用現代前端技術，打造兼具效能、可用性與視覺表現的網站。',
 }
 
 export const about = {
   // 個人照片：把檔案放進 public/images/（建議直式 4:5、寬 ≥ 800px），再填路徑，例如 '/images/profile.jpg'
   photo: '/images/image0.webp',
-  eyebrow: 'About / 關於我',
-  title: '從完成需求，到理解問題',
+  eyebrow: '關於我',
+  title: '從完成需求 到理解問題',
   body: [
     '我是李柏偉（Elio），一名前端工程師，主要使用 Vue 進行網頁介面開發。剛開始工作時，我更在意如何把畫面做出來、讓功能正常運作。進入公司後，我同時接觸 Vue 2 與 Vue 3 的專案，開始學會理解既有程式的設計原因、框架之間的差異，以及修改可能影響的範圍，再決定合適的實作方式。',
     '工作之外，我也透過個人專案探索前端技術與互動設計。這個網站的 3D 遺跡與迴廊，便是我運用 Three.js 與 GLSL Shader 探索空間感、動態效果與網頁互動的實驗。',
@@ -48,7 +47,7 @@ export const projects: {
   }
 }[] = [
   {
-    slug: 'game-together', code: 'GT-01', accent: '#A79BFF', no: '01', kind: '全端專案 · 2025',
+    slug: 'game-together', code: 'GT-01', accent: '#A79BFF', no: '01', kind: '全端專案 2025',
     tags: ['Vue 3', 'Vuetify', 'Node.js', 'MongoDB', 'WebSocket'],
     title: '遊戲社群揪團平台',
     body: '一個專為玩家打造的即時社群揪團平台，結合搜尋篩選、活動管理與即時聊天室，幫助玩家快速找到隊友並建立長期遊戲社群。',
@@ -71,7 +70,7 @@ export const projects: {
       period: '2025',
       demo: 'https://eliowei.github.io/game-together',
       github: 'https://github.com/eliowei/game-together',
-      headline: '為玩家打造更有效率的揪團體驗。',
+      headline: '為玩家打造更有效率的揪團體驗',
       overview: [
         '玩家在尋找遊戲夥伴時，經常需要透過社群貼文、即時通訊群組與不同平台反覆搜尋資訊，不僅效率低落，也難以管理活動與參與狀態。',
         '本專案整合揪團管理、活動報名、即時聊天室與留言互動功能，讓玩家能在單一平台完成從發起活動到交流互動的完整流程，提升揪團效率與社群參與體驗。',
@@ -104,7 +103,7 @@ export const projects: {
     },
   },
   {
-    slug: 'tokyo-travel-site', code: 'TR-02', accent: '#7C96F2', no: '02', kind: '個人專案 · 2026',
+    slug: 'tokyo-travel-site', code: 'TR-02', accent: '#7C96F2', no: '02', kind: '個人專案 2026',
     tags: ['Nuxt 4', 'Notion API', 'OpenAI', 'Gemini', 'Google Maps'],
     title: '東京自由行 旅遊網站',
     body: '為了 9 月的東京自由行開發的旅遊行程網站，以 Notion 作為 CMS，整合 AI 助手、地圖、花費紀錄與行李清單。',
@@ -124,7 +123,7 @@ export const projects: {
         ],
         edges: [['notion', 'api', 'Notion API'], ['api', 'tf'], ['tf', 'web'], ['web', 'ai', '伺服器路由']],
       },
-      headline: '為自己的東京自由行，做一個真正需要的工具。',
+      headline: '為自己的東京自由行 做一個真正需要的工具',
       overview: [
         '為了 9 月去日本東京自由行而開發。行程、行李和購物清單會不斷調整，所以用 Notion 當內容後台，網站負責讀取和顯示，不需要另外做一套管理介面。',
         '除了行程內容，也整合了 AI 助手、Google Maps、花費紀錄與迪士尼樂園規劃。',
@@ -159,7 +158,7 @@ export const projects: {
     },
   },
   {
-    slug: 'personal-portfolio', code: 'PF-03', accent: '#E6E1D6', no: '03', kind: '個人網站 · 2026',
+    slug: 'personal-portfolio', code: 'PF-03', accent: '#E6E1D6', no: '03', kind: '個人網站 2026',
     tags: ['Nuxt 4', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Nuxt Content', 'GA4', 'GTM'],
     title: '個人品牌網站',
     body: '使用 Nuxt 建立的個人品牌網站，對外展示服務與案例，並整合 SEO、GA4 與 GTM。',
@@ -180,7 +179,7 @@ export const projects: {
       },
       period: '2026',
       demo: 'https://elioflowra.com/',
-      headline: '建立個人品牌與專業形象展示平台。',
+      headline: '建立個人品牌與專業形象展示平台',
       overview: ['展示作品、技術能力與服務內容的個人品牌網站，重視搜尋能見度、頁面轉場體驗與內容維護效率。'],
       stack: [
         { group: 'frontend', items: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS'] },
@@ -211,7 +210,7 @@ export const projects: {
     },
   },
   {
-    slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', no: '04', kind: '商業系統實務 · 2026',
+    slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', no: '04', kind: '商業系統實務 2026',
     tags: ['Vue 3', 'PrimeVue', 'Node.js', 'MongoDB', 'LINE Messaging API', 'SSE'],
     title: 'LINE OA 商家管理平台',
     body: '提供商家自行管理 LINE 官方帳號內容的後台管理平台，讓店家不用找工程師，自己就能更新 FAQ、公告與價目表。',
@@ -223,16 +222,16 @@ export const projects: {
         title: '後台內容同步至 LINE 官方帳號',
         caption: '依專案內容繪製的示意圖：商家在後台編輯內容，同步至 LINE 官方帳號；使用者的點擊行為回到後台做數據分析。',
         nodes: [
-          { id: 'admin', label: '商家後台', sub: 'Vue 3 · PrimeVue', x: 12, y: 30 },
+          { id: 'admin', label: '商家後台', sub: 'Vue 3, PrimeVue', x: 12, y: 30 },
           { id: 'api', label: 'Node.js API', sub: '多店家 / 權限', x: 40, y: 30 },
-          { id: 'db', label: 'MongoDB', sub: 'FAQ · 公告 · 價目表', x: 40, y: 56 },
+          { id: 'db', label: 'MongoDB', sub: 'FAQ、公告、價目表', x: 40, y: 56 },
           { id: 'line', label: 'LINE API', sub: 'Messaging API', x: 65, y: 30 },
           { id: 'oa', label: '官方帳號使用者', x: 90, y: 30 },
           { id: 'stats', label: '數據分析', sub: '點擊與熱門內容', x: 65, y: 6 },
         ],
         edges: [['admin', 'api', '編輯內容'], ['api', 'db'], ['api', 'line', '同步'], ['line', 'oa'], ['oa', 'stats', '點擊紀錄'], ['stats', 'admin']],
       },
-      headline: '讓店家不用找工程師，自己就能更新 LINE 官方帳號。',
+      headline: '讓店家不用找工程師 自己就能更新 LINE 官方帳號',
       overview: [
         '專為貓舍、寵物旅館與寵物美容打造，支援商家自主更新與多店管理。',
         '商家經營 LINE 官方帳號常見的痛點包括：重複回答相同問題、貓咪資訊更新困難、公告資訊容易過期，以及無法了解客戶對哪些服務有興趣。',
@@ -271,7 +270,7 @@ export const projects: {
     },
   },
   {
-    slug: 'weather-bike-bot', code: 'WB-05', accent: '#5AB8F0', no: '05', kind: 'LINE Bot · 2024',
+    slug: 'weather-bike-bot', code: 'WB-05', accent: '#5AB8F0', no: '05', kind: 'LINE Bot 2024',
     tags: ['Node.js', 'Express', 'LINE Bot', 'Flex Message', 'API Integration'],
     title: '天氣 Bike 小幫手',
     body: '透過 LINE 聊天介面整合 YouBike 與天氣查詢功能，讓使用者能快速取得即時站點資訊與天氣預報，減少在不同 App 與網站之間切換的成本。',
@@ -284,7 +283,7 @@ export const projects: {
         nodes: [
           { id: 'user', label: 'LINE 使用者', sub: '關鍵字 / 功能選單', x: 10, y: 30 },
           { id: 'bot', label: 'Express Webhook', sub: 'LINE Bot SDK', x: 34, y: 30 },
-          { id: 'norm', label: '資料轉換層', sub: '統一格式 · 錯誤處理', x: 60, y: 30 },
+          { id: 'norm', label: '資料轉換層', sub: '統一格式、錯誤處理', x: 60, y: 30 },
           { id: 'bike', label: 'YouBike API', sub: '多城市', x: 88, y: 12 },
           { id: 'cwa', label: '中央氣象署 API', x: 88, y: 48 },
           { id: 'flex', label: 'Flex Message', x: 34, y: 56 },
@@ -293,7 +292,7 @@ export const projects: {
       },
       period: '2024',
       github: 'https://github.com/eliowei/linebot',
-      headline: '在 LINE 中快速查詢天氣與 YouBike 資訊。',
+      headline: '在 LINE 中快速查詢天氣與 YouBike 資訊',
       stack: [
         { group: 'backend', items: ['Node.js', 'Express', 'LINE Bot SDK'] },
         { group: 'api', items: ['YouBike API', '中央氣象署 API'] },
@@ -323,7 +322,7 @@ export const projects: {
 ]
 
 export const contact = {
-  eyebrow: 'Contact / 聯絡資訊',
+  eyebrow: '聯絡資訊',
   title: '歡迎與我聯繫',
   body: '我對新的前端工作機會保持開放。如果你的團隊正在找熟悉 Vue、遇到問題會追到根源的前端工程師，歡迎來信。',
 }

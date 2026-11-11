@@ -120,14 +120,13 @@ const cardArrow = 'text-[20px] text-on-surface-variant transition-transform grou
       <div class="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
         <component
           :is="c.href ? 'a' : 'button'"
-          v-for="(c, i) in channels"
+          v-for="c in channels"
           :key="c.key"
           v-bind="c.href ? { href: c.href, target: '_blank', rel: 'noopener noreferrer' } : { type: 'button', 'aria-haspopup': 'dialog' }"
           :class="[card, !c.href && 'ring-1 ring-primary/70']"
           @click="c.href ? track('social_click', { platform: c.key, source: 'contact_page' }) : openForm()"
         >
-          <span class="flex w-full items-start justify-between">
-            <span class="font-mono text-label-sm tracking-wider text-on-surface-variant">{{ String(i + 1).padStart(2, '0') }}</span>
+          <span class="flex w-full items-start justify-end">
             <UiIcon :name="c.href ? 'arrow_outward' : 'arrow_forward'" :class="cardArrow" />
           </span>
           <UiSocialIcon v-if="!c.icon" :name="c.key as 'instagram' | 'threads'" class="mt-8 h-8 w-8 text-lab-signal-ink" />

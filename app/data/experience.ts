@@ -1,7 +1,7 @@
 // 工作經歷頁文案。來源：Stitch「工作經歷」畫面（李柏偉 Elio Lee）。
 export const intro = {
-  eyebrow: 'EXPERIENCE / 01 工作經歷',
-  title: '從介面實作到工程品質的持續累積。',
+  eyebrow: '工作經歷',
+  title: '從介面實作到​工程品質的​持續累積',
   body: '整理我的工作經驗、技術應用與開發過程中累積的工程理解。',
   pills: [
     { icon: 'domain', color: 'text-primary', label: '北極星測繪公司 前端工程師' },
@@ -66,7 +66,7 @@ export const roles: Role[] = [
   {
     no: '02',
     dot: 'secondary',
-    badge: '職業訓練 · 軟體開發',
+    badge: '職業訓練 軟體開發',
     period: '2024/09 — 2025/03',
     place: '泰山職訓局',
     title: '前端網頁開發培訓 ｜ 泰山職訓局',
@@ -92,7 +92,7 @@ export const roles: Role[] = [
   {
     no: '03',
     dot: 'outline',
-    badge: '軍職 · 全職',
+    badge: '軍職 全職',
     period: '2017/12 — 2023/12',
     place: '陸軍第 21 砲指部',
     title: '志願役士兵 ｜ 陸軍第六軍團第二一砲兵指揮部',
@@ -114,12 +114,12 @@ export const roles: Role[] = [
 export const transitions = [
   {
     after: '03',
-    title: '從軍職出發，重新探索程式開發',
+    title: '從軍職出發 重新探索程式開發',
     body: ['退伍後，我開始思考下一階段的職涯方向。由於小時候就對程式有興趣，因此決定透過泰山職訓局的培訓課程，重新接觸程式開發，並從 HTML、CSS、JavaScript 等前端基礎開始，逐步建立網頁開發的知識與實作能力。'],
   },
   {
     after: '02',
-    title: '從專題實作，走進實際的軟體開發',
+    title: '從專題實作 走進實際的軟體開發',
     body: [
       '透過職訓期間的專題開發，我累積了從需求規劃、介面設計到前後端整合的實作經驗，並以此為基礎，取得第一份前端工程師的工作。',
       '進入業界後，我開始更深入地理解實際的軟體開發流程，也逐漸認識到課堂學習與工作實務之間的差異。從功能開發、問題排查到既有系統的維護與調整，我持續累積經驗，並學習如何在實際專案中兼顧功能需求、程式可維護性與使用者體驗。',
@@ -156,7 +156,7 @@ export const principles = [
 ]
 
 export const cta = {
-  badge: 'Contact / 聯絡',
+  badge: '聯絡',
   title: '想進一步聊聊嗎？',
   body: '看完經歷後，如果有想進一步了解的地方，歡迎留言給我。',
 }

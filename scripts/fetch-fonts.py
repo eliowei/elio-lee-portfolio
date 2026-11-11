@@ -15,7 +15,7 @@ ICONS = ('accessibility_new api arrow_back arrow_forward arrow_outward arrow_upw
          'dark_mode format_quote group_work groups hub language layers light_mode mail map markunread_mailbox menu message pedal_bike person_search school search '
          'location_on schedule send shield south sports_esports storefront task_alt topic translate travel_explore troubleshoot web').split()
 URLS = [
-    'https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400;500&family=Inter:wght@400..600&display=swap',
+    'https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400..600&display=swap',
     'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..500,0,0&icon_names=' + ','.join(sorted(ICONS)) + '&display=swap',
 ]
 

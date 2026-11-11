@@ -13,7 +13,7 @@ const { matrix } = useData()
       <p class="max-w-2xl text-body-md text-on-surface-variant">{{ matrix.body }}</p>
     </div>
 
-    <div v-reveal class="w-full overflow-x-auto rounded-lg bg-surface-container-lowest shadow-sm">
+    <div class="w-full overflow-x-auto rounded-lg bg-surface-container-lowest shadow-sm">
       <table class="w-full min-w-[700px] text-left">
         <thead>
           <tr class="bg-surface-container-low">

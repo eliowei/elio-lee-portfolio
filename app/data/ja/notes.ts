@@ -2,14 +2,14 @@
 import type * as zh from '../notes'
 
 export const page: typeof zh.page = {
-  eyebrow: 'Technical Notes / 01',
+  eyebrow: '技術ノート',
   title: '技術ノート',
   lead: '実際の問題を出発点に、より深い技術的理解を築く。フロントエンド開発、問題の調査、個人プロジェクトでの技術的な探求を記録し、ばらばらな経験を理解・検証・再利用できる知識に整理しています。',
   facts: ['問題の再現 → 原因の特定 → 検証', '実行できるコード例', '随時更新中'],
 }
 
 export const method: typeof zh.method = {
-  eyebrow: 'Methodology / 整理の方法',
+  eyebrow: '整理の方法',
   title: '技術的な問題をどう整理し、知識にしているか。',
   body: '実際のプロジェクトでは、技術的な落とし穴の多くは境界条件や内部の仕組みに対する思い込みから生まれます。ノートは断片を積み上げるのではなく、4 つのステップに沿って書き、解決策をほかの場面にも応用できるようにしています。',
   steps: [

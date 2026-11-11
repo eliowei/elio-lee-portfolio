@@ -39,7 +39,7 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
       >{{ code }}</p>
 
       <div class="section-x py-28 md:py-36">
-        <p class="lab-eyebrow lab-in">{{ $t('error.eyebrow') }} / {{ code }}</p>
+        <p class="lab-eyebrow lab-in">{{ $t('error.eyebrow') }} {{ code }}</p>
         <h1 id="error-title" class="lab-in mt-5 max-w-3xl font-heading text-display-mobile text-white [text-wrap:balance] md:text-display" style="--d: 80ms">{{ title }}</h1>
         <p class="lab-in lab-muted mt-5 max-w-xl text-body-lg" style="--d: 160ms">{{ lead }}</p>
         <p v-if="isDev && !is404 && error.message" class="lab-in mt-4 max-w-xl font-mono text-label-sm text-lab-on-dark-muted" style="--d: 200ms">{{ error.message }}</p>
@@ -55,7 +55,7 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
         </div>
 
         <p class="lab-in mt-14 font-mono text-label-sm tracking-wider text-lab-on-dark-muted" style="--d: 320ms" aria-hidden="true">
-          X —.— · Y —.— · {{ $t('error.readout') }}
+          X —.— Y —.— {{ $t('error.readout') }}
         </p>
       </div>
     </section>

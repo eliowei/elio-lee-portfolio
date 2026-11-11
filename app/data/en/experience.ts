@@ -2,7 +2,7 @@
 import type * as zh from '../experience'
 
 export const intro: typeof zh.intro = {
-  eyebrow: 'EXPERIENCE / 01',
+  eyebrow: 'Experience',
   title: 'From building interfaces to building engineering quality.',
   body: 'My work experience, the technologies I have applied, and the engineering understanding I have built up along the way.',
   pills: [
@@ -49,7 +49,7 @@ export const roles: typeof zh.roles = [
   {
     no: '02',
     dot: 'secondary',
-    badge: 'Vocational training · Software development',
+    badge: 'Vocational training, Software development',
     period: '2024/09 — 2025/03',
     place: 'Taishan Vocational Training Center',
     title: 'Frontend Web Development Training | Taishan Vocational Training Center',
@@ -75,7 +75,7 @@ export const roles: typeof zh.roles = [
   {
     no: '03',
     dot: 'outline',
-    badge: 'Military · Full-time',
+    badge: 'Military, Full-time',
     period: '2017/12 — 2023/12',
     place: 'ROC Army 21st Artillery Command',
     title: 'Volunteer Soldier | 21st Artillery Command, 6th Army Corps',

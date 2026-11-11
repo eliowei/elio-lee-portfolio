@@ -14,7 +14,7 @@ const { principles, principlesSection: s } = useData()
     </div>
 
     <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-      <div v-for="(p, i) in principles" :key="p.title" v-reveal="i * 0.1" class="flex flex-col justify-between rounded-lg bg-surface-container-low p-space-md">
+      <div v-for="p in principles" :key="p.title" class="flex flex-col justify-between rounded-lg bg-surface-container-low p-space-md">
         <div>
           <div class="mb-4 flex h-10 w-10 items-center justify-center rounded bg-surface-container-lowest text-primary shadow-sm">
             <UiIcon :name="p.icon" class="text-headline-sm" />

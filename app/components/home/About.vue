@@ -21,15 +21,15 @@ const isDev = import.meta.dev
 
       <div class="lg:col-span-7">
         <div class="max-w-2xl space-y-5 text-body-lg text-on-surface-variant">
-          <p v-for="(p, i) in about.body" :key="p" v-reveal="i * 0.1">{{ p }}</p>
+          <p v-for="p in about.body" :key="p">{{ p }}</p>
         </div>
         <dl class="mt-10 divide-y divide-hairline border-y border-hairline">
-          <div v-for="(f, i) in about.facts" :key="f.label" v-reveal="i * 0.1" class="grid gap-1 py-4 sm:grid-cols-[8rem_1fr] sm:gap-6">
+          <div v-for="f in about.facts" :key="f.label" class="grid gap-1 py-4 sm:grid-cols-[8rem_1fr] sm:gap-6">
             <dt class="font-mono text-label-md uppercase tracking-wider text-lab-signal-ink">{{ f.label }}</dt>
             <dd class="text-body-md">{{ f.text }}</dd>
           </div>
         </dl>
-        <NuxtLink v-reveal :to="localePath('/experience')" class="mt-8 inline-flex items-center gap-2 font-medium text-lab-signal-ink underline-offset-4 hover:underline">
+        <NuxtLink :to="localePath('/experience')" class="mt-8 inline-flex items-center gap-2 font-medium text-lab-signal-ink underline-offset-4 hover:underline">
           {{ $t('home.aboutLink') }} <UiIcon name="arrow_forward" class="text-[18px]" />
         </NuxtLink>
       </div>

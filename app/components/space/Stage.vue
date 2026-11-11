@@ -41,7 +41,7 @@ function onFrame(info: FrameInfo) {
     el.style.opacity = l.visible ? '1' : '0'
     el.style.pointerEvents = l.visible ? 'auto' : 'none'
   }
-  if (readout.value) readout.value.textContent = `AZ ${info.azimuth.toFixed(1).padStart(5, '0')}° · EL ${info.elevation.toFixed(1)}°`
+  if (readout.value) readout.value.textContent = `AZ ${info.azimuth.toFixed(1).padStart(5, '0')}° EL ${info.elevation.toFixed(1)}°`
 }
 
 // 0 at the top of the space, 1 once the project space fills the viewport.
@@ -145,10 +145,10 @@ onBeforeUnmount(() => {
         @click="emit('select', s.slug)"
       >
         <span class="h-2 w-2 rotate-45" :style="{ background: s.accent }" />
-        {{ s.code }} · {{ s.title }}
+        {{ s.code }} {{ s.title }}
       </button>
       <p class="pointer-events-none absolute bottom-6 right-8 z-0 font-mono text-label-sm tracking-wider text-lab-on-dark-muted" aria-hidden="true">
-        <span ref="readout" class="transition-opacity duration-300">AZ 000.0° · EL 0.0°</span>
+        <span ref="readout" class="transition-opacity duration-300">AZ 000.0° EL 0.0°</span>
       </p>
     </template>
   </div>

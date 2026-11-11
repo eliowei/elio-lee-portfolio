@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { hero, projects, projectImages } = useData()
+const { locale } = useI18n()
 const localePath = useLocalePath()
 
 // Hero + project space share one sticky 3D stage (desktop). Scrolling carries the camera from the ruin through
@@ -68,18 +69,18 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
       <section class="pointer-events-none relative flex min-h-[100svh] flex-col justify-end pb-20 pt-28 md:pb-24" aria-labelledby="hero-title">
         <div class="section-x pointer-events-auto">
           <p class="lab-eyebrow lab-in">{{ hero.eyebrow }}</p>
-          <h1 id="hero-title" class="space-title lab-in mt-6 max-w-[12em] text-white" style="--d: 80ms">
-            <span class="block">{{ hero.title[0] }}</span>
-            <span class="block">{{ hero.title[1]!.slice(0, -hero.titleAccent.length) }}<span class="text-lab-signal">{{ hero.titleAccent }}</span></span>
+          <h1 id="hero-title" class="space-title lab-in mt-6 max-w-[12em] text-white [text-wrap:balance] [word-break:auto-phrase]" style="--d: 80ms">
+            <span class="block"><UiMagnetText :text="hero.title[0]!" :plain="locale === 'ja'" /></span>
+            <span class="block"><UiMagnetText :text="hero.title[1]!" :plain="locale === 'ja'" /></span>
           </h1>
           <SpaceMonument class="mx-auto mt-10 h-72 w-auto max-w-full md:hidden" />
           <p class="lab-in lab-muted mt-8 max-w-[36rem] text-body-lg" style="--d: 160ms">{{ hero.intro }}</p>
           <div class="lab-in mt-10 flex flex-wrap items-center gap-3" style="--d: 240ms">
             <a href="#works" :class="[btn, 'bg-lab-signal text-lab-bg hover:bg-white']">
-              {{ $t('home.explore') }} <span v-if="$i18n.locale !== 'en'" class="font-mono text-label-sm opacity-80">Explore Works</span>
+              {{ $t('home.explore') }}
             </a>
             <a href="#about" :class="[btn, 'border border-white/25 text-white hover:border-white']">
-              {{ $t('home.aboutMe') }} <span v-if="$i18n.locale !== 'en'" class="font-mono text-label-sm opacity-80">About Elio</span>
+              {{ $t('home.aboutMe') }}
             </a>
           </div>
         </div>
@@ -164,7 +165,7 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
                   />
                   <div :class="i === 0 ? 'mt-4 px-1 pb-1' : 'min-w-0'">
                     <p class="flex items-center gap-2 font-mono text-label-sm text-lab-on-dark-muted">
-                      <span class="h-2 w-2 rotate-45" :style="{ background: p.accent }" aria-hidden="true" />{{ p.code }} · {{ p.kind }}
+                      <span class="h-2 w-2 rotate-45" :style="{ background: p.accent }" aria-hidden="true" />{{ p.code }} {{ p.kind }}
                     </p>
                     <h3 class="mt-1 font-heading text-white" :class="i === 0 ? 'text-headline-md' : 'text-headline-sm'">{{ p.title }}</h3>
                     <p v-if="i === 0" class="lab-muted mt-2 text-body-sm">{{ p.body }}</p>

@@ -117,7 +117,7 @@ const circle = 'absolute flex h-10 w-10 items-center justify-center rounded-full
 
       <div class="absolute inset-x-0 bottom-4 flex justify-center px-4" aria-live="polite">
         <span class="max-w-full truncate rounded-full bg-black/60 px-4 py-1.5 font-mono text-label-md text-white">
-          {{ pad((index ?? 0) + 1) }} / {{ pad(slides.length) }}<template v-if="current.caption"> · {{ current.caption }}</template>
+          {{ pad((index ?? 0) + 1) }} / {{ pad(slides.length) }}<template v-if="current.caption"> {{ current.caption }}</template>
         </span>
       </div>
     </div>

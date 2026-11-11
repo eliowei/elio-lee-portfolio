@@ -63,7 +63,7 @@
   /* ---- Building blocks ---- */
   .lab-dark { background-color: theme('colors.lab.bg'); color: theme('colors.lab.on-dark'); }
   .lab-dark .lab-muted { color: theme('colors.lab.on-dark-muted'); }
-  .lab-eyebrow { @apply inline-flex items-center gap-2 font-mono text-label-sm uppercase tracking-[0.18em] text-lab-signal-ink; }
+  .lab-eyebrow { @apply inline-flex items-center gap-2 font-mono text-label-sm uppercase tracking-[0.06em] md:tracking-[0.18em] text-lab-signal-ink; }
   .lab-eyebrow::before { content: ''; width: 6px; height: 6px; background: currentColor; }
   .lab-dark .lab-eyebrow { color: theme('colors.lab.signal'); }
   /* Faint survey contours for dark page headers. Put on an aria-hidden overlay, never on content. */
@@ -73,7 +73,7 @@
     mask-image: radial-gradient(ellipse 80% 80% at 78% 40%, #000 20%, transparent 75%);
   }
   /* Home title: phones 40–48px, desktop up to ~104px. Wide measure; overlaps the 3D monument on purpose. */
-  .space-title { font-family: Geist, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif; font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; font-size: clamp(2.5rem, 10.5vw, 3rem); }
+  .space-title { font-family: Barlow, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif; font-weight: 600; line-height: 1.08; letter-spacing: -0.02em; font-size: clamp(2.5rem, 10.5vw, 3rem); }
   @media (min-width: 768px) { .space-title { font-size: clamp(3.5rem, 6.4vw, 6.5rem); } }
   .lab-chip { @apply inline-flex items-center rounded border border-white/15 px-2.5 py-1 font-mono text-label-sm text-lab-on-dark; }
   .lab-chip-light { @apply inline-flex items-center rounded border border-hairline-strong bg-surface-container-lowest px-2.5 py-1 font-mono text-label-sm text-on-surface-variant; }
@@ -96,7 +96,7 @@
   .prose-post { @apply space-y-5 text-body-lg text-on-surface; }
   .prose-post h2 { @apply pt-6 text-headline-md; }
   .prose-post h3 { @apply pt-3 text-headline-sm; }
-  .prose-post :where(h2, h3) { scroll-margin-top: 6rem; font-family: Geist, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif; }
+  .prose-post :where(h2, h3) { scroll-margin-top: 6rem; font-family: Barlow, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif; }
   .prose-post a { @apply text-lab-signal-ink underline decoration-lab-signal-ink/40 underline-offset-4 transition-colors hover:decoration-lab-signal-ink; }
   .prose-post :where(h2, h3, h4) a { @apply text-inherit no-underline; } /* heading self-anchors are not links to style */
   .prose-post ul { @apply list-disc space-y-1 pl-6; }

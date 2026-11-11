@@ -18,7 +18,7 @@
 以「數位遺跡」為概念：深灰石材搭配單一橘色訊號。3D 場景裡的能量元素都只用橘色，作品識別色只出現在 HTML 與截圖，避免視覺分散。
 
 - 深色區塊負責敘事與 3D，淺色區塊負責閱讀。
-- 字體使用 Geist 與 Noto Sans TC，等寬字用於標籤與編號。
+- 字體使用 Barlow 與 Noto Sans TC，等寬字用於標籤與編號。
 - 動畫尊重系統的減少動態效果設定。
 
 ## 技術
@@ -39,7 +39,7 @@ Lighthouse（手機、預設節流）實測：筆記、聯絡、文章頁約 96�
 
 - Lighthouse 的 LCP 是模擬慢速 4G 推算的數字，實測 LCP 約 0.5–1 秒；首頁 TBT 每次量測落差大（約 300–1,100 ms），分數會上下跳動。
 - **字型全部自架**（`public/fonts/`），頁面不載入外部字型 CSS。
-  - `scripts/fetch-fonts.py`：下載 Inter、Geist、Geist Mono（僅 Latin）與 Material Symbols 圖示子集，並產生 `app/assets/css/latin-fonts.generated.css`。**新增圖示名稱時，要加進該腳本的 `ICONS` 清單後重跑**，否則圖示會顯示成文字。
+  - `scripts/fetch-fonts.py`：下載 Inter、Barlow、IBM Plex Mono（僅 Latin）與 Material Symbols 圖示子集，並產生 `app/assets/css/latin-fonts.generated.css`。**新增圖示名稱時，要加進該腳本的 `ICONS` 清單後重跑**，否則圖示會顯示成文字。
   - `scripts/subset-font.py`：把 Noto Sans TC 裁成網站實際用到的字，分成 `en`／`ui`／`article`／`ja` 四組（`unicode-range` 互不重疊），頁面只下載用得到的組別。新增大量文章後請重跑；缺字會退回系統字型，不會壞版。兩支腳本需要 `pip install fonttools brotli`，字型來源網址寫在腳本開頭。
   - 不要用 `media="print"` + `onload` 這種「非阻塞載入 Google Fonts」的寫法：在這個專案裡 `onload` 不會生效，樣式表永遠停在 `print`，字型與圖示不會載入。
 - `/blog` 與首頁筆記區的查詢用 `.select()` 只取列表需要的欄位，避免整篇文章內容進入 payload。

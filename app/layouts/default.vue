@@ -8,7 +8,7 @@ const { locale } = useI18n()
 
 // Preload the fonts every page paints with, so they start downloading with the HTML instead of after the CSS is parsed.
 // Chinese / Japanese pages also need the Noto Sans TC "ui" subset (regular + bold); English pages almost never do.
-const fontFiles = ['inter-400-600', 'geist-400-700', 'material-symbols-outlined-300-500']
+const fontFiles = ['inter-400-600', 'barlow-600', 'material-symbols-outlined-300-500']
 const cjkFiles = ['noto-sans-tc-ui-400', 'noto-sans-tc-ui-700']
 useHead(() => ({
   link: [...fontFiles, ...(locale.value === 'en' ? [] : cjkFiles)].map(f => ({ rel: 'preload', as: 'font', type: 'font/woff2', href: `/fonts/${f}.woff2`, crossorigin: 'anonymous' })),
@@ -18,7 +18,7 @@ useHead(() => ({
 // cover) overrides it.
 const siteUrl = String(useRuntimeConfig().public.siteUrl).replace(/\/$/, '')
 const ogImage = computed(() => `${siteUrl}/og-image-${locale.value}.jpg`)
-useSeoMeta({ ogImage, ogImageAlt: 'Elio Lee | Frontend Engineer · Creative Development', twitterCard: 'summary_large_image', twitterImage: ogImage })
+useSeoMeta({ ogImage, ogImageAlt: 'Elio Lee | Frontend Engineer, Creative Development', twitterCard: 'summary_large_image', twitterImage: ogImage })
 </script>
 
 <template>

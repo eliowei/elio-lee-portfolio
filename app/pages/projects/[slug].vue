@@ -83,7 +83,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
           <div class="lg:col-span-5">
             <p class="flex items-center gap-2.5 font-mono text-label-sm uppercase tracking-[0.18em] text-lab-on-dark-muted">
               <span class="h-2.5 w-2.5 rotate-45" :style="{ background: project.accent }" aria-hidden="true" />
-              {{ project.code }} · {{ project.kind }}
+              {{ project.code }} {{ project.kind }}
             </p>
             <h1 class="mt-5 font-heading text-display-mobile text-white [text-wrap:balance] md:text-display"><template v-for="w in project.title.split(' ')" :key="w"><span class="inline-block">{{ w }}</span>{{ ' ' }}</template></h1>
             <p v-if="detail.headline" class="mt-5 text-headline-sm font-normal text-lab-on-dark">{{ detail.headline }}</p>
@@ -203,7 +203,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
               <div v-for="g in detail.stack" :key="g.group" class="grid gap-2 py-3 sm:grid-cols-[8rem_1fr]">
                 <dt class="font-mono text-label-md uppercase tracking-wider text-on-surface-variant">{{ g.group }}</dt>
                 <dd>
-                  <span class="text-body-md">{{ g.items.join(' · ') }}</span>
+                  <span class="text-body-md">{{ g.items.join(', ') }}</span>
                   <p v-if="g.why" class="mt-1 text-body-sm text-on-surface-variant">{{ g.why }}</p>
                 </dd>
               </div>
@@ -299,7 +299,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
           <UiIcon name="arrow_back" class="text-[16px]" /> {{ $t('projects.back') }}
         </NuxtLink>
         <NuxtLink :to="localePath(`/projects/${next.slug}`)" class="group sm:text-right">
-          <span class="block font-mono text-label-sm uppercase tracking-[0.18em] text-lab-on-dark-muted">Next · {{ next.code }}</span>
+          <span class="block font-mono text-label-sm uppercase tracking-[0.18em] text-lab-on-dark-muted">Next {{ next.code }}</span>
           <span class="mt-1 inline-flex items-center gap-2 font-heading text-headline-md text-white">
             {{ next.title }} <UiIcon name="arrow_forward" class="text-[22px] text-lab-signal transition-transform group-hover:translate-x-1 motion-reduce:transition-none" />
           </span>

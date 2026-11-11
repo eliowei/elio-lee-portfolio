@@ -2,15 +2,14 @@
 import type * as zh from '../home'
 
 export const hero: typeof zh.hero = {
-  eyebrow: 'Frontend Engineer · Creative Development',
+  eyebrow: 'Frontend Engineer, Creative Development',
   title: ['コードでアイデアを形にし、', 'インタラクションでもっと'],
-  titleAccent: 'もっと', // title[1] の末尾と一致させる
   intro: 'フロントエンド開発とインタラクションの実装に取り組み、モダンなフロントエンド技術でパフォーマンス・使いやすさ・ビジュアル表現を兼ね備えたウェブサイトを作っています。',
 }
 
 export const about: typeof zh.about = {
   photo: '/images/image0.webp',
-  eyebrow: 'About / 自己紹介',
+  eyebrow: '自己紹介',
   title: '要件をこなすことから、問題を理解することへ。',
   body: [
     'Elio（李柏偉）です。主に Vue でウェブのインターフェースを開発しているフロントエンドエンジニアです。働き始めた頃は、画面を作って機能を動かすことを何より気にしていました。入社後は Vue 2 と Vue 3 のプロジェクトに同時に関わるようになり、既存コードの設計意図、フレームワーク間の違い、変更が及ぼす影響範囲を理解したうえで、適切な実装方法を決めるようになりました。',
@@ -25,7 +24,7 @@ export const about: typeof zh.about = {
 
 export const projects: typeof zh.projects = [
   {
-    slug: 'game-together', code: 'GT-01', accent: '#A79BFF', no: '01', kind: 'フルスタック · 2025',
+    slug: 'game-together', code: 'GT-01', accent: '#A79BFF', no: '01', kind: 'フルスタック 2025',
     tags: ['Vue 3', 'Vuetify', 'Node.js', 'MongoDB', 'WebSocket'],
     title: 'ゲーム仲間募集プラットフォーム',
     body: 'ゲーマーのためのリアルタイムなコミュニティ募集プラットフォームです。検索・絞り込み、イベント管理、リアルタイムチャットを組み合わせ、プレイヤーがすばやく仲間を見つけ、長く続くゲームコミュニティを作れるようにしました。',
@@ -81,7 +80,7 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'tokyo-travel-site', code: 'TR-02', accent: '#7C96F2', no: '02', kind: '個人プロジェクト · 2026',
+    slug: 'tokyo-travel-site', code: 'TR-02', accent: '#7C96F2', no: '02', kind: '個人プロジェクト 2026',
     tags: ['Nuxt 4', 'Notion API', 'OpenAI', 'Gemini', 'Google Maps'],
     title: '東京個人旅行サイト',
     body: '9 月の東京旅行のために開発した旅程サイトです。Notion を CMS として使い、AI アシスタント、地図、支出記録、持ち物リストを統合しました。',
@@ -136,7 +135,7 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'personal-portfolio', code: 'PF-03', accent: '#E6E1D6', no: '03', kind: '個人サイト · 2026',
+    slug: 'personal-portfolio', code: 'PF-03', accent: '#E6E1D6', no: '03', kind: '個人サイト 2026',
     tags: ['Nuxt 4', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Nuxt Content', 'GA4', 'GTM'],
     title: '個人ブランドサイト',
     body: 'Nuxt で構築した個人ブランドサイトです。サービスと事例を紹介し、SEO、GA4、GTM を統合しています。',
@@ -188,7 +187,7 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', no: '04', kind: '業務システム · 2026',
+    slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', no: '04', kind: '業務システム 2026',
     tags: ['Vue 3', 'PrimeVue', 'Node.js', 'MongoDB', 'LINE Messaging API', 'SSE'],
     title: 'LINE 公式アカウント管理プラットフォーム',
     body: '店舗が LINE 公式アカウントの内容を自分で管理できる管理プラットフォームです。エンジニアに頼まなくても、FAQ、お知らせ、料金表を店舗自身で更新できます。',
@@ -200,7 +199,7 @@ export const projects: typeof zh.projects = [
         title: '管理画面の内容を LINE 公式アカウントへ同期',
         caption: 'プロジェクトの内容をもとに描いた概念図：店舗は管理画面で内容を編集し、LINE 公式アカウントに同期します。ユーザーのクリックは管理画面に戻り、分析に使われます。',
         nodes: [
-          { id: 'admin', label: '店舗管理画面', sub: 'Vue 3 · PrimeVue', x: 12, y: 30 },
+          { id: 'admin', label: '店舗管理画面', sub: 'Vue 3, PrimeVue', x: 12, y: 30 },
           { id: 'api', label: 'Node.js API', sub: '複数店舗 / 権限', x: 40, y: 30 },
           { id: 'db', label: 'MongoDB', sub: 'FAQ・お知らせ・料金', x: 40, y: 56 },
           { id: 'line', label: 'LINE API', sub: 'Messaging API', x: 65, y: 30 },
@@ -248,7 +247,7 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'weather-bike-bot', code: 'WB-05', accent: '#5AB8F0', no: '05', kind: 'LINE Bot · 2024',
+    slug: 'weather-bike-bot', code: 'WB-05', accent: '#5AB8F0', no: '05', kind: 'LINE Bot 2024',
     tags: ['Node.js', 'Express', 'LINE Bot', 'Flex Message', 'API Integration'],
     title: '天気 & Bike ヘルパー',
     body: 'LINE のチャット画面で YouBike と天気の検索機能を統合し、リアルタイムのステーション情報と天気予報をすばやく確認できるようにしました。複数のアプリやサイトを行き来する手間が減ります。',
@@ -261,7 +260,7 @@ export const projects: typeof zh.projects = [
         nodes: [
           { id: 'user', label: 'LINE ユーザー', sub: 'キーワード / メニュー', x: 10, y: 30 },
           { id: 'bot', label: 'Express Webhook', sub: 'LINE Bot SDK', x: 34, y: 30 },
-          { id: 'norm', label: 'データ変換レイヤー', sub: '形式統一 · エラー処理', x: 60, y: 30 },
+          { id: 'norm', label: 'データ変換レイヤー', sub: '形式統一、エラー処理', x: 60, y: 30 },
           { id: 'bike', label: 'YouBike API', sub: '複数都市', x: 88, y: 12 },
           { id: 'cwa', label: '中央気象署 API', x: 88, y: 48 },
           { id: 'flex', label: 'Flex Message', x: 34, y: 56 },
@@ -300,7 +299,7 @@ export const projects: typeof zh.projects = [
 ]
 
 export const contact: typeof zh.contact = {
-  eyebrow: 'Contact / お問い合わせ',
+  eyebrow: 'お問い合わせ',
   title: 'お気軽にご連絡ください。',
   body: '新しいフロントエンドの仕事の機会を探しています。Vue に慣れていて、問題の根本原因まで追いかけるフロントエンドエンジニアをお探しでしたら、ぜひご連絡ください。',
 }
