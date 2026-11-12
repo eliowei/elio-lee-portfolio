@@ -2,8 +2,8 @@
 // rest of the picture stays almost where it is; let go and the bump springs back with a wobble.
 // How: while it is being pulled, the <img> is replaced by a WebGL canvas that draws the same picture on a mesh, and every mesh point
 // moves toward the pointer by a bell-shaped amount (strongest at the grabbed spot, fading with distance). The canvas is larger than the
-// image, so the bump can leave the frame instead of being clipped. Mouse and pen grab at once; a finger has to HOLD for a moment first
-// (so a normal swipe on the picture still scrolls the page), then the picture takes over the gesture. Off for reduced motion or without WebGL.
+// image, so the bump can leave the frame instead of being clipped. Mouse and pen only (a touch drag has to keep scrolling the page);
+// off for reduced motion or without WebGL.
 type Elastic = HTMLElement & { _elastic?: () => void }
 
 const PAD = 120 // css px of room around the image for the bump
@@ -12,8 +12,6 @@ const REACH = 150 // the most the grabbed spot can be pulled away from where it 
 const SIGMA = 62 // width of the bump when it is small (px); it widens a little as it is pulled further
 const STIFFNESS = 170 // spring: higher = snappier
 const DAMPING = 9 // spring: lower = more wobble
-const HOLD = 350 // ms a finger must stay put before the pull starts
-const SLOP = 10 // px a finger may drift during that hold before it counts as a scroll
 
 const VERT = `
 attribute vec2 a_pos; attribute vec2 a_uv;
@@ -48,7 +46,7 @@ function shader(gl: WebGLRenderingContext, type: number, src: string) {
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.directive('elastic', {
     mounted(el: Elastic) {
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+      if (!matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return
       const img = el.querySelector('img')
       if (!img) return
 
@@ -60,7 +58,6 @@ export default defineNuxtPlugin((nuxtApp) => {
       let broken = false
       let active = false
       let down: { id: number; x: number; y: number; gx: number; gy: number } | null = null
-      let pending: { id: number; x: number; y: number; timer: number } | null = null // a finger that is still holding, not pulling yet
       let raf = 0
       let last = 0
       const s = { x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0, sig: SIGMA, tsig: SIGMA }
@@ -226,43 +223,21 @@ export default defineNuxtPlugin((nuxtApp) => {
 
       const ready = () => !broken && build()
       const onEnter = () => { ready() } // build while the pointer is merely over it, so the first press is instant
-      const grab = (id: number, x: number, y: number) => {
-        if (!ready() || !canvas) return
+      const onDown = (e: PointerEvent) => {
+        if (e.button !== 0 || e.pointerType === 'touch' || !ready() || !canvas) return
+        e.preventDefault() // no native image drag
         const er = el.getBoundingClientRect() // the canvas is still hidden (no box yet): it sits PAD px outside the element
-        down = { id, x, y, gx: x - er.left + PAD, gy: y - er.top + PAD }
+        down = { id: e.pointerId, x: e.clientX, y: e.clientY, gx: e.clientX - er.left + PAD, gy: e.clientY - er.top + PAD }
         lastGrab.x = down.gx
         lastGrab.y = down.gy
         s.tx = s.ty = 0
         s.sig = s.tsig = SIGMA
-        try { el.setPointerCapture(id) }
+        try { el.setPointerCapture(e.pointerId) }
         catch { /* the pointer is gone already */ }
         show(true)
         kick()
       }
-      const cancelHold = () => {
-        if (pending) clearTimeout(pending.timer)
-        pending = null
-      }
-      const onDown = (e: PointerEvent) => {
-        if (e.button !== 0 || down || pending) return
-        if (e.pointerType === 'touch') {
-          ready() // build during the hold, so the pull starts the moment the hold ends
-          const id = e.pointerId
-          pending = { id, x: e.clientX, y: e.clientY, timer: window.setTimeout(() => {
-            const p = pending
-            pending = null
-            if (!p) return
-            navigator.vibrate?.(8) // a small tick: the picture is now yours
-            grab(id, p.x, p.y)
-          }, HOLD) }
-          return
-        }
-        if (!ready() || !canvas) return
-        e.preventDefault() // no native image drag
-        grab(e.pointerId, e.clientX, e.clientY)
-      }
       const onMove = (e: PointerEvent) => {
-        if (pending && e.pointerId === pending.id && Math.hypot(e.clientX - pending.x, e.clientY - pending.y) > SLOP) cancelHold() // it is a scroll
         if (!down || e.pointerId !== down.id) return
         const rx = e.clientX - down.x
         const ry = e.clientY - down.y
@@ -274,7 +249,6 @@ export default defineNuxtPlugin((nuxtApp) => {
         kick()
       }
       const onUp = (e: PointerEvent) => {
-        if (pending && e.pointerId === pending.id) cancelHold()
         if (!down || e.pointerId !== down.id) return
         try { el.releasePointerCapture(down.id) }
         catch { /* already released */ }
@@ -284,9 +258,6 @@ export default defineNuxtPlugin((nuxtApp) => {
         kick() // the spring carries it home, with a wobble
       }
       const noDrag = (e: Event) => e.preventDefault()
-      // Once the pull has started the finger must not scroll the page (the hold made sure the browser had not started scrolling yet).
-      const noScroll = (e: TouchEvent) => { if (down) e.preventDefault() }
-      const noMenu = (e: Event) => { if (down || pending) e.preventDefault() } // a long press must not open the context menu / image sheet
 
       el.addEventListener('pointerenter', onEnter)
       el.addEventListener('pointerdown', onDown)
@@ -294,9 +265,6 @@ export default defineNuxtPlugin((nuxtApp) => {
       el.addEventListener('pointerup', onUp)
       el.addEventListener('pointercancel', onUp)
       el.addEventListener('dragstart', noDrag)
-      el.addEventListener('touchmove', noScroll, { passive: false })
-      el.addEventListener('contextmenu', noMenu)
-      el.style.setProperty('-webkit-touch-callout', 'none')
       if (getComputedStyle(el).position === 'static') el.style.position = 'relative'
       el._elastic = () => {
         cancelAnimationFrame(raf)
@@ -306,9 +274,6 @@ export default defineNuxtPlugin((nuxtApp) => {
         el.removeEventListener('pointerup', onUp)
         el.removeEventListener('pointercancel', onUp)
         el.removeEventListener('dragstart', noDrag)
-        el.removeEventListener('touchmove', noScroll)
-        el.removeEventListener('contextmenu', noMenu)
-        cancelHold()
         show(false)
         destroy()
       }
