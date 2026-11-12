@@ -6,11 +6,11 @@ useHead(() => ({ htmlAttrs: head.value.htmlAttrs, link: head.value.link, meta: h
 
 const { locale } = useI18n()
 
-// Preload only the font files the first screen paints with (measured on the home page), so they start with the HTML instead of
-// after the CSS is parsed. Pages in English also paint with the Noto Sans TC "en" subset; Chinese and Japanese pages with the
-// "article" subset as well. Other subsets (ui, ja, bold variants) stay lazy: preloading what is not painted only competes for bandwidth.
-const fontFiles = ['barlow-500', 'ibm-plex-mono-500', 'noto-sans-tc-en-400', 'noto-sans-tc-en-700']
-const cjkFiles = ['noto-sans-tc-article-400']
+// Preload one font only. Fonts use font-display: swap, so they never block the first paint, and on a slow connection every extra
+// preload competes with the render-blocking CSS (PageSpeed mobile FCP went from 2.9 s to 3.6 s with five of them). Barlow is the hero
+// title's face; the rest are found when the CSS is parsed.
+const fontFiles = ['barlow-500']
+const cjkFiles: string[] = []
 useHead(() => ({
   link: [...fontFiles, ...(locale.value === 'en' ? [] : cjkFiles)].map(f => ({ rel: 'preload', as: 'font', type: 'font/woff2', href: `/fonts/${f}.woff2`, crossorigin: 'anonymous' })),
 }))
