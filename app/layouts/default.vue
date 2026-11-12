@@ -6,10 +6,11 @@ useHead(() => ({ htmlAttrs: head.value.htmlAttrs, link: head.value.link, meta: h
 
 const { locale } = useI18n()
 
-// Preload the fonts every page paints with, so they start downloading with the HTML instead of after the CSS is parsed.
-// Chinese / Japanese pages also need the Noto Sans TC "ui" subset (regular + bold); English pages almost never do.
-const fontFiles = ['inter-400-600', 'barlow-600', 'material-symbols-outlined-300-500']
-const cjkFiles = ['noto-sans-tc-ui-400', 'noto-sans-tc-ui-700']
+// Preload only the font files the first screen paints with (measured on the home page), so they start with the HTML instead of
+// after the CSS is parsed. Pages in English also paint with the Noto Sans TC "en" subset; Chinese and Japanese pages with the
+// "article" subset as well. Other subsets (ui, ja, bold variants) stay lazy: preloading what is not painted only competes for bandwidth.
+const fontFiles = ['barlow-500', 'ibm-plex-mono-500', 'noto-sans-tc-en-400', 'noto-sans-tc-en-700']
+const cjkFiles = ['noto-sans-tc-article-400']
 useHead(() => ({
   link: [...fontFiles, ...(locale.value === 'en' ? [] : cjkFiles)].map(f => ({ rel: 'preload', as: 'font', type: 'font/woff2', href: `/fonts/${f}.woff2`, crossorigin: 'anonymous' })),
 }))

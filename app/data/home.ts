@@ -303,8 +303,8 @@ export const projects: {
         { title: 'LINE 互動體驗', body: '利用 Flex Message 與功能選單，提供更直覺的聊天式操作體驗。', points: ['關鍵字觸發', '功能選單', 'Flex Message', '圖文訊息互動'] },
       ],
       challenges: [
-        { label: 'Data Integration', title: '整合多個第三方 API', problem: 'YouBike 各縣市的開放資料格式不一致：新北、桃園、台中、高雄用 sna、tot、sbi、bemp 這組英文欄位，新竹市卻是「站點名稱」「緯度」「經度」的中文欄位，而且沒有車輛數量；台中與高雄的陣列還分別包在 retVal 與 data.retVal 裡，新北市單次最多只回 1000 筆。氣象署的預報資料也依縣市使用不同的資料集代碼。', solution: '把各縣市的回傳整理成同一組欄位（站名、總停車格、可借數量、可還數量、經緯度、地址），缺值顯示「未提供」；新北市用 page 參數分頁，取到空頁為止。請求包在 try/catch 內，失敗時寫入 log 並停止，目前還不會回覆使用者提示。', tags: ['Node.js', 'Express'] },
-        { label: 'User Experience', title: '聊天流程設計', problem: '使用者無法像網站一樣透過導覽列操作，若功能過多容易增加學習成本。', solution: '設計功能選單與關鍵字觸發流程，搭配 Flex Message 呈現資訊，提供更清晰的操作體驗。', tags: ['LINE Bot SDK', 'Flex Message'] },
+        { label: 'Data Integration', title: '整合多個第三方 API', problem: 'YouBike 各縣市的開放資料格式不一致：新北、桃園、台中、高雄用 sna、tot、sbi、bemp 這組英文欄位，新竹市卻是「站點名稱」「緯度」「經度」的中文欄位，而且沒有車輛數量；台中與高雄的陣列還分別包在 retVal 與 data.retVal 裡，新北市單次最多只回 1000 筆。氣象署的預報資料也依縣市使用不同的資料集代碼。', solution: '把各縣市的回傳整理成同一組欄位（站名、總停車格、可借數量、可還數量、經緯度、地址），缺值顯示「未提供」；新北市用 page 參數分頁，取到空頁為止。請求包在 try/catch 內：YouBike 查詢失敗時只寫入 log，不會回覆使用者；天氣查詢失敗時會回覆「地區有誤! 請再重新分享一次」。', tags: ['Node.js', 'Express'] },
+        { label: 'User Experience', title: '聊天流程設計', problem: 'LINE 聊天介面沒有導覽列，天氣與 YouBike 查詢需要的資訊又不一樣：使用者不知道要怎麼開始，也不知道下一步該提供什麼。', solution: '用功能選單或關鍵字（找YouBike、天氣預報）開始，之後每一步都用 Quick Reply 按鈕提示下一步。查天氣先選「現在、3小時」「未來3天」「未來1週」，再選地區或分享位置；查 YouBike 則按「分享位置」，回傳最近 2 個站點的地圖位置與可借、可還數量。現在天氣用 Flex Message 卡片呈現，3 天與 1 週預報是文字。例如輸入「找YouBike」，Bot 會請你按「分享位置」，再回傳離你最近的 2 個站點的站名、地點、總停車格、可借與可還數量。', tags: ['LINE Bot SDK', 'Flex Message', 'Quick Reply'] },
       ],
       verification: [
         '撰寫小型腳本實際呼叫 YouBike 與天氣 API，確認回傳的資料格式',

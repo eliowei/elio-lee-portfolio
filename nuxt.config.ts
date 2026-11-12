@@ -21,6 +21,9 @@ export default defineNuxtConfig({
     // <NuxtPicture> emits AVIF first, then WebP, then the original format as the fallback.
     format: ['avif', 'webp'],
     quality: 70, // AVIF at ~70 is visually close to the source for screenshots
+    // The Vercel provider only serves widths listed here and rounds a request UP to the next one. With the defaults alone (smallest 320) an
+    // 80px thumbnail was served at 320 and the 320px portrait at 640; 160, 240 and 560 give those a closer fit.
+    screens: { thumb: 160, thumb2: 240, xs: 320, photo: 560, sm: 640, md: 768, lg: 1024, xl: 1280, xxl: 1536, '2xl': 2560 },
     // Remote images that may be optimised (the profile photo); local images come from /public.
     domains: ['lh3.googleusercontent.com'],
   },
