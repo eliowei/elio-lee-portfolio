@@ -78,6 +78,10 @@
   @media (min-width: 768px) { .space-title { font-size: clamp(3.5rem, 6.4vw, 6.5rem); } }
   .lab-chip { @apply inline-flex items-center rounded border border-white/15 px-2.5 py-1 text-label-sm text-lab-on-dark; }
   .lab-chip-light { @apply inline-flex items-center rounded border border-hairline-strong bg-surface-container-lowest px-2.5 py-1 text-label-sm text-on-surface-variant; }
+  /* Text-link underline that draws in from the left on hover / focus and withdraws on leave. The line follows the text colour. */
+  .u-link { background-image: linear-gradient(currentColor, currentColor); background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 1px; padding-bottom: 4px; transition: background-size 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.2s; }
+  .u-link:hover, .u-link:focus-visible { background-size: 100% 1px; }
+  @media (prefers-reduced-motion: reduce) { .u-link { transition: color 0.2s; } }
   /* Page entrance: CSS only, so content is never hidden waiting for JS. */
   .lab-in { animation: lab-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: var(--d, 0ms); }
   @keyframes lab-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
