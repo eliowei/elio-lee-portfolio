@@ -77,8 +77,7 @@ export default defineNuxtConfig({
         tagPosition: 'head',
       }],
       link: [
-        // Files in public/: SVG for modern browsers, PNG / ICO as fallbacks, apple-touch-icon for iOS home screens.
-        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        // Files in public/: a 96px PNG and an ICO for browser tabs (the old favicon.svg was a 1.7 MB PNG inside an SVG wrapper), apple-touch-icon for iOS home screens.
         { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon-96x96.png' },
         { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },

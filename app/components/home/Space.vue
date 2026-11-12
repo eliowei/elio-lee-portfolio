@@ -75,7 +75,8 @@ onMounted(() => {
   for (const e of events) addEventListener(e, end, { passive: true })
   addEventListener('scroll', onScroll, { passive: true })
   // The sequence is over about 1.9 s after the first paint: hand the letters to the mouse right then, not at the safety timeout.
-  setTimeout(end, Math.max(0, 2100 - performance.now()))
+  const phone = matchMedia('(max-width: 767px), (hover: none)').matches // a shorter opening there, see the styles below
+  setTimeout(end, Math.max(0, (phone ? 1300 : 2100) - performance.now()))
 })
 </script>
 
@@ -219,6 +220,12 @@ onMounted(() => {
 .hero-late-b { --d: 240ms; }
 :global(html[data-intro='1'] .hero-late-a) { --d: 1150ms; }
 :global(html[data-intro='1'] .hero-late-b) { --d: 1250ms; }
+/* Phones: no scan line, and the text and buttons come sooner. */
+@media (max-width: 767px), (hover: none) {
+  :global(html[data-intro='1'] .monument-scan) { display: none; }
+  :global(html[data-intro='1'] .hero-late-a) { --d: 260ms; }
+  :global(html[data-intro='1'] .hero-late-b) { --d: 340ms; }
+}
 .monument-scan::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--lab-signal); box-shadow: -8px 0 18px rgb(255 91 31 / 0.28); }
 @keyframes inscription-scan {
   0% { opacity: 0; transform: translateX(0); }

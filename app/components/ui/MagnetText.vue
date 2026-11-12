@@ -127,6 +127,16 @@ onMounted(() => {
 <style scoped>
 /* Only while <html data-intro> is set (every full load of the home page): without it the title is simply there. */
 :global(html[data-intro='1'] .scan-char) { display: inline-block; transform-origin: 50% 100%; animation: glyph-awaken 550ms cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: var(--scan-delay); }
+/* Phones and touch screens: the same wake-up without the 3D tilt. A letter that is rotated or squashed has a small painted box, and
+   the Largest Contentful Paint is only counted once the box has grown to full size; here it is full size from the first frame. */
+@keyframes glyph-awaken-lite {
+  0% { opacity: 0.12; color: var(--lab-signal); transform: translateY(0.18em); }
+  45% { opacity: 1; color: var(--lab-signal); }
+  100% { opacity: 1; color: inherit; transform: none; }
+}
+@media (max-width: 767px), (hover: none) {
+  :global(html[data-intro='1'] .scan-char) { animation: glyph-awaken-lite 420ms cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(var(--scan-delay) * 0.45); }
+}
 @keyframes glyph-awaken {
   0% { opacity: 0.12; color: var(--lab-signal); transform: perspective(500px) translateY(0.32em) rotateY(-65deg) rotateX(35deg) scaleY(0.6); }
   45% { opacity: 1; color: var(--lab-signal); }
