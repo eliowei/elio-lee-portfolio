@@ -5,12 +5,13 @@ const { cta } = useData()
 const localePath = useLocalePath()
 const { track } = useAnalytics()
 
-const btn = 'inline-flex items-center justify-center gap-2 rounded px-5 py-3 text-body-sm font-medium transition-colors motion-reduce:transition-none'
+const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-body-sm font-medium transition-colors motion-reduce:transition-none'
 </script>
 
 <template>
   <section class="mb-space-xl py-space-md">
-    <div class="lab-dark relative isolate overflow-hidden rounded-lg p-space-lg md:p-space-xl">
+    <!-- Same stone as the blocks above (warm dark grey, lit top edge, square corners), but low and flat: no thickness, just a hairline frame. -->
+    <div class="lab-dark relative isolate overflow-hidden border border-t-8 border-white/10 border-t-[#3A3833] bg-lab-bg-raise p-space-lg md:p-space-xl">
       <div class="lab-grid pointer-events-none absolute inset-0 -z-10 opacity-60" aria-hidden="true" />
       <div class="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
         <div class="max-w-2xl space-y-3">

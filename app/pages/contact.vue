@@ -20,7 +20,8 @@ const socials = ([
   { key: 'instagram', name: 'Instagram', href: site.instagram },
   { key: 'threads', name: 'Threads', href: site.threads },
 ] as const).filter(s => s.href)
-const email = { name: 'Email', body: t('contact.emailBody'), tag: t('contact.emailTag') }
+const email = { body: t('contact.emailBody') }
+const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-5 py-2.5 text-body-sm font-medium transition-colors motion-reduce:transition-none'
 const links = [
   { key: 'github', name: 'GitHub', href: site.github, body: t('contact.githubBody') },
   ...socials.map(c => ({ ...c, body: t(`contact.${c.key}Body`) })),
@@ -107,7 +108,6 @@ const label = 'mb-2 block text-label-md text-on-surface'
 const field = 'w-full rounded-sm border bg-surface-container-lowest px-4 py-3 text-body-md text-on-surface transition-colors motion-reduce:transition-none'
 const fieldState = (k: Field) => (errors[k] ? 'border-error' : 'border-hairline-strong hover:border-on-surface-variant')
 const hint = 'mt-2 text-body-sm text-error'
-const cardArrow = 'text-[20px] text-on-surface-variant transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transition-none'
 </script>
 
 <template>
@@ -115,48 +115,47 @@ const cardArrow = 'text-[20px] text-on-surface-variant transition-transform grou
     <LabPageHeader :title="contact.title" :lead="contact.body" />
 
     <section class="section-x py-space-2xl md:py-space-3xl" aria-labelledby="contact-methods">
-      <h2 id="contact-methods" class="text-headline-md">{{ $t('contact.methods') }}</h2>
-      <!-- Email is the main way in, so it is a large block of its own; the other places are plain rows. -->
-      <button
-        type="button"
-        aria-haspopup="dialog"
-        class="group mt-6 flex w-full items-end justify-between gap-6 border-y border-primary/70 py-8 text-left transition-colors hover:bg-surface-container-lowest motion-reduce:transition-none"
-        @click="openForm"
-      >
-        <span>
-          <span class="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <span class="text-headline-lg-mobile md:text-headline-lg">{{ email.name }}</span>
-            <span v-if="email.tag" class="rounded-sm bg-lab-signal/10 px-1.5 py-0.5 text-label-sm font-medium text-lab-signal-ink">{{ email.tag }}</span>
-          </span>
-          <span class="mt-2 block max-w-xl text-body-md text-on-surface-variant">{{ email.body }}</span>
-        </span>
-        <UiIcon name="arrow_forward" :class="[cardArrow, 'shrink-0 !text-[28px]']" />
-      </button>
+      <h2 id="contact-methods" class="sr-only">{{ $t('contact.methods') }}</h2>
 
-      <ul class="divide-y divide-hairline border-b border-hairline">
-        <li v-for="c in links" :key="c.key">
+      <!-- One main slab (the same stone as the experience page: warm dark grey, lit top edge, square corners). The way in sits at its foot. -->
+      <div class="lab-dark relative isolate overflow-hidden border border-t-8 border-white/10 border-t-[#3A3833] bg-lab-bg-raise p-space-lg md:p-space-xl">
+        <p class="font-heading text-headline-lg-mobile text-white md:text-headline-lg">{{ $t('contact.slabTitle') }}</p>
+        <p class="lab-muted mt-3 max-w-xl text-body-md">{{ email.body }}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <button
+            type="button"
+            aria-haspopup="dialog"
+            :class="[btn, 'bg-lab-signal text-lab-bg hover:bg-white']"
+            @click="openForm"
+          >
+            <UiIcon name="mail" class="text-[18px]" /> {{ $t('contact.write') }}
+          </button>
           <a
+            v-for="c in links"
+            :key="c.key"
             :href="c.href"
+            :title="c.body"
             target="_blank"
             rel="noopener noreferrer"
-            class="group grid items-baseline gap-x-6 gap-y-1 py-5 sm:grid-cols-[12rem_1fr_auto]"
+            :class="[btn, 'border border-white/25 text-white hover:border-lab-signal hover:text-lab-signal']"
             @click="track('social_click', { platform: c.key, source: 'contact_page' })"
           >
-            <span class="text-headline-sm">{{ c.name }}</span>
-            <span class="text-body-sm text-on-surface-variant">{{ c.body }}</span>
-            <UiIcon name="arrow_outward" :class="cardArrow" />
+            <UiIcon v-if="c.key === 'github'" name="code" class="text-[18px]" />
+            <UiSocialIcon v-else :name="c.key as 'instagram' | 'threads'" class="h-[18px] w-[18px]" />
+            {{ c.name }}
           </a>
-        </li>
-      </ul>
+        </div>
+      </div>
 
-      <h2 class="mt-space-xl text-headline-md">{{ $t('contact.infoTitle') }}</h2>
-      <dl class="mt-6 divide-y divide-hairline border-y border-hairline">
-        <div v-for="i in info" :key="i.title" class="grid gap-1 py-4 sm:grid-cols-[12rem_1fr] sm:gap-6">
+      <h2 class="mt-space-xl text-headline-sm">{{ $t('contact.infoTitle') }}</h2>
+      <!-- Four notes, each answering a different question: lighter stone, hairline frame, square corners, no shadow. -->
+      <dl class="mt-4 grid gap-4 sm:grid-cols-2">
+        <div v-for="i in info" :key="i.title" class="border border-hairline-strong bg-surface-container-low p-5">
           <dt class="text-body-md font-medium text-on-surface">{{ i.title }}</dt>
-          <dd class="text-body-sm text-on-surface-variant">{{ i.body }}</dd>
+          <dd class="mt-1 text-body-sm text-on-surface-variant">{{ i.body }}</dd>
         </div>
       </dl>
-      <NuxtLink :to="localePath('/legal/privacy')" class="mt-4 inline-flex items-center gap-1 text-body-sm font-medium text-lab-signal-ink underline-offset-4 hover:underline">
+      <NuxtLink :to="localePath('/legal/privacy')" class="mt-5 inline-flex items-center gap-1 text-body-sm font-medium text-lab-signal-ink u-link">
         {{ $t('contact.privacyLink') }} <UiIcon name="arrow_forward" class="text-[16px]" />
       </NuxtLink>
     </section>
@@ -225,7 +224,7 @@ const cardArrow = 'text-[20px] text-on-surface-variant transition-transform grou
           <button
             type="submit"
             :disabled="sending"
-            class="inline-flex items-center justify-center gap-2 rounded bg-lab-signal px-6 py-3 text-body-md font-medium text-lab-bg transition-colors hover:bg-lab-bg hover:text-white disabled:cursor-wait motion-reduce:transition-none"
+            class="inline-flex items-center justify-center gap-2 rounded-sm bg-lab-signal px-6 py-3 text-body-md font-medium text-lab-bg transition-colors hover:bg-lab-bg hover:text-white disabled:cursor-wait motion-reduce:transition-none"
           >
             {{ sending ? $t('contact.sending') : $t('contact.submit') }} <UiIcon name="send" class="text-[18px]" />
           </button>

@@ -43,6 +43,7 @@
     "title": "Elio Lee",
     "jobTitle": "Frontend Engineer",
     "photoAlt": "Portrait of Elio Lee",
+    "photoPull": "PULL",
     "aboutLink": "From the army to frontend engineering: full experience",
     "explore": "Explore work",
     "aboutMe": "About me",
@@ -86,12 +87,12 @@
     "chaptersMobile": "Case study sections (mobile)",
     "chapterTitles": {
       "context": "Context and goals",
-      "challenge": "Problems to solve",
-      "decision": "Technical decisions and trade-offs",
+      "challenge": "Problems and solutions",
       "implementation": "Implementation",
       "validation": "Testing and validation",
       "reflection": "Limitations and next steps"
     },
+    "solution": "What I did",
     "stack": "Tech stack",
     "screens": "Screenshots",
     "screensHint": "Click to enlarge; use the arrow keys or swipe to move between images.",
@@ -119,7 +120,6 @@
     "draft": "Draft sample article, visible in development only (404 in production)",
     "readingTime": "{n} min read",
     "articles": "{n} articles",
-    "step": "Step {n}",
     "tags": "Tags"
   },
   "contact": {
@@ -173,8 +173,9 @@
     ],
     "privacyLink": "Read the privacy policy",
     "methods": "Ways to reach me",
-    "emailTag": "Main channel",
     "emailBody": "Opens the contact form; your message goes straight to my inbox.",
+    "slabTitle": "Talk about a role or a technical problem",
+    "write": "Write a message",
     "githubBody": "Browse my code and project source",
     "instagramBody": "Find me on Instagram",
     "threadsBody": "Find me on Threads",

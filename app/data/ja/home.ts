@@ -280,9 +280,8 @@ export const projects: typeof zh.projects = [
         { title: 'LINE での操作体験', body: 'Flex Message とリッチメニューで、より直感的なチャット形式の操作を提供します。', points: ['キーワード', 'リッチメニュー', 'Flex Message', '画像付きメッセージ'] },
       ],
       challenges: [
-        { label: 'Data Integration', title: '複数のサードパーティ API の統合', problem: 'YouBike と中央気象署の API はデータ形式もフィールドの定義も異なり、そのまま使うと後々の保守コストが上がります。また、API リクエストの失敗やデータの異常も考慮する必要がありました。', solution: 'データ変換レイヤーを作ってデータ構造と返却形式を統一し、エラー処理も加えることで、システムの安定性と保守性を高めました。', tags: ['Node.js', 'Express'] },
+        { label: 'Data Integration', title: '複数の外部 API をまとめる', problem: 'YouBike のオープンデータは都市ごとに形式が違います。新北・桃園・台中・高雄は sna、tot、sbi、bemp という英語のフィールド名ですが、新竹市は「站點名稱」「緯度」「經度」という中国語のフィールド名で、台数の情報もありません。台中と高雄は配列が retVal と data.retVal に入っており、新北市は 1 回のリクエストで最大 1,000 件までしか返しません。気象署の予報データも県市ごとに別のデータセット ID です。', solution: '各都市の応答を同じ項目（駅名、総ドック数、貸出可能数、返却可能数、座標、住所）に変換し、値がないときは「未提供」と表示します。新北市は空のページが返るまでページ単位で取得します。リクエストは try/catch の中で行い、失敗するとログに記録して取得を止めますが、いまはユーザーには知らせていません。', tags: ['Node.js', 'Express'] },
         { label: 'User Experience', title: 'チャットフローの設計', problem: 'ウェブサイトのようにナビゲーションバーで操作できないため、機能が多すぎると覚えるのが大変になります。', solution: 'リッチメニューとキーワードによるフローを設計し、Flex Message で情報を表示することで、よりわかりやすい操作体験にしました。', tags: ['LINE Bot SDK', 'Flex Message'] },
-        { label: 'Data Normalization', title: '複数都市のデータ統合', problem: '都市ごとに YouBike API の構造やデータ形式が異なり、データ処理と保守が難しくなっていました。', solution: '共通のデータ形式と変換ロジックを作り、異なるソースのデータを同じ構造に整えることで、今後の機能追加をしやすくしました。', tags: ['Node.js', 'API Integration'] },
       ],
       verification: [
         '小さなスクリプトを書いて YouBike と天気の API を実際に呼び出し、返却されるデータ形式を確認しました',

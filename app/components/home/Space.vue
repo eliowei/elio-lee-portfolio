@@ -58,6 +58,25 @@ async function onStage(slug: string) {
 }
 
 const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 text-body-md font-medium transition-colors motion-reduce:transition-none'
+// The opening (see nuxt.config.ts: <html data-intro>) never makes anyone wait: the first input or any scrolling ends it at once.
+onMounted(() => {
+  const d = document.documentElement
+  if (d.dataset.intro !== '1') return
+  const events = ['pointerdown', 'keydown', 'wheel', 'touchstart']
+  const onScroll = () => { if (scrollY > 8) end() }
+  const off = () => {
+    for (const e of events) removeEventListener(e, end)
+    removeEventListener('scroll', onScroll)
+  }
+  function end() {
+    d.dataset.intro = 'done'
+    off()
+  }
+  for (const e of events) addEventListener(e, end, { passive: true })
+  addEventListener('scroll', onScroll, { passive: true })
+  // The sequence is over about 1.9 s after the first paint: hand the letters to the mouse right then, not at the safety timeout.
+  setTimeout(end, Math.max(0, 2100 - performance.now()))
+})
 </script>
 
 <template>
@@ -66,16 +85,18 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
 
     <div class="relative md:-mt-[100svh]">
       <!-- Hero -->
-      <section class="pointer-events-none relative flex min-h-[100svh] flex-col justify-end pb-20 pt-28 md:pb-24" aria-labelledby="hero-title">
+      <section class="pointer-events-none relative flex min-h-[100svh] flex-col justify-end overflow-x-clip pb-20 pt-28 md:pb-24" aria-labelledby="hero-title">
         <div class="section-x pointer-events-auto">
           <p class="lab-eyebrow lab-in">{{ hero.eyebrow }}</p>
-          <h1 id="hero-title" class="space-title lab-in mt-6 max-w-[12em] text-white [text-wrap:balance] [word-break:auto-phrase]" style="--d: 80ms">
-            <span class="block"><UiMagnetText :text="hero.title[0]!" :plain="locale === 'ja'" /></span>
-            <span class="block"><UiMagnetText :text="hero.title[1]!" :plain="locale === 'ja'" /></span>
+          <h1 id="hero-title" class="space-title monument-title mt-6 max-w-[12em] text-white [text-wrap:balance] [word-break:auto-phrase]">
+            <span v-for="(line, i) in hero.title" :key="i" class="monument-line" :style="{ '--line-delay': `${180 + i * 280}ms` }">
+              <span class="monument-letters"><UiMagnetText :text="line" :lang="locale" entrance :entrance-delay="180 + i * 280" /></span>
+              <span class="monument-scan" aria-hidden="true" />
+            </span>
           </h1>
           <SpaceMonument class="mx-auto mt-10 h-72 w-auto max-w-full md:hidden" />
-          <p class="lab-in lab-muted mt-8 max-w-[36rem] text-body-lg" style="--d: 160ms">{{ hero.intro }}</p>
-          <div class="lab-in mt-10 flex flex-wrap items-center gap-3" style="--d: 240ms">
+          <p class="lab-in hero-late-a lab-muted mt-8 max-w-[36rem] text-body-lg">{{ hero.intro }}</p>
+          <div class="lab-in hero-late-b mt-10 flex flex-wrap items-center gap-3">
             <a href="#works" :class="[btn, 'bg-lab-signal text-lab-bg hover:bg-white']">
               {{ $t('home.explore') }}
             </a>
@@ -140,7 +161,7 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
               <ul class="mt-4 flex flex-wrap gap-1.5" :aria-label="$t('common.techUsed')">
                 <li v-for="t in current.tags" :key="t" class="lab-chip">{{ t }}</li>
               </ul>
-              <NuxtLink :to="localePath(`/projects/${current.slug}`)" class="mt-6 inline-flex items-center gap-2 font-medium text-lab-signal underline-offset-4 hover:underline">
+              <NuxtLink :to="localePath(`/projects/${current.slug}`)" class="mt-6 inline-flex items-center gap-2 font-medium text-lab-signal u-link">
                 {{ $t('home.enterCase', { title: current.title }) }} <UiIcon name="arrow_forward" class="text-[18px]" />
               </NuxtLink>
             </div>
@@ -174,7 +195,7 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
             </ol>
 
             <!-- Skip the 3D: the plain project index. -->
-            <NuxtLink :to="localePath('/projects')" class="mt-8 inline-flex items-center gap-2 text-label-sm text-lab-on-dark-muted underline-offset-4 hover:text-white hover:underline">
+            <NuxtLink :to="localePath('/projects')" class="mt-8 inline-flex items-center gap-2 text-label-sm text-lab-on-dark-muted u-link hover:text-white">
               {{ $t('home.allWorks') }} <UiIcon name="arrow_forward" class="text-[16px]" />
             </NuxtLink>
           </div>
@@ -183,3 +204,26 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
     </div>
   </div>
 </template>
+
+<style scoped>
+/* Without the opening the title still arrives: the same short rise as the text below it. (Not after the opening: then it is already there.) */
+:global(html:not([data-intro]) .monument-title) { animation: lab-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 80ms both; }
+@media (prefers-reduced-motion: reduce) { :global(html:not([data-intro]) .monument-title) { animation: none; } }
+.monument-line { position: relative; display: block; width: fit-content; max-width: 100%; }
+.monument-letters { display: block; }
+/* Translate a full-width carrier so the vertical scan follows actual line width. */
+.monument-scan { position: absolute; inset: -8% 0; pointer-events: none; opacity: 0; display: none; }
+:global(html[data-intro='1'] .monument-scan) { display: block; animation: inscription-scan 1050ms linear both; animation-delay: var(--line-delay); }
+/* The intro text and buttons arrive after the scan; with no intro they keep the page's normal short delays. */
+.hero-late-a { --d: 160ms; }
+.hero-late-b { --d: 240ms; }
+:global(html[data-intro='1'] .hero-late-a) { --d: 1150ms; }
+:global(html[data-intro='1'] .hero-late-b) { --d: 1250ms; }
+.monument-scan::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--lab-signal); box-shadow: -8px 0 18px rgb(255 91 31 / 0.28); }
+@keyframes inscription-scan {
+  0% { opacity: 0; transform: translateX(0); }
+  5% { opacity: 1; }
+  80% { opacity: 1; transform: translateX(100%); }
+  100% { opacity: 0; transform: translateX(100%); }
+}
+</style>

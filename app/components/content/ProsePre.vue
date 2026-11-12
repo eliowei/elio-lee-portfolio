@@ -35,7 +35,7 @@ onBeforeUnmount(() => clearTimeout(timer))
         <button
           type="button"
           data-cursor-label=""
-          class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 transition-colors hover:bg-white/10 hover:text-white"
+          class="inline-flex items-center gap-1 rounded-sm px-1.5 py-0.5 transition-colors hover:bg-white/10 hover:text-white"
           @click="copy"
         >
           <UiIcon :name="copied ? 'check' : 'content_copy'" class="text-[14px]" />

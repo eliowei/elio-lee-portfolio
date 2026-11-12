@@ -15,7 +15,7 @@ const toTop = () => window.scrollTo({ top: 0, behavior: matchMedia('(prefers-red
       v-if="visible"
       type="button"
       data-cursor-label=""
-      class="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full border border-white/15 bg-lab-bg px-4 py-2.5 text-body-sm text-white shadow-lg transition-colors hover:border-lab-signal hover:text-lab-signal motion-reduce:transition-none"
+      class="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-sm border border-white/15 bg-lab-bg px-4 py-2.5 text-body-sm text-white shadow-lg transition-colors hover:border-lab-signal hover:text-lab-signal motion-reduce:transition-none"
       @click="toTop"
     >
       <UiIcon name="arrow_upward" class="text-[18px]" />

@@ -43,6 +43,7 @@
     "title": "Elio Lee",
     "jobTitle": "フロントエンドエンジニア",
     "photoAlt": "Elio Lee（李柏偉）のプロフィール写真",
+    "photoPull": "引っぱる",
     "aboutLink": "軍務からフロントエンドエンジニアへ：経歴を見る",
     "explore": "制作実績を見る",
     "aboutMe": "自己紹介",
@@ -86,12 +87,12 @@
     "chaptersMobile": "ケーススタディの構成（モバイル）",
     "chapterTitles": {
       "context": "背景と要件",
-      "challenge": "解決すべき課題",
-      "decision": "技術的な判断とトレードオフ",
+      "challenge": "課題と解決",
       "implementation": "実装",
       "validation": "テストと検証",
       "reflection": "制約と今後"
     },
+    "solution": "対応",
     "stack": "技術構成",
     "screens": "スクリーンショット",
     "screensHint": "クリックで拡大表示。左右キーまたはスワイプで切り替えられます。",
@@ -119,7 +120,6 @@
     "draft": "下書き サンプル記事。開発環境でのみ表示されます（本番環境では 404）",
     "readingTime": "{n} 分で読めます",
     "articles": "{n} 件の記事",
-    "step": "ステップ {n}",
     "tags": "タグ"
   },
   "contact": {
@@ -173,8 +173,9 @@
     ],
     "privacyLink": "プライバシーポリシーを読む",
     "methods": "連絡方法",
-    "emailTag": "メインの窓口",
     "emailBody": "クリックするとお問い合わせフォームが開き、メッセージは私のメールボックスに直接届きます。",
+    "slabTitle": "お仕事のご相談や技術のご質問はこちら",
+    "write": "メッセージを送る",
     "githubBody": "コードと作品のソースを見る",
     "instagramBody": "Instagram で私を見つける",
     "threadsBody": "Threads で私を見つける",

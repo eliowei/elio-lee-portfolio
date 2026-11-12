@@ -22,13 +22,12 @@ const coverSlide = cover ? Math.max(coverAt, 0) : -1
 const thumbs = slides.map((s, i) => ({ ...s, i })).filter(t => t.i !== coverSlide)
 const lightbox = ref<number | null>(null)
 
-// Editorial case study: Context → Challenge → Decision → Implementation → Validation → Reflection.
+// Editorial case study: Context → Problems and solutions → Implementation → Validation → Reflection.
 // A chapter with no real data is hidden in production; Validation / Reflection show a TODO box in dev only.
 const challenges = detail.challenges ?? []
 const has = {
   context: true, // falls back to the project summary
-  challenge: challenges.length > 0,
-  decision: challenges.length > 0 || !!detail.stack?.length,
+  challenge: challenges.length > 0 || !!detail.stack?.length,
   implementation: true,
   validation: !!(detail.verification?.length || detail.results?.length),
   reflection: !!detail.retrospective,
@@ -128,10 +127,10 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
             <div v-if="detail.demo || detail.github">
               <dt :class="eyebrow">{{ $t('projects.links') }}</dt>
               <dd class="mt-1 flex flex-wrap gap-x-4 gap-y-1">
-                <a v-if="detail.demo" :href="detail.demo" data-cursor-label="DEMO" target="_blank" rel="noopener noreferrer" @click="track('project_demo_click', { project_slug: project.slug })" class="inline-flex items-center gap-1 font-medium text-lab-signal-ink underline decoration-lab-signal-ink/40 underline-offset-4 hover:decoration-lab-signal-ink">
+                <a v-if="detail.demo" :href="detail.demo" data-cursor-label="DEMO" target="_blank" rel="noopener noreferrer" @click="track('project_demo_click', { project_slug: project.slug })" class="inline-flex items-center gap-1 font-medium text-lab-signal-ink underline decoration-lab-signal-ink/40 underline-offset-4 transition-colors hover:decoration-lab-signal-ink">
                   {{ $t('projects.demo') }} <UiIcon name="arrow_outward" class="text-[14px]" />
                 </a>
-                <a v-if="detail.github" :href="detail.github" data-cursor-label="CODE" target="_blank" rel="noopener noreferrer" @click="track('project_github_click', { project_slug: project.slug })" class="inline-flex items-center gap-1 font-medium text-on-surface underline decoration-hairline-strong underline-offset-4 hover:decoration-on-surface">
+                <a v-if="detail.github" :href="detail.github" data-cursor-label="CODE" target="_blank" rel="noopener noreferrer" @click="track('project_github_click', { project_slug: project.slug })" class="inline-flex items-center gap-1 font-medium text-on-surface underline decoration-hairline-strong underline-offset-4 transition-colors hover:decoration-on-surface">
                   GitHub <UiIcon name="arrow_outward" class="text-[14px]" />
                 </a>
               </dd>
@@ -171,26 +170,20 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
           </div>
         </section>
 
+        <!-- Problems and solutions in one chapter: each problem is followed at once by what was done about it. -->
         <section v-if="has.challenge" id="challenge" :class="chapter" aria-labelledby="challenge-h">
           <h2 id="challenge-h" :class="h2">{{ $t('projects.chapterTitles.challenge') }}</h2>
-          <ol class="mt-6 divide-y divide-hairline border-y border-hairline">
-            <li v-for="(c, i) in challenges" :key="c.title" class="grid gap-2 py-5 sm:grid-cols-[3.5rem_1fr]">
+          <ol v-if="challenges.length" class="mt-6 divide-y divide-hairline border-y border-hairline">
+            <li v-for="(c, i) in challenges" :key="c.title" class="grid gap-2 py-6 sm:grid-cols-[3.5rem_1fr]">
               <span class="font-mono text-label-md text-on-surface-variant">C{{ i + 1 }}</span>
               <div>
                 <h3 class="text-headline-sm">{{ c.title }}</h3>
                 <p class="mt-1.5 text-body-md text-on-surface-variant">{{ c.problem }}</p>
+                <p class="mt-4 text-body-md text-on-surface">
+                  <span class="mr-2 text-label-md font-medium text-lab-signal-ink">{{ $t('projects.solution') }}</span>{{ c.solution }}
+                </p>
+                <ul v-if="c.tags?.length" class="mt-3 flex flex-wrap gap-1.5"><li v-for="t in c.tags" :key="t" class="lab-chip-light">{{ t }}</li></ul>
               </div>
-            </li>
-          </ol>
-        </section>
-
-        <section v-if="has.decision" id="decision" :class="chapter" aria-labelledby="decision-h">
-          <h2 id="decision-h" :class="h2">{{ $t('projects.chapterTitles.decision') }}</h2>
-          <ol v-if="challenges.length" class="mt-6 space-y-4">
-            <li v-for="(c, i) in challenges" :key="c.title" class="rounded-sm bg-surface-container-lowest p-5 shadow-sm">
-              <p class="font-mono text-label-sm text-on-surface-variant">C{{ i + 1 }} → {{ c.label }}</p>
-              <p class="mt-2 text-body-md text-on-surface">{{ c.solution }}</p>
-              <ul v-if="c.tags?.length" class="mt-3 flex flex-wrap gap-1.5"><li v-for="t in c.tags" :key="t" class="lab-chip-light">{{ t }}</li></ul>
             </li>
           </ol>
           <template v-if="detail.stack?.length">

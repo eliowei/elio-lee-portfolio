@@ -2,7 +2,7 @@
 import { categories } from '~/data/site'
 
 const { t } = useI18n()
-const { method, page } = useData()
+const { page } = useData()
 const { track, slugOf } = useAnalytics()
 const title = `${t('blog.title')} | Elio Lee`
 const description = page.lead
@@ -87,20 +87,6 @@ const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-
           </NuxtLink>
         </li>
       </ol>
-    </section>
-
-    <section class="border-t border-hairline bg-surface-container-lowest" aria-labelledby="method">
-      <div class="section-x py-space-2xl">
-        <h2 id="method" class="max-w-2xl text-headline-lg-mobile md:text-headline-lg">{{ method.title }}</h2>
-        <p class="mt-4 max-w-2xl text-body-md text-on-surface-variant">{{ method.body }}</p>
-        <ol class="mt-10 grid gap-x-8 gap-y-8 border-t border-hairline pt-8 sm:grid-cols-2 lg:grid-cols-4">
-          <li v-for="(s, i) in method.steps" :key="s.title">
-            <div class="text-label-sm text-lab-signal-ink">{{ $t('blog.step', { n: i + 1 }) }}</div>
-            <h3 class="mt-2 text-headline-sm">{{ s.title }}</h3>
-            <p class="mt-1 text-body-sm text-on-surface-variant">{{ s.body }}</p>
-          </li>
-        </ol>
-      </div>
     </section>
   </div>
 </template>

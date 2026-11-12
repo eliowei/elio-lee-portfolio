@@ -5,7 +5,7 @@ const { contact } = useData()
 const localePath = useLocalePath()
 const { track } = useAnalytics()
 
-const btn = 'inline-flex items-center justify-center gap-2 rounded px-6 py-3 text-body-md font-medium transition-colors motion-reduce:transition-none'
+const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 text-body-md font-medium transition-colors motion-reduce:transition-none'
 </script>
 
 <template>

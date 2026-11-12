@@ -127,7 +127,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="overflow-hidden">
-    <div ref="host" aria-hidden="true" class="absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none" :class="status === 'ready' ? 'opacity-100' : 'opacity-0'" />
+    <div ref="host" aria-hidden="true" class="stage-arrival absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none" :class="status === 'ready' ? 'opacity-100' : 'opacity-0'" />
     <!-- Keeps the HTML column (title / project list) on a dark ground whatever the camera is looking at. -->
     <div aria-hidden="true" class="pointer-events-none absolute inset-y-0 left-0 w-[58%] bg-gradient-to-r from-lab-bg via-lab-bg/85 to-transparent" />
     <SpaceMonument v-if="status === 'static'" class="absolute bottom-[8%] right-[4%] h-[78%] w-auto opacity-90" />
@@ -153,3 +153,9 @@ onBeforeUnmount(() => {
     </template>
   </div>
 </template>
+
+<style scoped>
+/* Arrival push stays on the canvas layer so scroll camera and labels retain their coordinates after arrival. */
+:global(html[data-intro='1'] .stage-arrival) { animation: stage-arrive 1800ms cubic-bezier(0.16, 1, 0.3, 1) both; transform-origin: 70% 50%; }
+@keyframes stage-arrive { from { transform: scale(0.96); } to { transform: none; } }
+</style>

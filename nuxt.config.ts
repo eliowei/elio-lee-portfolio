@@ -68,6 +68,11 @@ export default defineNuxtConfig({
     head: {
       // Theme before first paint (no flash of the wrong theme): saved choice, else the OS preference. Keep in sync with useTheme.ts.
       script: [{
+        // Opening sequence on the home page (see Space.vue): every full load of the home page, never for reduced motion, a hash or a query (so coming back from a case study does not replay it).
+        // `data-intro="1"` on <html> switches the CSS animations on; Space.vue sets it to "done" when they have finished (or on the first input), and this timer does so after 4.5 s at the latest.
+        innerHTML: "(function(){try{var p=location.pathname.replace(/\\/$/,'');if(['','/en','/ja'].indexOf(p)<0||location.hash||location.search||matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.dataset.intro='1';setTimeout(function(){d.dataset.intro='done'},4500)}catch(e){}})()",
+        tagPosition: 'head',
+      }, {
         innerHTML: "(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t})()",
         tagPosition: 'head',
       }],

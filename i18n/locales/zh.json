@@ -43,6 +43,7 @@
     "title": "Elio Lee",
     "jobTitle": "前端工程師",
     "photoAlt": "李柏偉 Elio Lee 的個人照片",
+    "photoPull": "拖曳",
     "aboutLink": "從軍職到前端工程：完整經歷",
     "explore": "探索作品",
     "aboutMe": "認識我",
@@ -86,12 +87,12 @@
     "chaptersMobile": "案例段落（行動版）",
     "chapterTitles": {
       "context": "背景與需求",
-      "challenge": "需要解決的問題",
-      "decision": "技術方案與取捨",
+      "challenge": "問題與解法",
       "implementation": "實作過程",
       "validation": "測試與驗證",
       "reflection": "限制與後續"
     },
+    "solution": "怎麼解",
     "stack": "技術組成",
     "screens": "實際畫面",
     "screensHint": "點擊放大檢視，可用左右鍵或滑動切換。",
@@ -119,7 +120,6 @@
     "draft": "草稿 範例文章，僅開發環境可見（正式環境為 404）",
     "readingTime": "{n} 分鐘閱讀",
     "articles": "{n} 篇文章",
-    "step": "步驟 {n}",
     "tags": "標籤"
   },
   "contact": {
@@ -173,8 +173,9 @@
     ],
     "privacyLink": "閱讀隱私權政策",
     "methods": "聯絡方式",
-    "emailTag": "主要管道",
     "emailBody": "點擊開啟聯絡表單，訊息會直接寄到我的信箱。",
+    "slabTitle": "聊聊工作機會或技術問題",
+    "write": "寫訊息",
     "githubBody": "查看程式碼與作品原始碼",
     "instagramBody": "在 Instagram 上找到我",
     "threadsBody": "在 Threads 上找到我",
