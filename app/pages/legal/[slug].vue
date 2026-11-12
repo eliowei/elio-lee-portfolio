@@ -14,7 +14,6 @@ useSeoMeta({ title, description: doc.value.description, ogTitle: title, ogDescri
   <div v-if="doc" class="section-x pb-space-xl pt-28 md:pt-32">
     <div class="mx-auto max-w-[720px]">
       <header class="space-y-3 pb-space-lg">
-        <p class="lab-eyebrow">{{ $t('footer.legal') }}</p>
         <h1 class="text-headline-lg-mobile md:text-headline-lg">{{ doc.title }}</h1>
         <p class="font-mono text-label-md text-on-surface-variant">
           {{ $t('legal.updated') }}：<time :datetime="doc.updated">{{ doc.updated.replaceAll('-', '/') }}</time>

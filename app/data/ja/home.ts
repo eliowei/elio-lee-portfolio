@@ -9,7 +9,6 @@ export const hero: typeof zh.hero = {
 
 export const about: typeof zh.about = {
   photo: '/images/image0.webp',
-  eyebrow: '自己紹介',
   title: '要件をこなすことから、問題を理解することへ。',
   body: [
     'Elio（李柏偉）です。主に Vue でウェブのインターフェースを開発しているフロントエンドエンジニアです。働き始めた頃は、画面を作って機能を動かすことを何より気にしていました。入社後は Vue 2 と Vue 3 のプロジェクトに同時に関わるようになり、既存コードの設計意図、フレームワーク間の違い、変更が及ぼす影響範囲を理解したうえで、適切な実装方法を決めるようになりました。',
@@ -299,7 +298,6 @@ export const projects: typeof zh.projects = [
 ]
 
 export const contact: typeof zh.contact = {
-  eyebrow: 'お問い合わせ',
   title: 'お気軽にご連絡ください。',
   body: '新しいフロントエンドの仕事の機会を探しています。Vue に慣れていて、問題の根本原因まで追いかけるフロントエンドエンジニアをお探しでしたら、ぜひご連絡ください。',
 }

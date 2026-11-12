@@ -32,12 +32,12 @@
 
 | Token | 值 | 用途 |
 |---|---|---|
-| `lab-bg` | `#0C0D0F` | 深色區塊底色 |
-| `lab-bg-soft` | `#15171A` | 深色區塊內的卡片、手機版作品卡 |
-| `lab-bg-raise` | `#1F2125` | 更高一層的深色表面 |
+| `lab-bg` | `#171614` | 深色區塊底色 |
+| `lab-bg-soft` | `#1D1B19` | 深色區塊內的卡片、手機版作品卡 |
+| `lab-bg-raise` | `#22201D` | 更高一層的深色表面 |
 | `lab-signal` | `#FF5B1F` | 品牌橘：深色底上的文字、按鈕底色、非文字標記 |
-| `lab-on-dark` | `#ECEBE7` | 深色底上的主要文字 |
-| `lab-on-dark-muted` | `#9A9DA3` | 深色底上的次要文字 |
+| `lab-on-dark` | `#EAE6DE` | 深色底上的主要文字 |
+| `lab-on-dark-muted` | `#A8A39A` | 深色底上的次要文字 |
 | `lab-signal-ink` | 隨主題（見 3.2） | 閱讀區的橘色文字與連結 |
 | `lab-paper` | 隨主題（= `background`） | 閱讀區底色 |
 
@@ -51,31 +51,31 @@
 
 | Token | Tailwind class 範例 | 亮色 | 暗色 | 用途 |
 |---|---|---|---|---|
-| `background` | `bg-background` / `text-background` | `#f3f2ee` | `#111316` | 頁面底色（閱讀區） |
-| `surface` | `bg-surface` / `text-surface` | `#f3f2ee` | `#111316` | 同 `background`，一般表面 |
-| `surface-dim` | `bg-surface-dim` / `text-surface-dim` | `#dcdad4` | `#0c0d0f` |  |
-| `surface-bright` | `bg-surface-bright` / `text-surface-bright` | `#ffffff` | `#2a2d32` |  |
-| `surface-variant` | `bg-surface-variant` / `text-surface-variant` | `#e8e6e1` | `#1f2226` |  |
-| `surface-container-lowest` | `bg-surface-container-lowest` / `text-surface-container-lowest` | `#ffffff` | `#181a1e` | 卡片、輸入框、圖表節點（亮色為白、暗色略比底色亮） |
-| `surface-container-low` | `bg-surface-container-low` / `text-surface-container-low` | `#ecebe6` | `#15171a` |  |
-| `surface-container` | `bg-surface-container` / `text-surface-container` | `#e6e4df` | `#1b1d21` | 標籤、行內程式碼底色 |
-| `surface-container-high` | `bg-surface-container-high` / `text-surface-container-high` | `#dfddd7` | `#212429` | `UiChip` 預設底色 |
-| `surface-container-highest` | `bg-surface-container-highest` / `text-surface-container-highest` | `#d6d4ce` | `#282b30` |  |
+| `background` | `bg-background` / `text-background` | `#f3f0e9` | `#1a1917` | 頁面底色（閱讀區） |
+| `surface` | `bg-surface` / `text-surface` | `#f3f0e9` | `#1a1917` | 同 `background`，一般表面 |
+| `surface-dim` | `bg-surface-dim` / `text-surface-dim` | `#dcdad4` | `#171614` |  |
+| `surface-bright` | `bg-surface-bright` / `text-surface-bright` | `#ffffff` | `#302e2a` |  |
+| `surface-variant` | `bg-surface-variant` / `text-surface-variant` | `#e8e6e1` | `#262421` |  |
+| `surface-container-lowest` | `bg-surface-container-lowest` / `text-surface-container-lowest` | `#ffffff` | `#1e1d1a` | 卡片、輸入框、圖表節點（亮色為白、暗色略比底色亮） |
+| `surface-container-low` | `bg-surface-container-low` / `text-surface-container-low` | `#ecebe6` | `#201f1c` |  |
+| `surface-container` | `bg-surface-container` / `text-surface-container` | `#e6e4df` | `#252320` | 標籤、行內程式碼底色 |
+| `surface-container-high` | `bg-surface-container-high` / `text-surface-container-high` | `#dfddd7` | `#2b2926` | `UiChip` 預設底色 |
+| `surface-container-highest` | `bg-surface-container-highest` / `text-surface-container-highest` | `#d6d4ce` | `#32302c` |  |
 | `surface-tint` | `bg-surface-tint` / `text-surface-tint` | `#b83d0e` | `#ff7a47` | 強調色疊色 |
 
 #### 文字與邊線
 
 | Token | Tailwind class 範例 | 亮色 | 暗色 | 用途 |
 |---|---|---|---|---|
-| `on-background` | `bg-on-background` / `text-on-background` | `#0c0d0f` | `#ecebe7` |  |
-| `on-surface` | `bg-on-surface` / `text-on-surface` | `#0c0d0f` | `#ecebe7` | 主要文字 |
-| `on-surface-variant` | `bg-on-surface-variant` / `text-on-surface-variant` | `#55575c` | `#a8abb1` | 次要文字、說明 |
-| `outline` | `bg-outline` / `text-outline` | `#6b6e74` | `#8a8d94` | 非文字元素的邊線（圖表連線等） |
-| `outline-variant` | `bg-outline-variant` / `text-outline-variant` | `#cfccc5` | `#3a3d43` |  |
-| `hairline` | `bg-hairline` / `text-hairline` | `#dedcd6` | `#26292e` | 卡片外框（`shadow-sm` 的 1px 描邊）、分隔線 |
-| `hairline-strong` | `bg-hairline-strong` / `text-hairline-strong` | `#cfccc5` | `#373a40` | 輸入框、hover 時加深的描邊 |
-| `inverse-surface` | `bg-inverse-surface` / `text-inverse-surface` | `#0c0d0f` | `#ecebe7` | 反色表面（與目前主題相反） |
-| `inverse-on-surface` | `bg-inverse-on-surface` / `text-inverse-on-surface` | `#ecebe7` | `#0c0d0f` |  |
+| `on-background` | `bg-on-background` / `text-on-background` | `#0c0d0f` | `#eae6de` |  |
+| `on-surface` | `bg-on-surface` / `text-on-surface` | `#0c0d0f` | `#eae6de` | 主要文字 |
+| `on-surface-variant` | `bg-on-surface-variant` / `text-on-surface-variant` | `#55575c` | `#a8a39a` | 次要文字、說明 |
+| `outline` | `bg-outline` / `text-outline` | `#6b6e74` | `#8f8a82` | 非文字元素的邊線（圖表連線等） |
+| `outline-variant` | `bg-outline-variant` / `text-outline-variant` | `#cfccc5` | `#3d3a35` |  |
+| `hairline` | `bg-hairline` / `text-hairline` | `#dedcd6` | `#2f2d29` | 卡片外框（`shadow-sm` 的 1px 描邊）、分隔線 |
+| `hairline-strong` | `bg-hairline-strong` / `text-hairline-strong` | `#cfccc5` | `#3f3c37` | 輸入框、hover 時加深的描邊 |
+| `inverse-surface` | `bg-inverse-surface` / `text-inverse-surface` | `#0c0d0f` | `#eae6de` | 反色表面（與目前主題相反） |
+| `inverse-on-surface` | `bg-inverse-on-surface` / `text-inverse-on-surface` | `#eae6de` | `#0c0d0f` |  |
 
 #### 品牌色（橘）
 
@@ -95,14 +95,14 @@
 
 | Token | Tailwind class 範例 | 亮色 | 暗色 | 用途 |
 |---|---|---|---|---|
-| `secondary` | `bg-secondary` / `text-secondary` | `#55575c` | `#a8abb1` | 灰階次要色 |
+| `secondary` | `bg-secondary` / `text-secondary` | `#55575c` | `#a8a39a` | 灰階次要色 |
 | `on-secondary` | `bg-on-secondary` / `text-on-secondary` | `#ffffff` | `#0c0d0f` |  |
-| `secondary-container` | `bg-secondary-container` / `text-secondary-container` | `#e6e4df` | `#2a2d32` |  |
-| `on-secondary-container` | `bg-on-secondary-container` / `text-on-secondary-container` | `#3a3c40` | `#dcdad4` |  |
-| `secondary-fixed` | `bg-secondary-fixed` / `text-secondary-fixed` | `#e6e4df` | `#2a2d32` |  |
-| `secondary-fixed-dim` | `bg-secondary-fixed-dim` / `text-secondary-fixed-dim` | `#cfccc5` | `#3a3d43` |  |
-| `on-secondary-fixed` | `bg-on-secondary-fixed` / `text-on-secondary-fixed` | `#0c0d0f` | `#ecebe7` |  |
-| `on-secondary-fixed-variant` | `bg-on-secondary-fixed-variant` / `text-on-secondary-fixed-variant` | `#3a3c40` | `#dcdad4` |  |
+| `secondary-container` | `bg-secondary-container` / `text-secondary-container` | `#e6e4df` | `#2d2b27` |  |
+| `on-secondary-container` | `bg-on-secondary-container` / `text-on-secondary-container` | `#3a3c40` | `#dcd8cf` |  |
+| `secondary-fixed` | `bg-secondary-fixed` / `text-secondary-fixed` | `#e6e4df` | `#2d2b27` |  |
+| `secondary-fixed-dim` | `bg-secondary-fixed-dim` / `text-secondary-fixed-dim` | `#cfccc5` | `#3d3a35` |  |
+| `on-secondary-fixed` | `bg-on-secondary-fixed` / `text-on-secondary-fixed` | `#0c0d0f` | `#eae6de` |  |
+| `on-secondary-fixed-variant` | `bg-on-secondary-fixed-variant` / `text-on-secondary-fixed-variant` | `#3a3c40` | `#dcd8cf` |  |
 | `tertiary` | `bg-tertiary` / `text-tertiary` | `#b83d0e` | `#ff7a47` | 目前與 `primary` 相同，保留是為了語意名稱完整 |
 | `on-tertiary` | `bg-on-tertiary` / `text-on-tertiary` | `#ffffff` | `#0c0d0f` |  |
 | `tertiary-container` | `bg-tertiary-container` / `text-tertiary-container` | `#ff5b1f` | `#ff5b1f` |  |

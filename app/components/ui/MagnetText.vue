@@ -1,8 +1,9 @@
 <script setup lang="ts">
-// Display text whose letters lean toward the mouse pointer when it comes near (hero title). Mouse only, off for reduced motion.
+// Display text whose letters behave like jelly standing on the baseline when the mouse pointer comes near (hero title):
+// each letter stays where it is, but its top leans toward the pointer (skew) and stretches or squashes (scale), driven by a
+// slightly under-damped spring, so it overshoots and wobbles back when the pointer leaves. Mouse only, off for reduced motion.
 // Letters are separate inline-blocks, so Latin words are wrapped in a nowrap box (they must not break mid-word) while CJK
 // characters may wrap between each other. A screen reader gets the plain text; the split letters are aria-hidden.
-// The offset uses the `translate` property, so it never clashes with the parent's own transform / animation.
 // `plain` renders ordinary text with no effect: split letters cannot follow Japanese line-breaking rules (small kana, phrase breaks).
 const props = defineProps<{ text: string; plain?: boolean }>()
 
@@ -13,20 +14,31 @@ const tokens = computed(() => (props.text.match(/\s+|[\w'’,.-]+|./gu) ?? []).m
   chars: [...t],
 })))
 
-const RADIUS = 140 // px around the pointer that reaches a letter
-const MAX = 16 // px a letter can lean
+const RADIUS = 170 // px around the pointer that reaches a letter
+const LEAN = 16 // deg a letter's top can lean toward the pointer
+const STRETCH = 0.16 // how much a letter grows (pointer above it) or shrinks (below it)
+const STIFFNESS = 170 // spring: higher = snappier
+const DAMPING = 9 // spring: lower = more wobble (critical damping would be ~26)
 const root = ref<HTMLElement>()
+
+type Jelly = { lean: number; leanV: number; grow: number; growV: number; tLean: number; tGrow: number }
 
 onMounted(() => {
   if (props.plain || !matchMedia('(hover: hover) and (pointer: fine)').matches) return
   const reduced = matchMedia('(prefers-reduced-motion: reduce)')
   const html = document.documentElement
   const chars = [...root.value!.querySelectorAll<HTMLElement>('[data-ch]')]
-  const st = chars.map(() => ({ x: 0, y: 0, tx: 0, ty: 0 }))
+  for (const c of chars) c.style.transformOrigin = '50% 88%' // stands on the baseline
+  const st: Jelly[] = chars.map(() => ({ lean: 0, leanV: 0, grow: 0, growV: 0, tLean: 0, tGrow: 0 }))
   let px = 0, py = 0, near = false, dirty = false, raf = 0, last = 0
 
+  const spring = (x: number, v: number, target: number, dt: number) => {
+    v += (STIFFNESS * (target - x) - DAMPING * v) * dt
+    return [x + v * dt, v] as const
+  }
+
   const tick = (t: number) => {
-    const k = 1 - Math.pow(1 - 0.18, Math.min(t - last, 50) / 16.7)
+    const dt = Math.min((t - last) / 1000, 0.032)
     last = t
     let busy = false
     chars.forEach((c, i) => {
@@ -34,19 +46,20 @@ onMounted(() => {
       if (dirty) {
         if (near) {
           const r = c.getBoundingClientRect()
-          const dx = px - (r.left + r.width / 2 - s.x) // undo our own offset, or the centre would chase itself
-          const dy = py - (r.top + r.height / 2 - s.y)
+          const dx = px - (r.left + r.width / 2)
+          const dy = py - (r.top + r.height / 2)
           const d = Math.hypot(dx, dy)
-          const pull = d < RADIUS ? (1 - d / RADIUS) ** 2 * MAX * Math.min(1, d / 40) : 0 // eases to 0 right under the pointer, no flip-flop
-          s.tx = d ? (dx / d) * pull : 0
-          s.ty = d ? (dy / d) * pull : 0
+          const f = d < RADIUS ? (1 - d / RADIUS) ** 2 : 0
+          s.tLean = -Math.max(-1, Math.min(1, dx / 90)) * LEAN * f // skewX turns the top left for a positive angle, so flip it
+          s.tGrow = -Math.max(-1, Math.min(1, dy / 90)) * STRETCH * f // pointer above (dy < 0) → taller
         }
-        else s.tx = s.ty = 0
+        else s.tLean = s.tGrow = 0
       }
-      s.x += (s.tx - s.x) * k
-      s.y += (s.ty - s.y) * k
-      if (!s.tx && !s.ty && Math.abs(s.x) + Math.abs(s.y) < 0.05) { s.x = s.y = 0; c.style.translate = '' }
-      else { c.style.translate = `${s.x.toFixed(1)}px ${s.y.toFixed(1)}px`; busy = true }
+      ;[s.lean, s.leanV] = spring(s.lean, s.leanV, s.tLean, dt)
+      ;[s.grow, s.growV] = spring(s.grow, s.growV, s.tGrow, dt)
+      const rest = !s.tLean && !s.tGrow && Math.abs(s.lean) + Math.abs(s.leanV) + Math.abs(s.grow * 10) + Math.abs(s.growV) < 0.05
+      if (rest) { s.lean = s.leanV = s.grow = s.growV = 0; c.style.transform = '' }
+      else { c.style.transform = `skewX(${s.lean.toFixed(2)}deg) scale(${(1 - s.grow * 0.5).toFixed(3)}, ${(1 + s.grow).toFixed(3)})`; busy = true }
     })
     dirty = false
     raf = busy ? requestAnimationFrame(tick) : 0
@@ -73,7 +86,7 @@ onMounted(() => {
     cancelAnimationFrame(raf)
     document.removeEventListener('pointermove', move)
     html.removeEventListener('pointerleave', leave)
-    for (const c of chars) c.style.translate = ''
+    for (const c of chars) { c.style.transform = ''; c.style.transformOrigin = '' }
   })
 })
 </script>

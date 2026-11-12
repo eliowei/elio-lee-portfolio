@@ -13,8 +13,7 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded px-6 py-3 tex
     <div class="lab-grid pointer-events-none absolute inset-0 -z-10 opacity-60" aria-hidden="true" />
     <div class="section-x grid items-end gap-10 py-space-2xl md:py-space-3xl lg:grid-cols-12">
       <div class="lg:col-span-8">
-        <p v-reveal="{ x: -32 }" class="lab-eyebrow">{{ contact.eyebrow }}</p>
-        <h2 id="contact-title" v-reveal="{ x: -32 }" class="mt-4 font-heading text-display-mobile text-white md:text-display">{{ contact.title }}</h2>
+        <h2 id="contact-title" v-reveal.mask="0.08" class="font-heading text-display-mobile text-white md:text-display">{{ contact.title }}</h2>
         <p class="lab-muted mt-5 max-w-xl text-body-lg">{{ contact.body }}</p>
       </div>
       <div class="flex flex-wrap gap-3 lg:col-span-4 lg:justify-end">

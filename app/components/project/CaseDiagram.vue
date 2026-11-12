@@ -59,7 +59,7 @@ const fit = (text: string, size: number, max = NW - 24) => {
       </svg>
     </div>
     <figcaption class="flex gap-2 text-body-sm text-on-surface-variant">
-      <span class="shrink-0 self-start rounded-sm border border-hairline-strong px-1.5 font-mono text-label-sm text-on-surface-variant">{{ $t('projects.diagramTag') }}</span>
+      <span class="shrink-0 self-start rounded-sm border border-hairline-strong px-1.5 text-label-sm text-on-surface-variant">{{ $t('projects.diagramTag') }}</span>
       {{ diagram.caption }}
     </figcaption>
   </figure>

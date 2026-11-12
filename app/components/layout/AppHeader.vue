@@ -101,7 +101,7 @@ onMounted(() => {
         <button
           ref="langButton"
           type="button"
-          class="inline-flex h-10 items-center gap-1 px-1.5 font-mono text-label-sm opacity-80 transition-opacity hover:opacity-100"
+          class="inline-flex h-10 items-center gap-1 px-1.5 text-label-sm opacity-80 transition-opacity hover:opacity-100"
           :aria-expanded="langOpen"
           aria-controls="lang-menu"
           @click="toggleLang"

@@ -4,7 +4,7 @@ import { legalLinks, navLinks, site } from '~/data/site'
 const localePath = useLocalePath()
 const { reopen } = useConsent()
 const { track } = useAnalytics()
-const heading = 'mb-3 font-mono text-label-sm uppercase tracking-[0.18em] text-lab-on-dark-muted'
+const heading = 'mb-3 text-label-sm font-medium text-lab-on-dark-muted'
 const link = 'text-body-sm text-lab-on-dark-muted transition-colors hover:text-white'
 const icon = 'inline-flex h-10 w-10 items-center justify-center text-lab-on-dark-muted transition-colors hover:text-white motion-reduce:transition-none'
 </script>
@@ -45,7 +45,7 @@ const icon = 'inline-flex h-10 w-10 items-center justify-center text-lab-on-dark
           </nav>
         </div>
       </div>
-      <div class="flex flex-col items-start justify-between gap-2 border-t border-white/10 py-5 font-mono text-label-sm text-lab-on-dark-muted sm:flex-row sm:items-center">
+      <div class="flex flex-col items-start justify-between gap-2 border-t border-white/10 py-5 text-label-sm text-lab-on-dark-muted sm:flex-row sm:items-center">
         <p>© {{ new Date().getFullYear() }} 李柏偉 (Elio Lee)</p>
       </div>
     </div>

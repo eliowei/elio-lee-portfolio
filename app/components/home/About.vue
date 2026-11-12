@@ -9,9 +9,8 @@ const isDev = import.meta.dev
   <section id="about" class="section-x scroll-mt-8 overflow-x-clip py-space-2xl md:py-space-3xl" aria-labelledby="about-title">
     <div class="grid gap-10 lg:grid-cols-12 lg:gap-12">
       <div class="lg:col-span-5">
-        <p v-reveal="{ x: -32 }" class="lab-eyebrow">{{ about.eyebrow }}</p>
-        <h2 id="about-title" v-reveal="{ x: -32 }" class="mt-4 text-headline-lg-mobile md:text-headline-lg">{{ about.title }}</h2>
-        <figure v-if="about.photo" v-reveal="{ x: -32, delay: 0.15 }" class="mt-8 max-w-xs overflow-hidden rounded-lg shadow-sm">
+        <h2 id="about-title" v-reveal.mask="0.08" class="text-headline-lg-mobile md:text-headline-lg">{{ about.title }}</h2>
+        <figure v-if="about.photo" v-reveal.mask="0.2" class="mt-8 max-w-xs overflow-hidden rounded-lg shadow-sm">
           <NuxtPicture :src="about.photo" :alt="$t('home.photoAlt')" width="800" height="1000" sizes="320px" class="block" :img-attrs="{ class: 'aspect-[4/5] w-full object-cover', loading: 'lazy' }" />
         </figure>
         <p v-else-if="isDev" class="mt-8 max-w-xs rounded border border-dashed border-hairline-strong px-4 py-10 text-center font-mono text-label-sm text-secondary">
@@ -25,7 +24,7 @@ const isDev = import.meta.dev
         </div>
         <dl class="mt-10 divide-y divide-hairline border-y border-hairline">
           <div v-for="f in about.facts" :key="f.label" class="grid gap-1 py-4 sm:grid-cols-[8rem_1fr] sm:gap-6">
-            <dt class="font-mono text-label-md uppercase tracking-wider text-lab-signal-ink">{{ f.label }}</dt>
+            <dt class="text-label-md font-medium text-lab-signal-ink">{{ f.label }}</dt>
             <dd class="text-body-md">{{ f.text }}</dd>
           </div>
         </dl>

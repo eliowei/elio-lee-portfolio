@@ -2,7 +2,7 @@ import type { Config } from 'tailwindcss'
 import plugin from 'tailwindcss/plugin'
 
 // Design system "Elio Lee / Digital Space".
-//   Dark stage #0C0D0F (immersion: hero, project space, case covers) · light paper #F3F2EE (reading; dark theme: #111316) ·
+//   Dark stage #171614 (immersion: hero, project space, case covers) · light paper #F3F0E9 (reading; dark theme: #1A1917) ·
 //   survey orange #FF5B1F as the single identity colour.
 // #FF5B1F is for dark grounds and non-text marks. Text/links on the light ground use `signal-ink` (5.05:1 on paper).
 // The semantic token names (surface-*, on-surface, primary…) are kept and remapped, so content components re-skin.
@@ -33,10 +33,10 @@ export default <Partial<Config>>{
       colors: {
         // --- Space palette: the dark stage is fixed (dark sections stay dark in both themes)...
         lab: {
-          bg: '#0C0D0F', 'bg-soft': '#15171A', 'bg-raise': '#1F2125',
+          bg: '#171614', 'bg-soft': '#1D1B19', 'bg-raise': '#22201D',
           paper: token('background'), // ...except the reading ground, which follows the theme
           signal: '#FF5B1F', 'signal-ink': token('signal-ink'),
-          'on-dark': '#ECEBE7', 'on-dark-muted': '#9A9DA3',
+          'on-dark': '#EAE6DE', 'on-dark-muted': '#A8A39A',
         },
         // --- Semantic tokens (content ground). Light + dark values live in app/assets/css/theme.css.
         ...Object.fromEntries(SEMANTIC.map(n => [n, token(n)])),

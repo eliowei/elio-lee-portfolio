@@ -47,6 +47,6 @@ const viewBox = `${minX.toFixed(0)} ${minY.toFixed(0)} ${(maxX - minX).toFixed(0
 
 <template>
   <svg :viewBox="viewBox" fill="none" aria-hidden="true">
-    <polygon v-for="(f, i) in polys" :key="i" :points="f.d" :fill="f.fill" :stroke="f.stroke ?? '#0C0D0F'" :stroke-width="f.stroke ? 1 : 0.8" stroke-linejoin="round" />
+    <polygon v-for="(f, i) in polys" :key="i" :points="f.d" :fill="f.fill" :stroke="f.stroke ?? '#171614'" :stroke-width="f.stroke ? 1 : 0.8" stroke-linejoin="round" />
   </svg>
 </template>

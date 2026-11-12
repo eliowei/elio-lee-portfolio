@@ -1,6 +1,5 @@
 // 工作經歷頁文案。來源：Stitch「工作經歷」畫面（李柏偉 Elio Lee）。
 export const intro = {
-  eyebrow: '工作經歷',
   title: '從介面實作到​工程品質的​持續累積',
   body: '整理我的工作經驗、技術應用與開發過程中累積的工程理解。',
   pills: [
@@ -128,7 +127,6 @@ export const transitions = [
 ]
 
 export const matrix = {
-  eyebrow: '技術與實踐',
   title: '技術與實際應用',
   body: '整理我在公司專案與個人專案中實際用過的技術，以及用在哪些地方。',
   heads: ['技術領域', '技術與工具', '實際應用', '經驗來源'],
@@ -144,19 +142,17 @@ export const matrix = {
 }
 
 export const principlesSection = {
-  eyebrow: '工程心得',
   title: '工作中的技術累積',
   body: '在專案開發與維護的過程中，逐步養成的三個工作習慣。',
 }
 
 export const principles = [
-  { icon: 'compare', title: '框架差異分析', body: '同時接觸 Vue 2 與 Vue 3 專案，理解不同版本的元件 API、預設行為與樣式差異，不把一邊的寫法直接套到另一邊。', foot: 'Framework Behavior Analysis' },
-  { icon: 'troubleshoot', title: '追到問題根源', body: '從重現問題開始，追蹤資料流與業務邏輯，分辨是既有程式的缺陷、事件傳遞、生命週期順序還是 CSS 層級造成的，修正後再驗證結果。', foot: 'Root Cause Debugging' },
-  { icon: 'person_search', title: '從使用者角度完善需求', body: '收到需求時，不只做到規格要求，也會思考實際使用的情境，例如在後台 CRUD 加上圖片預覽與放大，或在擴充下單流程時讓操作更直覺。', foot: 'User-Centered Development' },
+  { title: '框架差異分析', body: '同時接觸 Vue 2 與 Vue 3 專案，理解不同版本的元件 API、預設行為與樣式差異，不把一邊的寫法直接套到另一邊。' },
+  { title: '追到問題根源', body: '從重現問題開始，追蹤資料流與業務邏輯，分辨是既有程式的缺陷、事件傳遞、生命週期順序還是 CSS 層級造成的，修正後再驗證結果。' },
+  { title: '從使用者角度完善需求', body: '收到需求時，不只做到規格要求，也會思考實際使用的情境，例如在後台 CRUD 加上圖片預覽與放大，或在擴充下單流程時讓操作更直覺。' },
 ]
 
 export const cta = {
-  badge: '聯絡',
   title: '想進一步聊聊嗎？',
   body: '看完經歷後，如果有想進一步了解的地方，歡迎留言給我。',
 }

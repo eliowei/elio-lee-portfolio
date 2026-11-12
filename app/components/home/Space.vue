@@ -93,8 +93,7 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
       <section id="works" class="pointer-events-none relative scroll-mt-0 py-24 md:flex md:min-h-[100svh] md:items-center" aria-labelledby="works-title">
         <div class="section-x pointer-events-auto">
           <div ref="column" class="md:max-w-[26rem]" @mouseleave="preview = null" @focusout="onFocusOut" @pointerdown="pointerType = $event.pointerType">
-            <p class="lab-eyebrow">{{ $t('home.worksEyebrow') }}</p>
-            <h2 id="works-title" class="mt-4 font-heading text-headline-lg-mobile text-white md:text-headline-lg">{{ $t('home.worksTitle') }}</h2>
+            <h2 id="works-title" class="font-heading text-headline-lg-mobile text-white md:text-headline-lg">{{ $t('home.worksTitle') }}</h2>
             <p class="lab-muted mt-3 hidden text-body-sm md:block">{{ $t('home.worksHint') }}</p>
 
             <!-- Desktop: the list drives the 3D focus. Each item is a real link. -->
@@ -134,7 +133,7 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
                   :style="{ viewTransitionName: `cover-${current.slug}` }"
                 />
                 <div class="min-w-0">
-                  <p class="font-mono text-label-sm text-lab-on-dark-muted">{{ current.kind }}</p>
+                  <p class="text-label-sm text-lab-on-dark-muted">{{ current.kind }}</p>
                   <p class="mt-1 line-clamp-3 text-body-sm text-lab-on-dark">{{ current.body }}</p>
                 </div>
               </div>
@@ -164,8 +163,8 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
                     :style="{ viewTransitionName: `cover-${p.slug}` }"
                   />
                   <div :class="i === 0 ? 'mt-4 px-1 pb-1' : 'min-w-0'">
-                    <p class="flex items-center gap-2 font-mono text-label-sm text-lab-on-dark-muted">
-                      <span class="h-2 w-2 rotate-45" :style="{ background: p.accent }" aria-hidden="true" />{{ p.code }} {{ p.kind }}
+                    <p class="flex items-center gap-2 text-label-sm text-lab-on-dark-muted">
+                      <span class="h-2 w-2 rotate-45" :style="{ background: p.accent }" aria-hidden="true" /><span class="font-mono">{{ p.code }}</span> {{ p.kind }}
                     </p>
                     <h3 class="mt-1 font-heading text-white" :class="i === 0 ? 'text-headline-md' : 'text-headline-sm'">{{ p.title }}</h3>
                     <p v-if="i === 0" class="lab-muted mt-2 text-body-sm">{{ p.body }}</p>
@@ -175,7 +174,7 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
             </ol>
 
             <!-- Skip the 3D: the plain project index. -->
-            <NuxtLink :to="localePath('/projects')" class="mt-8 inline-flex items-center gap-2 font-mono text-label-sm text-lab-on-dark-muted underline-offset-4 hover:text-white hover:underline">
+            <NuxtLink :to="localePath('/projects')" class="mt-8 inline-flex items-center gap-2 text-label-sm text-lab-on-dark-muted underline-offset-4 hover:text-white hover:underline">
               {{ $t('home.allWorks') }} <UiIcon name="arrow_forward" class="text-[16px]" />
             </NuxtLink>
           </div>

@@ -12,7 +12,7 @@ withDefaults(defineProps<{ tone?: keyof typeof tones }>(), { tone: 'neutral' })
 </script>
 
 <template>
-  <span class="inline-flex items-center gap-1.5 rounded px-3 py-0.5 font-mono text-label-sm" :class="tones[tone]">
+  <span class="inline-flex items-center gap-1.5 rounded px-3 py-0.5 text-label-sm" :class="tones[tone]">
     <slot />
   </span>
 </template>

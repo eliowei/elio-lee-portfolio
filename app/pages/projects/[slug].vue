@@ -33,7 +33,6 @@ const has = {
   validation: !!(detail.verification?.length || detail.results?.length),
   reflection: !!detail.retrospective,
 }
-const labels = { context: 'Context', challenge: 'Challenge', decision: 'Decision', implementation: 'Implementation', validation: 'Validation', reflection: 'Reflection' }
 type Chapter = keyof typeof has
 const chapters = (Object.keys(has) as Chapter[]).filter(k => has[k] || (dev && (k === 'validation' || k === 'reflection')))
 const no = (k: Chapter) => String(chapters.indexOf(k) + 1).padStart(2, '0')
@@ -65,8 +64,8 @@ useHead({
 })
 
 const back = `${localePath('/')}?project=${project.slug}#works`
-const eyebrow = 'font-mono text-label-sm uppercase tracking-[0.18em] text-lab-signal-ink'
-const h2 = 'mt-3 text-headline-lg-mobile md:text-headline-lg'
+const eyebrow = 'text-label-sm font-medium text-lab-signal-ink'
+const h2 = 'text-headline-lg-mobile md:text-headline-lg'
 const chapter = 'scroll-mt-24 border-t border-hairline-strong pb-space-2xl pt-space-lg'
 const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab-signal/5 p-4 font-mono text-label-md text-lab-signal-ink'
 </script>
@@ -76,14 +75,14 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
     <!-- Cover: dark, the landing point of the cover morph from the project space. -->
     <header class="lab-dark relative isolate overflow-hidden">
       <div class="section-x pb-space-xl pt-24 md:pt-28">
-        <NuxtLink :to="back" data-cursor-label="" class="inline-flex items-center gap-1.5 font-mono text-label-md text-lab-on-dark-muted transition-colors hover:text-white">
+        <NuxtLink :to="back" data-cursor-label="" class="inline-flex items-center gap-1.5 text-label-md text-lab-on-dark-muted transition-colors hover:text-white">
           <UiIcon name="arrow_back" class="text-[15px]" /> {{ $t('projects.back') }}
         </NuxtLink>
         <div class="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">
           <div class="lg:col-span-5">
-            <p class="flex items-center gap-2.5 font-mono text-label-sm uppercase tracking-[0.18em] text-lab-on-dark-muted">
+            <p class="flex items-center gap-2.5 text-label-sm text-lab-on-dark-muted">
               <span class="h-2.5 w-2.5 rotate-45" :style="{ background: project.accent }" aria-hidden="true" />
-              {{ project.code }} {{ project.kind }}
+              <span class="font-mono">{{ project.code }}</span> {{ project.kind }}
             </p>
             <h1 class="mt-5 font-heading text-display-mobile text-white [text-wrap:balance] md:text-display"><template v-for="w in project.title.split(' ')" :key="w"><span class="inline-block">{{ w }}</span>{{ ' ' }}</template></h1>
             <p v-if="detail.headline" class="mt-5 text-headline-sm font-normal text-lab-on-dark">{{ detail.headline }}</p>
@@ -148,7 +147,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
                   :class="active === k ? 'border-lab-signal font-medium text-on-surface' : 'border-transparent text-on-surface-variant hover:text-on-surface'"
                   :aria-current="active === k ? 'true' : undefined"
                 >
-                  <span class="font-mono text-label-sm">{{ no(k) }}</span>{{ labels[k] }}
+                  <span class="font-mono text-label-sm">{{ no(k) }}</span>{{ $t(`projects.chapterTitles.${k}`) }}
                 </a>
               </li>
             </ol>
@@ -159,14 +158,13 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
       <!-- Phones / tablets: chapter index as a scrollable row -->
       <nav class="-mx-margin-mobile mb-space-lg overflow-x-auto px-margin-mobile lg:hidden" data-cursor-label="" :aria-label="$t('projects.chaptersMobile')">
         <ol class="flex gap-2 whitespace-nowrap">
-          <li v-for="k in chapters" :key="k"><a :href="`#${k}`" class="lab-chip-light">{{ no(k) }} {{ labels[k] }}</a></li>
+          <li v-for="k in chapters" :key="k"><a :href="`#${k}`" class="lab-chip-light">{{ no(k) }} {{ $t(`projects.chapterTitles.${k}`) }}</a></li>
         </ol>
       </nav>
 
       <!-- Right: the narrative -->
       <div class="min-w-0 max-w-[46rem]">
         <section id="context" :class="chapter" aria-labelledby="context-h">
-          <p :class="eyebrow">{{ no('context') }} / Context</p>
           <h2 id="context-h" :class="h2">{{ $t('projects.chapterTitles.context') }}</h2>
           <div class="mt-6 space-y-4 text-body-lg text-on-surface-variant">
             <p v-for="p in detail.overview?.length ? detail.overview : [project.body]" :key="p">{{ p }}</p>
@@ -174,7 +172,6 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
         </section>
 
         <section v-if="has.challenge" id="challenge" :class="chapter" aria-labelledby="challenge-h">
-          <p :class="eyebrow">{{ no('challenge') }} / Challenge</p>
           <h2 id="challenge-h" :class="h2">{{ $t('projects.chapterTitles.challenge') }}</h2>
           <ol class="mt-6 divide-y divide-hairline border-y border-hairline">
             <li v-for="(c, i) in challenges" :key="c.title" class="grid gap-2 py-5 sm:grid-cols-[3.5rem_1fr]">
@@ -188,7 +185,6 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
         </section>
 
         <section v-if="has.decision" id="decision" :class="chapter" aria-labelledby="decision-h">
-          <p :class="eyebrow">{{ no('decision') }} / Decision</p>
           <h2 id="decision-h" :class="h2">{{ $t('projects.chapterTitles.decision') }}</h2>
           <ol v-if="challenges.length" class="mt-6 space-y-4">
             <li v-for="(c, i) in challenges" :key="c.title" class="rounded-sm bg-surface-container-lowest p-5 shadow-sm">
@@ -201,7 +197,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
             <h3 class="mt-10 text-headline-sm">{{ $t('projects.stack') }}</h3>
             <dl class="mt-4 divide-y divide-hairline border-y border-hairline">
               <div v-for="g in detail.stack" :key="g.group" class="grid gap-2 py-3 sm:grid-cols-[8rem_1fr]">
-                <dt class="font-mono text-label-md uppercase tracking-wider text-on-surface-variant">{{ g.group }}</dt>
+                <dt class="text-label-md font-medium text-on-surface-variant">{{ g.group }}</dt>
                 <dd>
                   <span class="text-body-md">{{ g.items.join(', ') }}</span>
                   <p v-if="g.why" class="mt-1 text-body-sm text-on-surface-variant">{{ g.why }}</p>
@@ -212,7 +208,6 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
         </section>
 
         <section id="implementation" :class="chapter" aria-labelledby="implementation-h">
-          <p :class="eyebrow">{{ no('implementation') }} / Implementation</p>
           <h2 id="implementation-h" :class="h2">{{ $t('projects.chapterTitles.implementation') }}</h2>
 
           <ProjectCaseDiagram v-if="detail.diagram" class="mt-6" :diagram="detail.diagram" :accent="project.accent" />
@@ -250,7 +245,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
                       class="block h-full w-full"
                     />
                   </button>
-                  <figcaption class="font-mono text-label-sm text-on-surface-variant">{{ t.caption }}</figcaption>
+                  <figcaption class="text-label-sm text-on-surface-variant">{{ t.caption }}</figcaption>
                 </figure>
               </li>
             </ul>
@@ -258,7 +253,6 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
         </section>
 
         <section v-if="chapters.includes('validation')" id="validation" :class="chapter" aria-labelledby="validation-h">
-          <p :class="eyebrow">{{ no('validation') }} / Validation</p>
           <h2 id="validation-h" :class="h2">{{ $t('projects.chapterTitles.validation') }}</h2>
           <template v-if="has.validation">
             <ul v-if="detail.verification?.length" class="mt-6 divide-y divide-hairline border-y border-hairline">
@@ -276,7 +270,6 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
         </section>
 
         <section v-if="chapters.includes('reflection')" id="reflection" :class="chapter" aria-labelledby="reflection-h">
-          <p :class="eyebrow">{{ no('reflection') }} / Reflection</p>
           <h2 id="reflection-h" :class="h2">{{ $t('projects.chapterTitles.reflection') }}</h2>
           <div v-if="has.reflection" class="mt-6 grid gap-8 sm:grid-cols-2">
             <div v-if="detail.retrospective?.learned">
@@ -295,11 +288,11 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
 
     <nav class="lab-dark" :aria-label="$t('projects.projectNav')">
       <div class="section-x flex flex-col gap-6 py-space-xl sm:flex-row sm:items-center sm:justify-between">
-        <NuxtLink :to="back" data-cursor-label="" class="inline-flex items-center gap-2 font-mono text-label-md text-lab-on-dark-muted transition-colors hover:text-white">
+        <NuxtLink :to="back" data-cursor-label="" class="inline-flex items-center gap-2 text-label-md text-lab-on-dark-muted transition-colors hover:text-white">
           <UiIcon name="arrow_back" class="text-[16px]" /> {{ $t('projects.back') }}
         </NuxtLink>
         <NuxtLink :to="localePath(`/projects/${next.slug}`)" class="group sm:text-right">
-          <span class="block font-mono text-label-sm uppercase tracking-[0.18em] text-lab-on-dark-muted">Next {{ next.code }}</span>
+          <span class="block font-mono text-label-sm tracking-[0.04em] text-lab-on-dark-muted">Next {{ next.code }}</span>
           <span class="mt-1 inline-flex items-center gap-2 font-heading text-headline-md text-white">
             {{ next.title }} <UiIcon name="arrow_forward" class="text-[22px] text-lab-signal transition-transform group-hover:translate-x-1 motion-reduce:transition-none" />
           </span>

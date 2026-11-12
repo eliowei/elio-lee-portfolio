@@ -14,13 +14,13 @@ defineProps<{ role: Role }>()
           </div>
           <p class="mt-1 text-body-md text-on-surface-variant">{{ role.summary }}</p>
         </div>
-        <span class="inline-flex shrink-0 items-center gap-1 self-start rounded-md bg-surface-container-low px-3 py-1 font-mono text-label-sm text-on-surface-variant">
+        <span class="inline-flex shrink-0 items-center gap-1 self-start rounded-md bg-surface-container-low px-3 py-1 text-label-sm text-on-surface-variant">
           <UiIcon :name="role.tagIcon" class="text-label-sm text-primary" /> {{ role.tagLabel }}
         </span>
       </div>
 
       <ul v-if="role.stack" class="mb-4 flex flex-wrap gap-2" :aria-label="$t('common.techUsed')">
-        <li v-for="t in role.stack" :key="t.label" class="rounded-full bg-surface-container-low px-2.5 py-1 font-mono text-label-sm font-medium" :class="t.primary ? 'text-primary' : 'text-secondary'">{{ t.label }}</li>
+        <li v-for="t in role.stack" :key="t.label" class="rounded-full bg-surface-container-low px-2.5 py-1 text-label-sm font-medium" :class="t.primary ? 'text-primary' : 'text-secondary'">{{ t.label }}</li>
       </ul>
 
       <div class="mb-6">

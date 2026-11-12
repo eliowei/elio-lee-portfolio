@@ -140,7 +140,7 @@ onBeforeUnmount(() => {
         type="button"
         tabindex="-1"
         aria-hidden="true"
-        class="absolute left-0 top-0 flex items-center gap-2 whitespace-nowrap rounded-sm border px-2.5 py-1.5 font-mono text-label-sm opacity-0 transition-[opacity,background-color,border-color] duration-200 motion-reduce:transition-none"
+        class="absolute left-0 top-0 flex items-center gap-2 whitespace-nowrap rounded-sm border px-2.5 py-1.5 text-label-sm opacity-0 transition-[opacity,background-color,border-color] duration-200 motion-reduce:transition-none"
         :class="s.slug === selected ? 'border-white/40 bg-lab-bg text-white' : 'border-white/15 bg-lab-bg/70 text-lab-on-dark-muted hover:border-white/40 hover:text-white'"
         @click="emit('select', s.slug)"
       >

@@ -2,7 +2,6 @@
 import type * as zh from '../experience'
 
 export const intro: typeof zh.intro = {
-  eyebrow: '経歴',
   title: 'UI の実装からエンジニアリング品質まで、積み重ねてきたこと。',
   body: 'これまでの職務経験、活用してきた技術、開発の中で身につけたエンジニアリングへの理解をまとめています。',
   pills: [
@@ -110,7 +109,6 @@ export const transitions: typeof zh.transitions = [
 ]
 
 export const matrix: typeof zh.matrix = {
-  eyebrow: '技術と実践',
   title: '技術と実際の活用',
   body: '会社のプロジェクトと個人プロジェクトで実際に使った技術と、その使いどころをまとめました。',
   heads: ['技術領域', '技術とツール', '実際の活用', '経験の場'],
@@ -126,19 +124,17 @@ export const matrix: typeof zh.matrix = {
 }
 
 export const principlesSection: typeof zh.principlesSection = {
-  eyebrow: 'エンジニアリングの学び',
   title: '仕事の中で積み重ねた技術',
   body: 'プロジェクトの開発と保守の中で、少しずつ身についた 3 つの働き方です。',
 }
 
 export const principles: typeof zh.principles = [
-  { icon: 'compare', title: 'フレームワークの違いを分析する', body: 'Vue 2 と Vue 3 の両方のプロジェクトに関わる中で、バージョンごとのコンポーネント API、デフォルトの挙動、スタイルの違いを理解し、一方の書き方をそのままもう一方に当てはめないようにしています。', foot: 'Framework Behavior Analysis' },
-  { icon: 'troubleshoot', title: '問題の根本まで追う', body: '問題の再現から始め、データフローと業務ロジックを追って、原因が既存コードの不具合なのか、イベントの伝播、ライフサイクルの順序、CSS の重なりなのかを見極め、修正後に結果を検証します。', foot: 'Root Cause Debugging' },
-  { icon: 'person_search', title: 'ユーザー視点で要件を補う', body: '要件を受けたら、仕様を満たすだけでなく実際の利用場面も考えます。たとえば管理画面の CRUD に画像のプレビューと拡大を加えたり、注文フローを拡張するときに操作をより直感的にしたりしました。', foot: 'User-Centered Development' },
+  { title: 'フレームワークの違いを分析する', body: 'Vue 2 と Vue 3 の両方のプロジェクトに関わる中で、バージョンごとのコンポーネント API、デフォルトの挙動、スタイルの違いを理解し、一方の書き方をそのままもう一方に当てはめないようにしています。' },
+  { title: '問題の根本まで追う', body: '問題の再現から始め、データフローと業務ロジックを追って、原因が既存コードの不具合なのか、イベントの伝播、ライフサイクルの順序、CSS の重なりなのかを見極め、修正後に結果を検証します。' },
+  { title: 'ユーザー視点で要件を補う', body: '要件を受けたら、仕様を満たすだけでなく実際の利用場面も考えます。たとえば管理画面の CRUD に画像のプレビューと拡大を加えたり、注文フローを拡張するときに操作をより直感的にしたりしました。' },
 ]
 
 export const cta: typeof zh.cta = {
-  badge: 'お問い合わせ',
   title: 'もう少し話してみませんか？',
   body: '経歴をご覧になって、さらに知りたいことがあれば、お気軽にメッセージをお送りください。',
 }

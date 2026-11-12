@@ -49,9 +49,9 @@ import type { Block } from './ruin'
 //   · enter (click) → from the gate's stop the camera carries on through the opening, then the page navigates.
 // Orange is the only energy colour; project colours live in the HTML and the screenshots only.
 // Everything readable lives in HTML; this canvas is decoration + visual focus.
-const BG = 0x0c0d0f
+const BG = 0x171614
 const SIGNAL = 0xff5b1f
-const LINE = 0x9a9da3
+const LINE = 0xa8a39a
 
 export interface Station {
   slug: string
@@ -369,7 +369,7 @@ export function createSpaceScene(
     for (let x = -11; x <= 11; x++) if (hash(x, a, 3) > 0.1) add(x, TOP_ROW, z)
   }
   ruin.add(masonryMesh(below))
-  const floor = new Mesh(track(new PlaneGeometry(HALF * 2, MOUTH - ZEND)), track(new MeshStandardMaterial({ color: 0x1d1f23, roughness: 1 })))
+  const floor = new Mesh(track(new PlaneGeometry(HALF * 2, MOUTH - ZEND)), track(new MeshStandardMaterial({ color: 0x22201d, roughness: 1 })))
   floor.rotation.x = -Math.PI / 2
   floor.position.set(0, FLOOR, (MOUTH + ZEND) / 2)
   const guide = new Mesh(track(new PlaneGeometry(0.05, MOUTH - ZEND)), signalMat)
@@ -461,7 +461,7 @@ export function createSpaceScene(
     const glow = new PointLight(SIGNAL, 0, Math.max(W, H) * 0.9, 2)
     glow.position.set(0, plateY, U * 0.8)
 
-    const plateMat = track(new MeshBasicMaterial({ color: 0x1f2125, transparent: true, opacity: 0.5, toneMapped: false }))
+    const plateMat = track(new MeshBasicMaterial({ color: 0x22201d, transparent: true, opacity: 0.5, toneMapped: false }))
     const decode = { uAmount: { value: 0 }, uSignal: { value: signal }, uCells: { value: new Vector2(W, H).multiplyScalar(12) } }
     plateMat.onBeforeCompile = (shader) => {
       Object.assign(shader.uniforms, decode)

@@ -39,7 +39,7 @@ const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-
 
 <template>
   <div>
-    <LabPageHeader :eyebrow="page.eyebrow" :title="page.title" :lead="page.lead">
+    <LabPageHeader :title="page.title" :lead="page.lead">
       <ul class="flex flex-wrap gap-2" :aria-label="$t('blog.facts')">
         <li v-for="f in page.facts" :key="f" class="lab-chip">{{ f }}</li>
       </ul>
@@ -49,7 +49,7 @@ const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-
     <section v-if="posts?.length" class="section-x py-space-2xl" aria-labelledby="latest">
       <div class="flex items-end justify-between pb-6">
         <h2 id="latest" class="text-headline-md">{{ $t('blog.latest') }}</h2>
-        <span class="hidden font-mono text-label-sm uppercase tracking-wider text-on-surface-variant sm:inline">{{ $t('blog.articles', { n: shown.length }) }}</span>
+        <span class="hidden text-label-sm text-on-surface-variant sm:inline">{{ $t('blog.articles', { n: shown.length }) }}</span>
       </div>
       <div class="relative mb-4 max-w-md">
         <label for="note-search" class="sr-only">{{ $t('blog.search') }}</label>
@@ -74,10 +74,10 @@ const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-
           <NuxtLink :to="p.path" class="group grid gap-2 py-8 md:grid-cols-12 md:gap-8" @click="track('note_click', { note_slug: slugOf(p.path), source: 'list' })">
             <div class="font-mono text-label-md text-on-surface-variant md:col-span-2">
               <time :datetime="p.date">{{ p.date.replaceAll('-', '/') }}</time>
-              <p class="mt-1 text-label-sm uppercase tracking-wider text-lab-signal-ink">{{ $t('blog.readingTime', { n: p.readingTime }) }}</p>
+              <p class="mt-1 text-label-sm text-lab-signal-ink">{{ $t('blog.readingTime', { n: p.readingTime }) }}</p>
             </div>
             <div class="md:col-span-8">
-              <p class="font-mono text-label-sm uppercase tracking-wider text-lab-signal-ink">{{ $t(`categories.${p.category}`) }}</p>
+              <p class="text-label-sm font-medium text-lab-signal-ink">{{ $t(`categories.${p.category}`) }}</p>
               <h3 class="mt-1 text-headline-sm transition-colors group-hover:text-lab-signal-ink md:text-headline-md">{{ p.title }}</h3>
               <p class="mt-2 text-body-md text-on-surface-variant">{{ p.description }}</p>
             </div>
@@ -91,12 +91,11 @@ const chip = (on: boolean) => ['lab-chip-light gap-1.5 transition-colors motion-
 
     <section class="border-t border-hairline bg-surface-container-lowest" aria-labelledby="method">
       <div class="section-x py-space-2xl">
-        <p class="lab-eyebrow">{{ method.eyebrow }}</p>
-        <h2 id="method" class="mt-4 max-w-2xl text-headline-lg-mobile md:text-headline-lg">{{ method.title }}</h2>
+        <h2 id="method" class="max-w-2xl text-headline-lg-mobile md:text-headline-lg">{{ method.title }}</h2>
         <p class="mt-4 max-w-2xl text-body-md text-on-surface-variant">{{ method.body }}</p>
         <ol class="mt-10 grid gap-x-8 gap-y-8 border-t border-hairline pt-8 sm:grid-cols-2 lg:grid-cols-4">
           <li v-for="(s, i) in method.steps" :key="s.title">
-            <div class="font-mono text-label-sm text-lab-signal-ink">{{ $t('blog.step', { n: i + 1 }) }}</div>
+            <div class="text-label-sm text-lab-signal-ink">{{ $t('blog.step', { n: i + 1 }) }}</div>
             <h3 class="mt-2 text-headline-sm">{{ s.title }}</h3>
             <p class="mt-1 text-body-sm text-on-surface-variant">{{ s.body }}</p>
           </li>

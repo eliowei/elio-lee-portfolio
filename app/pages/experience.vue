@@ -31,7 +31,7 @@ const chapters = [...roles].reverse().map((role, i) => ({ role, n: String(i + 1)
       <section v-if="c.turn" class="lab-dark relative isolate overflow-hidden" :aria-label="c.turn.title">
         <div class="lab-grid pointer-events-none absolute inset-0 -z-10 opacity-80" aria-hidden="true" />
         <div class="section-x grid gap-8 py-space-2xl lg:grid-cols-[14rem_1fr] lg:gap-12">
-          <p class="font-mono text-label-sm uppercase tracking-[0.18em] text-lab-on-dark-muted">{{ $t('experience.transition') }}</p>
+          <p class="text-label-md font-medium text-lab-on-dark-muted">{{ $t('experience.transition') }}</p>
           <div class="max-w-3xl border-l-2 border-lab-signal pl-6 md:pl-8">
             <h2 class="font-heading text-headline-lg-mobile text-white [word-break:keep-all] [overflow-wrap:break-word] md:text-headline-lg">{{ c.turn.title }}</h2>
             <p v-for="p in c.turn.body" :key="p" class="lab-muted mt-5 text-body-lg">{{ p }}</p>

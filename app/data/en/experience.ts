@@ -2,7 +2,6 @@
 import type * as zh from '../experience'
 
 export const intro: typeof zh.intro = {
-  eyebrow: 'Experience',
   title: 'From building interfaces to building engineering quality.',
   body: 'My work experience, the technologies I have applied, and the engineering understanding I have built up along the way.',
   pills: [
@@ -110,7 +109,6 @@ export const transitions: typeof zh.transitions = [
 ]
 
 export const matrix: typeof zh.matrix = {
-  eyebrow: 'Tech Stack & Practice',
   title: 'Technologies and how I use them',
   body: 'The technologies I have actually used in company and personal projects, and where I used them.',
   heads: ['Area', 'Technologies and tools', 'In practice', 'Where'],
@@ -126,19 +124,17 @@ export const matrix: typeof zh.matrix = {
 }
 
 export const principlesSection: typeof zh.principlesSection = {
-  eyebrow: 'Engineering Insights',
   title: 'What I have learned on the job',
   body: 'Three working habits I have built up while developing and maintaining projects.',
 }
 
 export const principles: typeof zh.principles = [
-  { icon: 'compare', title: 'Understanding framework differences', body: 'Working on both Vue 2 and Vue 3 projects, I understand how the component APIs, default behaviour and styling differ between versions, and I don’t copy one version’s patterns straight into the other.', foot: 'Framework Behavior Analysis' },
-  { icon: 'troubleshoot', title: 'Following problems to the root', body: 'I start by reproducing the problem, then trace the data flow and business logic to tell whether it comes from a defect in existing code, event propagation, lifecycle order or CSS stacking, and verify the result after fixing it.', foot: 'Root Cause Debugging' },
-  { icon: 'person_search', title: 'Rounding out requirements from the user’s view', body: 'When I get a requirement, I don’t stop at the spec; I think about how it will actually be used, for example adding image preview and zoom to a back-office CRUD, or making steps more intuitive when extending the ordering flow.', foot: 'User-Centered Development' },
+  { title: 'Understanding framework differences', body: 'Working on both Vue 2 and Vue 3 projects, I understand how the component APIs, default behaviour and styling differ between versions, and I don’t copy one version’s patterns straight into the other.' },
+  { title: 'Following problems to the root', body: 'I start by reproducing the problem, then trace the data flow and business logic to tell whether it comes from a defect in existing code, event propagation, lifecycle order or CSS stacking, and verify the result after fixing it.' },
+  { title: 'Rounding out requirements from the user’s view', body: 'When I get a requirement, I don’t stop at the spec; I think about how it will actually be used, for example adding image preview and zoom to a back-office CRUD, or making steps more intuitive when extending the ordering flow.' },
 ]
 
 export const cta: typeof zh.cta = {
-  badge: 'Contact',
   title: 'Want to talk further?',
   body: 'If anything in my experience makes you want to know more, feel free to leave me a message.',
 }

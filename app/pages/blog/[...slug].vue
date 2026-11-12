@@ -61,7 +61,7 @@ useHead({
 
 <template>
   <div v-if="post" class="section-x pb-space-xl pt-28 md:pt-32">
-    <nav aria-label="Breadcrumb" class="mb-space-md flex flex-wrap items-center gap-2 font-mono text-label-md">
+    <nav aria-label="Breadcrumb" class="mb-space-md flex flex-wrap items-center gap-2 text-label-md">
       <NuxtLink :to="localePath('/blog')" class="inline-flex items-center gap-1 text-secondary transition-colors hover:text-lab-signal-ink">
         <UiIcon name="arrow_back" class="text-[15px]" /> {{ $t('blog.breadcrumb') }}
       </NuxtLink>
@@ -77,7 +77,7 @@ useHead({
         </p>
 
         <header class="space-y-4 pb-space-lg">
-          <div class="flex flex-wrap items-center gap-3 font-mono text-label-md text-secondary">
+          <div class="flex flex-wrap items-center gap-3 text-label-md text-secondary">
             <UiChip tone="secondary">{{ $t(`categories.${post.category}`) }}</UiChip>
             <time :datetime="post.date">{{ post.date.replaceAll('-', '/') }}</time>
             <span class="rounded bg-surface-container px-2 py-0.5 text-label-sm text-on-surface-variant">{{ $t('blog.readingTime', { n: post.readingTime }) }}</span>
@@ -91,7 +91,7 @@ useHead({
         </article>
 
         <footer class="mt-space-xl flex flex-col gap-4 border-t border-hairline pt-space-md sm:flex-row sm:items-center sm:justify-between">
-          <ul class="flex flex-wrap gap-1.5 font-mono text-label-sm" :aria-label="$t('blog.tags')">
+          <ul class="flex flex-wrap gap-1.5 text-label-sm" :aria-label="$t('blog.tags')">
             <li v-for="t in post.tags" :key="t" class="rounded bg-surface-container px-2 py-0.5 text-on-surface-variant">{{ t }}</li>
           </ul>
           <NuxtLink :to="localePath('/blog')" class="inline-flex items-center justify-center gap-2 rounded border border-hairline px-4 py-2 text-body-sm font-medium transition-colors hover:border-hairline-strong hover:bg-surface-container-low">

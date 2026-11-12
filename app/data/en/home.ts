@@ -9,7 +9,6 @@ export const hero: typeof zh.hero = {
 
 export const about: typeof zh.about = {
   photo: '/images/image0.webp',
-  eyebrow: 'About',
   title: 'From finishing tasks to understanding problems.',
   body: [
     'I’m Elio Lee (李柏偉), a frontend engineer who mainly builds web interfaces with Vue. When I started out, I cared most about getting screens built and features working. At my company I work on both Vue 2 and Vue 3 projects, and I have learned to understand why existing code was designed the way it was, how the frameworks differ, and what a change might affect, before deciding how to implement it.',
@@ -299,7 +298,6 @@ export const projects: typeof zh.projects = [
 ]
 
 export const contact: typeof zh.contact = {
-  eyebrow: 'Contact',
   title: 'Let’s get in touch.',
   body: 'I am open to new frontend roles. If your team is looking for a frontend engineer who knows Vue and follows problems down to their root cause, I would love to hear from you.',
 }

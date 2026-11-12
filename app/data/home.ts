@@ -8,7 +8,6 @@ export const hero = {
 export const about = {
   // 個人照片：把檔案放進 public/images/（建議直式 4:5、寬 ≥ 800px），再填路徑，例如 '/images/profile.jpg'
   photo: '/images/image0.webp',
-  eyebrow: '關於我',
   title: '從完成需求 到理解問題',
   body: [
     '我是李柏偉（Elio），一名前端工程師，主要使用 Vue 進行網頁介面開發。剛開始工作時，我更在意如何把畫面做出來、讓功能正常運作。進入公司後，我同時接觸 Vue 2 與 Vue 3 的專案，開始學會理解既有程式的設計原因、框架之間的差異，以及修改可能影響的範圍，再決定合適的實作方式。',
@@ -322,7 +321,6 @@ export const projects: {
 ]
 
 export const contact = {
-  eyebrow: '聯絡資訊',
   title: '歡迎與我聯繫',
   body: '我對新的前端工作機會保持開放。如果你的團隊正在找熟悉 Vue、遇到問題會追到根源的前端工程師，歡迎來信。',
 }

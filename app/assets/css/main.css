@@ -4,12 +4,12 @@
 
 /* Design tokens — Elio Lee / Digital Space. Mirrors tailwind.config.ts (`lab.*`) for CSS / canvas use. */
 :root {
-  --lab-bg: #0c0d0f;
-  --lab-paper: #f3f2ee;
+  --lab-bg: #171614;
+  --lab-paper: #f3f0e9;
   --lab-signal: #ff5b1f; /* survey orange — dark grounds + non-text marks */
   --lab-signal-ink: #b83d0e; /* same hue, text-safe on the light ground */
-  --lab-on-dark: #ecebe7;
-  --lab-on-dark-muted: #9a9da3;
+  --lab-on-dark: #eae6de;
+  --lab-on-dark-muted: #a8a39a;
 }
 
 @layer base {
@@ -63,8 +63,9 @@
   /* ---- Building blocks ---- */
   .lab-dark { background-color: theme('colors.lab.bg'); color: theme('colors.lab.on-dark'); }
   .lab-dark .lab-muted { color: theme('colors.lab.on-dark-muted'); }
-  .lab-eyebrow { @apply inline-flex items-center gap-2 font-mono text-label-sm uppercase tracking-[0.06em] md:tracking-[0.18em] text-lab-signal-ink; }
-  .lab-eyebrow::before { content: ''; width: 6px; height: 6px; background: currentColor; }
+  /* Section label: sentence case in the heading face (mono is kept for real data: dates, codes, readouts). The marker is the station diamond. */
+  .lab-eyebrow { @apply inline-flex items-center gap-2.5 font-medium text-lab-signal-ink; font-family: Barlow, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif; font-size: 0.875rem; line-height: 1.4; letter-spacing: 0.02em; }
+  .lab-eyebrow::before { content: ''; width: 6px; height: 6px; background: currentColor; transform: rotate(45deg); }
   .lab-dark .lab-eyebrow { color: theme('colors.lab.signal'); }
   /* Faint survey contours for dark page headers. Put on an aria-hidden overlay, never on content. */
   .lab-grid {
@@ -75,8 +76,8 @@
   /* Home title: phones 40–48px, desktop up to ~104px. Wide measure; overlaps the 3D monument on purpose. */
   .space-title { font-family: Barlow, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif; font-weight: 600; line-height: 1.08; letter-spacing: -0.02em; font-size: clamp(2.5rem, 10.5vw, 3rem); }
   @media (min-width: 768px) { .space-title { font-size: clamp(3.5rem, 6.4vw, 6.5rem); } }
-  .lab-chip { @apply inline-flex items-center rounded border border-white/15 px-2.5 py-1 font-mono text-label-sm text-lab-on-dark; }
-  .lab-chip-light { @apply inline-flex items-center rounded border border-hairline-strong bg-surface-container-lowest px-2.5 py-1 font-mono text-label-sm text-on-surface-variant; }
+  .lab-chip { @apply inline-flex items-center rounded border border-white/15 px-2.5 py-1 text-label-sm text-lab-on-dark; }
+  .lab-chip-light { @apply inline-flex items-center rounded border border-hairline-strong bg-surface-container-lowest px-2.5 py-1 text-label-sm text-on-surface-variant; }
   /* Page entrance: CSS only, so content is never hidden waiting for JS. */
   .lab-in { animation: lab-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: var(--d, 0ms); }
   @keyframes lab-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
@@ -90,7 +91,6 @@
   @media (prefers-reduced-motion: reduce) { .theme-icon-moon, .theme-icon-sun { transition: none; } }
   .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; letter-spacing: normal; text-transform: none; font-feature-settings: 'liga'; font-size: inherit; line-height: 1; display: inline-block; width: 1em; height: 1em; overflow: hidden; white-space: nowrap; user-select: none; } /* fixed box: the ligature name (e.g. "arrow_outward") shows as text until the icon font loads and must not shift the layout */
   .section-x { @apply mx-auto w-full max-w-page px-margin-mobile md:px-margin; }
-  .eyebrow { @apply mb-1.5 flex items-center gap-1.5 font-mono text-label-sm uppercase tracking-widest text-secondary; }
 
   /* Markdown body rendered by <ContentRenderer>. Reading measure comes from the 720px column (~65-72 chars). */
   .prose-post { @apply space-y-5 text-body-lg text-on-surface; }
@@ -107,7 +107,7 @@
   .prose-post pre code { @apply bg-transparent p-0 text-inherit; }
   .prose-post .table-wrap { @apply overflow-x-auto rounded-lg bg-surface-container-lowest shadow-sm; }
   .prose-post table { @apply w-full text-left text-body-sm; }
-  .prose-post th { @apply min-w-[7rem] bg-surface-container-low px-4 py-3 font-mono text-label-md text-on-surface; }
+  .prose-post th { @apply min-w-[7rem] bg-surface-container-low px-4 py-3 text-label-md text-on-surface; }
   .prose-post td { @apply min-w-[7rem] border-t border-hairline px-4 py-3; }
   .prose-post img { @apply rounded-lg; }
 }

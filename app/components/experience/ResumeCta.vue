@@ -14,7 +14,6 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded px-5 py-3 tex
       <div class="lab-grid pointer-events-none absolute inset-0 -z-10 opacity-60" aria-hidden="true" />
       <div class="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
         <div class="max-w-2xl space-y-3">
-          <p class="lab-eyebrow">{{ cta.badge }}</p>
           <h3 class="font-heading text-headline-lg-mobile text-white md:text-headline-lg">{{ cta.title }}</h3>
           <p class="lab-muted text-body-md">{{ cta.body }}</p>
         </div>

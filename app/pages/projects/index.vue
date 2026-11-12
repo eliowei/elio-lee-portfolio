@@ -14,7 +14,6 @@ const cover = (slug: string) => projectImages[slug]?.cover
 <template>
   <div>
     <LabPageHeader
-      :eyebrow="$t('projects.eyebrow')"
       :title="$t('projects.heading')"
       :lead="$t('projects.lead')"
     />
@@ -31,8 +30,8 @@ const cover = (slug: string) => projectImages[slug]?.cover
               />
             </div>
             <div :class="i === 0 ? 'md:col-span-5' : 'md:col-span-8'">
-              <p class="flex items-center gap-2 font-mono text-label-sm uppercase tracking-[0.16em] text-on-surface-variant">
-                <span class="h-2 w-2 rotate-45 bg-lab-signal" aria-hidden="true" />{{ p.code }} {{ p.kind }}
+              <p class="flex items-center gap-2 text-label-sm text-on-surface-variant">
+                <span class="h-2 w-2 rotate-45 bg-lab-signal" aria-hidden="true" /><span class="font-mono">{{ p.code }}</span> {{ p.kind }}
               </p>
               <h2 class="mt-3 font-heading text-headline-md md:text-headline-lg">{{ p.title }}</h2>
               <p class="mt-3 text-body-md text-on-surface-variant">{{ p.body }}</p>
