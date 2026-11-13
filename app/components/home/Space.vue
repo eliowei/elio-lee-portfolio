@@ -176,7 +176,7 @@ onMounted(() => {
                     :src="cover(p.slug)!.src" 
                     :width="i === 0 ? 720 : 160" 
                     :height="i === 0 ? 450 : 160"
-                    :sizes="i === 0 ? '100vw' : '80px'"
+                    :sizes="i === 0 ? 'xs:100vw sm:100vw md:100vw' : '80px'"
                     format="webp" 
                     loading="lazy" 
                     alt=""

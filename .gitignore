@@ -25,3 +25,8 @@ logs
 
 # Local notes
 PROGRESS.md
+
+# local agent skills
+.agents/
+.claude/
+skills-lock.json
