@@ -9,8 +9,8 @@ const { projects, projectImages } = useData()
 // they duplicate the keyboard-accessible list in <HomeSpace>, so they are mouse-only (tabindex -1).
 // `selected` is the project shown in the HTML panel; `preview` is the gate the camera goes to (null: the
 // corridor's exploring spot). `enter()` flies through a gate before the page navigates.
-const props = defineProps<{ selected: string | null; preview: string | null }>()
-const emit = defineEmits<{ select: [slug: string] }>()
+const props = defineProps<{ selected: string | null; preview: string | null; activeNote: number | null }>()
+const emit = defineEmits<{ select: [slug: string]; archiveReady: [ready: boolean]; activeWork: [slug: string] }>()
 
 const host = ref<HTMLElement>()
 const status = ref<'static' | 'ready'>('static')
@@ -31,7 +31,21 @@ const capable = () => {
   return !nav.connection?.saveData && (nav.deviceMemory ?? 8) > 4 && (nav.hardwareConcurrency ?? 8) > 4
 }
 
+let lastArchiveReady: boolean | undefined
+let lastActiveWork: string | null = null
 function onFrame(info: FrameInfo) {
+  if (info.activeWork && info.activeWork !== lastActiveWork) {
+    lastActiveWork = info.activeWork
+    emit('activeWork', info.activeWork)
+  }
+  const wrap = host.value?.closest<HTMLElement>('[data-space]')
+  wrap?.style.setProperty('--guide-x', info.guideX + 'px')
+  const about = wrap?.querySelector<HTMLElement>('#about')
+  if (about) about.style.setProperty('--guide-start', Math.max(0, info.guideY - about.getBoundingClientRect().top) + 'px')
+  if (info.archiveReady !== lastArchiveReady) {
+    lastArchiveReady = info.archiveReady
+    emit('archiveReady', info.archiveReady)
+  }
   for (const l of info.labels) {
     const el = labelEls.value[l.slug]
     if (!el) continue
@@ -48,7 +62,13 @@ function onFrame(info: FrameInfo) {
 function progress() {
   const wrap = host.value?.closest('[data-space]')
   if (!wrap) return 0
-  return Math.min(Math.max(-wrap.getBoundingClientRect().top / (innerHeight * 0.85), 0), 1)
+  const approach = wrap.querySelector('[data-archive-approach]')
+  const arrival = approach ? Math.min(Math.max(-approach.getBoundingClientRect().top / Math.max(approach.clientHeight, 1), 0), 1) : 0
+  const notes = wrap.querySelector('[data-notes]')
+  const notesProgress = notes ? Math.min(Math.max((innerHeight * 0.75 - notes.getBoundingClientRect().top) / (innerHeight * 0.75), 0), 1) : 0
+  const works = wrap.querySelector('#works')
+  const worksProgress = works ? Math.min(Math.max(-works.getBoundingClientRect().top / Math.max(works.clientHeight, 1), 0), 1) : 0
+  return Math.min(Math.max(-wrap.getBoundingClientRect().top / (innerHeight * 0.85), 0), 1) + worksProgress + arrival + notesProgress
 }
 function onScroll() {
   const p = progress()
@@ -61,6 +81,9 @@ function stop() {
   scene?.dispose()
   scene = undefined
   status.value = 'static'
+  lastArchiveReady = undefined
+  emit('archiveReady', true)
+  host.value?.closest('[data-space]')?.removeAttribute('data-scene-ready')
 }
 
 async function start() {
@@ -85,7 +108,9 @@ async function start() {
     })
     scene.setProgress(progress())
     scene.focus(props.preview)
+    scene.focusNote(props.activeNote)
     status.value = 'ready'
+    host.value.closest('[data-space]')?.setAttribute('data-scene-ready', '')
   }
   catch (err) {
     console.warn('[SpaceStage] WebGL unavailable, showing the static drawing.', err)
@@ -100,6 +125,7 @@ const sync = () => (wide?.matches ? start() : stop())
 const onMotion = () => scene?.setReducedMotion(!!motion?.matches)
 
 watch(() => props.preview, s => scene?.focus(s))
+watch(() => props.activeNote, index => scene?.focusNote(index))
 
 /** Fly through the gate (resolves at once without 3D or with reduced motion; never waits more than 1.6s). */
 function enter(slug: string) {
@@ -113,6 +139,7 @@ onMounted(() => {
   wide.addEventListener('change', sync)
   motion.addEventListener('change', onMotion)
   window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('resize', onScroll)
   sync()
 })
 
@@ -121,6 +148,7 @@ onBeforeUnmount(() => {
   wide?.removeEventListener('change', sync)
   motion?.removeEventListener('change', onMotion)
   window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('resize', onScroll)
   stop()
 })
 </script>
@@ -129,7 +157,7 @@ onBeforeUnmount(() => {
   <div class="overflow-hidden">
     <div ref="host" aria-hidden="true" class="stage-arrival absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none" :class="status === 'ready' ? 'opacity-100' : 'opacity-0'" />
     <!-- Keeps the HTML column (title / project list) on a dark ground whatever the camera is looking at. -->
-    <div aria-hidden="true" class="pointer-events-none absolute inset-y-0 left-0 w-[58%] bg-gradient-to-r from-lab-bg via-lab-bg/85 to-transparent" />
+    <div aria-hidden="true" class="stage-reading-veil pointer-events-none absolute inset-y-0 left-0 w-[58%]" />
     <SpaceMonument v-if="status === 'static'" class="absolute bottom-[8%] right-[4%] h-[78%] w-auto opacity-90" />
 
     <template v-if="status === 'ready'">
@@ -140,8 +168,8 @@ onBeforeUnmount(() => {
         type="button"
         tabindex="-1"
         aria-hidden="true"
-        class="absolute left-0 top-0 flex items-center gap-2 whitespace-nowrap rounded-sm border px-2.5 py-1.5 text-label-sm opacity-0 transition-[opacity,background-color,border-color] duration-200 motion-reduce:transition-none"
-        :class="s.slug === selected ? 'border-white/40 bg-lab-bg text-white' : 'border-white/15 bg-lab-bg/70 text-lab-on-dark-muted hover:border-white/40 hover:text-white'"
+        class="station-label absolute left-0 top-0 flex items-center gap-2 whitespace-nowrap rounded-sm border px-3 py-2 text-label-md font-medium opacity-0 transition-[opacity,background-color,border-color] duration-200 motion-reduce:transition-none"
+        :class="{ 'station-label-selected': s.slug === selected }"
         @click="emit('select', s.slug)"
       >
         <span class="h-2 w-2 rotate-45" :style="{ background: s.accent }" />
@@ -158,4 +186,8 @@ onBeforeUnmount(() => {
 /* Arrival push stays on the canvas layer so scroll camera and labels retain their coordinates after arrival. */
 :global(html[data-intro='1'] .stage-arrival) { animation: stage-arrive 1800ms cubic-bezier(0.16, 1, 0.3, 1) both; transform-origin: 70% 50%; }
 @keyframes stage-arrive { from { transform: scale(0.96); } to { transform: none; } }
+.stage-reading-veil { background: linear-gradient(to right, rgb(var(--c-background)), rgb(var(--c-background) / 0.85), transparent); }
+
+.station-label { color: #eae6de; background: #22201d; border-color: #777168; box-shadow: 0 3px 12px rgb(0 0 0 / 0.25); }
+.station-label:hover, .station-label-selected { color: #fff; background: #171614; border-color: #c8c2b6; }
 </style>

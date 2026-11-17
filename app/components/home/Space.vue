@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const { hero, projects, projectImages } = useData()
+const archiveReady = ref(true)
+const activeNote = ref<number | null>(null)
 const { locale } = useI18n()
 const localePath = useLocalePath()
 
@@ -82,7 +84,7 @@ onMounted(() => {
 
 <template>
   <div data-space class="lab-dark relative">
-    <SpaceStage ref="stage" :selected="selected" :preview="preview" class="sticky top-0 hidden h-[100svh] md:block" @select="onStage" />
+    <SpaceStage ref="stage" :selected="selected" :preview="preview" :active-note="activeNote" class="sticky top-0 hidden h-[100svh] md:block" @select="onStage" @active-work="selected = $event" @archive-ready="archiveReady = $event" />
 
     <div class="relative md:-mt-[100svh]">
       <!-- Hero -->
@@ -112,7 +114,7 @@ onMounted(() => {
       </section>
 
       <!-- Project space -->
-      <section id="works" class="pointer-events-none relative scroll-mt-0 py-24 md:flex md:min-h-[100svh] md:items-center" aria-labelledby="works-title">
+      <section id="works" class="pointer-events-none relative scroll-mt-0 py-12 md:flex md:min-h-[85svh] md:items-center" aria-labelledby="works-title">
         <div class="section-x pointer-events-auto">
           <div ref="column" class="md:max-w-[26rem]" @mouseleave="preview = null" @focusout="onFocusOut" @pointerdown="pointerType = $event.pointerType">
             <h2 id="works-title" class="font-heading text-headline-lg-mobile text-white md:text-headline-lg">{{ $t('home.worksTitle') }}</h2>
@@ -131,7 +133,7 @@ onMounted(() => {
                   @focus="show(p.slug)"
                   @keydown="onKey($event, i)"
                 >
-                  <span class="w-12 shrink-0 font-mono text-label-sm" :style="p.slug === selected ? { color: p.accent } : undefined">{{ p.code }}</span>
+                  <span class="work-code w-12 shrink-0 font-mono text-label-sm" :class="{ 'work-code-selected': p.slug === selected, 'work-code-portfolio': p.slug === 'personal-portfolio' }" :style="{ '--work-accent': p.accent }">{{ p.code }}</span>
                   <span :class="i === 0 ? 'text-headline-md' : 'text-headline-sm'" class="font-heading">{{ p.title }}</span>
                   <UiIcon name="arrow_forward" class="ml-auto self-center text-[18px] transition-[opacity,transform] motion-reduce:transition-none" :class="p.slug === selected ? 'opacity-100' : 'opacity-0 group-hover:opacity-60'" />
                 </NuxtLink>
@@ -202,6 +204,9 @@ onMounted(() => {
           </div>
         </div>
       </section>
+      <div data-archive-approach class="archive-approach hidden h-[25svh] md:block" aria-hidden="true" />
+      <HomeAbout :ready="archiveReady" />
+      <HomeNotes @preview="activeNote = $event" />
     </div>
   </div>
 </template>
@@ -233,4 +238,6 @@ onMounted(() => {
   80% { opacity: 1; transform: translateX(100%); }
   100% { opacity: 0; transform: translateX(100%); }
 }
+.work-code-selected { color: var(--work-accent); }
+:global(html:not([data-theme='dark']) .work-code-selected.work-code-portfolio) { color: #655d4f; }
 </style>

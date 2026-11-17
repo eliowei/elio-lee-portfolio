@@ -56,7 +56,10 @@
     "notesTitle": "記錄問題 也整理自己的理解",
     "notesBody": "從實際遇到的問題出發，記錄除錯過程、框架版本的差異，以及個人專案中的技術探索。",
     "notesLink": "閱讀技術筆記",
-    "titleTagline": "作品集與技術筆記"
+    "titleTagline": "作品集與技術筆記",
+    "aboutHeading": "關於我",
+    "closeDetail": "關閉說明",
+    "aboutPositioning": "我是李柏偉（Elio），一名前端工程師，具備既有系統維護與介面開發經驗。在開發過程中，我學會從需求出發，釐清問題，再決定合適的實作方式，也重視每次修改對使用者與既有功能的影響。"
   },
   "experience": {
     "title": "工作經歷",

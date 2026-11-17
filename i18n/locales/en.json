@@ -56,7 +56,10 @@
     "notesTitle": "Writing down problems, and what I learned from them.",
     "notesBody": "Notes that start from real problems: debugging stories, differences between framework versions, and technical exploration from personal projects.",
     "notesLink": "Read the technical notes",
-    "titleTagline": "Portfolio & Technical Notes"
+    "titleTagline": "Portfolio & Technical Notes",
+    "aboutHeading": "About me",
+    "closeDetail": "Close details",
+    "aboutPositioning": "I’m Elio, a frontend engineer working primarily with Vue. I maintain existing systems, build interfaces, and explore spatial interaction with Three.js."
   },
   "experience": {
     "title": "Experience",

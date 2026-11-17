@@ -56,7 +56,10 @@
     "notesTitle": "問題を記録し、自分の理解を整理する。",
     "notesBody": "実際に直面した問題を出発点に、デバッグの過程、フレームワークのバージョン間の違い、個人プロジェクトでの技術的な探求を記録しています。",
     "notesLink": "技術ノートを読む",
-    "titleTagline": "ポートフォリオと技術ノート"
+    "titleTagline": "ポートフォリオと技術ノート",
+    "aboutHeading": "私について",
+    "closeDetail": "説明を閉じる",
+    "aboutPositioning": "Vue を中心に開発するフロントエンドエンジニア、Elio です。既存システムの保守と UI 開発に携わり、Three.js で空間とインタラクションも探求しています。"
   },
   "experience": {
     "title": "経歴",

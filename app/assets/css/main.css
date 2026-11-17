@@ -115,3 +115,123 @@
   .prose-post td { @apply min-w-[7rem] border-t border-hairline px-4 py-3; }
   .prose-post img { @apply rounded-lg; }
 }
+
+/* The corridor gives way to an archive; its survey marks continue through the reading areas. */
+.home-reading {
+  position: relative;
+  background: linear-gradient(to bottom, var(--lab-bg), rgb(var(--c-background))) top / 100% 5rem no-repeat;
+  padding-top: 5rem;
+}
+.home-reading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 7rem;
+  background: linear-gradient(var(--lab-signal), rgb(var(--c-primary) / 0.25));
+  pointer-events: none;
+}
+.home-archive { position: relative; }
+.home-chapter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  color: rgb(var(--c-primary));
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+}
+.home-chapter-line {
+  position: relative;
+  width: 5rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+}
+.home-chapter-line::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 1px;
+  height: 7px;
+  background: currentColor;
+}
+.home-portrait {
+  position: relative;
+  padding: 0.75rem;
+  border: 1px solid rgb(var(--c-hairline-strong));
+  background: rgb(var(--c-surface-container-lowest));
+}
+.home-portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-top: 2px solid rgb(var(--c-primary));
+  border-left: 2px solid rgb(var(--c-primary));
+  width: 1.5rem;
+  height: 1.5rem;
+  pointer-events: none;
+}
+.home-notes { border-top: 1px solid rgb(var(--c-hairline)); }
+.home-index > li { position: relative; }
+.home-index > li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 1.5rem;
+  height: 1px;
+  background: rgb(var(--c-primary));
+  pointer-events: none;
+}
+.home-signal .home-chapter { color: var(--lab-signal); }
+.home-gate {
+  position: absolute;
+  z-index: -1;
+  top: 2.5rem;
+  right: max(1.25rem, calc((100vw - 1136px) / 2));
+  bottom: -1px;
+  width: clamp(10rem, 32vw, 25rem);
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-bottom: 0;
+  box-shadow: inset 0.75rem 0 0 rgb(255 255 255 / 0.02);
+  pointer-events: none;
+}
+.home-gate::before {
+  content: '';
+  position: absolute;
+  inset: 0.75rem 0.75rem 0;
+  border: 1px solid rgb(255 255 255 / 0.06);
+  border-bottom: 0;
+}
+.home-gate span {
+  position: absolute;
+  top: -1px;
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  background: var(--lab-signal);
+  box-shadow: 0 0 20px rgb(255 91 31 / 0.2);
+}
+@media (max-width: 767px) {
+  .home-reading { padding-top: 3rem; background-size: 100% 3rem; }
+  .home-reading::before { height: 4.5rem; }
+  .home-gate { opacity: 0.5; }
+}
+
+/* Match the light 3D stage to the reading palette, including fixed Tailwind stage colours. */
+:root:not([data-theme='dark']) [data-space] { background-color: rgb(var(--c-background)); color: rgb(var(--c-on-surface)); }
+:root:not([data-theme='dark']) [data-space] :is(.text-white, .text-lab-on-dark) { color: rgb(var(--c-on-surface)); }
+:root:not([data-theme='dark']) [data-space] :is(.lab-muted, .text-lab-on-dark-muted) { color: rgb(var(--c-on-surface-variant)); }
+:root:not([data-theme='dark']) [data-space] :is(.lab-eyebrow, .text-lab-signal) { color: rgb(var(--c-primary)); }
+:root:not([data-theme='dark']) [data-space] .lab-chip { color: rgb(var(--c-on-surface)); border-color: rgb(var(--c-hairline-strong)); }
+:root:not([data-theme='dark']) [data-space] .bg-lab-bg-soft { background-color: rgb(var(--c-surface-container-lowest)); }
+
+@media (max-width: 1023px) {
+  .home-chapter-line { width: 3rem; }
+  .home-index > li::before { display: none; }
+}

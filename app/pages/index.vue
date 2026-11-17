@@ -30,8 +30,6 @@ useHead({
 <template>
   <div class="flex w-full flex-col">
     <HomeSpace />
-    <HomeAbout />
-    <HomeNotes />
     <HomeContact />
   </div>
 </template>
