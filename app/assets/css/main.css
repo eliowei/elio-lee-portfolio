@@ -13,6 +13,8 @@
 }
 
 @layer base {
+  /* Clip transformed/animated elements at the viewport instead of letting visual overflow create a horizontal scrollbar. */
+  html, body { max-width: 100%; overflow-x: clip; }
   html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   /* Focus rings: ink-orange on the light ground, bright orange on dark sections. */
