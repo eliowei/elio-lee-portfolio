@@ -55,8 +55,9 @@ watch(() => props.index !== null, async (open) => {
   }
 })
 
-// Warm the cache for the neighbours so ← → feel instant. Same `sizes` + AVIF as <NuxtPicture> above,
-// so the browser picks the very candidate it will need (preloading the original PNG would waste bandwidth).
+// Warm the cache for the neighbours so ← → feel instant. Same `sizes` as <NuxtPicture> above, so the browser picks the very
+// candidate it will need. No `format` here on purpose: the `vercel` image provider ignores it (the format is negotiated from
+// the Accept header) and its types reject it, which broke `nuxt typecheck` on Vercel.
 const VIEWER_SIZES = 'xs:100vw sm:100vw md:100vw lg:100vw xl:100vw xxl:100vw'
 const $img = useImage()
 watch(() => props.index, (i) => {
@@ -64,7 +65,7 @@ watch(() => props.index, (i) => {
   for (const d of [1, -1]) {
     const s = props.slides[(i + d + props.slides.length) % props.slides.length]
     if (!s) continue
-    const { srcset, sizes } = $img.getSizes(s.src, { sizes: VIEWER_SIZES, modifiers: { width: s.w, height: s.h, format: 'avif' } })
+    const { srcset, sizes } = $img.getSizes(s.src, { sizes: VIEWER_SIZES, modifiers: { width: s.w, height: s.h } })
     const pre = new Image()
     pre.sizes = sizes ?? ''
     pre.srcset = srcset ?? ''

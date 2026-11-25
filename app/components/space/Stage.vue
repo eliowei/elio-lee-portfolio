@@ -101,7 +101,7 @@ async function start() {
         return {
           slug: p.slug,
           featured: p.slug === 'game-together',
-          texture: cover ? img(cover.src, { width: 640, format: 'webp' }) : '',
+          texture: cover ? img(cover.src, { width: 640 }) : '',
           aspect: cover ? cover.w / cover.h : 16 / 10,
         }
       }),

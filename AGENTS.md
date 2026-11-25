@@ -28,7 +28,7 @@
 | `npm run dev` | 開發 |
 | `npm run check` | **提交前必跑**：`check:content` + `lint` + `typecheck`（約 30 秒） |
 | `npm run check:content` | 三語內容檔名、`draft` 狀態、i18n 鍵、重複鍵的對照 |
-| `npm run lint` / `npm run typecheck` | ESLint / `nuxt typecheck`（含 `.vue`） |
+| `npm run lint` / `npm run typecheck` | ESLint / `nuxt typecheck`（含 `.vue`）。`typecheck` 刻意以 `VERCEL=1` 執行（`scripts/typecheck.mjs`），型別與 Vercel 部署環境一致 |
 | `npm run build` | 建置。**Vercel 會先跑 `npm run check` 再建置**（`vercel.json`），檢查沒過就不部署 |
 
 專案目前**沒有自動化測試**，驗證靠 `check` + 建置 + 實際在瀏覽器看（見 §9）。
@@ -164,6 +164,7 @@ server/api/     只有 sitemap 來源
 - **three.js 只在 ≥768px、非 Save-Data、記憶體與核心數足夠時才載入**，並且 `nuxt.config.ts` 的 `build:manifest` 鉤子刻意取消它的 prefetch。**不要讓它進入首屏必載的 bundle。**
 - 字型：只預載 `barlow-500`，其餘靠 CSS 解析後載入（`font-display: swap`）。**預載越多，慢速網路上 FCP 越差**（實測過）。不要加預載。
 - 圖片用 `<NuxtPicture>` / `<NuxtImg>`，`sizes` 要用 `image.screens` 的名稱（`xs:100vw sm:...`）。**單獨寫 `sizes="100vw"` 會被解析成 `1w`，只產出 1×1 的圖**（真實發生過）。
+- **不要對 `$img` / `getSizes` / `<NuxtImg>` 傳 `format` 或 `height` 修飾子**：Vercel 的圖片 provider 只吃 `w`、`q`（格式由 `Accept` 標頭協商），型別也不允許 `format`。本機的 `ipx` provider 允許它，所以**只在本機跑型別檢查會漏掉**（曾因此部署失敗），`npm run typecheck` 已改成跟 Vercel 同環境。
 - **效能問題先量測再改**：用 Chrome Performance 面板或 Lighthouse，沒有量測結果就不要重構。
 
 ---
