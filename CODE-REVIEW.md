@@ -59,13 +59,20 @@
 - 2.1 的「重複鍵」是逐行掃描，只適用目前這種一行一鍵的排版；若有人把 JSON 改成壓縮成單行，這項檢查會失效（其他三項不受影響）。
 - Vercel Build Command 啟用後，**任何檢查失敗都會擋住新的部署**（舊版仍在線）。目前 lint 有 6 個警告（`vue/no-template-shadow`），警告不會擋；只有錯誤才會擋。
 
+### 第三階段：開發規範（草稿完成，**待你審閱**；尚未 commit）
+
+| 項目 | 狀態 | 內容 |
+|---|---|---|
+| `AGENTS.md` | ✅ 已建立（草稿） | 繁體中文，共 10 章：專案概要與指令、目錄與架構分工、Vue/Nuxt/TS（含 ESLint 注意事項）、抽離原則、Tailwind 與 Design Tokens、動畫與資源清理、SSR/SEO/i18n/無障礙/效能、完成標準與 Code Review、**給 AI 助手的工作規則**、已知技術債。視覺規範不重複，引用既有的 `DESIGN-SYSTEM.md`。多數規則標註來源（R#、L#），都是這次審查中「實際出過問題」的地方 |
+| `CLAUDE.md` | ✅ 已建立 | 以 `@AGENTS.md` 引用共用規範，加上 Claude Code 專屬的三條補充，避免兩份內容分叉。Codex 原生讀 `AGENTS.md` |
+| 驗證 | ⚠️ 限制 | 規範是文件，沒有自動驗證手段。我核對了其中可查證的事實（`any` / `@ts-ignore` 為 0、`.vue` 皆為 `lang="ts"`、沒有 `utils/` 目錄、`AGENTS.md` / `CLAUDE.md` 不會被 `.gitignore` 忽略）。**沒有驗證**的是「Codex 是否會讀 `AGENTS.md`」與「`CLAUDE.md` 的 `@AGENTS.md` 引用在你的 Claude Code 版本是否生效」，需要你實際開新對話確認 |
+
 ### 其餘階段
 
 | # | 項目 | 狀態 |
 |---|---|---|
 | R5、R7、R8、R9 | 一致性與可維護性重構 | ⏳ 第四階段 |
 | R10、L6、L7 | 架構與效能 | ⏳ 第五階段（先量測） |
-| 開發規範（`AGENTS.md` / `CLAUDE.md`） | ⏳ 第三階段 |
 | 測試 | ⏳ 第六階段 |
 
 ---
