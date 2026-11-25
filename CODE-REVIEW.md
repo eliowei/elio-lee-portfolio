@@ -30,7 +30,7 @@
    - `node_modules/better-sqlite3/build` 不存在（沒有編譯成功過）。
    - 執行 `npm uninstall gsap` 時，npm 會觸發 `better-sqlite3` 的 install script（`node-gyp rebuild`），在這台 Windows 機器上因找不到 Visual Studio 而失敗。**也就是說，只要它還在 `dependencies` 裡，任何人在沒有 C++ 編譯環境的機器上做 `npm install` / `npm uninstall` 都可能失敗。**
    - 它是 `@nuxt/content` 的**可選** peer 依賴（`peerDependenciesMeta.optional: true`），不是被連帶安裝，而是被明確寫進了你的 `package.json`。
-   - 部署端確認：Vercel、Node 22.x（≥ 22.5，`node:sqlite` 可用）。
+   - 部署端確認：Vercel。**更正**：當時依你的口頭說法記為 Node 22.x，但 Vercel 專案設定實際是 **26.x**（後來從部署日誌才發現）；兩者都 ≥ 22.5，`node:sqlite` 皆可用，所以移除 `better-sqlite3` 的結論不受影響，但「我確認過部署端」這句話當時並沒有查證 Vercel 設定。
    - 因此原本報告 R6 的「⚪ 待確認」可以改判為「已確認可移除」。
 2. **`engines` 的建議值需修正**：報告原文寫「補 `engines: { node: '>=22.5' }`」。實際上 `nuxt` 自己宣告 `^22.22.3 || ^24.15.0 || >=26.0.0`，應以此為準。這項屬第二階段，到時一起處理。
 3. **對移除依賴的順序有影響**：因為上面第 1 點，**必須先移除 `better-sqlite3`，才能順利移除其他套件**。
@@ -47,7 +47,7 @@
 | 項目 | 狀態 | 內容 / 驗證結果 |
 |---|---|---|
 | 2.1 內容與 i18n 對照檢查 | ✅ 完成並驗證（尚未 commit） | 新增 `scripts/check-content.mjs`（純 Node，零依賴），`npm run check:content`。檢查：①`content/{blog,legal}` 三語檔名一致 ②同一篇文章三語 `draft` 狀態一致 ③`en`、`ja` 的 i18n 鍵與 `zh` 完全相同 ④同一層 JSON 物件內沒有重複鍵。目前通過（170 鍵）。**負向測試**：分別故意刪翻譯檔、讓 `draft` 不一致、刪一個 i18n 鍵、加重複鍵，四種都正確紅燈，還原後恢復綠燈 |
-| 2.2 Node 版本規範 | ✅ 完成（尚未 commit） | `package.json` 加 `"engines": { "node": "22.x" }`，新增 `.nvmrc`（`22`）。刻意用 `22.x` 而不是照抄 Nuxt 的範圍：Vercel 會讀 `engines`，範圍太寬可能讓部署悄悄升到 Node 24。本機 Node 22.23.4 符合 |
+| 2.2 Node 版本規範 | 🔄 **已更正** | 原本加了 `"engines": { "node": "22.x" }` 與 `.nvmrc`（`22`），**我沒有核實 Vercel 專案設定**（實際是 **26.x**，你當時說 22.x）。`engines` 會覆蓋專案設定，把 Vercel 的 Node 從 26.x 降成 22.x（Vercel 日誌有警告），而第一次啟用 `check` 的部署就失敗了（exit 2）。**已移除 `engines`**，Vercel 回到使用專案設定的 26.x；`.nvmrc` 保留，僅作為本機開發的版本提示。**本機以乾淨安裝在失敗的那個 commit（`6c00824`）跑 `npm run check`，Node 22.23.4 上通過**，所以程式碼本身沒問題；失敗的確切原因**仍待確認**（需要 Vercel 日誌中 `check` 開始後的輸出）。此外，`npm run check` 在 Node 26 上是否通過，**尚未驗證** |
 | 檢查入口 | ✅ | `npm run check` = `check:content` + `lint` + `typecheck`（約 30 秒） |
 | 2.3 型別檢查 | ✅ 完成並驗證（尚未 commit） | 安裝 devDependencies：`vue-tsc` 3.3.14、`typescript` 6.0.3；新增 `npm run typecheck`（`nuxt typecheck`，約 25 秒），並併入 `npm run check`。**基準：整個專案含 `.vue` 目前 0 個型別錯誤**，所以不需要「記錄基準再逐步降低」，可以直接設為必須通過。**負向測試**：故意在元件裡寫 `const x: number = 'a'`、在模板傳不存在的 prop 值，兩者都被抓到（已還原）。注意：`typescript` 被裝成 **6.0.3**（原本只是間接依賴的 5.9.3），目前與 Nuxt 配合沒有問題，但屬於主版本較新的選擇，若日後遇到相容問題可退回 5.x |
 | 2.4 ESLint | ✅ 完成並驗證（尚未 commit） | 安裝 devDependencies `eslint` 10.15.0、`@nuxt/eslint` 1.17.0（`nuxt.config.ts` 的 `modules` 加入 `@nuxt/eslint`，`stylistic: false`、`checker: false`）；新增 `eslint.config.mjs`（只用 recommended，關閉 `vue/attributes-order`）與 `npm run lint`，併入 `npm run check`。**量測**：67 個檔案共 16 個命中（8 錯誤、8 警告），約 13 秒。**逐一判斷後的處理**：①`prefer-const` ×2（`Space.vue` 的 `pointerType`、`Lightbox.vue` 的 `touchX`）是**誤報**——這兩個變數在**模板裡被賦值**，ESLint 看不到；照規則改成 `const` 會直接壞掉，所以加上帶理由的 `eslint-disable-next-line`。②`vue/no-deprecated-filter` ×1（`contact.vue`）是**誤報**——eslint-plugin-vue 把模板裡 TS 的 `as 'a' \| 'b'` 的 `\|` 誤認成已淘汰的 filter 語法；改用具名型別 `SocialKey`。③`no-irregular-whitespace` ×1（`CaseDiagram.vue` 的正規式藏了一個肉眼看不見的全形空白 U+3000）：改成 `　-鿿＀-￯`，語意相同（已用 `）`、`あ`、`ａ`、`a`、空白驗證）。④`no-unused-expressions` ×4（`space-scene.ts` 用逗號把多個動作串成一句）：改成分號加大括號，語意相同。⑤`vue/attributes-order` ×2：排版偏好，規則關閉。⑥`vue/no-template-shadow` ×6（迴圈變數 `t` 蓋過 i18n 的 `t()`）：**真實但低風險**的隱患，目前沒出事，**保留為警告，沒有修改**。**結果**：0 錯誤、6 警告；`npm run check` 通過（約 31 秒）；`nuxt build` 成功；實際在瀏覽器開首頁，3D 場景正常啟動（遺跡、階梯、迴廊、作品門、封面貼圖比例、橘色門框、標籤都正常）。**限制**：3D 的 4 處改動是語意相同的語法改寫，我只用肉眼確認畫面正常，沒有做像素級比對 |

@@ -2,9 +2,6 @@
   "name": "frontend-portfolio",
   "type": "module",
   "private": true,
-  "engines": {
-    "node": "22.x"
-  },
   "scripts": {
     "build": "nuxt build",
     "check": "npm run check:content && npm run lint && npm run typecheck",

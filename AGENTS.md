@@ -19,7 +19,7 @@
 | i18n | `@nuxtjs/i18n`，`prefix_except_default`，不做瀏覽器語言自動轉址 |
 | 3D | `three`，場景在 `app/lib/space-scene.ts` |
 | 圖片 | `@nuxt/image`（`<NuxtPicture>` / `<NuxtImg>`） |
-| 部署 | Vercel，Node **22.x**；`/`、`/blog`、`/blog/**` 為 ISR（3600 秒） |
+| 部署 | Vercel（專案設定的 Node 為 **26.x**）；本機開發用 Node 22.x（`.nvmrc`）；`/`、`/blog`、`/blog/**` 為 ISR（3600 秒） |
 
 ### 常用指令
 
@@ -210,6 +210,7 @@ server/api/     只有 sitemap 來源
 
 ### 環境注意
 
+- **不要在 `package.json` 加 `engines`**：Vercel 會讓它覆蓋專案設定的 Node 版本（曾因此把 26.x 悄悄降成 22.x，部署失敗）。要改 Node 版本，到 Vercel 專案設定改，並先確認 `npm run check` 在該版本通過。
 - 開發機是 **Windows**，檔案換行混用 LF 與 CRLF。**做多行字串替換前先確認該檔的換行**，否則樣式比對會失敗（真實發生過：`space-scene.ts`、`Space.vue` 是 CRLF）。
 - `.env` 含 EmailJS 設定（公開金鑰，但仍不要讀出或複製值）。需要鍵名看 `.env.example`。
 - `.claude/` 與 `.agents/` 被 `.gitignore` 忽略（本機技能），不要把它們加進版本控制。
