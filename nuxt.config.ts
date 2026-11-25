@@ -3,7 +3,9 @@ const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || 'https://portfolio.elioflowr
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/i18n', '@nuxt/scripts', '@nuxt/content', '@nuxtjs/tailwindcss', '@nuxtjs/sitemap', '@nuxt/image'],
+  modules: ['@nuxtjs/i18n', '@nuxt/scripts', '@nuxt/content', '@nuxtjs/tailwindcss', '@nuxtjs/sitemap', '@nuxt/image', '@nuxt/eslint'],
+  // Lint only: no stylistic rules (the code base has its own, deliberately dense formatting) and no dev-time checker overlay.
+  eslint: { config: { stylistic: false }, checker: false },
   // 中文維持原網址，英文 /en/...、日文 /ja/...。不做瀏覽器語言自動轉址：首頁有 ISR 快取，轉址會讓快取錯亂。
   // 文案：介面字串在 i18n/locales/*.json；頁面資料在 app/data/{,en/,ja/}；筆記在 content/{,en/,ja/}blog。
   i18n: {

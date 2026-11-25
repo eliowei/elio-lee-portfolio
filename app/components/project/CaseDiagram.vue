@@ -26,7 +26,7 @@ const uid = useId()
 // SVG text never wraps, so a long label (Japanese runs longer than Chinese) shrinks to fit its box instead of
 // spilling out. Width estimate: CJK / kana / full-width glyphs ≈ 1em, everything else ≈ 0.6em.
 const fit = (text: string, size: number, max = NW - 24) => {
-  const em = [...text].reduce((w, c) => w + (/[　-鿿＀-￯]/.test(c) ? 1 : 0.6), 0)
+  const em = [...text].reduce((w, c) => w + (/[\u3000-\u9fff\uff00-\uffef]/.test(c) ? 1 : 0.6), 0)
   return Math.min(size, Math.floor(max / em))
 }
 </script>

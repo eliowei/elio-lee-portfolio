@@ -24,8 +24,8 @@ export const projects: {
   slug: string
   code: string // 測站代號，例如 GT-01
   accent: string // 作品識別色：只用在深色底與非文字標記
-  no: string; kind: string; tags: string[]; title: string; body: string
-  side: { icon: string; title: string; items: string[] }
+  kind: string; tags: string[]; title: string; body: string
+  side: { items: string[] }
   // 專案詳情頁（/projects/[slug]）：全部選填，有填才會顯示對應區塊，沒填就不顯示，不放佔位文字。
   detail?: {
     period?: string
@@ -34,11 +34,10 @@ export const projects: {
     github?: string // 專案 repo
     headline?: string
     overview?: string[]
-    scope?: string[] // 個人負責範圍（尚未提供；有填才顯示，開發環境會提示待補）
     stack?: { group: string; items: string[]; why?: string }[] // why = 為什麼這樣選（尚未提供）
     verification?: string[] // 驗證方式（尚未提供）
     features?: { title: string; body: string; points?: string[] }[]
-    challenges?: { label: string; title: string; problem: string; solution: string; tags?: string[] }[]
+    challenges?: { title: string; problem: string; solution: string; tags?: string[] }[]
     // 案例頁的技術示意圖（依專案文字內容繪製，頁面上標示為「示意」，不是產品畫面）
     diagram?: { title: string; caption: string; nodes: { id: string; label: string; sub?: string; x: number; y: number }[]; edges: [string, string, string?][] }
     results?: { value: string; label: string; body?: string }[]
@@ -46,11 +45,11 @@ export const projects: {
   }
 }[] = [
   {
-    slug: 'game-together', code: 'GT-01', accent: '#A79BFF', no: '01', kind: '全端專案 2025',
+    slug: 'game-together', code: 'GT-01', accent: '#A79BFF', kind: '全端專案 2025',
     tags: ['Vue 3', 'Vuetify', 'Node.js', 'MongoDB', 'WebSocket'],
     title: '遊戲社群揪團平台',
     body: '一個專為玩家打造的即時社群揪團平台，結合搜尋篩選、活動管理與即時聊天室，幫助玩家快速找到隊友並建立長期遊戲社群。',
-    side: { icon: 'sports_esports', title: 'FEATURE HIGHLIGHTS', items: ['多條件搜尋與排序（關鍵字、地區、標籤、日期）', 'Socket.IO 即時聊天室與聊天紀錄保存', 'JWT 身份驗證與揪團建立 / 管理流程'] },
+    side: { items: ['多條件搜尋與排序（關鍵字、地區、標籤、日期）', 'Socket.IO 即時聊天室與聊天紀錄保存', 'JWT 身份驗證與揪團建立 / 管理流程'] },
     detail: {
       role: '獨立開發',
       diagram: {
@@ -86,10 +85,10 @@ export const projects: {
         { title: '即時聊天室', body: '透過 WebSocket 即時通訊，提升活動前後的互動與協調效率。', points: ['Socket.IO', '即時訊息同步', '聊天紀錄保存', '獨立聊天室'] },
       ],
       challenges: [
-        { label: 'Realtime Communication', title: 'WebSocket 連線管理', problem: '若使用者頻繁切換頁面，容易建立重複 WebSocket 連線。', solution: '僅在揪團詳情頁建立連線，離開頁面立即斷開連線，避免重複建立 Socket 實例。', tags: ['WebSocket', 'MongoDB'] },
-        { label: 'Authentication', title: 'JWT 權限驗證', problem: '會員功能與管理功能需要權限控管，避免未登入或非授權使用者存取敏感資源。', solution: '使用 Passport JWT 驗證，並於 Middleware 中驗證 Token 與使用者身份，確保受保護資源僅能由授權使用者存取。', tags: ['JWT', 'Passport'] },
-        { label: 'Search Experience', title: '多條件搜尋設計', problem: '玩家通常會依照遊戲類型、地區、日期等條件尋找活動。', solution: '設計多條件搜尋與排序機制，支援關鍵字、標籤、地區與日期篩選，提升活動媒合效率。', tags: ['MongoDB', 'Express'] },
-        { label: 'Data Modeling', title: '資料關聯設計', problem: '活動、使用者、聊天室與留言之間存在多層資料關聯，若結構設計不佳容易造成查詢複雜度提升。', solution: '透過 Mongoose Schema 建立資料關聯結構，並依照使用情境進行資料拆分與引用設計，兼顧查詢效率與維護性。', tags: ['MongoDB', 'Mongoose'] },
+        { title: 'WebSocket 連線管理', problem: '若使用者頻繁切換頁面，容易建立重複 WebSocket 連線。', solution: '僅在揪團詳情頁建立連線，離開頁面立即斷開連線，避免重複建立 Socket 實例。', tags: ['WebSocket', 'MongoDB'] },
+        { title: 'JWT 權限驗證', problem: '會員功能與管理功能需要權限控管，避免未登入或非授權使用者存取敏感資源。', solution: '使用 Passport JWT 驗證，並於 Middleware 中驗證 Token 與使用者身份，確保受保護資源僅能由授權使用者存取。', tags: ['JWT', 'Passport'] },
+        { title: '多條件搜尋設計', problem: '玩家通常會依照遊戲類型、地區、日期等條件尋找活動。', solution: '設計多條件搜尋與排序機制，支援關鍵字、標籤、地區與日期篩選，提升活動媒合效率。', tags: ['MongoDB', 'Express'] },
+        { title: '資料關聯設計', problem: '活動、使用者、聊天室與留言之間存在多層資料關聯，若結構設計不佳容易造成查詢複雜度提升。', solution: '透過 Mongoose Schema 建立資料關聯結構，並依照使用情境進行資料拆分與引用設計，兼顧查詢效率與維護性。', tags: ['MongoDB', 'Mongoose'] },
       ],
       verification: [
         '目前以手動測試為主，走過建立揪團、參加、留言與聊天等主要流程',
@@ -102,11 +101,11 @@ export const projects: {
     },
   },
   {
-    slug: 'tokyo-travel-site', code: 'TR-02', accent: '#7C96F2', no: '02', kind: '個人專案 2026',
+    slug: 'tokyo-travel-site', code: 'TR-02', accent: '#7C96F2', kind: '個人專案 2026',
     tags: ['Nuxt 4', 'Notion API', 'OpenAI', 'Gemini', 'Google Maps'],
     title: '東京自由行 旅遊網站',
     body: '為了 9 月的東京自由行開發的旅遊行程網站，以 Notion 作為 CMS，整合 AI 助手、地圖、花費紀錄與行李清單。',
-    side: { icon: 'travel_explore', title: 'TRIP TOOLKIT', items: ['Notion API 內容管理', 'GPT 與 Gemini AI 助手', 'Google Maps 動線規劃'] },
+    side: { items: ['Notion API 內容管理', 'GPT 與 Gemini AI 助手', 'Google Maps 動線規劃'] },
     detail: {
       period: '2026/06 — 2026/09',
       role: '獨立開發',
@@ -140,9 +139,9 @@ export const projects: {
         { title: '花費與清單', body: '花費紀錄支援分類、付款方式與日幣換算；打勾狀態存在瀏覽器，不寫回 Notion。', points: ['圖表統計', 'localStorage', 'Zod 驗證'] },
       ],
       challenges: [
-        { label: 'Deployment', title: '部署後找不到資料檔', problem: 'API 用 node:fs 在執行時讀取 JSON，本機正常，部署到 Vercel 後卻找不到檔案，因為打包器無法追蹤動態路徑。', solution: '改用 Nitro 的 serverAssets 把資料內嵌進 server build，再透過 useStorage() 讀取。', tags: ['Nitro', 'Vercel'] },
-        { label: 'Data Integrity', title: 'Notion 的 slug 不保證唯一', problem: '同一間飯店住兩次時，會出現相同的 slug，行程詳情頁只用 slug 查詢會拿到錯誤的資料。', solution: '再用第幾天區分行程，並把參數一起放進快取的 key，避免不同天拿到同一份快取。', tags: ['Notion API', 'Cache'] },
-        { label: 'Reliability', title: 'AI 額度用完時的備援', problem: 'Gemini 回傳 429 時，聊天功能就無法使用。', solution: '在伺服器攔截 429，自動改由 OpenAI 回答，使用者不用自己切換。', tags: ['Gemini', 'OpenAI'] },
+        { title: '部署後找不到資料檔', problem: 'API 用 node:fs 在執行時讀取 JSON，本機正常，部署到 Vercel 後卻找不到檔案，因為打包器無法追蹤動態路徑。', solution: '改用 Nitro 的 serverAssets 把資料內嵌進 server build，再透過 useStorage() 讀取。', tags: ['Nitro', 'Vercel'] },
+        { title: 'Notion 的 slug 不保證唯一', problem: '同一間飯店住兩次時，會出現相同的 slug，行程詳情頁只用 slug 查詢會拿到錯誤的資料。', solution: '再用第幾天區分行程，並把參數一起放進快取的 key，避免不同天拿到同一份快取。', tags: ['Notion API', 'Cache'] },
+        { title: 'AI 額度用完時的備援', problem: 'Gemini 回傳 429 時，聊天功能就無法使用。', solution: '在伺服器攔截 429，自動改由 OpenAI 回答，使用者不用自己切換。', tags: ['Gemini', 'OpenAI'] },
       ],
       verification: [
         '9 月實際帶去東京自由行使用，主要功能都常用到，旅途中沒有遇到問題',
@@ -157,11 +156,11 @@ export const projects: {
     },
   },
   {
-    slug: 'personal-portfolio', code: 'PF-03', accent: '#E6E1D6', no: '03', kind: '個人網站 2026',
+    slug: 'personal-portfolio', code: 'PF-03', accent: '#E6E1D6', kind: '個人網站 2026',
     tags: ['Nuxt 4', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Nuxt Content', 'GA4', 'GTM'],
     title: '個人品牌網站',
     body: '使用 Nuxt 建立的個人品牌網站，對外展示服務與案例，並整合 SEO、GA4 與 GTM。',
-    side: { icon: 'web', title: 'SITE ARCHITECTURE', items: ['SEO 優化（Sitemap、Meta Tags、Open Graph）', 'GSAP 頁面轉場與捲動動畫', 'Nuxt Content 內容驅動架構'] },
+    side: { items: ['SEO 優化（Sitemap、Meta Tags、Open Graph）', 'GSAP 頁面轉場與捲動動畫', 'Nuxt Content 內容驅動架構'] },
     detail: {
       role: '獨立開發',
       diagram: {
@@ -193,9 +192,9 @@ export const projects: {
         { title: '動畫與使用體驗', body: '使用 GSAP 建立頁面轉場與互動效果，強化品牌網站的視覺體驗。', points: ['Page Transition', 'Scroll Animation', 'Responsive Layout'] },
       ],
       challenges: [
-        { label: 'Search Optimization', title: 'SEO 架構規劃', problem: '個人網站需要具備良好的搜尋能見度，同時兼顧內容維護與頁面效能。', solution: '透過 Nuxt SSR、Meta 管理與 Sitemap 建立，提升搜尋引擎索引效率與網站曝光度。', tags: ['Nuxt SEO', 'Sitemap'] },
-        { label: 'User Experience', title: '頁面轉場體驗', problem: '頁面切換過於生硬，容易降低整體瀏覽體驗。', solution: '使用 GSAP 建立 Page Transition 與動畫效果，提升網站的互動感與品牌印象。', tags: ['GSAP', 'Vue Transition'] },
-        { label: 'Content Architecture', title: '內容架構設計', problem: '隨著作品數量增加，若缺乏統一資料結構，容易造成維護成本提高與版面不一致。', solution: '使用 Nuxt Content 與 Markdown 建立內容驅動架構，將作品資料結構化管理，讓頁面能透過相同模板快速產生內容。', tags: ['Nuxt Content', 'Markdown'] },
+        { title: 'SEO 架構規劃', problem: '個人網站需要具備良好的搜尋能見度，同時兼顧內容維護與頁面效能。', solution: '透過 Nuxt SSR、Meta 管理與 Sitemap 建立，提升搜尋引擎索引效率與網站曝光度。', tags: ['Nuxt SEO', 'Sitemap'] },
+        { title: '頁面轉場體驗', problem: '頁面切換過於生硬，容易降低整體瀏覽體驗。', solution: '使用 GSAP 建立 Page Transition 與動畫效果，提升網站的互動感與品牌印象。', tags: ['GSAP', 'Vue Transition'] },
+        { title: '內容架構設計', problem: '隨著作品數量增加，若缺乏統一資料結構，容易造成維護成本提高與版面不一致。', solution: '使用 Nuxt Content 與 Markdown 建立內容驅動架構，將作品資料結構化管理，讓頁面能透過相同模板快速產生內容。', tags: ['Nuxt Content', 'Markdown'] },
       ],
       verification: [
         '以 Google Search Console 確認網站收錄與搜尋成效',
@@ -209,11 +208,11 @@ export const projects: {
     },
   },
   {
-    slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', no: '04', kind: '商業系統實務 2026',
+    slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', kind: '商業系統實務 2026',
     tags: ['Vue 3', 'PrimeVue', 'Node.js', 'MongoDB', 'LINE Messaging API', 'SSE'],
     title: 'LINE OA 商家管理平台',
     body: '提供商家自行管理 LINE 官方帳號內容的後台管理平台，讓店家不用找工程師，自己就能更新 FAQ、公告與價目表。',
-    side: { icon: 'storefront', title: 'MANAGEMENT CAPABILITY', items: ['內容管理：FAQ、公告、價目表', '多店家與權限管理', '圖文選單點擊與熱門內容數據分析'] },
+    side: { items: ['內容管理：FAQ、公告、價目表', '多店家與權限管理', '圖文選單點擊與熱門內容數據分析'] },
     detail: {
       period: '2026',
       role: '獨立開發',
@@ -250,9 +249,9 @@ export const projects: {
         { title: '數據分析', body: '追蹤商家 LINE 內容的使用情形，作為優化經營策略的依據。', points: ['圖文選單點擊紀錄', '熱門內容排行', '使用者行為分析', '點擊成效統計'] },
       ],
       challenges: [
-        { label: 'Observability', title: '監控工具影響 LINE Bot 回應速度', problem: '後端導入 Sentry 後，LINE Bot 的回應從約 0.1～0.2 秒變成約 1 秒。服務部署在 Render 免費方案，CPU 與記憶體都很有限，判斷是監控工具增加的負擔造成影響。', solution: '先關閉 profiling，再關閉 tracing，只保留錯誤監控，逐步縮小範圍排查。最後決定移除後端的 Sentry，改用自己寫的 access log 與 audit log，輸出到 console 由 Render 收集，前端則保留少量使用。', tags: ['Sentry', 'Logging', 'Performance'] },
-        { label: 'Browser Compatibility', title: '手機 Safari 登入後 Cookie 存不下來', problem: '後台使用 HttpOnly Cookie 保存登入狀態。電腦上測試正常，用手機測試時才發現登入成功後仍是未登入狀態：前後端在不同網域，Cookie 被視為第三方 Cookie，遭到 Safari 封鎖。', solution: '調整網域，讓前後端使用同一個主網域，Cookie 不再屬於第三方，Safari 就能正常保存。', tags: ['Cookie', 'Safari'] },
-        { label: 'Authentication', title: '多支請求同時 401 造成連環登出', problem: 'Refresh Token 每次更新都會輪替。Access Token 過期時，頁面上的多支請求會同時呼叫 /refresh，後到的請求拿舊 token 被拒絕，進而觸發登出並清掉 CSRF Token。', solution: '在 axios 攔截器共用同一個 refresh Promise，同一時間只更新一次，其他請求等待結果後再重試。', tags: ['JWT', 'CSRF', 'Axios'] },
+        { title: '監控工具影響 LINE Bot 回應速度', problem: '後端導入 Sentry 後，LINE Bot 的回應從約 0.1～0.2 秒變成約 1 秒。服務部署在 Render 免費方案，CPU 與記憶體都很有限，判斷是監控工具增加的負擔造成影響。', solution: '先關閉 profiling，再關閉 tracing，只保留錯誤監控，逐步縮小範圍排查。最後決定移除後端的 Sentry，改用自己寫的 access log 與 audit log，輸出到 console 由 Render 收集，前端則保留少量使用。', tags: ['Sentry', 'Logging', 'Performance'] },
+        { title: '手機 Safari 登入後 Cookie 存不下來', problem: '後台使用 HttpOnly Cookie 保存登入狀態。電腦上測試正常，用手機測試時才發現登入成功後仍是未登入狀態：前後端在不同網域，Cookie 被視為第三方 Cookie，遭到 Safari 封鎖。', solution: '調整網域，讓前後端使用同一個主網域，Cookie 不再屬於第三方，Safari 就能正常保存。', tags: ['Cookie', 'Safari'] },
+        { title: '多支請求同時 401 造成連環登出', problem: 'Refresh Token 每次更新都會輪替。Access Token 過期時，頁面上的多支請求會同時呼叫 /refresh，後到的請求拿舊 token 被拒絕，進而觸發登出並清掉 CSRF Token。', solution: '在 axios 攔截器共用同一個 refresh Promise，同一時間只更新一次，其他請求等待結果後再重試。', tags: ['JWT', 'CSRF', 'Axios'] },
       ],
       verification: [
         '部署於 Render，自行撰寫 access log 與 audit log 輸出到 console，上線後能追蹤實際的請求與關鍵操作',
@@ -269,11 +268,11 @@ export const projects: {
     },
   },
   {
-    slug: 'weather-bike-bot', code: 'WB-05', accent: '#5AB8F0', no: '05', kind: 'LINE Bot 2024',
+    slug: 'weather-bike-bot', code: 'WB-05', accent: '#5AB8F0', kind: 'LINE Bot 2024',
     tags: ['Node.js', 'Express', 'LINE Bot', 'Flex Message', 'API Integration'],
     title: '天氣 Bike 小幫手',
     body: '透過 LINE 聊天介面整合 YouBike 與天氣查詢功能，讓使用者能快速取得即時站點資訊與天氣預報，減少在不同 App 與網站之間切換的成本。',
-    side: { icon: 'pedal_bike', title: 'BOT CAPABILITY', items: ['YouBike 站點查詢（車輛數量與空位）', '即時天氣、3 小時、3 天與 1 週預報', 'Flex Message 與功能選單互動'] },
+    side: { items: ['YouBike 站點查詢（車輛數量與空位）', '即時天氣、3 小時、3 天與 1 週預報', 'Flex Message 與功能選單互動'] },
     detail: {
       role: '獨立開發',
       diagram: {
@@ -303,8 +302,8 @@ export const projects: {
         { title: 'LINE 互動體驗', body: '利用 Flex Message 與功能選單，提供更直覺的聊天式操作體驗。', points: ['關鍵字觸發', '功能選單', 'Flex Message', '圖文訊息互動'] },
       ],
       challenges: [
-        { label: 'Data Integration', title: '整合多個第三方 API', problem: 'YouBike 各縣市的開放資料格式不一致：新北、桃園、台中、高雄用 sna、tot、sbi、bemp 這組英文欄位，新竹市卻是「站點名稱」「緯度」「經度」的中文欄位，而且沒有車輛數量；台中與高雄的陣列還分別包在 retVal 與 data.retVal 裡，新北市單次最多只回 1000 筆。氣象署的預報資料也依縣市使用不同的資料集代碼。', solution: '把各縣市的回傳整理成同一組欄位（站名、總停車格、可借數量、可還數量、經緯度、地址），缺值顯示「未提供」；新北市用 page 參數分頁，取到空頁為止。請求包在 try/catch 內：YouBike 查詢失敗時只寫入 log，不會回覆使用者；天氣查詢失敗時會回覆「地區有誤! 請再重新分享一次」。', tags: ['Node.js', 'Express'] },
-        { label: 'User Experience', title: '聊天流程設計', problem: 'LINE 聊天介面沒有導覽列，天氣與 YouBike 查詢需要的資訊又不一樣：使用者不知道要怎麼開始，也不知道下一步該提供什麼。', solution: '用功能選單或關鍵字（找YouBike、天氣預報）開始，之後每一步都用 Quick Reply 按鈕提示下一步。查天氣先選「現在、3小時」「未來3天」「未來1週」，再選地區或分享位置；查 YouBike 則按「分享位置」，回傳最近 2 個站點的地圖位置與可借、可還數量。現在天氣用 Flex Message 卡片呈現，3 天與 1 週預報是文字。例如輸入「找YouBike」，Bot 會請你按「分享位置」，再回傳離你最近的 2 個站點的站名、地點、總停車格、可借與可還數量。', tags: ['LINE Bot SDK', 'Flex Message', 'Quick Reply'] },
+        { title: '整合多個第三方 API', problem: 'YouBike 各縣市的開放資料格式不一致：新北、桃園、台中、高雄用 sna、tot、sbi、bemp 這組英文欄位，新竹市卻是「站點名稱」「緯度」「經度」的中文欄位，而且沒有車輛數量；台中與高雄的陣列還分別包在 retVal 與 data.retVal 裡，新北市單次最多只回 1000 筆。氣象署的預報資料也依縣市使用不同的資料集代碼。', solution: '把各縣市的回傳整理成同一組欄位（站名、總停車格、可借數量、可還數量、經緯度、地址），缺值顯示「未提供」；新北市用 page 參數分頁，取到空頁為止。請求包在 try/catch 內：YouBike 查詢失敗時只寫入 log，不會回覆使用者；天氣查詢失敗時會回覆「地區有誤! 請再重新分享一次」。', tags: ['Node.js', 'Express'] },
+        { title: '聊天流程設計', problem: 'LINE 聊天介面沒有導覽列，天氣與 YouBike 查詢需要的資訊又不一樣：使用者不知道要怎麼開始，也不知道下一步該提供什麼。', solution: '用功能選單或關鍵字（找YouBike、天氣預報）開始，之後每一步都用 Quick Reply 按鈕提示下一步。查天氣先選「現在、3小時」「未來3天」「未來1週」，再選地區或分享位置；查 YouBike 則按「分享位置」，回傳最近 2 個站點的地圖位置與可借、可還數量。現在天氣用 Flex Message 卡片呈現，3 天與 1 週預報是文字。例如輸入「找YouBike」，Bot 會請你按「分享位置」，再回傳離你最近的 2 個站點的站名、地點、總停車格、可借與可還數量。', tags: ['LINE Bot SDK', 'Flex Message', 'Quick Reply'] },
       ],
       verification: [
         '撰寫小型腳本實際呼叫 YouBike 與天氣 API，確認回傳的資料格式',

@@ -10,6 +10,7 @@ const current = computed(() => (props.index === null ? undefined : props.slides[
 const dialog = ref<HTMLElement>()
 const closeBtn = ref<HTMLButtonElement>()
 let opener: HTMLElement | null = null
+// eslint-disable-next-line prefer-const -- reassigned in the template (@touchstart), which ESLint cannot see
 let touchX = 0
 
 const pad = (n: number) => String(n).padStart(2, '0')

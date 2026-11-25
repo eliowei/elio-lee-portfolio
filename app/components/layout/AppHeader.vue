@@ -107,7 +107,7 @@ onMounted(() => {
           @click="toggleLang"
         >
           <UiIcon name="language" class="text-[16px]" />
-          <span class="sr-only">{{ $t('nav.language') }}：</span>{{ short[locale] }}
+          <span class="sr-only">{{ $t('nav.language') }}{{ $t('common.colon') }}</span>{{ short[locale] }}
           <UiIcon name="expand_more" class="text-[16px] transition-transform motion-reduce:transition-none" :class="{ 'rotate-180': langOpen }" />
         </button>
         <Transition name="lang">
@@ -137,7 +137,7 @@ onMounted(() => {
         aria-controls="mobile-nav"
         @click="toggleMenu"
       >
-        {{ menuOpen ? 'Close' : 'Menu' }}
+        {{ menuOpen ? $t('common.close') : $t('nav.menu') }}
       </button>
     </div>
     </div>

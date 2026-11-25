@@ -23,11 +23,11 @@ export const about: typeof zh.about = {
 
 export const projects: typeof zh.projects = [
   {
-    slug: 'game-together', code: 'GT-01', accent: '#A79BFF', no: '01', kind: 'Full-stack project, 2025',
+    slug: 'game-together', code: 'GT-01', accent: '#A79BFF', kind: 'Full-stack project, 2025',
     tags: ['Vue 3', 'Vuetify', 'Node.js', 'MongoDB', 'WebSocket'],
     title: 'Gaming Meetup Platform',
     body: 'A real-time community platform for gamers that combines search and filtering, event management and live chat rooms, helping players quickly find teammates and build long-term gaming communities.',
-    side: { icon: 'sports_esports', title: 'FEATURE HIGHLIGHTS', items: ['Multi-criteria search and sorting (keyword, region, tags, date)', 'Socket.IO live chat with saved history', 'JWT authentication and meetup creation / management'] },
+    side: { items: ['Multi-criteria search and sorting (keyword, region, tags, date)', 'Socket.IO live chat with saved history', 'JWT authentication and meetup creation / management'] },
     detail: {
       role: 'Solo developer',
       diagram: {
@@ -63,10 +63,10 @@ export const projects: typeof zh.projects = [
         { title: 'Live chat', body: 'Real-time messaging over WebSocket makes it easier to talk and coordinate before and after an event.', points: ['Socket.IO', 'Real-time sync', 'Saved history', 'Per-meetup rooms'] },
       ],
       challenges: [
-        { label: 'Realtime Communication', title: 'Managing WebSocket connections', problem: 'When users switch pages often, duplicate WebSocket connections are easily created.', solution: 'Connect only on the meetup detail page and disconnect as soon as the user leaves, so no duplicate socket instances are created.', tags: ['WebSocket', 'MongoDB'] },
-        { label: 'Authentication', title: 'JWT authorisation', problem: 'Member and admin features need access control, so that signed-out or unauthorised users cannot reach sensitive resources.', solution: 'Use Passport JWT and verify the token and user identity in middleware, so protected resources are only available to authorised users.', tags: ['JWT', 'Passport'] },
-        { label: 'Search Experience', title: 'Designing multi-criteria search', problem: 'Players usually look for events by game type, region, date and similar criteria.', solution: 'A multi-criteria search and sorting mechanism supporting keyword, tag, region and date filters, making it easier to match players with events.', tags: ['MongoDB', 'Express'] },
-        { label: 'Data Modeling', title: 'Designing data relations', problem: 'Events, users, chat rooms and comments have several layers of relations; a poor structure would make queries increasingly complex.', solution: 'Model the relations with Mongoose schemas, splitting and referencing data according to how it is used, balancing query efficiency and maintainability.', tags: ['MongoDB', 'Mongoose'] },
+        { title: 'Managing WebSocket connections', problem: 'When users switch pages often, duplicate WebSocket connections are easily created.', solution: 'Connect only on the meetup detail page and disconnect as soon as the user leaves, so no duplicate socket instances are created.', tags: ['WebSocket', 'MongoDB'] },
+        { title: 'JWT authorisation', problem: 'Member and admin features need access control, so that signed-out or unauthorised users cannot reach sensitive resources.', solution: 'Use Passport JWT and verify the token and user identity in middleware, so protected resources are only available to authorised users.', tags: ['JWT', 'Passport'] },
+        { title: 'Designing multi-criteria search', problem: 'Players usually look for events by game type, region, date and similar criteria.', solution: 'A multi-criteria search and sorting mechanism supporting keyword, tag, region and date filters, making it easier to match players with events.', tags: ['MongoDB', 'Express'] },
+        { title: 'Designing data relations', problem: 'Events, users, chat rooms and comments have several layers of relations; a poor structure would make queries increasingly complex.', solution: 'Model the relations with Mongoose schemas, splitting and referencing data according to how it is used, balancing query efficiency and maintainability.', tags: ['MongoDB', 'Mongoose'] },
       ],
       verification: [
         'Mainly manual testing so far, going through the main flows: creating and joining meetups, commenting and chatting',
@@ -79,11 +79,11 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'tokyo-travel-site', code: 'TR-02', accent: '#7C96F2', no: '02', kind: 'Personal project, 2026',
+    slug: 'tokyo-travel-site', code: 'TR-02', accent: '#7C96F2', kind: 'Personal project, 2026',
     tags: ['Nuxt 4', 'Notion API', 'OpenAI', 'Gemini', 'Google Maps'],
     title: 'Tokyo Trip Planner',
     body: 'A travel itinerary site built for my September trip to Tokyo. It uses Notion as the CMS and brings together an AI assistant, maps, expense tracking and a packing list.',
-    side: { icon: 'travel_explore', title: 'TRIP TOOLKIT', items: ['Content managed with the Notion API', 'GPT and Gemini AI assistant', 'Route planning with Google Maps'] },
+    side: { items: ['Content managed with the Notion API', 'GPT and Gemini AI assistant', 'Route planning with Google Maps'] },
     detail: {
       period: '2026/06 — 2026/09',
       role: 'Solo developer',
@@ -117,9 +117,9 @@ export const projects: typeof zh.projects = [
         { title: 'Expenses and lists', body: 'Expense tracking supports categories, payment methods and yen conversion; checkbox states are stored in the browser and never written back to Notion.', points: ['Charts', 'localStorage', 'Zod validation'] },
       ],
       challenges: [
-        { label: 'Deployment', title: 'Data file missing after deployment', problem: 'The API read a JSON file at runtime with node:fs. It worked locally but the file could not be found on Vercel, because the bundler cannot trace dynamic paths.', solution: 'Embed the data in the server build with Nitro serverAssets and read it with useStorage().', tags: ['Nitro', 'Vercel'] },
-        { label: 'Data Integrity', title: 'Notion slugs are not guaranteed to be unique', problem: 'Staying at the same hotel twice produces the same slug, so a detail page that only queries by slug gets the wrong entry.', solution: 'Also distinguish entries by day number, and include that parameter in the cache key so different days never share one cached result.', tags: ['Notion API', 'Cache'] },
-        { label: 'Reliability', title: 'Fallback when the AI quota runs out', problem: 'When Gemini returned 429, the chat stopped working.', solution: 'Catch the 429 on the server and answer with OpenAI instead, so the user does not have to switch manually.', tags: ['Gemini', 'OpenAI'] },
+        { title: 'Data file missing after deployment', problem: 'The API read a JSON file at runtime with node:fs. It worked locally but the file could not be found on Vercel, because the bundler cannot trace dynamic paths.', solution: 'Embed the data in the server build with Nitro serverAssets and read it with useStorage().', tags: ['Nitro', 'Vercel'] },
+        { title: 'Notion slugs are not guaranteed to be unique', problem: 'Staying at the same hotel twice produces the same slug, so a detail page that only queries by slug gets the wrong entry.', solution: 'Also distinguish entries by day number, and include that parameter in the cache key so different days never share one cached result.', tags: ['Notion API', 'Cache'] },
+        { title: 'Fallback when the AI quota runs out', problem: 'When Gemini returned 429, the chat stopped working.', solution: 'Catch the 429 on the server and answer with OpenAI instead, so the user does not have to switch manually.', tags: ['Gemini', 'OpenAI'] },
       ],
       verification: [
         'Used it on the actual trip to Tokyo in September; the main features were used constantly and caused no problems during the trip',
@@ -134,11 +134,11 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'personal-portfolio', code: 'PF-03', accent: '#E6E1D6', no: '03', kind: 'Personal website, 2026',
+    slug: 'personal-portfolio', code: 'PF-03', accent: '#E6E1D6', kind: 'Personal website, 2026',
     tags: ['Nuxt 4', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Nuxt Content', 'GA4', 'GTM'],
     title: 'Personal Brand Website',
     body: 'A personal brand website built with Nuxt that presents services and case studies, with SEO, GA4 and GTM integrated.',
-    side: { icon: 'web', title: 'SITE ARCHITECTURE', items: ['SEO (sitemap, meta tags, Open Graph)', 'GSAP page transitions and scroll animation', 'Content-driven architecture with Nuxt Content'] },
+    side: { items: ['SEO (sitemap, meta tags, Open Graph)', 'GSAP page transitions and scroll animation', 'Content-driven architecture with Nuxt Content'] },
     detail: {
       role: 'Solo developer',
       diagram: {
@@ -170,9 +170,9 @@ export const projects: typeof zh.projects = [
         { title: 'Animation and experience', body: 'Page transitions and interactions built with GSAP strengthen the visual experience of the brand site.', points: ['Page Transition', 'Scroll Animation', 'Responsive Layout'] },
       ],
       challenges: [
-        { label: 'Search Optimization', title: 'Planning the SEO architecture', problem: 'A personal website needs good search visibility while keeping content maintenance and page performance in mind.', solution: 'Nuxt SSR, meta management and a sitemap improve indexing efficiency and site exposure.', tags: ['Nuxt SEO', 'Sitemap'] },
-        { label: 'User Experience', title: 'Page transitions', problem: 'Abrupt page changes make browsing feel worse.', solution: 'Page transitions and animation built with GSAP make the site feel more interactive and leave a stronger brand impression.', tags: ['GSAP', 'Vue Transition'] },
-        { label: 'Content Architecture', title: 'Designing the content architecture', problem: 'As the number of projects grows, a lack of shared data structure raises maintenance costs and leads to inconsistent layouts.', solution: 'A content-driven architecture with Nuxt Content and Markdown manages project data in a structured way, so pages can be generated quickly from the same template.', tags: ['Nuxt Content', 'Markdown'] },
+        { title: 'Planning the SEO architecture', problem: 'A personal website needs good search visibility while keeping content maintenance and page performance in mind.', solution: 'Nuxt SSR, meta management and a sitemap improve indexing efficiency and site exposure.', tags: ['Nuxt SEO', 'Sitemap'] },
+        { title: 'Page transitions', problem: 'Abrupt page changes make browsing feel worse.', solution: 'Page transitions and animation built with GSAP make the site feel more interactive and leave a stronger brand impression.', tags: ['GSAP', 'Vue Transition'] },
+        { title: 'Designing the content architecture', problem: 'As the number of projects grows, a lack of shared data structure raises maintenance costs and leads to inconsistent layouts.', solution: 'A content-driven architecture with Nuxt Content and Markdown manages project data in a structured way, so pages can be generated quickly from the same template.', tags: ['Nuxt Content', 'Markdown'] },
       ],
       verification: [
         'Checked indexing and search performance with Google Search Console',
@@ -186,11 +186,11 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', no: '04', kind: 'Business system, 2026',
+    slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', kind: 'Business system, 2026',
     tags: ['Vue 3', 'PrimeVue', 'Node.js', 'MongoDB', 'LINE Messaging API', 'SSE'],
     title: 'LINE OA Management Platform',
     body: 'An admin platform that lets businesses manage their own LINE Official Account content, so shops can update FAQs, announcements and price lists themselves without hiring an engineer.',
-    side: { icon: 'storefront', title: 'MANAGEMENT CAPABILITY', items: ['Content management: FAQs, announcements, price lists', 'Multiple shops and permissions', 'Analytics for rich menu clicks and popular content'] },
+    side: { items: ['Content management: FAQs, announcements, price lists', 'Multiple shops and permissions', 'Analytics for rich menu clicks and popular content'] },
     detail: {
       period: '2026',
       role: 'Solo developer',
@@ -227,9 +227,9 @@ export const projects: typeof zh.projects = [
         { title: 'Analytics', body: 'Tracks how the shop’s LINE content is used, as a basis for improving how the business is run.', points: ['Rich menu click log', 'Top content ranking', 'User behaviour analysis', 'Click statistics'] },
       ],
       challenges: [
-        { label: 'Observability', title: 'A monitoring tool slowed down the LINE bot', problem: 'After adding Sentry to the backend, the LINE bot’s responses went from about 0.1–0.2 s to about 1 s. The service runs on Render’s free plan with very limited CPU and memory, and I concluded that the extra load from the monitoring tool was the cause.', solution: 'I narrowed it down step by step: first turning off profiling, then tracing, keeping only error monitoring. In the end I removed Sentry from the backend and switched to self-written access and audit logs written to the console and collected by Render; the frontend still uses a little Sentry.', tags: ['Sentry', 'Logging', 'Performance'] },
-        { label: 'Browser Compatibility', title: 'Cookies not saved after login on mobile Safari', problem: 'The admin keeps the login state in an HttpOnly cookie. It worked on desktop, but testing on a phone showed users still signed out after a successful login: the frontend and backend were on different domains, so the cookie counted as third-party and Safari blocked it.', solution: 'Adjusted the domains so the frontend and backend share one main domain; the cookie is no longer third-party and Safari saves it normally.', tags: ['Cookie', 'Safari'] },
-        { label: 'Authentication', title: 'Simultaneous 401s caused a chain of logouts', problem: 'The refresh token rotates on every refresh. When the access token expired, several requests on a page called /refresh at once; the later ones used the old token, were rejected, triggered a logout and cleared the CSRF token.', solution: 'Share a single refresh Promise in the axios interceptor, so only one refresh happens at a time and other requests wait for it before retrying.', tags: ['JWT', 'CSRF', 'Axios'] },
+        { title: 'A monitoring tool slowed down the LINE bot', problem: 'After adding Sentry to the backend, the LINE bot’s responses went from about 0.1–0.2 s to about 1 s. The service runs on Render’s free plan with very limited CPU and memory, and I concluded that the extra load from the monitoring tool was the cause.', solution: 'I narrowed it down step by step: first turning off profiling, then tracing, keeping only error monitoring. In the end I removed Sentry from the backend and switched to self-written access and audit logs written to the console and collected by Render; the frontend still uses a little Sentry.', tags: ['Sentry', 'Logging', 'Performance'] },
+        { title: 'Cookies not saved after login on mobile Safari', problem: 'The admin keeps the login state in an HttpOnly cookie. It worked on desktop, but testing on a phone showed users still signed out after a successful login: the frontend and backend were on different domains, so the cookie counted as third-party and Safari blocked it.', solution: 'Adjusted the domains so the frontend and backend share one main domain; the cookie is no longer third-party and Safari saves it normally.', tags: ['Cookie', 'Safari'] },
+        { title: 'Simultaneous 401s caused a chain of logouts', problem: 'The refresh token rotates on every refresh. When the access token expired, several requests on a page called /refresh at once; the later ones used the old token, were rejected, triggered a logout and cleared the CSRF token.', solution: 'Share a single refresh Promise in the axios interceptor, so only one refresh happens at a time and other requests wait for it before retrying.', tags: ['JWT', 'CSRF', 'Axios'] },
       ],
       verification: [
         'Deployed on Render with self-written access and audit logs written to the console, so real requests and key operations can be tracked in production',
@@ -246,11 +246,11 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'weather-bike-bot', code: 'WB-05', accent: '#5AB8F0', no: '05', kind: 'LINE Bot, 2024',
+    slug: 'weather-bike-bot', code: 'WB-05', accent: '#5AB8F0', kind: 'LINE Bot, 2024',
     tags: ['Node.js', 'Express', 'LINE Bot', 'Flex Message', 'API Integration'],
     title: 'Weather & Bike Helper',
     body: 'A LINE chat bot that combines YouBike and weather lookups, so users can get live station information and forecasts quickly without switching between apps and websites.',
-    side: { icon: 'pedal_bike', title: 'BOT CAPABILITY', items: ['YouBike station lookup (bikes and free docks)', 'Current weather, 3-hour, 3-day and 1-week forecasts', 'Flex Message and rich menu interaction'] },
+    side: { items: ['YouBike station lookup (bikes and free docks)', 'Current weather, 3-hour, 3-day and 1-week forecasts', 'Flex Message and rich menu interaction'] },
     detail: {
       role: 'Solo developer',
       diagram: {
@@ -280,8 +280,8 @@ export const projects: typeof zh.projects = [
         { title: 'LINE interaction', body: 'Flex Messages and a rich menu give a more intuitive, chat-based experience.', points: ['Keyword triggers', 'Rich menu', 'Flex Message', 'Image messages'] },
       ],
       challenges: [
-        { label: 'Data Integration', title: 'Integrating several third-party APIs', problem: 'YouBike open data differs from city to city. New Taipei, Taoyuan, Taichung and Kaohsiung use the English fields sna, tot, sbi and bemp, while Hsinchu uses Chinese field names (站點名稱, 緯度, 經度) and has no bike counts. Taichung and Kaohsiung wrap the array in retVal and data.retVal, and New Taipei returns at most 1,000 records per request. The Central Weather Administration also uses a different dataset ID for each county.', solution: 'Each city’s response is mapped to one set of fields (name, total docks, bikes to rent, docks to return, coordinates, address), and a missing value is shown as “not provided”. New Taipei is fetched page by page until a page comes back empty. Requests sit inside try/catch: a failed YouBike lookup is only logged and the user gets no reply, while a failed weather lookup replies “地區有誤! 請再重新分享一次” (the area is wrong, please share it again).', tags: ['Node.js', 'Express'] },
-        { label: 'User Experience', title: 'Designing the chat flow', problem: 'A LINE chat has no navigation bar, and weather and YouBike lookups need different information: users do not know how to start, or what to give the bot next.', solution: 'A lookup starts from the rich menu or a keyword (“找YouBike”, “天氣預報”), and every step after that offers the next move as Quick Reply buttons. For weather the user picks “now and 3 hours”, “next 3 days” or “next week”, then a region or a shared location; for YouBike they tap “Share location” and get the map pins and the available bikes and docks of the 2 nearest stations. The current weather is shown as a Flex Message card; the 3-day and 1-week forecasts are plain text. For example, typing “找YouBike” makes the bot ask for your location, then reply with the 2 nearest stations: name, address, total docks, bikes to rent and docks to return.', tags: ['LINE Bot SDK', 'Flex Message', 'Quick Reply'] },
+        { title: 'Integrating several third-party APIs', problem: 'YouBike open data differs from city to city. New Taipei, Taoyuan, Taichung and Kaohsiung use the English fields sna, tot, sbi and bemp, while Hsinchu uses Chinese field names (站點名稱, 緯度, 經度) and has no bike counts. Taichung and Kaohsiung wrap the array in retVal and data.retVal, and New Taipei returns at most 1,000 records per request. The Central Weather Administration also uses a different dataset ID for each county.', solution: 'Each city’s response is mapped to one set of fields (name, total docks, bikes to rent, docks to return, coordinates, address), and a missing value is shown as “not provided”. New Taipei is fetched page by page until a page comes back empty. Requests sit inside try/catch: a failed YouBike lookup is only logged and the user gets no reply, while a failed weather lookup replies “地區有誤! 請再重新分享一次” (the area is wrong, please share it again).', tags: ['Node.js', 'Express'] },
+        { title: 'Designing the chat flow', problem: 'A LINE chat has no navigation bar, and weather and YouBike lookups need different information: users do not know how to start, or what to give the bot next.', solution: 'A lookup starts from the rich menu or a keyword (“找YouBike”, “天氣預報”), and every step after that offers the next move as Quick Reply buttons. For weather the user picks “now and 3 hours”, “next 3 days” or “next week”, then a region or a shared location; for YouBike they tap “Share location” and get the map pins and the available bikes and docks of the 2 nearest stations. The current weather is shown as a Flex Message card; the 3-day and 1-week forecasts are plain text. For example, typing “找YouBike” makes the bot ask for your location, then reply with the 2 nearest stations: name, address, total docks, bikes to rent and docks to return.', tags: ['LINE Bot SDK', 'Flex Message', 'Quick Reply'] },
       ],
       verification: [
         'Wrote small scripts that call the YouBike and weather APIs to check the response formats',

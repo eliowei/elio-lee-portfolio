@@ -422,7 +422,7 @@ export function createSpaceScene(
       for (let r = FLOOR_ROW; r < row; r++) for (let x = -1; x <= 1; x++) add(x, r, z)
       continue
     }
-    for (let r = row + 1; r <= row + 3; r++) add(-2, r, z), add(2, r, z)
+    for (let r = row + 1; r <= row + 3; r++) { add(-2, r, z); add(2, r, z) }
     for (let x = -2; x <= 2; x++) add(x, row + 4, z)
     if ((row + 1) * U < 0 && (row + 4) * U > 0) {
       holeNear = holeNear || z + U / 2
@@ -614,7 +614,7 @@ export function createSpaceScene(
     // 門楣兩端有 40% 機率缺一顆，做出風化感。`,` 逗號運算式讓兩個 put 寫在同一行。
     const put = (k: number, j: number) => cells.push({ p: [(k - (cw + 1) / 2) * U, j * U + U / 2, 0], tone: j / (ch + 2) })
     for (let k = 0; k <= cw + 1; k++) put(k, 0) // sill
-    for (let j = 1; j <= ch; j++) put(0, j), put(cw + 1, j) // pillars
+    for (let j = 1; j <= ch; j++) { put(0, j); put(cw + 1, j) } // pillars
     for (let k = 0; k <= cw + 1; k++) if (!((k === 0 || k === cw + 1) && hash(k, i, 7) < 0.4)) put(k, ch + 1) // lintel, worn now and then
     // Orange sill inlay, opening outline and a branch off the guide line — dim at rest, lit when previewed.
     const frameMat = track(new MeshBasicMaterial({ color: SIGNAL }))
@@ -652,8 +652,8 @@ export function createSpaceScene(
       // Cover-crop into the opening: trim the sides of wide shots, the bottom of tall ones (UV y = 1 is the top).
       const a = tex.image.width / tex.image.height
       const o = W / H
-      if (a > o) tex.repeat.set(o / a, 1), tex.offset.set((1 - o / a) / 2, 0)
-      else tex.repeat.set(1, a / o), tex.offset.set(0, 1 - a / o)
+      if (a > o) { tex.repeat.set(o / a, 1); tex.offset.set((1 - o / a) / 2, 0) }
+      else { tex.repeat.set(1, a / o); tex.offset.set(0, 1 - a / o) }
       textures.push(tex)
       plateMat.map = tex
       plateMat.color.set(0xffffff)

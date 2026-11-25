@@ -9,10 +9,10 @@
     "mainMobile": "Main navigation (mobile)",
     "footer": "Footer navigation",
     "home": "Elio Lee — Home",
-    "openMenu": "Open menu",
-    "closeMenu": "Close menu",
     "darkMode": "Dark mode",
-    "language": "Change language"
+    "language": "Change language",
+    "menu": "Menu",
+    "breadcrumb": "Breadcrumb"
   },
   "footer": {
     "tagline": "I write frontend code, and I like making things that move.",
@@ -32,7 +32,8 @@
   "common": {
     "contactMe": "Contact me",
     "techUsed": "Technologies used",
-    "close": "Close"
+    "close": "Close",
+    "colon": ": "
   },
   "code": {
     "copy": "Copy code",
@@ -43,7 +44,6 @@
     "title": "Elio Lee",
     "jobTitle": "Frontend Engineer",
     "photoAlt": "Portrait of Elio Lee",
-    "photoPull": "PULL",
     "aboutLink": "From the army to frontend engineering: full experience",
     "explore": "Explore work",
     "aboutMe": "About me",
@@ -81,6 +81,7 @@
     "coverAlt": "Cover screenshot of {title}",
     "zoom": "Enlarge: {caption}",
     "back": "Back to the project space",
+    "nextProject": "Next",
     "year": "Year",
     "role": "Role",
     "tech": "Stack",

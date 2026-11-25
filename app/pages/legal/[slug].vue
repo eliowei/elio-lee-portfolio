@@ -16,7 +16,7 @@ useSeoMeta({ title, description: doc.value.description, ogTitle: title, ogDescri
       <header class="space-y-3 pb-space-lg">
         <h1 class="text-headline-lg-mobile md:text-headline-lg">{{ doc.title }}</h1>
         <p class="font-mono text-label-md text-on-surface-variant">
-          {{ $t('legal.updated') }}：<time :datetime="doc.updated">{{ doc.updated.replaceAll('-', '/') }}</time>
+          {{ $t('legal.updated') }}{{ $t('common.colon') }}<time :datetime="doc.updated">{{ doc.updated.replaceAll('-', '/') }}</time>
         </p>
       </header>
       <article class="border-t border-hairline pt-space-lg">

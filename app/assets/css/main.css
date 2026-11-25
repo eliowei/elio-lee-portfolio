@@ -5,7 +5,6 @@
 /* Design tokens — Elio Lee / Digital Space. Mirrors tailwind.config.ts (`lab.*`) for CSS / canvas use. */
 :root {
   --lab-bg: #171614;
-  --lab-paper: #f3f0e9;
   --lab-signal: #ff5b1f; /* survey orange — dark grounds + non-text marks */
   --lab-signal-ink: #b83d0e; /* same hue, text-safe on the light ground */
   --lab-on-dark: #eae6de;
@@ -117,21 +116,6 @@
 }
 
 /* The corridor gives way to an archive; its survey marks continue through the reading areas. */
-.home-reading {
-  position: relative;
-  background: linear-gradient(to bottom, var(--lab-bg), rgb(var(--c-background))) top / 100% 5rem no-repeat;
-  padding-top: 5rem;
-}
-.home-reading::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 1px;
-  height: 7rem;
-  background: linear-gradient(var(--lab-signal), rgb(var(--c-primary) / 0.25));
-  pointer-events: none;
-}
 .home-archive { position: relative; }
 .home-chapter {
   display: flex;
@@ -218,8 +202,6 @@
   box-shadow: 0 0 20px rgb(255 91 31 / 0.2);
 }
 @media (max-width: 767px) {
-  .home-reading { padding-top: 3rem; background-size: 100% 3rem; }
-  .home-reading::before { height: 4.5rem; }
   .home-gate { opacity: 0.5; }
 }
 

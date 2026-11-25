@@ -10,9 +10,8 @@ const { locale } = useI18n()
 // preload competes with the render-blocking CSS (PageSpeed mobile FCP went from 2.9 s to 3.6 s with five of them). Barlow is the hero
 // title's face; the rest are found when the CSS is parsed.
 const fontFiles = ['barlow-500']
-const cjkFiles: string[] = []
 useHead(() => ({
-  link: [...fontFiles, ...(locale.value === 'en' ? [] : cjkFiles)].map(f => ({ rel: 'preload', as: 'font', type: 'font/woff2', href: `/fonts/${f}.woff2`, crossorigin: 'anonymous' })),
+  link: fontFiles.map(f => ({ rel: 'preload', as: 'font', type: 'font/woff2', href: `/fonts/${f}.woff2`, crossorigin: 'anonymous' })),
 }))
 
 // Default share image, one per language (public/og-image-{zh,en,ja}.jpg). A page's own useSeoMeta (e.g. a project

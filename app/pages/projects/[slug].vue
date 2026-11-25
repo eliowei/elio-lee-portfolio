@@ -285,7 +285,7 @@ const todoBox = 'rounded-sm border border-dashed border-lab-signal-ink/40 bg-lab
           <UiIcon name="arrow_back" class="text-[16px]" /> {{ $t('projects.back') }}
         </NuxtLink>
         <NuxtLink :to="localePath(`/projects/${next.slug}`)" class="group sm:text-right">
-          <span class="block font-mono text-label-sm tracking-[0.04em] text-lab-on-dark-muted">Next {{ next.code }}</span>
+          <span class="block font-mono text-label-sm tracking-[0.04em] text-lab-on-dark-muted">{{ $t('projects.nextProject') }} {{ next.code }}</span>
           <span class="mt-1 inline-flex items-center gap-2 font-heading text-headline-md text-white">
             {{ next.title }} <UiIcon name="arrow_forward" class="text-[22px] text-lab-signal transition-transform group-hover:translate-x-1 motion-reduce:transition-none" />
           </span>

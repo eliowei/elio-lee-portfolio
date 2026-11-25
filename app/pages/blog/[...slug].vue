@@ -61,7 +61,7 @@ useHead({
 
 <template>
   <div v-if="post" class="section-x pb-space-xl pt-28 md:pt-32">
-    <nav aria-label="Breadcrumb" class="mb-space-md flex flex-wrap items-center gap-2 text-label-md">
+    <nav :aria-label="$t('nav.breadcrumb')" class="mb-space-md flex flex-wrap items-center gap-2 text-label-md">
       <NuxtLink :to="localePath('/blog')" class="inline-flex items-center gap-1 text-secondary transition-colors hover:text-lab-signal-ink">
         <UiIcon name="arrow_back" class="text-[15px]" /> {{ $t('blog.breadcrumb') }}
       </NuxtLink>

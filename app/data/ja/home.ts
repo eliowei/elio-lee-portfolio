@@ -23,11 +23,11 @@ export const about: typeof zh.about = {
 
 export const projects: typeof zh.projects = [
   {
-    slug: 'game-together', code: 'GT-01', accent: '#A79BFF', no: '01', kind: 'フルスタック 2025',
+    slug: 'game-together', code: 'GT-01', accent: '#A79BFF', kind: 'フルスタック 2025',
     tags: ['Vue 3', 'Vuetify', 'Node.js', 'MongoDB', 'WebSocket'],
     title: 'ゲーム仲間募集プラットフォーム',
     body: 'ゲーマーのためのリアルタイムなコミュニティ募集プラットフォームです。検索・絞り込み、イベント管理、リアルタイムチャットを組み合わせ、プレイヤーがすばやく仲間を見つけ、長く続くゲームコミュニティを作れるようにしました。',
-    side: { icon: 'sports_esports', title: 'FEATURE HIGHLIGHTS', items: ['複数条件での検索と並べ替え（キーワード・地域・タグ・日付）', 'Socket.IO によるリアルタイムチャットと履歴の保存', 'JWT 認証と募集の作成・管理フロー'] },
+    side: { items: ['複数条件での検索と並べ替え（キーワード・地域・タグ・日付）', 'Socket.IO によるリアルタイムチャットと履歴の保存', 'JWT 認証と募集の作成・管理フロー'] },
     detail: {
       role: '個人開発',
       diagram: {
@@ -63,10 +63,10 @@ export const projects: typeof zh.projects = [
         { title: 'リアルタイムチャット', body: 'WebSocket によるリアルタイム通信で、イベント前後のやり取りと調整をしやすくしました。', points: ['Socket.IO', 'リアルタイム同期', '履歴の保存', '専用チャットルーム'] },
       ],
       challenges: [
-        { label: 'Realtime Communication', title: 'WebSocket 接続の管理', problem: 'ユーザーが頻繁にページを切り替えると、WebSocket 接続が重複して作られやすくなります。', solution: '募集の詳細ページでのみ接続し、ページを離れたらすぐに切断することで、Socket インスタンスの重複を防ぎました。', tags: ['WebSocket', 'MongoDB'] },
-        { label: 'Authentication', title: 'JWT による権限検証', problem: '会員機能と管理機能には権限制御が必要で、未ログインや権限のないユーザーが重要なリソースにアクセスできないようにする必要があります。', solution: 'Passport JWT を使い、ミドルウェアでトークンとユーザーを検証することで、保護されたリソースに権限のあるユーザーだけがアクセスできるようにしました。', tags: ['JWT', 'Passport'] },
-        { label: 'Search Experience', title: '複数条件検索の設計', problem: 'プレイヤーは通常、ゲームの種類、地域、日付などの条件でイベントを探します。', solution: 'キーワード・タグ・地域・日付で絞り込める複数条件の検索と並べ替えを設計し、イベントとのマッチングを効率化しました。', tags: ['MongoDB', 'Express'] },
-        { label: 'Data Modeling', title: 'データ関連の設計', problem: 'イベント、ユーザー、チャットルーム、コメントの間には何層もの関連があり、構造が悪いとクエリが複雑になりやすくなります。', solution: 'Mongoose Schema でデータの関連構造を定義し、利用シーンに合わせてデータの分割と参照を設計することで、クエリ効率と保守性を両立させました。', tags: ['MongoDB', 'Mongoose'] },
+        { title: 'WebSocket 接続の管理', problem: 'ユーザーが頻繁にページを切り替えると、WebSocket 接続が重複して作られやすくなります。', solution: '募集の詳細ページでのみ接続し、ページを離れたらすぐに切断することで、Socket インスタンスの重複を防ぎました。', tags: ['WebSocket', 'MongoDB'] },
+        { title: 'JWT による権限検証', problem: '会員機能と管理機能には権限制御が必要で、未ログインや権限のないユーザーが重要なリソースにアクセスできないようにする必要があります。', solution: 'Passport JWT を使い、ミドルウェアでトークンとユーザーを検証することで、保護されたリソースに権限のあるユーザーだけがアクセスできるようにしました。', tags: ['JWT', 'Passport'] },
+        { title: '複数条件検索の設計', problem: 'プレイヤーは通常、ゲームの種類、地域、日付などの条件でイベントを探します。', solution: 'キーワード・タグ・地域・日付で絞り込める複数条件の検索と並べ替えを設計し、イベントとのマッチングを効率化しました。', tags: ['MongoDB', 'Express'] },
+        { title: 'データ関連の設計', problem: 'イベント、ユーザー、チャットルーム、コメントの間には何層もの関連があり、構造が悪いとクエリが複雑になりやすくなります。', solution: 'Mongoose Schema でデータの関連構造を定義し、利用シーンに合わせてデータの分割と参照を設計することで、クエリ効率と保守性を両立させました。', tags: ['MongoDB', 'Mongoose'] },
       ],
       verification: [
         '現時点では手動テストが中心で、募集の作成・参加・コメント・チャットといった主要なフローを確認しています',
@@ -79,11 +79,11 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'tokyo-travel-site', code: 'TR-02', accent: '#7C96F2', no: '02', kind: '個人プロジェクト 2026',
+    slug: 'tokyo-travel-site', code: 'TR-02', accent: '#7C96F2', kind: '個人プロジェクト 2026',
     tags: ['Nuxt 4', 'Notion API', 'OpenAI', 'Gemini', 'Google Maps'],
     title: '東京個人旅行サイト',
     body: '9 月の東京旅行のために開発した旅程サイトです。Notion を CMS として使い、AI アシスタント、地図、支出記録、持ち物リストを統合しました。',
-    side: { icon: 'travel_explore', title: 'TRIP TOOLKIT', items: ['Notion API によるコンテンツ管理', 'GPT と Gemini の AI アシスタント', 'Google Maps でのルート計画'] },
+    side: { items: ['Notion API によるコンテンツ管理', 'GPT と Gemini の AI アシスタント', 'Google Maps でのルート計画'] },
     detail: {
       period: '2026/06 — 2026/09',
       role: '個人開発',
@@ -117,9 +117,9 @@ export const projects: typeof zh.projects = [
         { title: '支出とリスト', body: '支出記録はカテゴリー、支払い方法、円換算に対応しています。チェック状態はブラウザに保存し、Notion には書き戻しません。', points: ['グラフ集計', 'localStorage', 'Zod 検証'] },
       ],
       challenges: [
-        { label: 'Deployment', title: 'デプロイ後にデータファイルが見つからない', problem: 'API は実行時に node:fs で JSON を読み込んでいました。ローカルでは問題ないのに、Vercel にデプロイするとファイルが見つかりません。バンドラーが動的なパスを追跡できないためです。', solution: 'Nitro の serverAssets でデータをサーバービルドに埋め込み、useStorage() で読み込むように変更しました。', tags: ['Nitro', 'Vercel'] },
-        { label: 'Data Integrity', title: 'Notion の slug は一意とは限らない', problem: '同じホテルに 2 回泊まると同じ slug ができてしまい、slug だけで検索する旅程詳細ページが誤ったデータを取得していました。', solution: '何日目かでも旅程を区別し、そのパラメーターをキャッシュのキーにも含めることで、別の日が同じキャッシュを使わないようにしました。', tags: ['Notion API', 'Cache'] },
-        { label: 'Reliability', title: 'AI の利用枠が尽きたときのフォールバック', problem: 'Gemini が 429 を返すと、チャット機能が使えなくなっていました。', solution: 'サーバーで 429 を捕捉し、自動的に OpenAI で回答するようにしたので、ユーザーが自分で切り替える必要はありません。', tags: ['Gemini', 'OpenAI'] },
+        { title: 'デプロイ後にデータファイルが見つからない', problem: 'API は実行時に node:fs で JSON を読み込んでいました。ローカルでは問題ないのに、Vercel にデプロイするとファイルが見つかりません。バンドラーが動的なパスを追跡できないためです。', solution: 'Nitro の serverAssets でデータをサーバービルドに埋め込み、useStorage() で読み込むように変更しました。', tags: ['Nitro', 'Vercel'] },
+        { title: 'Notion の slug は一意とは限らない', problem: '同じホテルに 2 回泊まると同じ slug ができてしまい、slug だけで検索する旅程詳細ページが誤ったデータを取得していました。', solution: '何日目かでも旅程を区別し、そのパラメーターをキャッシュのキーにも含めることで、別の日が同じキャッシュを使わないようにしました。', tags: ['Notion API', 'Cache'] },
+        { title: 'AI の利用枠が尽きたときのフォールバック', problem: 'Gemini が 429 を返すと、チャット機能が使えなくなっていました。', solution: 'サーバーで 429 を捕捉し、自動的に OpenAI で回答するようにしたので、ユーザーが自分で切り替える必要はありません。', tags: ['Gemini', 'OpenAI'] },
       ],
       verification: [
         '9 月の東京旅行で実際に使用し、主要な機能はよく使いましたが、旅行中に問題は起きませんでした',
@@ -134,11 +134,11 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'personal-portfolio', code: 'PF-03', accent: '#E6E1D6', no: '03', kind: '個人サイト 2026',
+    slug: 'personal-portfolio', code: 'PF-03', accent: '#E6E1D6', kind: '個人サイト 2026',
     tags: ['Nuxt 4', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Nuxt Content', 'GA4', 'GTM'],
     title: '個人ブランドサイト',
     body: 'Nuxt で構築した個人ブランドサイトです。サービスと事例を紹介し、SEO、GA4、GTM を統合しています。',
-    side: { icon: 'web', title: 'SITE ARCHITECTURE', items: ['SEO 対策（サイトマップ、メタタグ、Open Graph）', 'GSAP によるページ遷移とスクロールアニメーション', 'Nuxt Content によるコンテンツ駆動の構成'] },
+    side: { items: ['SEO 対策（サイトマップ、メタタグ、Open Graph）', 'GSAP によるページ遷移とスクロールアニメーション', 'Nuxt Content によるコンテンツ駆動の構成'] },
     detail: {
       role: '個人開発',
       diagram: {
@@ -170,9 +170,9 @@ export const projects: typeof zh.projects = [
         { title: 'アニメーションと体験', body: 'GSAP でページ遷移とインタラクションを作り、ブランドサイトのビジュアル体験を強化しました。', points: ['Page Transition', 'Scroll Animation', 'Responsive Layout'] },
       ],
       challenges: [
-        { label: 'Search Optimization', title: 'SEO 構成の設計', problem: '個人サイトには、コンテンツの保守とページのパフォーマンスを保ちながら、検索で見つけてもらえることが求められます。', solution: 'Nuxt の SSR、メタ管理、サイトマップの作成により、検索エンジンのインデックス効率とサイトの露出を高めました。', tags: ['Nuxt SEO', 'Sitemap'] },
-        { label: 'User Experience', title: 'ページ遷移の体験', problem: 'ページの切り替えがぎこちないと、閲覧体験全体が損なわれがちです。', solution: 'GSAP でページ遷移とアニメーションを作り、サイトのインタラクション性とブランドの印象を高めました。', tags: ['GSAP', 'Vue Transition'] },
-        { label: 'Content Architecture', title: 'コンテンツ構成の設計', problem: '作品が増えるにつれ、共通のデータ構造がないと保守コストが上がり、レイアウトもばらつきやすくなります。', solution: 'Nuxt Content と Markdown でコンテンツ駆動の構成を作り、作品データを構造化して管理することで、同じテンプレートからすばやくページを生成できるようにしました。', tags: ['Nuxt Content', 'Markdown'] },
+        { title: 'SEO 構成の設計', problem: '個人サイトには、コンテンツの保守とページのパフォーマンスを保ちながら、検索で見つけてもらえることが求められます。', solution: 'Nuxt の SSR、メタ管理、サイトマップの作成により、検索エンジンのインデックス効率とサイトの露出を高めました。', tags: ['Nuxt SEO', 'Sitemap'] },
+        { title: 'ページ遷移の体験', problem: 'ページの切り替えがぎこちないと、閲覧体験全体が損なわれがちです。', solution: 'GSAP でページ遷移とアニメーションを作り、サイトのインタラクション性とブランドの印象を高めました。', tags: ['GSAP', 'Vue Transition'] },
+        { title: 'コンテンツ構成の設計', problem: '作品が増えるにつれ、共通のデータ構造がないと保守コストが上がり、レイアウトもばらつきやすくなります。', solution: 'Nuxt Content と Markdown でコンテンツ駆動の構成を作り、作品データを構造化して管理することで、同じテンプレートからすばやくページを生成できるようにしました。', tags: ['Nuxt Content', 'Markdown'] },
       ],
       verification: [
         'Google Search Console でサイトのインデックス状況と検索パフォーマンスを確認しました',
@@ -186,11 +186,11 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', no: '04', kind: '業務システム 2026',
+    slug: 'line-oa-platform', code: 'OA-04', accent: '#4CC38A', kind: '業務システム 2026',
     tags: ['Vue 3', 'PrimeVue', 'Node.js', 'MongoDB', 'LINE Messaging API', 'SSE'],
     title: 'LINE 公式アカウント管理プラットフォーム',
     body: '店舗が LINE 公式アカウントの内容を自分で管理できる管理プラットフォームです。エンジニアに頼まなくても、FAQ、お知らせ、料金表を店舗自身で更新できます。',
-    side: { icon: 'storefront', title: 'MANAGEMENT CAPABILITY', items: ['コンテンツ管理：FAQ、お知らせ、料金表', '複数店舗と権限の管理', 'リッチメニューのクリックと人気コンテンツの分析'] },
+    side: { items: ['コンテンツ管理：FAQ、お知らせ、料金表', '複数店舗と権限の管理', 'リッチメニューのクリックと人気コンテンツの分析'] },
     detail: {
       period: '2026',
       role: '個人開発',
@@ -227,9 +227,9 @@ export const projects: typeof zh.projects = [
         { title: 'データ分析', body: '店舗の LINE コンテンツの利用状況を追跡し、運営方針を改善するための根拠にします。', points: ['リッチメニューのクリック記録', '人気コンテンツのランキング', 'ユーザー行動の分析', 'クリック効果の集計'] },
       ],
       challenges: [
-        { label: 'Observability', title: '監視ツールが LINE Bot の応答速度に影響', problem: 'バックエンドに Sentry を導入したところ、LINE Bot の応答が約 0.1〜0.2 秒から約 1 秒に遅くなりました。サービスは Render の無料プランで動いており、CPU もメモリも限られているため、監視ツールによる負荷が原因だと判断しました。', solution: 'まず profiling を、次に tracing を無効にしてエラー監視だけを残し、段階的に範囲を絞り込みました。最終的にバックエンドの Sentry を外し、自作の access log と audit log を console に出力して Render に収集させる方式に変更しました。フロントエンドでは Sentry を少しだけ使っています。', tags: ['Sentry', 'Logging', 'Performance'] },
-        { label: 'Browser Compatibility', title: 'モバイル Safari でログイン後に Cookie が保存されない', problem: '管理画面は HttpOnly Cookie でログイン状態を保持しています。PC では問題なかったのに、スマートフォンでテストするとログインに成功しても未ログインのままでした。フロントエンドとバックエンドが別ドメインだったため、Cookie がサードパーティ Cookie とみなされ、Safari にブロックされていたのです。', solution: 'ドメインを調整してフロントエンドとバックエンドを同じメインドメインにしたことで、Cookie がサードパーティ扱いでなくなり、Safari でも正しく保存されるようになりました。', tags: ['Cookie', 'Safari'] },
-        { label: 'Authentication', title: '複数のリクエストが同時に 401 になり連鎖的にログアウト', problem: 'Refresh Token は更新のたびにローテーションされます。Access Token の期限が切れると、ページ上の複数のリクエストが同時に /refresh を呼び、後から来たリクエストは古いトークンで拒否され、ログアウトが発生して CSRF Token まで消えていました。', solution: 'axios のインターセプターで refresh の Promise を共有し、同時に 1 回だけ更新して、他のリクエストはその結果を待ってから再試行するようにしました。', tags: ['JWT', 'CSRF', 'Axios'] },
+        { title: '監視ツールが LINE Bot の応答速度に影響', problem: 'バックエンドに Sentry を導入したところ、LINE Bot の応答が約 0.1〜0.2 秒から約 1 秒に遅くなりました。サービスは Render の無料プランで動いており、CPU もメモリも限られているため、監視ツールによる負荷が原因だと判断しました。', solution: 'まず profiling を、次に tracing を無効にしてエラー監視だけを残し、段階的に範囲を絞り込みました。最終的にバックエンドの Sentry を外し、自作の access log と audit log を console に出力して Render に収集させる方式に変更しました。フロントエンドでは Sentry を少しだけ使っています。', tags: ['Sentry', 'Logging', 'Performance'] },
+        { title: 'モバイル Safari でログイン後に Cookie が保存されない', problem: '管理画面は HttpOnly Cookie でログイン状態を保持しています。PC では問題なかったのに、スマートフォンでテストするとログインに成功しても未ログインのままでした。フロントエンドとバックエンドが別ドメインだったため、Cookie がサードパーティ Cookie とみなされ、Safari にブロックされていたのです。', solution: 'ドメインを調整してフロントエンドとバックエンドを同じメインドメインにしたことで、Cookie がサードパーティ扱いでなくなり、Safari でも正しく保存されるようになりました。', tags: ['Cookie', 'Safari'] },
+        { title: '複数のリクエストが同時に 401 になり連鎖的にログアウト', problem: 'Refresh Token は更新のたびにローテーションされます。Access Token の期限が切れると、ページ上の複数のリクエストが同時に /refresh を呼び、後から来たリクエストは古いトークンで拒否され、ログアウトが発生して CSRF Token まで消えていました。', solution: 'axios のインターセプターで refresh の Promise を共有し、同時に 1 回だけ更新して、他のリクエストはその結果を待ってから再試行するようにしました。', tags: ['JWT', 'CSRF', 'Axios'] },
       ],
       verification: [
         'Render にデプロイし、自作の access log と audit log を console に出力して、本番での実際のリクエストと重要な操作を追跡できるようにしました',
@@ -246,11 +246,11 @@ export const projects: typeof zh.projects = [
     },
   },
   {
-    slug: 'weather-bike-bot', code: 'WB-05', accent: '#5AB8F0', no: '05', kind: 'LINE Bot 2024',
+    slug: 'weather-bike-bot', code: 'WB-05', accent: '#5AB8F0', kind: 'LINE Bot 2024',
     tags: ['Node.js', 'Express', 'LINE Bot', 'Flex Message', 'API Integration'],
     title: '天気 & Bike ヘルパー',
     body: 'LINE のチャット画面で YouBike と天気の検索機能を統合し、リアルタイムのステーション情報と天気予報をすばやく確認できるようにしました。複数のアプリやサイトを行き来する手間が減ります。',
-    side: { icon: 'pedal_bike', title: 'BOT CAPABILITY', items: ['YouBike ステーション検索（台数と空き）', '現在の天気、3 時間・3 日間・1 週間の予報', 'Flex Message とリッチメニューによる操作'] },
+    side: { items: ['YouBike ステーション検索（台数と空き）', '現在の天気、3 時間・3 日間・1 週間の予報', 'Flex Message とリッチメニューによる操作'] },
     detail: {
       role: '個人開発',
       diagram: {
@@ -280,8 +280,8 @@ export const projects: typeof zh.projects = [
         { title: 'LINE での操作体験', body: 'Flex Message とリッチメニューで、より直感的なチャット形式の操作を提供します。', points: ['キーワード', 'リッチメニュー', 'Flex Message', '画像付きメッセージ'] },
       ],
       challenges: [
-        { label: 'Data Integration', title: '複数の外部 API をまとめる', problem: 'YouBike のオープンデータは都市ごとに形式が違います。新北・桃園・台中・高雄は sna、tot、sbi、bemp という英語のフィールド名ですが、新竹市は「站點名稱」「緯度」「經度」という中国語のフィールド名で、台数の情報もありません。台中と高雄は配列が retVal と data.retVal に入っており、新北市は 1 回のリクエストで最大 1,000 件までしか返しません。気象署の予報データも県市ごとに別のデータセット ID です。', solution: '各都市の応答を同じ項目（駅名、総ドック数、貸出可能数、返却可能数、座標、住所）に変換し、値がないときは「未提供」と表示します。新北市は空のページが返るまでページ単位で取得します。リクエストは try/catch の中で行い、YouBike の検索が失敗したときはログに記録するだけでユーザーには返信せず、天気の検索が失敗したときは「地區有誤! 請再重新分享一次」（地域が正しくありません。もう一度共有してください）と返信します。', tags: ['Node.js', 'Express'] },
-        { label: 'User Experience', title: 'チャットフローの設計', problem: 'LINE のトーク画面にはナビゲーションバーがなく、天気と YouBike では必要な情報も違います。ユーザーは、どう始めればよいか、次に何を送ればよいかが分かりません。', solution: 'リッチメニューかキーワード（「找YouBike」「天氣預報」）で始め、その後は一歩ごとに次の操作をクイックリプライのボタンで示します。天気は「現在・3 時間」「3 日間」「1 週間」を選んでから、地域か位置情報を選び、YouBike は「位置を共有」を押すと、最寄りの 2 駅の地図位置と貸出可能数・返却可能数を返します。現在の天気は Flex Message のカードで、3 日間と 1 週間の予報はテキストで表示します。たとえば「找YouBike」と送ると、ボットが位置情報を求め、最寄りの 2 駅の名前・場所・総ドック数・貸出可能数・返却可能数を返します。', tags: ['LINE Bot SDK', 'Flex Message', 'Quick Reply'] },
+        { title: '複数の外部 API をまとめる', problem: 'YouBike のオープンデータは都市ごとに形式が違います。新北・桃園・台中・高雄は sna、tot、sbi、bemp という英語のフィールド名ですが、新竹市は「站點名稱」「緯度」「經度」という中国語のフィールド名で、台数の情報もありません。台中と高雄は配列が retVal と data.retVal に入っており、新北市は 1 回のリクエストで最大 1,000 件までしか返しません。気象署の予報データも県市ごとに別のデータセット ID です。', solution: '各都市の応答を同じ項目（駅名、総ドック数、貸出可能数、返却可能数、座標、住所）に変換し、値がないときは「未提供」と表示します。新北市は空のページが返るまでページ単位で取得します。リクエストは try/catch の中で行い、YouBike の検索が失敗したときはログに記録するだけでユーザーには返信せず、天気の検索が失敗したときは「地區有誤! 請再重新分享一次」（地域が正しくありません。もう一度共有してください）と返信します。', tags: ['Node.js', 'Express'] },
+        { title: 'チャットフローの設計', problem: 'LINE のトーク画面にはナビゲーションバーがなく、天気と YouBike では必要な情報も違います。ユーザーは、どう始めればよいか、次に何を送ればよいかが分かりません。', solution: 'リッチメニューかキーワード（「找YouBike」「天氣預報」）で始め、その後は一歩ごとに次の操作をクイックリプライのボタンで示します。天気は「現在・3 時間」「3 日間」「1 週間」を選んでから、地域か位置情報を選び、YouBike は「位置を共有」を押すと、最寄りの 2 駅の地図位置と貸出可能数・返却可能数を返します。現在の天気は Flex Message のカードで、3 日間と 1 週間の予報はテキストで表示します。たとえば「找YouBike」と送ると、ボットが位置情報を求め、最寄りの 2 駅の名前・場所・総ドック数・貸出可能数・返却可能数を返します。', tags: ['LINE Bot SDK', 'Flex Message', 'Quick Reply'] },
       ],
       verification: [
         '小さなスクリプトを書いて YouBike と天気の API を実際に呼び出し、返却されるデータ形式を確認しました',

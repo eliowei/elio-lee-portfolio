@@ -16,6 +16,7 @@ const info = (tm('contact.info') as Record<'icon' | 'title' | 'body', string>[])
 const localePath = useLocalePath()
 const { track } = useAnalytics()
 // Social cards after Email and GitHub; one with no URL in data/site.ts is simply not shown.
+type SocialKey = 'instagram' | 'threads' // named on purpose: eslint-plugin-vue misreads an inline `as 'a' | 'b'` in the template as a filter
 const socials = ([
   { key: 'instagram', name: 'Instagram', href: site.instagram },
   { key: 'threads', name: 'Threads', href: site.threads },
@@ -79,6 +80,7 @@ async function send() {
     const [res] = await Promise.all([
       fetch('https://api.emailjs.com/api/v1.0/email/send', {
         method: 'POST',
+        signal: AbortSignal.timeout(15_000), // a stalled network must not lock the dialog (Esc and close are disabled while sending)
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           service_id: config.emailjs.serviceId,
@@ -141,7 +143,7 @@ const hint = 'mt-2 text-body-sm text-error'
             @click="track('social_click', { platform: c.key, source: 'contact_page' })"
           >
             <UiIcon v-if="c.key === 'github'" name="code" class="text-[18px]" />
-            <UiSocialIcon v-else :name="c.key as 'instagram' | 'threads'" class="h-[18px] w-[18px]" />
+            <UiSocialIcon v-else :name="c.key as SocialKey" class="h-[18px] w-[18px]" />
             {{ c.name }}
           </a>
         </div>

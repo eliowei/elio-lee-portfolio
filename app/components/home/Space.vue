@@ -23,6 +23,7 @@ const cover = (slug: string) => projectImages[slug]?.cover
 const items = ref<HTMLElement[]>([])
 const stage = ref<{ enter(slug: string): Promise<void> }>()
 const column = ref<HTMLElement>()
+// eslint-disable-next-line prefer-const -- reassigned in the template (@pointerdown), which ESLint cannot see
 let pointerType = 'mouse'
 
 function show(slug: string) {

@@ -9,10 +9,10 @@
     "mainMobile": "メインナビゲーション（モバイル）",
     "footer": "フッターナビゲーション",
     "home": "Elio Lee — ホーム",
-    "openMenu": "メニューを開く",
-    "closeMenu": "メニューを閉じる",
     "darkMode": "ダークモード",
-    "language": "言語を切り替える"
+    "language": "言語を切り替える",
+    "menu": "メニュー",
+    "breadcrumb": "パンくずリスト"
   },
   "footer": {
     "tagline": "フロントエンドを書きつつ、動くものを作るのが好きです。",
@@ -32,7 +32,8 @@
   "common": {
     "contactMe": "お問い合わせ",
     "techUsed": "使用技術",
-    "close": "閉じる"
+    "close": "閉じる",
+    "colon": "："
   },
   "code": {
     "copy": "コードをコピー",
@@ -43,7 +44,6 @@
     "title": "Elio Lee",
     "jobTitle": "フロントエンドエンジニア",
     "photoAlt": "Elio Lee（李柏偉）のプロフィール写真",
-    "photoPull": "引っぱる",
     "aboutLink": "軍務からフロントエンドエンジニアへ：経歴を見る",
     "explore": "制作実績を見る",
     "aboutMe": "自己紹介",
@@ -81,6 +81,7 @@
     "coverAlt": "{title} のカバー画像",
     "zoom": "拡大表示：{caption}",
     "back": "作品空間に戻る",
+    "nextProject": "次へ",
     "year": "年",
     "role": "役割",
     "tech": "技術",

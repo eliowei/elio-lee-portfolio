@@ -9,10 +9,10 @@
     "mainMobile": "主要導覽（手機）",
     "footer": "頁尾導覽",
     "home": "李柏偉 Elio Lee — 首頁",
-    "openMenu": "開啟選單",
-    "closeMenu": "關閉選單",
     "darkMode": "深色模式",
-    "language": "切換語言"
+    "language": "切換語言",
+    "menu": "選單",
+    "breadcrumb": "導覽路徑"
   },
   "footer": {
     "tagline": "寫前端，也喜歡做一些會動的東西。",
@@ -32,7 +32,8 @@
   "common": {
     "contactMe": "聯絡我",
     "techUsed": "使用技術",
-    "close": "關閉"
+    "close": "關閉",
+    "colon": "："
   },
   "code": {
     "copy": "複製程式碼",
@@ -43,7 +44,6 @@
     "title": "Elio Lee",
     "jobTitle": "前端工程師",
     "photoAlt": "李柏偉 Elio Lee 的個人照片",
-    "photoPull": "拖曳",
     "aboutLink": "從軍職到前端工程：完整經歷",
     "explore": "探索作品",
     "aboutMe": "認識我",
@@ -81,6 +81,7 @@
     "coverAlt": "{title} 封面畫面",
     "zoom": "放大檢視：{caption}",
     "back": "返回作品空間",
+    "nextProject": "下一個",
     "year": "年份",
     "role": "角色",
     "tech": "技術",

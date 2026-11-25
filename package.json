@@ -2,8 +2,15 @@
   "name": "frontend-portfolio",
   "type": "module",
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "build": "nuxt build",
+    "check": "npm run check:content && npm run lint && npm run typecheck",
+    "lint": "eslint .",
+    "typecheck": "nuxt typecheck",
+    "check:content": "node scripts/check-content.mjs",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -16,15 +23,18 @@
     "@nuxtjs/i18n": "^10.6.0",
     "@nuxtjs/sitemap": "^9.1.0",
     "@nuxtjs/tailwindcss": "^6.14.0",
-    "better-sqlite3": "^13.0.3",
-    "gsap": "^3.15.0",
     "nuxt": "^4.6.3",
     "three": "^0.186.1",
     "vue": "^3.5.44",
     "vue-router": "^5.4.0"
   },
   "devDependencies": {
+    "@intlify/eslint-plugin-vue-i18n": "^4.5.1",
+    "@nuxt/eslint": "^1.17.0",
     "@types/node": "^26.6.6",
-    "@types/three": "^0.186.0"
+    "@types/three": "^0.186.0",
+    "eslint": "^10.15.0",
+    "typescript": "^6.0.3",
+    "vue-tsc": "^3.3.14"
   }
 }
