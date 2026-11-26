@@ -28,7 +28,7 @@ const { matrix } = useData()
             <td class="mt-1 block md:mt-0 md:table-cell md:px-4 md:py-4">
               <span class="mr-2 font-semibold text-on-surface md:hidden">{{ matrix.heads[2] }}</span>{{ r.scope }}
             </td>
-            <td class="mt-2 block md:mt-0 md:table-cell md:px-4 md:py-4"><UiChip tone="secondary" class="!font-medium">{{ r.source }}</UiChip></td>
+            <td class="mt-2 block md:mt-0 md:table-cell md:px-4 md:py-4"><UiChip class="!font-medium">{{ r.source }}</UiChip></td>
           </tr>
         </tbody>
       </table>

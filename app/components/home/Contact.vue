@@ -5,7 +5,6 @@ const { contact } = useData()
 const localePath = useLocalePath()
 const { track } = useAnalytics()
 
-const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 text-body-md font-medium transition-colors motion-reduce:transition-none'
 </script>
 
 <template>
@@ -20,8 +19,8 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
       <div class="contact-actions lg:col-span-4">
         <div class="home-gate" aria-hidden="true"><span /></div>
         <div class="contact-buttons flex flex-wrap gap-3 lg:justify-end">
-        <NuxtLink :to="localePath('/contact')" :class="[btn, 'bg-lab-signal text-lab-bg hover:bg-white']" @click="track('contact_click', { source: 'home' })">{{ $t('common.contactMe') }} <UiIcon name="arrow_forward" class="text-[18px]" /></NuxtLink>
-        <a :href="site.github" target="_blank" rel="noopener noreferrer" :class="[btn, 'border border-white/20 text-white hover:border-lab-signal hover:text-lab-signal']" @click="track('social_click', { platform: 'github', source: 'home' })">GitHub</a>
+        <NuxtLink :to="localePath('/contact')" class="btn btn-primary px-6 py-3 text-body-md font-medium" @click="track('contact_click', { source: 'home' })">{{ $t('common.contactMe') }} <UiIcon name="arrow_forward" class="text-[18px]" /></NuxtLink>
+        <a :href="site.github" target="_blank" rel="noopener noreferrer" class="btn btn-outline-signal px-6 py-3 text-body-md font-medium text-white" @click="track('social_click', { platform: 'github', source: 'home' })">GitHub</a>
         </div>
       </div>
     </div>

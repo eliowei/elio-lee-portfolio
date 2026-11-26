@@ -76,6 +76,13 @@
   @media (min-width: 768px) { .space-title { font-size: clamp(3.5rem, 6.4vw, 6.5rem); } .space-title:lang(ja) { font-size: clamp(3rem, 5.6vw, 5.75rem); } } /* the longest Japanese line is 12 full-width characters: keep it on one line */
   .lab-chip { @apply inline-flex items-center rounded border border-white/15 px-2.5 py-1 text-label-sm text-lab-on-dark; }
   .lab-chip-light { @apply inline-flex items-center rounded border border-hairline-strong bg-surface-container-lowest px-2.5 py-1 text-label-sm text-on-surface-variant; }
+  /* Buttons: shared look only. Padding and type size stay at the call site.
+     Do not move `font-medium` into .btn (a text-* size utility would override its weight) or `text-white` into the outline
+     variants (the light-theme rules under [data-space] target that class name). */
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-sm transition-colors motion-reduce:transition-none; }
+  .btn-primary { @apply bg-lab-signal text-lab-bg hover:bg-white; }
+  .btn-outline { @apply border border-white/25 hover:border-white; }
+  .btn-outline-signal { @apply border border-white/20 hover:border-lab-signal hover:text-lab-signal; }
   /* Text-link underline that draws in from the left on hover / focus and withdraws on leave. The line follows the text colour. */
   .u-link { background-image: linear-gradient(currentColor, currentColor); background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 1px; padding-bottom: 4px; transition: background-size 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.2s; }
   .u-link:hover, .u-link:focus-visible { background-size: 100% 1px; }

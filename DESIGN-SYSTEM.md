@@ -59,7 +59,7 @@
 | `surface-container-lowest` | `bg-surface-container-lowest` / `text-surface-container-lowest` | `#ffffff` | `#1e1d1a` | 卡片、輸入框、圖表節點（亮色為白、暗色略比底色亮） |
 | `surface-container-low` | `bg-surface-container-low` / `text-surface-container-low` | `#ecebe6` | `#201f1c` |  |
 | `surface-container` | `bg-surface-container` / `text-surface-container` | `#e6e4df` | `#252320` | 標籤、行內程式碼底色 |
-| `surface-container-high` | `bg-surface-container-high` / `text-surface-container-high` | `#dfddd7` | `#2b2926` | `UiChip` 預設底色 |
+| `surface-container-high` | `bg-surface-container-high` / `text-surface-container-high` | `#dfddd7` | `#2b2926` |  |
 | `surface-container-highest` | `bg-surface-container-highest` / `text-surface-container-highest` | `#d6d4ce` | `#32302c` |  |
 | `surface-tint` | `bg-surface-tint` / `text-surface-tint` | `#b83d0e` | `#ff7a47` | 強調色疊色 |
 
@@ -266,9 +266,9 @@
 
 ### 8.2 Vue 元件
 
-- **`UiChip`**：`tone` 可選 `neutral`（預設）、`primary`、`secondary`、`tertiary`、`solid`、`deep`，分別對應 `surface-container-high`、`primary-fixed`、`secondary-container`、`tertiary-fixed`、`primary`、`primary-container` 底色。
+- **`UiChip`**：閱讀區的小標籤，單一外觀（`secondary-container` 底）。
 - **`LabPageHeader`**：區段首頁（經歷、作品、筆記）共用的深色頁首，接收 `eyebrow`、`title`、`lead` 與預設 slot；各項依序以 0／80／160／220ms 延遲進場。
-- **按鈕**（定義在使用處）：實心按鈕 `bg-lab-signal text-lab-bg hover:bg-white`；外框按鈕 `border border-white/25 text-white hover:border-white`。尺寸 `px-6 py-3 text-body-md font-medium rounded-sm`。
+- **按鈕**：`main.css` 的 `.btn` 加 `.btn-primary`（橘底）、`.btn-outline`（白框，移過去框變白）或 `.btn-outline-signal`（白框，移過去變橘）。內距、字級、`font-medium`、`text-white` 寫在使用處；常用尺寸 `px-6 py-3 text-body-md`。
 - **`LayoutThemeToggle`**：主題切換鈕（見 §4）。
 
 ### 8.3 文章內文 `.prose-post`

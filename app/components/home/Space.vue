@@ -60,7 +60,6 @@ async function onStage(slug: string) {
   await navigateTo(localePath(`/projects/${slug}`))
 }
 
-const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 text-body-md font-medium transition-colors motion-reduce:transition-none'
 // The opening (see nuxt.config.ts: <html data-intro>) never makes anyone wait: the first input or any scrolling ends it at once.
 onMounted(() => {
   const d = document.documentElement
@@ -101,10 +100,10 @@ onMounted(() => {
           <SpaceMonument class="mx-auto mt-10 h-72 w-auto max-w-full md:hidden" />
           <p class="lab-in hero-late-a lab-muted mt-8 max-w-[36rem] text-body-lg">{{ hero.intro }}</p>
           <div class="lab-in hero-late-b mt-10 flex flex-wrap items-center gap-3">
-            <a href="#works" :class="[btn, 'bg-lab-signal text-lab-bg hover:bg-white']">
+            <a href="#works" class="btn btn-primary px-6 py-3 text-body-md font-medium">
               {{ $t('home.explore') }}
             </a>
-            <a href="#about" :class="[btn, 'border border-white/25 text-white hover:border-white']">
+            <a href="#about" class="btn btn-outline px-6 py-3 text-body-md font-medium text-white">
               {{ $t('home.aboutMe') }}
             </a>
           </div>

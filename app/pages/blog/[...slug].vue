@@ -74,7 +74,7 @@ useHead({
 
         <header class="space-y-4 pb-space-lg">
           <div class="flex flex-wrap items-center gap-3 text-label-md text-secondary">
-            <UiChip tone="secondary">{{ $t(`categories.${post.category}`) }}</UiChip>
+            <UiChip>{{ $t(`categories.${post.category}`) }}</UiChip>
             <time :datetime="post.date">{{ post.date.replaceAll('-', '/') }}</time>
             <span class="rounded bg-surface-container px-2 py-0.5 text-label-sm text-on-surface-variant">{{ $t('blog.readingTime', { n: post.readingTime }) }}</span>
           </div>

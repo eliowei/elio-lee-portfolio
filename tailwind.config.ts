@@ -34,7 +34,7 @@ export default <Partial<Config>>{
       colors: {
         // --- Space palette: the dark stage is fixed (dark sections stay dark in both themes)...
         lab: {
-          bg: '#171614', 'bg-soft': '#1D1B19', 'bg-raise': '#22201D',
+          bg: '#171614', 'bg-soft': '#1D1B19', 'bg-raise': '#22201D', stone: '#3A3833',
           paper: token('background'), // ...except the reading ground, which follows the theme
           signal: SIGNAL, 'signal-ink': token('signal-ink'),
           'on-dark': '#EAE6DE', 'on-dark-muted': '#A8A39A',

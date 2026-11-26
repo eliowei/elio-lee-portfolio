@@ -87,8 +87,10 @@ server/api/     只有 sitemap 來源
 
 - **出現第三次才抽。** 兩處相同先保留；第三處出現再抽。審查時刻意保留的重複：`elastic.ts` 與 `MagnetText.vue` 的彈簧常數（只有兩處，L5）。
 - **共用外觀 ≠ 共用行為。** 只需要共用外觀時，優先用 `main.css` 的 `@layer components` class（例如現有的 `.lab-chip`、`.lab-chip-light`），不要為了外觀去做 Vue 元件。需要共用結構、插槽或行為時才做元件。
-- 不要為了共用而共用：不加只有一個實作的介面、不加只用在一處的設定項、不加 `UiButton` 這類多型元件除非 `<a>` / `<NuxtLink>` / `<button>` 的差異真的被處理（R8 的待辦，見 §10）。
-- 元件的 props 以最少為原則；未使用的 variant 不要保留（`UiChip` 目前 6 種色調只用到 1 種，L4）。
+- 不要為了共用而共用：不加只有一個實作的介面、不加只用在一處的設定項。不要做 `UiButton` 這類多型元件；按鈕只共用外觀。
+- 元件的 props 以最少為原則；未使用的 variant 不要保留。
+- **按鈕**用 `main.css` 的 `.btn` 加一個樣式（`.btn-primary` / `.btn-outline` / `.btn-outline-signal`），內距、字級、`font-medium` 寫在使用處。兩個不能改的地方：`font-medium` 不收進 `.btn`（`text-*` 字級會蓋掉字重）；`text-white` 不收進外框樣式（`[data-space]` 的亮色主題規則靠這個 class 名稱改色）。
+- 石板色用 `lab-stone`。**不要做石板卡片的 component class**：使用處的 `border-white/10` 會蓋掉它的頂邊顏色。
 - `createSpaceScene`（約 800 行的單一函式）、`elastic.ts`、`MagnetText.vue` 是**自成一體、清理完整**的模擬/互動，**不要為了「檔案太長」拆分**。若要拆，理由必須是「要為純數學寫測試」。
 
 ---
@@ -224,7 +226,6 @@ server/api/     只有 sitemap 來源
 
 | 編號 | 內容 |
 |---|---|
-| R8 | 按鈕（6 份 `const btn`）、chip（3 套）、石板卡片（3 份）的外觀重複 |
 | R9 | 剩餘：3D 亮色主題色（`applyTheme`）與 `theme.css` 是兩份手動同步 |
 | R10 | `Stage` 與 `Space/About/Notes` 靠 selector 耦合；每幀讀版面（**需先量測**） |
 | — | 6 個 `vue/no-template-shadow` 警告 |

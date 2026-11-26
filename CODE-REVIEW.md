@@ -97,11 +97,20 @@
 - **驗證**：`npm run check` 通過、`nuxt build` 成功；修改前後全部 CSS（944 條規則）與首頁 SVG 備援的 420 個 polygon **零差異**；瀏覽器目視首頁 3D 與修改前一致。**反向測試**：暫時把 `SIGNAL` 改成綠色後建置，CSS 16 條規則與 SVG 28 個 polygon 全部變綠、原橘色 0 筆；3D 的門光、碎塊外框跟著變綠，暗色主題下階梯嵌條也變綠；已還原，還原後建置結果與基準零差異。
 - **反向測試發現的範圍限制**：**亮色主題**下 3D 階梯嵌條仍是原色，因為 `applyTheme` 寫死 `0xb83d0e`（對應 `theme.css` 的 signal-ink）；亮色頁面的小標籤文字也由 `theme.css` 決定。所以改品牌橘要改三處：`palette.ts`、`theme.css`、`applyTheme`。
 
+#### R8（2026-11-26，尚未 commit）
+
+- **按鈕**：`main.css` 新增 `.btn`、`.btn-primary`、`.btn-outline`、`.btn-outline-signal`；移除 6 個檔案的 `const btn` 與重複配色字串；內距、字級、`font-medium`、`text-white` 保留在使用處，4 種尺寸不變。
+- **UiChip**：移除 `tone` 屬性與未使用的 5 種色調，外觀不變。
+- **石板色**：`tailwind.config.ts` 新增 `lab.stone`，3 處改用。**不做** `.lab-slab` class（原報告建議）：使用處的 `border-white/10` 屬於較後面的 utility 層，會蓋掉 component class 的頂邊顏色。
+- **更正原建議**：原報告建議 `.btn` 內含 `font-medium`、外框樣式內含 `text-white`，兩者都會改壞畫面（字重被 `text-*` 蓋掉；`main.css` 的 `[data-space]` 亮色規則以 `.text-white` 為選擇器）。
+- **驗證**：`npm run check` 通過、`nuxt build` 成功。在瀏覽器比對修改前（原始碼經 `git stash` 建置）與修改後 6 個頁面（首頁 zh / en、經歷、聯絡、文章、404）所有元素在亮、暗主題與模擬滑鼠移過時的實際樣式（31 個屬性＋轉場設定，共約 6,500 項比對）。**唯一差異**：Cookie 橫幅兩顆按鈕的 `gap` 由 `normal` 變 `8px`（按鈕只有文字，尺寸量測相同）。滑鼠移過是以複製 `:hover` 規則到測試 class 的方式模擬，並確認確實有元素因此變色。**限制**：僅 1280px 寬；聯絡表單對話框內的元素在關閉狀態量測；沒有做像素截圖比對。第一次量測因背景 iframe 的顏色轉場未完成而作廢，修正量測方式後重做。
+- **刻意未改**：`RoleCard` 與文章頁的其他小標籤、`.lab-chip` / `.lab-chip-light`（外觀不同）。
+
 ### 其餘階段
 
 | # | 項目 | 狀態 |
 |---|---|---|
-| R8、R9 | 一致性與可維護性重構 | ⏳ 第四階段 |
+| R5、R7、R8、R9 | 一致性與可維護性重構 | ✅ 第四階段完成（R8 尚未 commit） |
 | R10、L6、L7 | 架構與效能 | ⏳ 第五階段（先量測） |
 | 測試 | ⏳ 第六階段 |
 
@@ -178,7 +187,7 @@ content/        zh 在根，en/ja 各一個子目錄；每個語言一個 collec
 | R5 | ✅ 已修復：`font-heading` class 沒有定義（15 處使用） | 一致性 | 🔴 缺陷（輕微視覺） | 低～中 | 已完成，採方案 C（尚未 commit） |
 | R6 | 沒有 lint / 型別檢查 / 測試；依賴與環境衛生 | 可測試 / 可維護 | 🟡 技術債 | 中 | 立即（工具）＋後續（測試） |
 | R7 | ✅ 已修復：站台網址、SEO meta、JSON-LD 作者名重複 | 可維護 | 🟡 技術債 | 中 | 已完成（尚未 commit） |
-| R8 | 按鈕 / chip / 石板卡片：同視覺多份實作 | 一致性 | 🟡 技術債 | 中 | 後續 |
+| R8 | ✅ 已完成：按鈕 / chip / 石板卡片的重複外觀 | 一致性 | 🟡 技術債 | 中 | 已完成（尚未 commit） |
 | R9 | ✅ 已完成（A～D）：Design Token 外洩 | 一致性 | 🟡 技術債 | 中 | 已完成（尚未 commit）；3D 亮色主題色刻意維持 |
 | R10 | Stage ↔ Space / About / Notes 靠 CSS selector 暗中耦合，且每幀讀版面 | 可維護 / 效能 | 🟡 技術債＋⚪ | 中 | 後續 |
 | — | 其餘低嚴重度項目 | 各面向 | 見 §4 | 低 | 見 §4 |
@@ -401,7 +410,7 @@ content/        zh 在根，en/ja 各一個子目錄；每個語言一個 collec
 
 ---
 
-### R8　按鈕 / chip / 石板卡片：同視覺多份實作　🟡 中 → 後續
+### R8　按鈕 / chip / 石板卡片：同視覺多份實作　🟡 中 → ✅ 已完成並驗證
 
 - **面向**：一致性、可維護性
 
@@ -521,7 +530,7 @@ content/        zh 在根，en/ja 各一個子目錄；每個語言一個 collec
 | L1 | 死程式碼：`cjkFiles` 永遠是空陣列 | 簡潔 | `layouts/default.vue:11-13` | `const cjkFiles: string[] = []`，下面還寫了 `locale.value === 'en' ? [] : cjkFiles` 分支，永遠不會執行 | 刪掉 `cjkFiles` 與該分支；`fontFiles` 直接 map | 🟡 低 | 立即（零風險） |
 | L2 | 死 CSS：`.home-reading`、`--lab-paper` | 簡潔 | `main.css:120-134`、`main.css:8` | `grep` 全專案沒有任何模板使用 `home-reading`；`--lab-paper` 也沒人引用 | 刪除（刪前再 grep 一次） | 🟡 低 | 立即 |
 | L3 | 重複 / 覆蓋的 CSS 規則 | 可讀性 | `About.vue:93,118`（`.archive-trigger` 兩次）、`Notes.vue:55,79`（`.notes-record margin-bottom` 1rem 後又 1.5rem）、`Notes.vue:64`（`position: relative` 另起一條） | 後面的規則覆蓋前面的，改前面那條沒效果，是「改了沒用」的陷阱 | 合併成一條 | 🟡 低 | 後續 |
-| L4 | `UiChip` 6 種色調只用 1 種 | 簡潔 | `ui/Chip.vue:2-9` | `primary / solid / deep / tertiary / neutral` 沒有任何使用處 | 見 R8b | 🟡 低 | 後續 |
+| L4 | ✅ `UiChip` 6 種色調只用 1 種 | 簡潔 | `ui/Chip.vue` | 已移除 `tone` 屬性與 5 種未使用色調（併入 R8） | — | 🟡 低 | 已完成 |
 | L5 | 彈簧常數與物理在兩處重複 | 可維護 | `plugins/elastic.ts:13-14`、`ui/MagnetText.vue:41-42` | 兩處都是 `STIFFNESS = 170`、`DAMPING = 9`，註解逐字相同，彈簧積分公式也相同 | 如果之後要調「手感」，抽成 `lib/spring.ts`；**現在不抽也可以**，只有兩處 | 🔵 | 維持現狀（有第 3 處時再抽） |
 | L6 | `MagnetText` 讀寫交錯 | 可靠性（效能） | `ui/MagnetText.vue:65-84` | 在同一個 `forEach` 裡，每個字元先 `getBoundingClientRect()`（讀）再寫 `style.transform`（寫），N 個字元就交錯 N 次，可能觸發 N 次強制重排 | 兩個迴圈：先全部讀、再全部寫。**只在 `dirty` 時（滑鼠在附近）才跑，字數約 20 字，影響大概有限** | ⚪ 待實測 | 後續（先量測） |
 | L7 | `v-reveal` 可能在水合時閃一下 | 可靠性 | `plugins/reveal.ts:23-37`、`getSSRProps: () => ({})` | SSR 輸出的元素是可見的；`mounted` 才把它設為隱藏再動畫進場。若元素在首屏內，會有「可見 → 消失 → 淡入」。目前用法 6 處，多數在首屏外；`experience.vue:81` 的第一張卡片可能在首屏邊緣 | 實際用手機慢速網路錄影確認。若真有閃爍，可在 SSR 階段加 `style="opacity:0"` + `<noscript>` 例外，但那會讓無 JS 時看不到內容，要權衡 | ⚪ 待確認 | 先確認 |

@@ -14,7 +14,7 @@ const { principles, principlesSection: s } = useData()
       <li
         v-for="(p, i) in principles"
         :key="p.title"
-        class="border-t-8 border-[#3A3833] bg-lab-bg-raise p-space-md pb-space-lg text-lab-on-dark shadow-[8px_8px_0_#12110F]"
+        class="border-t-8 border-lab-stone bg-lab-bg-raise p-space-md pb-space-lg text-lab-on-dark shadow-[8px_8px_0_#12110F]"
         :class="['md:min-h-[15.5rem]', 'md:min-h-[19.5rem]', 'md:min-h-[23rem]'][i]"
       >
         <h3 class="flex items-baseline gap-2.5 text-headline-sm">

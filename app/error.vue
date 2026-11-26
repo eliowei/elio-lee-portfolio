@@ -26,7 +26,6 @@ const links = computed(() => [
 
 // An error page isn't a route: clearing the error and redirecting is how you leave it.
 const go = (to: string) => clearError({ redirect: localePath(to) })
-const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 text-body-md font-medium transition-colors motion-reduce:transition-none'
 </script>
 
 <template>
@@ -50,7 +49,7 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
             v-for="l in links"
             :key="l.to"
             :href="localePath(l.to)"
-            :class="[btn, l.primary ? 'bg-lab-signal text-lab-bg hover:bg-white' : 'border border-white/25 text-white hover:border-white']"
+            class="btn px-6 py-3 text-body-md font-medium" :class="l.primary ? 'btn-primary' : 'btn-outline text-white'"
             @click.prevent="go(l.to)"
           >{{ l.label }}</a>
         </div>

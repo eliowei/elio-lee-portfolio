@@ -20,7 +20,6 @@ const socials = ([
   { key: 'threads', name: 'Threads', href: site.threads },
 ] as const).filter(s => s.href)
 const email = { body: t('contact.emailBody') }
-const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-5 py-2.5 text-body-sm font-medium transition-colors motion-reduce:transition-none'
 const links = [
   { key: 'github', name: 'GitHub', href: site.github, body: t('contact.githubBody') },
   ...socials.map(c => ({ ...c, body: t(`contact.${c.key}Body`) })),
@@ -118,14 +117,14 @@ const hint = 'mt-2 text-body-sm text-error'
       <h2 id="contact-methods" class="sr-only">{{ $t('contact.methods') }}</h2>
 
       <!-- One main slab (the same stone as the experience page: warm dark grey, lit top edge, square corners). The way in sits at its foot. -->
-      <div class="lab-dark relative isolate overflow-hidden border border-t-8 border-white/10 border-t-[#3A3833] bg-lab-bg-raise p-space-lg md:p-space-xl">
+      <div class="lab-dark relative isolate overflow-hidden border border-t-8 border-white/10 border-t-lab-stone bg-lab-bg-raise p-space-lg md:p-space-xl">
         <p class="font-heading text-headline-lg-mobile text-white md:text-headline-lg">{{ $t('contact.slabTitle') }}</p>
         <p class="lab-muted mt-3 max-w-xl text-body-md">{{ email.body }}</p>
         <div class="mt-8 flex flex-wrap gap-3">
           <button
             type="button"
             aria-haspopup="dialog"
-            :class="[btn, 'bg-lab-signal text-lab-bg hover:bg-white']"
+            class="btn btn-primary px-5 py-2.5 text-body-sm font-medium"
             @click="openForm"
           >
             <UiIcon name="mail" class="text-[18px]" /> {{ $t('contact.write') }}
@@ -137,7 +136,7 @@ const hint = 'mt-2 text-body-sm text-error'
             :title="c.body"
             target="_blank"
             rel="noopener noreferrer"
-            :class="[btn, 'border border-white/25 text-white hover:border-lab-signal hover:text-lab-signal']"
+            class="btn btn-outline-signal px-5 py-2.5 text-body-sm font-medium border-white/25 text-white"
             @click="track('social_click', { platform: c.key, source: 'contact_page' })"
           >
             <UiIcon v-if="c.key === 'github'" name="code" class="text-[18px]" />

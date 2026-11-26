@@ -4,7 +4,6 @@ const localePath = useLocalePath()
 
 onMounted(restore)
 
-const btn = 'inline-flex items-center justify-center rounded-sm px-4 py-2 text-body-sm font-medium transition-colors motion-reduce:transition-none'
 </script>
 
 <template>
@@ -21,8 +20,8 @@ const btn = 'inline-flex items-center justify-center rounded-sm px-4 py-2 text-b
         <NuxtLink :to="localePath('/legal/privacy')" class="text-white underline underline-offset-4">{{ $t('consent.policy') }}</NuxtLink>
       </p>
       <div class="mt-4 flex flex-wrap gap-2">
-        <button type="button" :class="[btn, 'bg-lab-signal text-lab-bg hover:bg-white']" @click="decide('granted')">{{ $t('consent.accept') }}</button>
-        <button type="button" :class="[btn, 'border border-white/25 text-white hover:border-white']" @click="decide('denied')">{{ $t('consent.reject') }}</button>
+        <button type="button" class="btn btn-primary px-4 py-2 text-body-sm font-medium" @click="decide('granted')">{{ $t('consent.accept') }}</button>
+        <button type="button" class="btn btn-outline px-4 py-2 text-body-sm font-medium text-white" @click="decide('denied')">{{ $t('consent.reject') }}</button>
       </div>
     </section>
   </Transition>
