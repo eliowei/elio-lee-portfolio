@@ -100,7 +100,7 @@ server/api/     只有 sitemap 來源
 1. **`.vue` 內不寫新的 `#hex` 或 `rgb(…)` 色碼。** 跟著主題變的顏色用 `theme.css` 的 `--c-*`（Tailwind 語意名稱：`bg-surface`、`text-on-surface`…）；不跟主題變的舞台色與品牌橘用 `--lab-*` / `lab-*`。例外要在旁邊註明為什麼不能用 token（R9）。
 2. 品牌橘 `#FF5B1F` **只用在深色底與非文字標記**；淺色底上的文字用 `signal-ink`。
 3. 需要品牌橘加透明度時，現在沒有通道值變數，這是已知缺口（R9）；**不要再貼新的 `rgb(255 91 31 / x)`**，先問。
-4. **`font-heading` 沒有定義**（`tailwind.config.ts` 的 `fontFamily` 沒有 `heading`），加了不會有任何效果。標題字型實際由 `text-display*` / `text-headline-*` 字級 class 提供。要讓元素用標題字型，請用這些字級 class（R5）。
+4. 標題字型（Barlow）由 `text-display*` / `text-headline-*` 字級 class 自動套用，一般不需要另外指定。不用這些字級、但要標題字型時才加 `font-heading`（定義在 `tailwind.config.ts`）。`error.vue` 的裝飾用大狀態碼**刻意維持 Inter**（R5）。
 5. 響應式：mobile-first；手機版以「斷點 class」切換，不寫兩份結構以外的 JS 判斷（3D 場景例外，它依 `matchMedia` 與裝置能力決定）。
 6. 用 Tailwind 的 `motion-reduce:` 或 `@media (prefers-reduced-motion)` 處理動畫（見 §6）。
 
@@ -224,7 +224,6 @@ server/api/     只有 sitemap 來源
 
 | 編號 | 內容 |
 |---|---|
-| R5 | `font-heading` 沒有定義（`error.vue` 的 404 數字實際是 Inter） |
 | R8 | 按鈕（6 份 `const btn`）、chip（3 套）、石板卡片（3 份）的外觀重複 |
 | R9 | 品牌橘、標題字型堆疊、3D 場景亮色主題色在多處硬編碼 |
 | R10 | `Stage` 與 `Space/About/Notes` 靠 selector 耦合；每幀讀版面（**需先量測**） |

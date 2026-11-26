@@ -35,7 +35,7 @@ const btn = 'inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 
       <div class="lab-grid pointer-events-none absolute inset-0 -z-10 opacity-70" aria-hidden="true" />
       <!-- The code, huge and hollow, like a contour line on the survey map. -->
       <p
-        class="pointer-events-none absolute -right-4 top-1/2 -z-10 -translate-y-1/2 select-none font-heading text-[clamp(10rem,34vw,26rem)] font-semibold leading-none tracking-tighter text-transparent [-webkit-text-stroke:1px_rgb(255_255_255/0.14)]"
+        class="pointer-events-none absolute -right-4 top-1/2 -z-10 -translate-y-1/2 select-none text-[clamp(10rem,34vw,26rem)] font-semibold leading-none tracking-tighter text-transparent [-webkit-text-stroke:1px_rgb(255_255_255/0.14)]"
         aria-hidden="true"
       >{{ code }}</p>
 

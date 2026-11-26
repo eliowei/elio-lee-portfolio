@@ -78,11 +78,17 @@
 - **更正原建議**：報告原本建議「`useSiteConfig()` + `titleTemplate`」，查原始碼後**不採用**：`useSiteConfig().url` 有多個來源依優先序覆蓋（請求網域、config、i18n、環境變數），正規化只補 `https`、不處理尾斜線，且來自 `@nuxtjs/sitemap` 的間接依賴；`titleTemplate` 只作用於 `<title>`，`og:title` 仍需自行加後綴（依 unhead 行為判斷，未實測）。改用約 15 行的自有函式。
 - **刻意未改**：首頁標題組法、`nuxt.config.ts` 的 `siteUrl`、footer 版權文字（屬文案、格式不同）、部落格頁的預設分享圖（只有兩處）。
 
+#### R5（2026-11-26，尚未 commit）
+
+- **決定**：方案 C（不改視覺）。`tailwind.config.ts` 的 `fontFamily` 新增 `heading: [HEADING_FONT]`（沿用既有常數）；`error.vue` 的 404 大數字移除 `font-heading`，維持原本實際顯示的 Inter。
+- **驗證**：`npm run check` 通過、`nuxt build` 成功；建置出的 CSS 出現 `.font-heading{font-family:Barlow,…}`。修改前後在瀏覽器逐一讀取有文字的元素的實際 `font-family` 與 `font-weight`（首頁、`/en`、作品列表、案例頁、經歷 zh / ja、聯絡、404，共 8 頁），**8 頁的結果完全相同**；404 大數字前後皆為 `Inter 600`。**限制**：以 1280px 寬、亮 / 暗主題依瀏覽器預設量測一次；比對的是字型與字重，沒有做像素級截圖比對。
+- **剩餘**：標題字型堆疊在 `main.css` 仍有 3 份複製，併入 R9。有 14 處同時寫了字級 class 與 `font-heading`（兩者指定同一字型），無害但重複。
+
 ### 其餘階段
 
 | # | 項目 | 狀態 |
 |---|---|---|
-| R5、R8、R9 | 一致性與可維護性重構 | ⏳ 第四階段 |
+| R8、R9 | 一致性與可維護性重構 | ⏳ 第四階段 |
 | R10、L6、L7 | 架構與效能 | ⏳ 第五階段（先量測） |
 | 測試 | ⏳ 第六階段 |
 
@@ -156,7 +162,7 @@ content/        zh 在根，en/ja 各一個子目錄；每個語言一個 collec
 | R2 | ✅ 已修復：兩篇文章缺 en/ja，切語言 404、hreflang 指向 404 | 可靠性 / 可擴充 | 🔴 缺陷 | 高 | 已補翻譯；防線腳本待做 |
 | R3 | ✅ 已修復：三處寫死英文，沒走 i18n | 一致性 | 🔴 缺陷 | 中 | 已完成 |
 | R4 | ✅ 已修復：contact 送出沒有逾時，對話框可能被鎖死 | 可靠性 | 🟠 風險 | 中 | 已完成（`.env.example` 待補） |
-| R5 | `font-heading` class 沒有定義（15 處使用） | 一致性 | 🔴 缺陷（輕微視覺） | 低～中 | 待決定 |
+| R5 | ✅ 已修復：`font-heading` class 沒有定義（15 處使用） | 一致性 | 🔴 缺陷（輕微視覺） | 低～中 | 已完成，採方案 C（尚未 commit） |
 | R6 | 沒有 lint / 型別檢查 / 測試；依賴與環境衛生 | 可測試 / 可維護 | 🟡 技術債 | 中 | 立即（工具）＋後續（測試） |
 | R7 | ✅ 已修復：站台網址、SEO meta、JSON-LD 作者名重複 | 可維護 | 🟡 技術債 | 中 | 已完成（尚未 commit） |
 | R8 | 按鈕 / chip / 石板卡片：同視覺多份實作 | 一致性 | 🟡 技術債 | 中 | 後續 |
@@ -300,7 +306,7 @@ content/        zh 在根，en/ja 各一個子目錄；每個語言一個 collec
 
 ---
 
-### R5　`font-heading` class 沒有定義　🔴 低～中 → 待你決定
+### R5　`font-heading` class 沒有定義　🔴 低～中 → ✅ 已修復並驗證（方案 C）
 
 - **面向**：一致性
 - **位置**：15 處使用（例：`components/home/Space.vue:120`、`components/home/Contact.vue:17`、`error.vue:37`…）；定義處：**不存在**

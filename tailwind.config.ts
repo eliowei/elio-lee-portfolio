@@ -57,6 +57,7 @@ export default <Partial<Config>>{
         'space-2xl': '5rem', 'space-3xl': '7rem', // section rhythm
       },
       fontFamily: {
+        heading: [HEADING_FONT],
         sans: ['Inter', "'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif"],
         mono: ["'IBM Plex Mono'", 'ui-monospace', 'monospace'],
       },
