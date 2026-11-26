@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { site } from '~/data/site'
+import { author, site } from '~/data/site'
 
 const { t } = useI18n()
 const { hero } = useData()
@@ -15,9 +15,7 @@ useHead({
     type: 'application/ld+json',
     innerHTML: JSON.stringify({
       '@context': 'https://schema.org',
-      '@type': 'Person',
-      name: '李柏偉',
-      alternateName: 'Elio Lee',
+      ...author,
       jobTitle: t('home.jobTitle'),
       ...(site.email && { email: site.email }),
       url,

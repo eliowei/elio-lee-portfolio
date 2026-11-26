@@ -2,10 +2,8 @@
 const { t } = useI18n()
 const localePath = useLocalePath()
 const { projects, projectImages } = useData()
-const title = `${t('projects.title')} | Elio Lee`
-const description = t('projects.description')
 
-useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: usePageUrl() })
+usePageSeo({ title: t('projects.title'), description: t('projects.description') })
 
 // Plain HTML index of every project — the non-3D way in. Lead project first and larger.
 const cover = (slug: string) => projectImages[slug]?.cover

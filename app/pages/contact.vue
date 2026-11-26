@@ -3,11 +3,9 @@ import { site } from '~/data/site'
 
 const { t, tm, rt } = useI18n()
 const { contact } = useData()
-const title = `${t('contact.title')} | Elio Lee`
-const description = contact.body
 const config = useRuntimeConfig().public
 
-useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: usePageUrl() })
+usePageSeo({ title: t('contact.title'), description: contact.body })
 
 const topics = (tm('contact.topics') as string[]).map(m => rt(m))
 // Stable, language-independent topic keys for analytics (the labels themselves are translated).

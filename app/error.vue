@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
+import { pageTitle } from '~/data/site'
 
 // Error page for the whole app (unknown URLs and fatal errors thrown by pages). It replaces app.vue, so it brings its own layout.
 // Same look as the section headers: dark stage, survey contours, signal orange. The server still answers with the real status
@@ -15,7 +16,7 @@ const code = computed(() => String(props.error.statusCode || 500))
 const title = computed(() => (is404.value ? t('error.title404') : t('error.titleGeneric')))
 const lead = computed(() => (is404.value ? t('error.lead404') : t('error.leadGeneric')))
 
-useSeoMeta({ title: () => `${code.value} | Elio Lee`, robots: 'noindex, nofollow' })
+useSeoMeta({ title: () => pageTitle(code.value), robots: 'noindex, nofollow' })
 
 const links = computed(() => [
   { to: '/', label: t('error.home'), primary: true },

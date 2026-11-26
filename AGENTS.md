@@ -70,7 +70,7 @@ server/api/     只有 sitemap 來源
 4. 跨元件共享狀態只用 `useState`（目前的 `space-selected`、`scroll-y` 等）。**不要引入 Pinia、lodash、動畫庫**；先問。
 5. `data/en/*`、`data/ja/*` 一律以 `typeof zh.x` 標型別。**這是專案最重要的型別保護之一，別弱化它**。新增欄位時只改 zh 的型別，編譯器會告訴你其他語言缺什麼。
 6. **新增欄位前先確認有人讀它**。審查時發現過 5 個「資料裡有、但沒有任何程式讀取」的欄位（已移除）。要判斷欄位是否被使用，**把它從型別拿掉再跑 `typecheck`**，不要只靠 grep（同名欄位會誤導）。
-7. 頁面的 `useSeoMeta` 由各頁自己宣告 title / description（這是正確的）；站台網址不要再手寫 `String(...siteUrl).replace(/\/$/, '')`（R7，待收斂為統一來源）。
+7. 內頁的基本 meta 用 `usePageSeo({ title, description, type })`（`composables/useSeo.ts`）：它加站名後綴並設定 `og:*`；**標題與描述仍由各頁自己決定**。額外標籤（分享圖、`robots`…）由頁面再呼叫 `useSeoMeta`，不要往 `usePageSeo` 加參數。站台網址一律用 `useSiteUrl()` / `usePageUrl()`，JSON-LD 作者用 `data/site.ts` 的 `author`（R7）。首頁的標題組法不同，直接用 `useSeoMeta`。
 8. 草稿文章（`draft: true`）：列表與 sitemap 不出現、正式環境 404、開發環境可預覽。
 
 ### 3.1 ESLint 的注意事項
@@ -139,7 +139,7 @@ server/api/     只有 sitemap 來源
 
 ### SEO
 
-- 每個頁面都要有 `useSeoMeta`（title、description、og:*）。文章頁另有 `BlogPosting` JSON-LD，案例頁有 `CreativeWork`。
+- 每個頁面都要設定 title、description、og:*（內頁用 `usePageSeo`，見 §3）。文章頁另有 `BlogPosting` JSON-LD，案例頁有 `CreativeWork`。
 - canonical / hreflang 由 i18n 的 `useLocaleHead` 在 layout 產生。**hreflang 會對所有語言輸出，所以任何頁面缺語言版本就是 SEO 缺陷**（R2）。
 - 不該被索引的頁面：加 `robots: 'noindex, nofollow'`（草稿、`error.vue` 已有）。
 - `app/pages/` 下**每個檔案都會進 sitemap**。
@@ -164,7 +164,7 @@ server/api/     只有 sitemap 來源
 - **three.js 只在 ≥768px、非 Save-Data、記憶體與核心數足夠時才載入**，並且 `nuxt.config.ts` 的 `build:manifest` 鉤子刻意取消它的 prefetch。**不要讓它進入首屏必載的 bundle。**
 - 字型：只預載 `barlow-500`，其餘靠 CSS 解析後載入（`font-display: swap`）。**預載越多，慢速網路上 FCP 越差**（實測過）。不要加預載。
 - 圖片用 `<NuxtPicture>` / `<NuxtImg>`，`sizes` 要用 `image.screens` 的名稱（`xs:100vw sm:...`）。**單獨寫 `sizes="100vw"` 會被解析成 `1w`，只產出 1×1 的圖**（真實發生過）。
-- **不要對 `$img` / `getSizes` / `<NuxtImg>` 傳 `format` 或 `height` 修飾子**：Vercel 的圖片 provider 只吃 `w`、`q`（格式由 `Accept` 標頭協商），型別也不允許 `format`。本機的 `ipx` provider 允許它，所以**只在本機跑型別檢查會漏掉**（曾因此部署失敗），`npm run typecheck` 已改成跟 Vercel 同環境。
+- **在程式碼中呼叫 `$img()` / `getSizes()` 時，不要在修飾子傳 `format`**：Vercel 的圖片 provider 型別不允許它，網址也只帶 `url`、`w`、`q`（輸出格式由瀏覽器的 `Accept` 標頭協商，線上仍會回傳 AVIF / WebP）。本機的 `ipx` provider 允許 `format`，所以**只在本機型別下檢查會漏掉**（曾因此部署失敗），`npm run typecheck` 已改成跟 Vercel 同環境。模板上的 `<NuxtImg format="webp">` 與 `width` / `height` 屬性不受此限（`height` 用來預留圖片空間，避免版面跳動）。
 - **效能問題先量測再改**：用 Chrome Performance 面板或 Lighthouse，沒有量測結果就不要重構。
 
 ---
@@ -225,7 +225,6 @@ server/api/     只有 sitemap 來源
 | 編號 | 內容 |
 |---|---|
 | R5 | `font-heading` 沒有定義（`error.vue` 的 404 數字實際是 Inter） |
-| R7 | 站台網址、SEO meta、JSON-LD 作者名在多處重複 |
 | R8 | 按鈕（6 份 `const btn`）、chip（3 套）、石板卡片（3 份）的外觀重複 |
 | R9 | 品牌橘、標題字型堆疊、3D 場景亮色主題色在多處硬編碼 |
 | R10 | `Stage` 與 `Space/About/Notes` 靠 selector 耦合；每幀讀版面（**需先量測**） |

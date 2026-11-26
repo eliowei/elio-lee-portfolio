@@ -6,8 +6,7 @@ const collection = useLegalCollection()
 const { data: doc } = await useAsyncData(`legal-${route.path}`, () => queryCollection(collection).path(route.path).first())
 if (!doc.value) throw createError({ statusCode: 404, statusMessage: t('legal.notFound'), fatal: true })
 
-const title = `${doc.value.title} | Elio Lee`
-useSeoMeta({ title, description: doc.value.description, ogTitle: title, ogDescription: doc.value.description, ogType: 'website', ogUrl: usePageUrl() })
+usePageSeo({ title: doc.value.title, description: doc.value.description })
 </script>
 
 <template>

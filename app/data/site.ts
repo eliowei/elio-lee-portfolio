@@ -9,6 +9,12 @@ export const site = {
   threads: 'https://www.threads.com/@z220168722', // 已去掉分享連結的追蹤參數（?xmt=...）
 }
 
+// 內頁 <title> 的站名後綴（首頁的標題組法不同，見 pages/index.vue）。
+export const pageTitle = (title: string) => `${title} | Elio Lee`
+
+// JSON-LD 的作者。
+export const author = { '@type': 'Person', name: '李柏偉', alternateName: 'Elio Lee' } as const
+
 // 標籤文字在 i18n/locales/*.json 的 nav.<key>；分類名稱在 categories.<key>。
 export const navLinks = [
   { key: 'projects', to: '/projects' },

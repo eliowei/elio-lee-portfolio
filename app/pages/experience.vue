@@ -1,10 +1,8 @@
 <script setup lang="ts">
 const { t } = useI18n()
 const { roles, transitions } = useData()
-const title = `${t('experience.title')} | Elio Lee`
-const description = t('experience.description')
 
-useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: usePageUrl() })
+usePageSeo({ title: t('experience.title'), description: t('experience.description') })
 
 // Told in time order (roles are stored newest-first): each chapter is a light reading section; the
 // transitions between them — in Elio's own words — are dark full-width bands.

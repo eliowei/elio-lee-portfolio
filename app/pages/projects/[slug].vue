@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { author } from '~/data/site'
+
 const { t } = useI18n()
 const localePath = useLocalePath()
 const { projects, projectImages } = useData()
@@ -51,14 +53,14 @@ onMounted(() => {
   onBeforeUnmount(() => io.disconnect())
 })
 
-const title = `${project.title} | Elio Lee`
 const url = usePageUrl()
-const ogImage = cover ? `${String(useRuntimeConfig().public.siteUrl).replace(/\/$/, '')}${cover.src}` : undefined
-useSeoMeta({ title, description: project.body, ogTitle: title, ogDescription: project.body, ogType: 'article', ogUrl: url, ogImage, ogImageAlt: ogImage ? title : undefined, twitterImage: ogImage })
+const ogImage = cover ? `${useSiteUrl()}${cover.src}` : undefined
+const title = usePageSeo({ title: project.title, description: project.body, type: 'article' })
+useSeoMeta({ ogImage, ogImageAlt: ogImage ? title : undefined, twitterImage: ogImage })
 useHead({
   script: [{
     type: 'application/ld+json',
-    innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'CreativeWork', name: project.title, description: project.body, keywords: project.tags.join(', '), author: { '@type': 'Person', name: '李柏偉', alternateName: 'Elio Lee' }, url }),
+    innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'CreativeWork', name: project.title, description: project.body, keywords: project.tags.join(', '), author, url }),
   }],
 })
 

@@ -42,6 +42,3 @@ export const useLegalCollection = () => {
   const l = useNuxtApp().$i18n.locale.value as Locale
   return l === 'zh' ? 'legal' : (`legal_${l}` as const)
 }
-
-/** 目前頁面的完整網址（og:url 用；canonical / hreflang 由 i18n 的 useLocaleHead 產生）。 */
-export const usePageUrl = () => `${String(useRuntimeConfig().public.siteUrl).replace(/\/$/, '')}${useRoute().path}`

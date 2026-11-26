@@ -69,11 +69,20 @@
 | `CLAUDE.md` | ✅ 已建立 | 以 `@AGENTS.md` 引用共用規範，加上 Claude Code 專屬的三條補充，避免兩份內容分叉。Codex 原生讀 `AGENTS.md` |
 | 驗證 | ⚠️ 限制 | 規範是文件，沒有自動驗證手段。我核對了其中可查證的事實（`any` / `@ts-ignore` 為 0、`.vue` 皆為 `lang="ts"`、沒有 `utils/` 目錄、`AGENTS.md` / `CLAUDE.md` 不會被 `.gitignore` 忽略）。**沒有驗證**的是「Codex 是否會讀 `AGENTS.md`」與「`CLAUDE.md` 的 `@AGENTS.md` 引用在你的 Claude Code 版本是否生效」，需要你實際開新對話確認 |
 
+### 第四階段：一致性與可維護性（進行中）
+
+#### R7（2026-11-26，尚未 commit）
+
+- **修改**：新增 `composables/useSeo.ts`（`useSiteUrl`、`usePageUrl`、`usePageSeo`；`usePageUrl` 由 `useData.ts` 搬入）；`data/site.ts` 新增 `pageTitle`、`author`；8 個頁面 / 元件與 layout 改用。
+- **驗證**：`npm run check` 通過、`nuxt build` 成功。修改前後各擷取 **132 頁**（三語 sitemap 全部頁面＋首頁、筆記列表、經歷、404），比對結果 **132 頁完全一致**（含 `<title>`、`<meta>`、canonical、hreflang、JSON-LD、`<body>`，且 `<head>` 標籤順序也相同）。比對時只排除每次建置都會變的內容：資產雜湊、建置 ID、行內 runtime config、payload、`<style>` 內容，以及 scoped CSS 的 `data-v-` 識別碼（原始碼一改就會換）。**負向對照**：在副本中竄改一個標題與一段內容，腳本兩個都抓到。**限制**：`<style>` 內容不在比對範圍（本次沒有改任何樣式）；比對的是本機 `ipx` 建置，不是 Vercel。
+- **更正原建議**：報告原本建議「`useSiteConfig()` + `titleTemplate`」，查原始碼後**不採用**：`useSiteConfig().url` 有多個來源依優先序覆蓋（請求網域、config、i18n、環境變數），正規化只補 `https`、不處理尾斜線，且來自 `@nuxtjs/sitemap` 的間接依賴；`titleTemplate` 只作用於 `<title>`，`og:title` 仍需自行加後綴（依 unhead 行為判斷，未實測）。改用約 15 行的自有函式。
+- **刻意未改**：首頁標題組法、`nuxt.config.ts` 的 `siteUrl`、footer 版權文字（屬文案、格式不同）、部落格頁的預設分享圖（只有兩處）。
+
 ### 其餘階段
 
 | # | 項目 | 狀態 |
 |---|---|---|
-| R5、R7、R8、R9 | 一致性與可維護性重構 | ⏳ 第四階段 |
+| R5、R8、R9 | 一致性與可維護性重構 | ⏳ 第四階段 |
 | R10、L6、L7 | 架構與效能 | ⏳ 第五階段（先量測） |
 | 測試 | ⏳ 第六階段 |
 
@@ -149,7 +158,7 @@ content/        zh 在根，en/ja 各一個子目錄；每個語言一個 collec
 | R4 | ✅ 已修復：contact 送出沒有逾時，對話框可能被鎖死 | 可靠性 | 🟠 風險 | 中 | 已完成（`.env.example` 待補） |
 | R5 | `font-heading` class 沒有定義（15 處使用） | 一致性 | 🔴 缺陷（輕微視覺） | 低～中 | 待決定 |
 | R6 | 沒有 lint / 型別檢查 / 測試；依賴與環境衛生 | 可測試 / 可維護 | 🟡 技術債 | 中 | 立即（工具）＋後續（測試） |
-| R7 | 站台網址、SEO meta、JSON-LD 作者名重複 | 可維護 | 🟡 技術債 | 中 | 後續 |
+| R7 | ✅ 已修復：站台網址、SEO meta、JSON-LD 作者名重複 | 可維護 | 🟡 技術債 | 中 | 已完成（尚未 commit） |
 | R8 | 按鈕 / chip / 石板卡片：同視覺多份實作 | 一致性 | 🟡 技術債 | 中 | 後續 |
 | R9 | Design Token 外洩：色碼、品牌橘、標題字型多處硬編碼 | 一致性 | 🟡 技術債 | 中 | 後續 |
 | R10 | Stage ↔ Space / About / Notes 靠 CSS selector 暗中耦合，且每幀讀版面 | 可維護 / 效能 | 🟡 技術債＋⚪ | 中 | 後續 |
@@ -327,7 +336,7 @@ content/        zh 在根，en/ja 各一個子目錄；每個語言一個 collec
 
 ---
 
-### R7　站台網址、SEO meta、JSON-LD 作者名重複　🟡 中 → 後續
+### R7　站台網址、SEO meta、JSON-LD 作者名重複　🟡 中 → ✅ 已修復並驗證
 
 - **面向**：可維護性、一致性
 - **位置與原始碼**

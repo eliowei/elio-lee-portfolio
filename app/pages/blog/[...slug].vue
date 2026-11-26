@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { author } from '~/data/site'
+
 const route = useRoute()
 const { t } = useI18n()
 const localePath = useLocalePath()
@@ -25,17 +27,11 @@ onMounted(() => {
 })
 
 const url = usePageUrl()
-const title = `${post.value.title} | Elio Lee`
 // Same default share image the layout sets (per language).
-const ogImage = computed(() => `${String(useRuntimeConfig().public.siteUrl).replace(/\/$/, '')}/og-image-${useNuxtApp().$i18n.locale.value}.jpg`)
+const ogImage = computed(() => `${useSiteUrl()}/og-image-${useNuxtApp().$i18n.locale.value}.jpg`)
 
+usePageSeo({ title: post.value.title, description: post.value.description, type: 'article' })
 useSeoMeta({
-  title,
-  description: post.value.description,
-  ogTitle: title,
-  ogDescription: post.value.description,
-  ogType: 'article',
-  ogUrl: url,
   articlePublishedTime: post.value.date,
   robots: post.value.draft ? 'noindex, nofollow' : undefined,
 })
@@ -52,7 +48,7 @@ useHead({
       image: ogImage.value,
       keywords: post.value.tags.join(', '),
       inLanguage: useNuxtApp().$i18n.localeProperties.value.language,
-      author: { '@type': 'Person', name: '李柏偉', alternateName: 'Elio Lee' },
+      author,
       mainEntityOfPage: url,
     }),
   }],

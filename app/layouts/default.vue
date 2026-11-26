@@ -16,7 +16,7 @@ useHead(() => ({
 
 // Default share image, one per language (public/og-image-{zh,en,ja}.jpg). A page's own useSeoMeta (e.g. a project
 // cover) overrides it.
-const siteUrl = String(useRuntimeConfig().public.siteUrl).replace(/\/$/, '')
+const siteUrl = useSiteUrl()
 const ogImage = computed(() => `${siteUrl}/og-image-${locale.value}.jpg`)
 useSeoMeta({ ogImage, ogImageAlt: 'Elio Lee | Frontend Engineer, Creative Development', twitterCard: 'summary_large_image', twitterImage: ogImage })
 </script>

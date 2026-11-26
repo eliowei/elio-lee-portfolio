@@ -4,10 +4,7 @@ import { categories } from '~/data/site'
 const { t } = useI18n()
 const { page } = useData()
 const { track, slugOf } = useAnalytics()
-const title = `${t('blog.title')} | Elio Lee`
-const description = page.lead
-
-useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', ogUrl: usePageUrl() })
+usePageSeo({ title: t('blog.title'), description: page.lead })
 
 // Published articles only (drafts = sample posts). The list appears once there is something to list.
 const collection = useBlogCollection()
