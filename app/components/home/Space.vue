@@ -232,7 +232,7 @@ onMounted(() => {
   :global(html[data-intro='1'] .hero-late-a) { --d: 260ms; }
   :global(html[data-intro='1'] .hero-late-b) { --d: 340ms; }
 }
-.monument-scan::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--lab-signal); box-shadow: -8px 0 18px rgb(255 91 31 / 0.28); }
+.monument-scan::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--lab-signal); box-shadow: -8px 0 18px theme('colors.lab.signal / 28%'); }
 @keyframes inscription-scan {
   0% { opacity: 0; transform: translateX(0); }
   5% { opacity: 1; }

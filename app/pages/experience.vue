@@ -106,12 +106,12 @@ onMounted(() => {
 <style scoped>
 /* 2px lines, no glow, no easing: the line moves exactly as far as the reader has scrolled. */
 .tl-track { position: absolute; z-index: 5; width: 2px; pointer-events: none; background: rgb(122 116 104 / 0.38); }
-.tl-fill { position: absolute; inset: 0; background: #ff5b1f; transform: scaleY(var(--p, 0)); transform-origin: top; }
+.tl-fill { position: absolute; inset: 0; background: var(--lab-signal); transform: scaleY(var(--p, 0)); transform-origin: top; }
 /* the node sits in the page gutter, level with the chapter label (section padding-top 5rem + 0.4rem) */
 .tl-node { position: absolute; top: 5.4rem; left: 0.45rem; width: 9px; height: 9px; transform: rotate(45deg); background: #b9b3a6; transition: background-color 0.3s; }
 @media (min-width: 768px) { .tl-node { left: 1.2rem; } }
 @media (min-width: 1024px) { .tl-node { left: 0.6rem; } }
-.is-on .tl-node { background: #ff5b1f; }
+.is-on .tl-node { background: var(--lab-signal); }
 .tl-ready .tl-period { color: rgb(var(--c-on-surface-variant)); }
 .tl-ready .is-current .tl-period { color: rgb(var(--c-on-surface)); font-weight: 600; }
 @media (prefers-reduced-motion: reduce) { .tl-node { transition: none; } }

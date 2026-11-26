@@ -78,8 +78,8 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', outside))
 <style scoped>
 .home-archive { --archive-panel: rgb(var(--c-surface-bright)); --archive-ink: rgb(var(--c-on-surface)); --archive-edge: rgb(var(--c-hairline-strong)); --archive-signal: rgb(var(--c-primary)); color: var(--archive-ink); background: rgb(var(--c-background) / 0.72); position: relative; isolation: isolate; padding: 4rem 0; min-height: 85svh; }
 .archive-content { position: relative; }
-.archive-axis { position: absolute; top: var(--guide-start, 0px); bottom: 3rem; left: var(--guide-x, 46%); width: 1px; background: rgb(255 91 31 / 0.14); pointer-events: none; }
-.archive-axis span { display: block; height: 100%; background: linear-gradient(var(--archive-signal), rgb(255 91 31 / 0.1)); transform: scaleY(0); transform-origin: top; transition: transform 650ms ease; }
+.archive-axis { position: absolute; top: var(--guide-start, 0px); bottom: 3rem; left: var(--guide-x, 46%); width: 1px; background: theme('colors.lab.signal / 14%'); pointer-events: none; }
+.archive-axis span { display: block; height: 100%; background: linear-gradient(var(--archive-signal), theme('colors.lab.signal / 10%')); transform: scaleY(0); transform-origin: top; transition: transform 650ms ease; }
 .archive-ready .archive-axis span { transform: scaleY(1); }
 .archive-arrival { opacity: 0; visibility: hidden; transform: translate(var(--from-x, 0px), 22px); transition: opacity 650ms ease, transform 800ms cubic-bezier(.2,.7,.2,1), visibility 0s 800ms; }
 .archive-ready .archive-arrival { opacity: 1; visibility: visible; transform: none; transition-delay: var(--delay, 0ms); }
@@ -93,7 +93,7 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', outside))
 .archive-trigger { display: flex; align-items: center; gap: 1rem; width: 100%; min-height: 4.5rem; padding: 1rem 1.25rem; border: 1px solid var(--archive-edge); background: var(--archive-panel); color: var(--archive-ink); text-align: left; font-size: 1.125rem; box-shadow: 0 12px 28px rgb(0 0 0 / 0.15); }
 .archive-trigger:hover, .archive-trigger[aria-expanded='true'] { border-color: var(--archive-signal); }
 .archive-node { width: 7px; height: 7px; flex-shrink: 0; border: 1px solid var(--archive-signal); transform: rotate(45deg); }
-.is-active .archive-node { background: var(--archive-signal); box-shadow: 0 0 12px rgb(255 91 31 / 0.5); }
+.is-active .archive-node { background: var(--archive-signal); box-shadow: 0 0 12px theme('colors.lab.signal / 50%'); }
 .archive-popover { position: absolute; top: 100%; inset-inline: 0; padding: 1.25rem; max-height: min(24rem, 55svh); overflow-y: auto; overscroll-behavior: contain; background: var(--archive-panel); color: var(--archive-ink); border: 1px solid var(--archive-signal); box-shadow: 0 12px 32px rgb(0 0 0 / 0.18); }
 .archive-close { display: grid; place-items: center; width: 2rem; height: 2rem; color: var(--archive-ink); border: 1px solid var(--archive-edge); }
 @media (min-width: 768px) {
@@ -116,7 +116,7 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', outside))
 }
 
 .archive-trigger { transition: transform 250ms ease, border-color 250ms ease, box-shadow 250ms ease; }
-.archive-trigger:hover, .archive-trigger:focus-visible { transform: translateY(-5px); background: rgb(var(--c-surface-bright)); box-shadow: 0 8px 24px rgb(255 91 31 / 0.14); }
+.archive-trigger:hover, .archive-trigger:focus-visible { transform: translateY(-5px); background: rgb(var(--c-surface-bright)); box-shadow: 0 8px 24px theme('colors.lab.signal / 14%'); }
 .archive-popup-enter-active, .archive-popup-leave-active { transition: opacity 180ms ease, transform 220ms ease; }
 .archive-popup-enter-from, .archive-popup-leave-to { opacity: 0; transform: translateY(-8px) scale(0.98); }
 @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss'
 import plugin from 'tailwindcss/plugin'
+import { SIGNAL } from './app/lib/palette'
 
 // Design system "Elio Lee / Digital Space".
 //   Dark stage #171614 (immersion: hero, project space, case covers) · light paper #F3F0E9 (reading; dark theme: #1A1917) ·
@@ -35,7 +36,7 @@ export default <Partial<Config>>{
         lab: {
           bg: '#171614', 'bg-soft': '#1D1B19', 'bg-raise': '#22201D',
           paper: token('background'), // ...except the reading ground, which follows the theme
-          signal: '#FF5B1F', 'signal-ink': token('signal-ink'),
+          signal: SIGNAL, 'signal-ink': token('signal-ink'),
           'on-dark': '#EAE6DE', 'on-dark-muted': '#A8A39A',
         },
         // --- Semantic tokens (content ground). Light + dark values live in app/assets/css/theme.css.

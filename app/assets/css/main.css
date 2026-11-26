@@ -5,10 +5,7 @@
 /* Design tokens — Elio Lee / Digital Space. Mirrors tailwind.config.ts (`lab.*`) for CSS / canvas use. */
 :root {
   --lab-bg: #171614;
-  --lab-signal: #ff5b1f; /* survey orange — dark grounds + non-text marks */
-  --lab-signal-ink: #b83d0e; /* same hue, text-safe on the light ground */
-  --lab-on-dark: #eae6de;
-  --lab-on-dark-muted: #a8a39a;
+  --lab-signal: theme('colors.lab.signal'); /* survey orange — dark grounds + non-text marks */
 }
 
 @layer base {
@@ -39,8 +36,8 @@
 .page-scan {
   position: fixed; left: 0; right: 0; top: 0; height: 2px; z-index: 60; pointer-events: none; opacity: 0;
   view-transition-name: page-scan;
-  background: #ff5b1f;
-  box-shadow: 0 0 18px 3px rgb(255 91 31 / 0.55), 0 -90px 110px 10px rgb(255 91 31 / 0.10);
+  background: var(--lab-signal);
+  box-shadow: 0 0 18px 3px theme('colors.lab.signal / 55%'), 0 -90px 110px 10px theme('colors.lab.signal / 10%');
 }
 :root.vt-scan .page-scan { opacity: 1; }
 ::view-transition-group(page-scan) { opacity: 0; }
@@ -52,9 +49,9 @@
   position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
   background: radial-gradient(circle at var(--theme-x) var(--theme-y),
     transparent calc(var(--theme-r) - 160px),
-    rgb(255 91 31 / 0.10) calc(var(--theme-r) - 8px),
-    rgb(255 91 31 / 0.85) calc(var(--theme-r) - 2px),
-    #ff5b1f calc(var(--theme-r) - 1px),
+    theme('colors.lab.signal / 10%') calc(var(--theme-r) - 8px),
+    theme('colors.lab.signal / 85%') calc(var(--theme-r) - 2px),
+    var(--lab-signal) calc(var(--theme-r) - 1px),
     transparent calc(var(--theme-r) + 0.5px));
 }
 @keyframes vt-out { to { opacity: 0; } }
@@ -65,7 +62,7 @@
   .lab-dark { background-color: theme('colors.lab.bg'); color: theme('colors.lab.on-dark'); }
   .lab-dark .lab-muted { color: theme('colors.lab.on-dark-muted'); }
   /* Section label: sentence case in the heading face (mono is kept for real data: dates, codes, readouts). The marker is the station diamond. */
-  .lab-eyebrow { @apply inline-flex items-center gap-2.5 font-medium text-lab-signal-ink; font-family: Barlow, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif; font-size: 0.875rem; line-height: 1.4; letter-spacing: 0.02em; }
+  .lab-eyebrow { @apply inline-flex items-center gap-2.5 font-medium text-lab-signal-ink; font-family: theme('fontFamily.heading'); font-size: 0.875rem; line-height: 1.4; letter-spacing: 0.02em; }
   .lab-eyebrow::before { content: ''; width: 6px; height: 6px; background: currentColor; transform: rotate(45deg); }
   .lab-dark .lab-eyebrow { color: theme('colors.lab.signal'); }
   /* Faint survey contours for dark page headers. Put on an aria-hidden overlay, never on content. */
@@ -75,7 +72,7 @@
     mask-image: radial-gradient(ellipse 80% 80% at 78% 40%, #000 20%, transparent 75%);
   }
   /* Home title: phones 40–48px, desktop up to ~104px. Wide measure; overlaps the 3D monument on purpose. */
-  .space-title { font-family: Barlow, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif; font-weight: 600; line-height: 1.08; letter-spacing: -0.02em; font-size: clamp(2.5rem, 10.5vw, 3rem); }
+  .space-title { font-family: theme('fontFamily.heading'); font-weight: 600; line-height: 1.08; letter-spacing: -0.02em; font-size: clamp(2.5rem, 10.5vw, 3rem); }
   @media (min-width: 768px) { .space-title { font-size: clamp(3.5rem, 6.4vw, 6.5rem); } .space-title:lang(ja) { font-size: clamp(3rem, 5.6vw, 5.75rem); } } /* the longest Japanese line is 12 full-width characters: keep it on one line */
   .lab-chip { @apply inline-flex items-center rounded border border-white/15 px-2.5 py-1 text-label-sm text-lab-on-dark; }
   .lab-chip-light { @apply inline-flex items-center rounded border border-hairline-strong bg-surface-container-lowest px-2.5 py-1 text-label-sm text-on-surface-variant; }
@@ -101,7 +98,7 @@
   .prose-post { @apply space-y-5 text-body-lg text-on-surface; }
   .prose-post h2 { @apply pt-6 text-headline-md; }
   .prose-post h3 { @apply pt-3 text-headline-sm; }
-  .prose-post :where(h2, h3) { scroll-margin-top: 6rem; font-family: Barlow, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans', 'Yu Gothic', Meiryo, sans-serif; }
+  .prose-post :where(h2, h3) { scroll-margin-top: 6rem; font-family: theme('fontFamily.heading'); }
   .prose-post a { @apply text-lab-signal-ink underline decoration-lab-signal-ink/40 underline-offset-4 transition-colors hover:decoration-lab-signal-ink; }
   .prose-post :where(h2, h3, h4) a { @apply text-inherit no-underline; } /* heading self-anchors are not links to style */
   .prose-post ul { @apply list-disc space-y-1 pl-6; }
@@ -201,7 +198,7 @@
   width: 50%;
   height: 2px;
   background: var(--lab-signal);
-  box-shadow: 0 0 20px rgb(255 91 31 / 0.2);
+  box-shadow: 0 0 20px theme('colors.lab.signal / 20%');
 }
 @media (max-width: 767px) {
   .home-gate { opacity: 0.5; }

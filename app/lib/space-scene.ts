@@ -43,6 +43,7 @@ import {
 } from 'three'
 // 〔import type〕只匯入「型別」，編譯後整行消失，不會多帶任何執行碼。
 import type { Texture } from 'three'
+import { SIGNAL as SIGNAL_HEX } from './palette'
 import { GATE, hash, RUIN_LEVELS, RUIN_UNIT, ruinBlocks } from './ruin'
 import type { Block } from './ruin'
 
@@ -62,7 +63,7 @@ import type { Block } from './ruin'
 // 〔顏色常數〕0x 開頭是十六進位色碼。BG = 背景暖炭黑，SIGNAL = 唯一的橘色訊號色，LINE = 等高線的灰。
 // 改成常數是為了「改一處、全場景同步」，不在程式裡散落同一組數字。
 const BG = 0x171614
-const SIGNAL = 0xff5b1f
+const SIGNAL = parseInt(SIGNAL_HEX.slice(1), 16) // three.js 這裡沿用數字色碼；來源是 ./palette
 const LINE = 0xa8a39a
 
 // 〔interface 介面〕規定「每個作品站」要提供哪些欄位，傳錯會被編譯器擋下。

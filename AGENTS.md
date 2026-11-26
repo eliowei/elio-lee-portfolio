@@ -99,7 +99,7 @@ server/api/     只有 sitemap 來源
 
 1. **`.vue` 內不寫新的 `#hex` 或 `rgb(…)` 色碼。** 跟著主題變的顏色用 `theme.css` 的 `--c-*`（Tailwind 語意名稱：`bg-surface`、`text-on-surface`…）；不跟主題變的舞台色與品牌橘用 `--lab-*` / `lab-*`。例外要在旁邊註明為什麼不能用 token（R9）。
 2. 品牌橘 `#FF5B1F` **只用在深色底與非文字標記**；淺色底上的文字用 `signal-ink`。
-3. 需要品牌橘加透明度時，現在沒有通道值變數，這是已知缺口（R9）；**不要再貼新的 `rgb(255 91 31 / x)`**，先問。
+3. 品牌橘的來源是 `app/lib/palette.ts` 的 `SIGNAL`（Tailwind 設定、3D 場景、SVG 備援都讀它），**不要在任何地方寫色碼**。CSS：不透明用 `var(--lab-signal)`，要透明度用 `theme('colors.lab.signal / 55%')`；TS：import `SIGNAL`。標題字型用 `theme('fontFamily.heading')`，`.vue` 的 `<style>` 也能用 `theme()`。**改品牌橘時另外要改**：`theme.css` 的主題色通道值，以及 `space-scene.ts` 的 `applyTheme` 裡亮色主題寫死的顏色（R9）。
 4. 標題字型（Barlow）由 `text-display*` / `text-headline-*` 字級 class 自動套用，一般不需要另外指定。不用這些字級、但要標題字型時才加 `font-heading`（定義在 `tailwind.config.ts`）。`error.vue` 的裝飾用大狀態碼**刻意維持 Inter**（R5）。
 5. 響應式：mobile-first；手機版以「斷點 class」切換，不寫兩份結構以外的 JS 判斷（3D 場景例外，它依 `matchMedia` 與裝置能力決定）。
 6. 用 Tailwind 的 `motion-reduce:` 或 `@media (prefers-reduced-motion)` 處理動畫（見 §6）。
@@ -225,7 +225,7 @@ server/api/     只有 sitemap 來源
 | 編號 | 內容 |
 |---|---|
 | R8 | 按鈕（6 份 `const btn`）、chip（3 套）、石板卡片（3 份）的外觀重複 |
-| R9 | 品牌橘、標題字型堆疊、3D 場景亮色主題色在多處硬編碼 |
+| R9 | 剩餘：3D 亮色主題色（`applyTheme`）與 `theme.css` 是兩份手動同步 |
 | R10 | `Stage` 與 `Space/About/Notes` 靠 selector 耦合；每幀讀版面（**需先量測**） |
 | — | 6 個 `vue/no-template-shadow` 警告 |
 | — | 沒有自動化測試（第六階段評估） |

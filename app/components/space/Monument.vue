@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { SIGNAL } from '~/lib/palette'
 import { GATE, hash, RUIN_LEVELS, ruinBlocks } from '~/lib/ruin'
 import type { Block, Fragment } from '~/lib/ruin'
 
@@ -24,19 +25,19 @@ const items: { key: number; polys: Poly[] }[] = [
   ...[...masonry.map(b => ({ b, loose: false })), ...fragments.map(b => ({ b, loose: true }))].map(({ b, loose }: { b: Block | Fragment; loose: boolean }) => {
     // Block spans [x-.5, x+.5] × [y, y+1] × [z-.5, z+.5]; visible sides from the viewer: +y, +x, +z.
     const [x0, x1, z0, z1, y0, y1] = [b.x - 0.5, b.x + 0.5, b.z - 0.5, b.z + 0.5, b.y, b.y + 1]
-    const edge = 'decoded' in b && b.decoded ? '#FF5B1F' : undefined
+    const edge = 'decoded' in b && b.decoded ? SIGNAL : undefined
     const polys: Poly[] = []
     if (loose || !has(b.x, b.y + 1, b.z)) polys.push({ d: [iso(x0, y1, z0), iso(x1, y1, z0), iso(x1, y1, z1), iso(x0, y1, z1)].join(' '), fill: shade(b, 1.15), stroke: edge })
     if (loose || !has(b.x + 1, b.y, b.z)) polys.push({ d: [iso(x1, y1, z0), iso(x1, y1, z1), iso(x1, y0, z1), iso(x1, y0, z0)].join(' '), fill: shade(b, 0.62), stroke: edge })
     if (loose || !has(b.x, b.y, b.z + 1)) polys.push({ d: [iso(x0, y1, z1), iso(x1, y1, z1), iso(x1, y0, z1), iso(x0, y0, z1)].join(' '), fill: shade(b, 0.85), stroke: edge })
     // Orange inlay on each stair tread.
-    if (b.glyph) polys.push({ d: [iso(-0.14, y1, z0 + 0.03), iso(0.14, y1, z0 + 0.03), iso(0.14, y1, z1 - 0.03), iso(-0.14, y1, z1 - 0.03)].join(' '), fill: '#FF5B1F' })
+    if (b.glyph) polys.push({ d: [iso(-0.14, y1, z0 + 0.03), iso(0.14, y1, z0 + 0.03), iso(0.14, y1, z1 - 0.03), iso(-0.14, y1, z1 - 0.03)].join(' '), fill: SIGNAL })
     return { key: b.x + b.y + b.z, polys }
   }),
   // The door (same as the 3D scene): a warm, dark recess at the back of the opening, drawn before the pillars,
   // and an orange outline on its front face, drawn last.
   { key: -99, polys: [{ d: [iso(-1.5, L, -1.5), iso(1.5, L, -1.5), iso(1.5, L + 3, -1.5), iso(-1.5, L + 3, -1.5)].join(' '), fill: '#3A1A0E' }] },
-  { key: 99, polys: [{ d: [iso(-1.5, L, 0.5), iso(1.5, L, 0.5), iso(1.5, L + 3, 0.5), iso(-1.5, L + 3, 0.5)].join(' '), fill: 'none', stroke: '#FF5B1F' }] },
+  { key: 99, polys: [{ d: [iso(-1.5, L, 0.5), iso(1.5, L, 0.5), iso(1.5, L + 3, 0.5), iso(-1.5, L + 3, 0.5)].join(' '), fill: 'none', stroke: SIGNAL }] },
 ]
 const polys = items.sort((p, q) => p.key - q.key).flatMap(i => i.polys)
 const pts = polys.flatMap(p => p.d.split(' ').map(xy => xy.split(',').map(Number) as [number, number]))

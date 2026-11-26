@@ -84,6 +84,19 @@
 - **驗證**：`npm run check` 通過、`nuxt build` 成功；建置出的 CSS 出現 `.font-heading{font-family:Barlow,…}`。修改前後在瀏覽器逐一讀取有文字的元素的實際 `font-family` 與 `font-weight`（首頁、`/en`、作品列表、案例頁、經歷 zh / ja、聯絡、404，共 8 頁），**8 頁的結果完全相同**；404 大數字前後皆為 `Inter 600`。**限制**：以 1280px 寬、亮 / 暗主題依瀏覽器預設量測一次；比對的是字型與字重，沒有做像素級截圖比對。
 - **剩餘**：標題字型堆疊在 `main.css` 仍有 3 份複製，併入 R9。有 14 處同時寫了字級 class 與 `font-heading`（兩者指定同一字型），無害但重複。
 
+#### R9 A～C（2026-11-26，尚未 commit）
+
+- **修改**：`main.css` 的 3 份標題字型堆疊改為 `theme('fontFamily.heading')`；CSS 內 14 處品牌橘寫死值改為 `theme('colors.lab.signal / x%')`（10 處帶透明度）或 `var(--lab-signal)`（4 處不透明）；`--lab-signal` 改由 `theme()` 提供；刪除沒人引用的 `--lab-signal-ink`、`--lab-on-dark`、`--lab-on-dark-muted`。涉及 `main.css`、`About.vue`、`Space.vue`、`experience.vue`。
+- **驗證**：`npm run check` 通過、`nuxt build` 成功；比對修改前後全部產出 CSS（各 944 條規則），沒有殘留 `theme(`。允許「刪 3 個變數、`var(--lab-signal)` 等同 `#ff5b1f`、scoped `@keyframes` 名稱雜湊、規則內宣告順序」之後**完全相同**；負向對照（把一個透明度改 1/255）能被偵測。
+- **更正**：計畫寫的通過標準「唯一差異是少了 3 個變數」不精確，4 個不透明處改用 `var(--lab-signal)` 也會讓產出文字不同（值相同）。另外報告原建議的 `--lab-signal-rgb` 通道變數不需要，`theme()` 就能表達透明度。
+- **剩餘**：3D 亮色主題色維持現狀（見下方 D）。
+
+#### R9 D（2026-11-26，尚未 commit）
+
+- **修改**：新增 `app/lib/palette.ts`（`SIGNAL = '#FF5B1F'`），`tailwind.config.ts`、`space-scene.ts`（以 `parseInt` 轉回原本的數字色碼，下游用法不變）、`Monument.vue` 改由它讀取。
+- **驗證**：`npm run check` 通過、`nuxt build` 成功；修改前後全部 CSS（944 條規則）與首頁 SVG 備援的 420 個 polygon **零差異**；瀏覽器目視首頁 3D 與修改前一致。**反向測試**：暫時把 `SIGNAL` 改成綠色後建置，CSS 16 條規則與 SVG 28 個 polygon 全部變綠、原橘色 0 筆；3D 的門光、碎塊外框跟著變綠，暗色主題下階梯嵌條也變綠；已還原，還原後建置結果與基準零差異。
+- **反向測試發現的範圍限制**：**亮色主題**下 3D 階梯嵌條仍是原色，因為 `applyTheme` 寫死 `0xb83d0e`（對應 `theme.css` 的 signal-ink）；亮色頁面的小標籤文字也由 `theme.css` 決定。所以改品牌橘要改三處：`palette.ts`、`theme.css`、`applyTheme`。
+
 ### 其餘階段
 
 | # | 項目 | 狀態 |
@@ -166,7 +179,7 @@ content/        zh 在根，en/ja 各一個子目錄；每個語言一個 collec
 | R6 | 沒有 lint / 型別檢查 / 測試；依賴與環境衛生 | 可測試 / 可維護 | 🟡 技術債 | 中 | 立即（工具）＋後續（測試） |
 | R7 | ✅ 已修復：站台網址、SEO meta、JSON-LD 作者名重複 | 可維護 | 🟡 技術債 | 中 | 已完成（尚未 commit） |
 | R8 | 按鈕 / chip / 石板卡片：同視覺多份實作 | 一致性 | 🟡 技術債 | 中 | 後續 |
-| R9 | Design Token 外洩：色碼、品牌橘、標題字型多處硬編碼 | 一致性 | 🟡 技術債 | 中 | 後續 |
+| R9 | ✅ 已完成（A～D）：Design Token 外洩 | 一致性 | 🟡 技術債 | 中 | 已完成（尚未 commit）；3D 亮色主題色刻意維持 |
 | R10 | Stage ↔ Space / About / Notes 靠 CSS selector 暗中耦合，且每幀讀版面 | 可維護 / 效能 | 🟡 技術債＋⚪ | 中 | 後續 |
 | — | 其餘低嚴重度項目 | 各面向 | 見 §4 | 低 | 見 §4 |
 
@@ -447,7 +460,7 @@ content/        zh 在根，en/ja 各一個子目錄；每個語言一個 collec
 
 ---
 
-### R9　Design Token 外洩　🟡 中 → 後續
+### R9　Design Token 外洩：色碼、品牌橘、標題字型多處硬編碼　🟡 中 → ✅ 已完成並驗證（3D 亮色主題色刻意維持）
 
 - **面向**：一致性
 - **你的做法本身是好的**：`theme.css` 把「跟著主題變」的顏色做成 CSS 變數、Tailwind 讀變數，這個分層正確。問題是**不跟主題變的品牌色與字型**沒有同等待遇。
