@@ -38,22 +38,32 @@ function onFrame(info: FrameInfo) {
     lastActiveWork = info.activeWork
     emit('activeWork', info.activeWork)
   }
-  const wrap = host.value?.closest<HTMLElement>('[data-space]')
-  wrap?.style.setProperty('--guide-x', info.guideX + 'px')
-  const about = wrap?.querySelector<HTMLElement>('#about')
-  if (about) about.style.setProperty('--guide-start', Math.max(0, info.guideY - about.getBoundingClientRect().top) + 'px')
   if (info.archiveReady !== lastArchiveReady) {
     lastArchiveReady = info.archiveReady
     emit('archiveReady', info.archiveReady)
   }
-  for (const l of info.labels) {
+  const wrap = host.value?.closest<HTMLElement>('[data-space]')
+  const about = wrap?.querySelector<HTMLElement>('#about')
+  const axis = about?.querySelector<HTMLElement>('.archive-axis')
+  const notesGuide = wrap?.querySelector<HTMLElement>('.notes-guide')
+
+  // Read all layout first, then write: a read after a style write makes the browser recalculate on the spot.
+  const aboutTop = about?.getBoundingClientRect().top ?? 0
+  const labels = info.labels.flatMap((l) => {
     const el = labelEls.value[l.slug]
-    if (!el) continue
+    return el ? [{ ...l, el, height: el.offsetHeight }] : []
+  })
+
+  // Set the guide variables on the two lines that use them; on the wrapper they restyle every descendant each frame.
+  const guideX = info.guideX + 'px'
+  axis?.style.setProperty('--guide-x', guideX)
+  axis?.style.setProperty('--guide-start', Math.max(0, info.guideY - aboutTop) + 'px')
+  notesGuide?.style.setProperty('--guide-x', guideX)
+  for (const { el, x, y, visible, height } of labels) {
     // Keep the label below the fixed header (h-20 on desktop); close-up cameras can project it above the viewport.
-    const y = Math.max(l.y, 88 + el.offsetHeight)
-    el.style.transform = `translate3d(${l.x.toFixed(1)}px, ${y.toFixed(1)}px, 0) translate(-50%, -100%)`
-    el.style.opacity = l.visible ? '1' : '0'
-    el.style.pointerEvents = l.visible ? 'auto' : 'none'
+    el.style.transform = `translate3d(${x.toFixed(1)}px, ${Math.max(y, 88 + height).toFixed(1)}px, 0) translate(-50%, -100%)`
+    el.style.opacity = visible ? '1' : '0'
+    el.style.pointerEvents = visible ? 'auto' : 'none'
   }
   if (readout.value) readout.value.textContent = `AZ ${info.azimuth.toFixed(1).padStart(5, '0')}° EL ${info.elevation.toFixed(1)}°`
 }

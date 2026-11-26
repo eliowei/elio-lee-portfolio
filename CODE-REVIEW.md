@@ -106,12 +106,29 @@
 - **驗證**：`npm run check` 通過、`nuxt build` 成功。在瀏覽器比對修改前（原始碼經 `git stash` 建置）與修改後 6 個頁面（首頁 zh / en、經歷、聯絡、文章、404）所有元素在亮、暗主題與模擬滑鼠移過時的實際樣式（31 個屬性＋轉場設定，共約 6,500 項比對）。**唯一差異**：Cookie 橫幅兩顆按鈕的 `gap` 由 `normal` 變 `8px`（按鈕只有文字，尺寸量測相同）。滑鼠移過是以複製 `:hover` 規則到測試 class 的方式模擬，並確認確實有元素因此變色。**限制**：僅 1280px 寬；聯絡表單對話框內的元素在關閉狀態量測；沒有做像素截圖比對。第一次量測因背景 iframe 的顏色轉場未完成而作廢，修正量測方式後重做。
 - **刻意未改**：`RoleCard` 與文章頁的其他小標籤、`.lab-chip` / `.lab-chip-light`（外觀不同）。
 
+### 第五階段：架構與效能（進行中）
+
+#### R10 效能部分（2026-11-26，尚未 commit）
+
+- **量測**：`Stage.vue` 的 `onFrame` 超過約定門檻（> 2ms），耗時集中在「寫 `--guide-x` 之後讀 `#about` 位置、再寫 `--guide-start`」這兩行。
+- **A/B（同一次建置、3 回合輪流；`onFrame` ＋強制樣式與版面重算，捲動時平均 / p95）**：現況 21.3 / 36.6ms；值沒變就不寫 12.3 / 31.1ms；變數改寫在引導線上並先讀後寫 2.6 / 5.2ms。
+- **修改**：採第三案。`--guide-x`、`--guide-start` 改寫在 `.archive-axis` 與 `.notes-guide`（不再寫在 `[data-space]`）；`about` 位置與標籤高度全部先讀，再寫樣式。只改 `Stage.vue`。
+- **驗證**：`npm run check` 通過、`npm run build` 成功。
+  - 修改前後兩個建置輪流量測（每幀所有 `requestAnimationFrame` 回呼＋版面重算，2 組有效）：捲動平均 12.2 → 2.4ms、14.3 → 3.7ms（p95 18.7 → 3.9、24.5 → 7.1）。第 3 組的舊版當時只有 5 幀 / 秒，作廢。**靜止時沒有看到明確差異**（2.3 → 2.0、2.0 → 4.0ms）。
+  - 相同視窗高度、多個捲動位置比對引導線與 3D 標籤座標，**修改前後相同**。
+  - 目視亮 / 暗主題；900px（iframe 模擬）兩條引導線隱藏、標籤正常；減少動態效果（以替換 `matchMedia` 模擬）下變數有更新；瀏覽器沒有 console 錯誤。
+- **限制**：只有一台桌機；沒有真機、沒有低階裝置、沒有開作業系統的減少動態效果；沒有像素截圖比對；A/B 期間幀率波動大，原因未知，毫秒絕對值僅供參考。第三案同時改了兩件事，沒有分開量各自的貢獻。
+- **更正原判斷**：原報告只指出 `getBoundingClientRect` 的成本；實驗顯示把 CSS 變數寫在整個首頁外層也是做法上的問題（外層約 492 個元素）。`progress()`（平均 0.15～0.76ms）與 `MagnetText`（0.28ms，L6）低於門檻，**不修改**。
+- **剩餘**：`Stage` 現在多依賴 `.archive-axis`、`.notes-guide` 兩個 class；selector 集中成常數並在找不到時警告、`'game-together'` 兩處寫死，尚未處理。
+
 ### 其餘階段
 
 | # | 項目 | 狀態 |
 |---|---|---|
 | R5、R7、R8、R9 | 一致性與可維護性重構 | ✅ 第四階段完成（R8 尚未 commit） |
-| R10、L6、L7 | 架構與效能 | ⏳ 第五階段（先量測） |
+| R10 | 架構與效能 | 🔶 效能部分已修改（尚未 commit）；耦合部分待處理 |
+| L6 | `MagnetText` 讀寫交錯 | ✅ 已量測，不需修改 |
+| L7 | `v-reveal` 水合閃爍 | ⏳ 尚未量測 |
 | 測試 | ⏳ 第六階段 |
 
 ---
@@ -495,6 +512,8 @@ content/        zh 在根，en/ja 各一個子目錄；每個語言一個 collec
 
 ### R10　`Stage` ↔ `Space` / `About` / `Notes`：暗中耦合與每幀讀版面　🟡 中（⚪ 效能）→ 後續
 
+> **進度**：效能部分已量測並修改，見 §0.0 第五階段。以下是修改前的原始審查內容。
+
 - **面向**：可維護性、可擴充性、可靠性（效能）
 - **位置**：`components/space/Stage.vue:36-72`、`components/home/Space.vue:207`、`About.vue:37`、`Notes.vue:18`
 - **現況**：Stage 不是透過 props / emit / provide 與其他元件溝通，而是**用 CSS selector 與 data attribute 在 DOM 裡找人**：
@@ -532,7 +551,7 @@ content/        zh 在根，en/ja 各一個子目錄；每個語言一個 collec
 | L3 | 重複 / 覆蓋的 CSS 規則 | 可讀性 | `About.vue:93,118`（`.archive-trigger` 兩次）、`Notes.vue:55,79`（`.notes-record margin-bottom` 1rem 後又 1.5rem）、`Notes.vue:64`（`position: relative` 另起一條） | 後面的規則覆蓋前面的，改前面那條沒效果，是「改了沒用」的陷阱 | 合併成一條 | 🟡 低 | 後續 |
 | L4 | ✅ `UiChip` 6 種色調只用 1 種 | 簡潔 | `ui/Chip.vue` | 已移除 `tone` 屬性與 5 種未使用色調（併入 R8） | — | 🟡 低 | 已完成 |
 | L5 | 彈簧常數與物理在兩處重複 | 可維護 | `plugins/elastic.ts:13-14`、`ui/MagnetText.vue:41-42` | 兩處都是 `STIFFNESS = 170`、`DAMPING = 9`，註解逐字相同，彈簧積分公式也相同 | 如果之後要調「手感」，抽成 `lib/spring.ts`；**現在不抽也可以**，只有兩處 | 🔵 | 維持現狀（有第 3 處時再抽） |
-| L6 | `MagnetText` 讀寫交錯 | 可靠性（效能） | `ui/MagnetText.vue:65-84` | 在同一個 `forEach` 裡，每個字元先 `getBoundingClientRect()`（讀）再寫 `style.transform`（寫），N 個字元就交錯 N 次，可能觸發 N 次強制重排 | 兩個迴圈：先全部讀、再全部寫。**只在 `dirty` 時（滑鼠在附近）才跑，字數約 20 字，影響大概有限** | ⚪ 待實測 | 後續（先量測） |
+| L6 | `MagnetText` 讀寫交錯 | 可靠性（效能） | `ui/MagnetText.vue:65-84` | 在同一個 `forEach` 裡，每個字元先 `getBoundingClientRect()`（讀）再寫 `style.transform`（寫），N 個字元就交錯 N 次，可能觸發 N 次強制重排 | 兩個迴圈：先全部讀、再全部寫。**只在 `dirty` 時（滑鼠在附近）才跑，字數約 20 字，影響大概有限** | ⚪ 已實測：滑鼠移過時平均 0.28ms、p95 0.8ms | 維持現狀 |
 | L7 | `v-reveal` 可能在水合時閃一下 | 可靠性 | `plugins/reveal.ts:23-37`、`getSSRProps: () => ({})` | SSR 輸出的元素是可見的；`mounted` 才把它設為隱藏再動畫進場。若元素在首屏內，會有「可見 → 消失 → 淡入」。目前用法 6 處，多數在首屏外；`experience.vue:81` 的第一張卡片可能在首屏邊緣 | 實際用手機慢速網路錄影確認。若真有閃爍，可在 SSR 階段加 `style="opacity:0"` + `<noscript>` 例外，但那會讓無 JS 時看不到內容，要權衡 | ⚪ 待確認 | 先確認 |
 | L8 | `AppCursor` 每次 pointermove 都 `querySelector('dialog[open]')` | 效能 | `layout/AppCursor.vue:62` | 每次滑鼠移動做一次 DOM 查詢；專案裡真正用 `<dialog>` 的只有 contact 頁 | 可改成監聽 dialog 的 `toggle` 事件維護一個旗標；**但 querySelector 對這麼小的 DOM 很便宜，影響極小** | 🔵 | 維持現狀 |
 | L9 | `Lightbox` 手刻焦點陷阱，contact 用原生 `<dialog>` | 一致性 | `project/Lightbox.vue:22-34,41-55` vs `pages/contact.vue:30-37` | 同樣是 modal，一個手刻 Tab 陷阱、`body.style.overflow`、Esc；另一個交給 `<dialog>.showModal()`。手刻版**目前行為正確**（我檢查了 Esc、Tab 循環、焦點還原、卸載清理），但維護成本較高；且 `Lightbox` 只攔 `button`，若之後放進連結就攔不到 | 若改 `<dialog>`，要重新驗證觸控滑動、`AppCursor` 的 `dialog[open]` 分支（那段邏輯其實是為了這種情況而寫的）。**可改可不改** | 🔵 | 維持現狀，列為選配 |

@@ -124,8 +124,9 @@ server/api/     只有 sitemap 來源
 - **所有動畫與互動都必須處理 `prefers-reduced-motion`**（目前每一處都有，包含指令與 3D）。新增動畫沒處理 = 不合格。
 - 只在滑鼠使用者啟用的互動，用 `matchMedia('(hover: hover) and (pointer: fine)')` 判斷。
 - 在 `onMounted` 內建立的資源，就在同一處註冊清理（兩種寫法在專案內都存在、都正確，L18）。
-- **DOM 讀寫不要交錯**：先全部讀（`getBoundingClientRect`），再全部寫（`style`）。`MagnetText` 目前是交錯的（L6，待量測確認是否有影響）。
-- **不要在元件內用 `querySelector` / `closest` 找「別的元件」的 DOM。** 專案目前有一組刻意的例外：`Stage.vue` 依賴 `[data-space]`、`#about`、`#works`、`[data-archive-approach]`、`[data-notes]`，並寫入 `--guide-x`、`--guide-start`（R10）。**改動這些元素的 id / data 屬性前，先看 `Stage.vue`**；之後會把它集中成具名常數並加上「找不到就警告」。
+- **DOM 讀寫不要交錯**：先全部讀（`getBoundingClientRect`、`offsetHeight`），再全部寫（`style`）。`MagnetText` 仍是交錯的，量測後影響很小，維持現狀（L6）。
+- **每幀會變的 CSS 變數，寫在真正使用它的元素上**，不要寫在大範圍的外層（子元素都得重算樣式）。`Stage` 把「寫在外層」與「先寫後讀」一起改掉後，捲動時每幀量到少約 10ms；兩者各占多少沒有分開量（R10）。
+- **不要在元件內用 `querySelector` / `closest` 找「別的元件」的 DOM。** 專案目前有一組刻意的例外：`Stage.vue` 依賴 `[data-space]`、`#about`、`#works`、`[data-archive-approach]`、`[data-notes]`、`.archive-axis`、`.notes-guide`，並在後兩者寫入 `--guide-x`、`--guide-start`（R10）。**改動這些元素的 id / class / data 屬性前，先看 `Stage.vue`**；之後會把它集中成具名常數並加上「找不到就警告」。
 - 手動用 `classList` 改 Vue 渲染的元素（`experience.vue` 的 `is-on`、`is-current`）只在該元素 class 是靜態時才安全；改成動態綁定前先處理它（L12）。
 
 ---
@@ -227,7 +228,7 @@ server/api/     只有 sitemap 來源
 | 編號 | 內容 |
 |---|---|
 | R9 | 剩餘：3D 亮色主題色（`applyTheme`）與 `theme.css` 是兩份手動同步 |
-| R10 | `Stage` 與 `Space/About/Notes` 靠 selector 耦合；每幀讀版面（**需先量測**） |
+| R10 | `Stage` 與 `Space/About/Notes` 靠 selector 耦合（效能部分已處理） |
 | — | 6 個 `vue/no-template-shadow` 警告 |
 | — | 沒有自動化測試（第六階段評估） |
 
